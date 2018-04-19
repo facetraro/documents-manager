@@ -57,8 +57,8 @@ namespace DocumentsManagerTesting
         public void StyleClassEqualsDifferentTypeTest()
         {
             StyleClass testStyleClass = TestStyleClass();
-            int a = 10;
-            Assert.AreNotEqual(testStyleClass, a);
+            int otherObject = 10;
+            Assert.AreNotEqual(testStyleClass, otherObject);
         }
     }
 }
