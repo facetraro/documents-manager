@@ -52,14 +52,14 @@ namespace DocumentsManagerTesting
         public void EditorUserEqualsTest()
         {
             EditorUser user = TestEditorUser();
-            Assert.AreEqual(user, user);
+            Assert.IsTrue(user.Equals(user));
         }
         [TestMethod]
         public void EditorUserNotEqualsTest()
         {
             EditorUser user = TestEditorUser();
             string otherObject = "NotTheUser";
-            Assert.AreNotEqual(user, otherObject);
+            Assert.IsFalse(user.Equals(otherObject));
         }
     }
 }
