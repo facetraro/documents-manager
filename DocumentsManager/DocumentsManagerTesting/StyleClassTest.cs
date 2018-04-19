@@ -4,9 +4,22 @@ using DocumentsMangerEntities;
 
 namespace DocumentsManagerTesting
 {
+
     [TestClass]
     public class StyleClassTest
     {
+        StyleClass TestStyleClass()
+        {
+            StyleClass testStyleClass = new StyleClass();
+            testStyleClass.Underline = true;
+            testStyleClass.Italics = false;
+            testStyleClass.Bold = false;
+            testStyleClass.FontSize = 10;
+            testStyleClass.Alignment = TextAlignment.Center;
+            testStyleClass.Color = TextColor.Red;
+            testStyleClass.Font = FontType.Arial;
+            return testStyleClass;
+        }
         [TestMethod]
         public void StyleClassConstructorTest()
         {
@@ -17,16 +30,7 @@ namespace DocumentsManagerTesting
             TextAlignment alignment = TextAlignment.Center;
             TextColor color = TextColor.Red;
             FontType fontType = FontType.Arial;
-
-            StyleClass testStyleClass = new StyleClass();
-            testStyleClass.Underline = underline;
-            testStyleClass.Italics = italics;
-            testStyleClass.Bold = bold;
-            testStyleClass.FontSize = fontSize;
-            testStyleClass.Alignment = alignment;
-            testStyleClass.Color = color;
-            testStyleClass.Font = fontType;
-
+            StyleClass testStyleClass = TestStyleClass();
             Assert.IsTrue(testStyleClass.Underline.Equals(underline));
             Assert.IsTrue(testStyleClass.Italics.Equals(italics));
             Assert.IsTrue(testStyleClass.Bold.Equals(bold));
