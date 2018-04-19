@@ -9,8 +9,20 @@ using System.Threading.Tasks;
 namespace DocumentsManagerTesting
 {
     [TestClass]
-   public class TestAdminUser
+   public class AdminUserTest
     {
+        AdminUser TestAdminUser()
+        {
+            AdminUser user = new AdminUser();
+            user.Id = Guid.NewGuid();
+            user.Username = "DefaultUsername";
+            user.Password = "DefaultPassword";
+            user.Name = "DefaultName";
+            user.Surname = "DefaultSurname";
+            user.Email = "DefaultEmail@DefaultEmail.com";
+            return user;
+        }
+
         [TestMethod]
         public void EditorUserBuilderTestSameAttributes()
         {
@@ -19,12 +31,7 @@ namespace DocumentsManagerTesting
             string DefaultName = "DefaultName";
             string DefaultSurname = "DefaultSurname";
             string DefaultEmail = "DefaultEmail@DefaultEmail.com";
-            AdminUser user = new AdminUser();
-            user.Username = DefaultUsername;
-            user.Password = DefaultPassword;
-            user.Name = DefaultName;
-            user.Surname = DefaultSurname;
-            user.Email = DefaultEmail;
+            AdminUser user = TestAdminUser();
             Assert.AreEqual(user.Username, DefaultUsername);
             Assert.AreEqual(user.Password, DefaultPassword);
             Assert.AreEqual(user.Name, DefaultName);
@@ -34,17 +41,7 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void EditorUserBuilderTestDifferentAttributes()
         {
-            string DefaultUsername = "DefaultUsername";
-            string DefaultPassword = "DefaultPassword";
-            string DefaultName = "DefaultName";
-            string DefaultSurname = "DefaultSurname";
-            string DefaultEmail = "DefaultEmail@DefaultEmail.com";
-            AdminUser user = new AdminUser();
-            user.Username = DefaultUsername;
-            user.Password = DefaultPassword;
-            user.Name = DefaultName;
-            user.Surname = DefaultSurname;
-            user.Email = DefaultEmail;
+            AdminUser user = TestAdminUser();
             Assert.AreNotEqual(user.Username, "DefaultUsername2");
             Assert.AreNotEqual(user.Password, "DefaultUsername2");
             Assert.AreNotEqual(user.Name, "DefaultName2");
