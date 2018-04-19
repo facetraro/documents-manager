@@ -46,5 +46,12 @@ namespace DocumentsManagerTesting
             user.Surname = "DifferentAttribute";
             Assert.IsTrue(user.IsSameUserByEmail(user));
         }
+        [TestMethod]
+        public void UserSameUserByUsername()
+        {
+            User user = TestUser();
+            Assert.IsTrue(user.SameUserByUserName(user));
+        }
+
     }
 }
