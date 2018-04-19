@@ -50,7 +50,7 @@ namespace DocumentsManagerTesting
         public void UserSameUserByUsername()
         {
             User user = TestUser();
-            Assert.IsTrue(user.SameUserByUserName(user));
+            Assert.IsTrue(user.IsSameUserByUsername(user));
         }
 
     }

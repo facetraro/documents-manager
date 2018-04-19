@@ -26,5 +26,9 @@ namespace DocumentsMangerEntities
         public bool IsSameUserByEmail(User anUser) {
             return Email.Equals(anUser.Email);
         }
+        public bool IsSameUserByUsername(User anUser)
+        {
+            return true;
+        }
     }
 }
