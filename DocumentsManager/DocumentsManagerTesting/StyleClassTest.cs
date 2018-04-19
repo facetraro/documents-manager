@@ -18,6 +18,7 @@ namespace DocumentsManagerTesting
             testStyleClass.Alignment = TextAlignment.Center;
             testStyleClass.Color = TextColor.Red;
             testStyleClass.Font = FontType.Arial;
+            testStyleClass.Id = Guid.NewGuid();
             return testStyleClass;
         }
         [TestMethod]
@@ -50,8 +51,6 @@ namespace DocumentsManagerTesting
         {
             StyleClass testStyleClass = TestStyleClass();
             StyleClass anotherTestStyleClass = TestStyleClass();
-            testStyleClass.Id = Guid.NewGuid();
-            anotherTestStyleClass.Id = Guid.NewGuid();
             Assert.AreNotEqual(testStyleClass, anotherTestStyleClass);
         }
     }
