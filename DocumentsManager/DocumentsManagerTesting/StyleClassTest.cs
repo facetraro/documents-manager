@@ -8,7 +8,7 @@ namespace DocumentsManagerTesting
     [TestClass]
     public class StyleClassTest
     {
-        StyleClass TestStyleClass()
+        public StyleClass TestStyleClass()
         {
             StyleClass testStyleClass = new StyleClass();
             testStyleClass.Underline = true;
