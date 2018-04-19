@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using DocumentsMangerEntities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace DocumentsManagerTesting
             user.Surname = DefaultSurname;
             user.Email = DefaultEmail;
             Assert.AreEqual(user.Username,DefaultUsername);
-            Assert.AreEqual(user.Password, DefaultUsername);
+            Assert.AreEqual(user.Password, DefaultPassword);
             Assert.AreEqual(user.Name, DefaultName);
             Assert.AreEqual(user.Surname, DefaultSurname);
             Assert.AreEqual(user.Email, DefaultEmail);
