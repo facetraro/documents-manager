@@ -60,5 +60,13 @@ namespace DocumentsManagerTesting
             int otherObject = 10;
             Assert.AreNotEqual(testStyleClass, otherObject);
         }
+        [TestMethod]
+        public void StyleClassBasedTest()
+        {
+            StyleClass testStyleClass = TestStyleClass();
+            StyleClass childStyleClass = new StyleClass();
+            childStyleClass.Based = testStyleClass;
+            Assert.AreEqual(testStyleClass, childStyleClass.Based);
+        }
     }
 }
