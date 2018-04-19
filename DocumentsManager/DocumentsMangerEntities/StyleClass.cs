@@ -25,6 +25,11 @@ namespace DocumentsMangerEntities
                 return false;
             }
             return Id.Equals(anotherStyleClass.Id);
-        }        
+        }
+
+        public StyleClass GetBasedOnStyleClass()
+        {
+            return this.Based;
+        }
     }
 }
