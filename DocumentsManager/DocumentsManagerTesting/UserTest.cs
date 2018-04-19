@@ -23,13 +23,13 @@ namespace DocumentsManagerTesting
             return user;
         }
         [TestMethod]
-        public void UserSameUserByEmail()
+        public void TestUserSameUserByEmail()
         {
             User user = TestUser();
             Assert.IsTrue(user.IsSameUserByEmail(user));
         }
         [TestMethod]
-        public void UserNotSameUserByEmail()
+        public void TestUserNotSameUserByEmail()
         {
             User user = TestUser();
             User user2 = TestUser();
@@ -37,7 +37,7 @@ namespace DocumentsManagerTesting
             Assert.IsFalse(user.IsSameUserByEmail(user2));
         }
         [TestMethod]
-        public void UserSameUserByOnlyEmail()
+        public void TestUserSameUserByOnlyEmail()
         {   User user = TestUser();
             User user2 = TestUser();
             user.Username = "DifferentAttribute";
@@ -47,13 +47,13 @@ namespace DocumentsManagerTesting
             Assert.IsTrue(user.IsSameUserByEmail(user));
         }
         [TestMethod]
-        public void UserSameUserByUsername()
+        public void TestUserSameUserByUsername()
         {
             User user = TestUser();
             Assert.IsTrue(user.IsSameUserByUsername(user));
         }
         [TestMethod]
-        public void UserNotSameUserByUsername()
+        public void TestUserNotSameUserByUsername()
         {
             User user = TestUser();
             User user2 = TestUser();
@@ -61,7 +61,7 @@ namespace DocumentsManagerTesting
             Assert.IsFalse(user.IsSameUserByUsername(user2));
         }
         [TestMethod]
-        public void UserOnlySameUserByUsername()
+        public void TestUserOnlySameUserByUsername()
         {
             User user = TestUser();
             User user2 = TestUser();
@@ -71,6 +71,5 @@ namespace DocumentsManagerTesting
             user2.Email = "Different Email";
             Assert.IsTrue(user.IsSameUserByUsername(user2));
         }
-
     }
 }
