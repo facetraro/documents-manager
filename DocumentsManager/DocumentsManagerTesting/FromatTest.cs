@@ -42,5 +42,50 @@ namespace DocumentsManagerTesting
             Assert.AreNotEqual(format.Name, "anotherName");
             Assert.AreNotEqual(format.StyleClasses, new List<StyleClass>());
         }
+        [TestMethod]
+        public void TestFormatEquals() {
+
+            Format format = new Format();
+            Guid Id = Guid.NewGuid();
+            List<StyleClass> styles = new List<StyleClass>();
+            StyleClass style = ExampleInstances.TestStyleClass();
+            styles.Add(style);
+            format.Id = Id;
+            format.Name = "FormatName";
+            format.StyleClasses = styles;
+            Assert.IsTrue(format.Equals(format));
+        }
+        [TestMethod]
+        public void TestFormatNotEquals()
+        {
+            Format format = new Format();
+            List<StyleClass> styles = new List<StyleClass>();
+            StyleClass style = ExampleInstances.TestStyleClass();
+            styles.Add(style);
+            format.Id = Guid.NewGuid(); ;
+            format.Name = "FormatName";
+            format.StyleClasses = styles;
+            Format anotherFormat = new Format();
+            anotherFormat.Id = Guid.NewGuid(); 
+            anotherFormat.Name = "anotherFormatName";
+            format.StyleClasses = new List<StyleClass>();
+            Assert.IsFalse(format.Equals(anotherFormat));
+        }
+        [TestMethod]
+        public void TestFormatDifferentButEquals()
+        {
+            Format format = new Format();
+            List<StyleClass> styles = new List<StyleClass>();
+            StyleClass style = ExampleInstances.TestStyleClass();
+            styles.Add(style);
+            format.Id = Guid.NewGuid(); ;
+            format.Name = "FormatName";
+            format.StyleClasses = styles;
+            Format anotherFormat = new Format();
+            anotherFormat.Id = format.Id; 
+            anotherFormat.Name = "anotherFormatName";
+            format.StyleClasses = new List<StyleClass>();
+            Assert.IsTrue(format.Equals(anotherFormat));
+        }
     }
 }
