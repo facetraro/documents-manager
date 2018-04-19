@@ -68,5 +68,19 @@ namespace DocumentsManagerTesting
             childStyleClass.Based = testStyleClass;
             Assert.AreEqual(testStyleClass, childStyleClass.Based);
         }
+        [TestMethod]
+        public void GetBasedOnStyleClassTest()
+        {
+            StyleClass testStyleClass = TestStyleClass();
+            StyleClass childStyleClass = new StyleClass();
+            childStyleClass.Based = testStyleClass;
+            Assert.IsTrue(testStyleClass.Underline.Equals(childStyleClass.GetBasedOnStyleClass().Underline));
+            Assert.IsTrue(testStyleClass.Italics.Equals(childStyleClass.GetBasedOnStyleClass().Italics));
+            Assert.IsTrue(testStyleClass.Bold.Equals(childStyleClass.GetBasedOnStyleClass().Bold));
+            Assert.IsTrue(testStyleClass.FontSize.Equals(childStyleClass.GetBasedOnStyleClass().FontSize));
+            Assert.IsTrue(testStyleClass.Alignment.Equals(childStyleClass.GetBasedOnStyleClass().Alignment));
+            Assert.IsTrue(testStyleClass.Color.Equals(childStyleClass.GetBasedOnStyleClass().Color));
+            Assert.IsTrue(testStyleClass.Font.Equals(childStyleClass.GetBasedOnStyleClass().Font));
+        }
     }
 }
