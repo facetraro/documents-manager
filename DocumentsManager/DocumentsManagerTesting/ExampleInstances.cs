@@ -11,24 +11,28 @@ namespace DocumentsManagerTesting
     {
         public static User TestUser()
         {
-            User user = new AdminUser();
-            user.Id = Guid.NewGuid();
-            user.Username = "DefaultUsername";
-            user.Password = "DefaultPassword";
-            user.Name = "DefaultName";
-            user.Surname = "DefaultSurname";
-            user.Email = "DefaultEmail@DefaultEmail.com";
+            User user = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Username = "DefaultUsername",
+                Password = "DefaultPassword",
+                Name = "DefaultName",
+                Surname = "DefaultSurname",
+                Email = "DefaultEmail@DefaultEmail.com"
+            };
             return user;
         }
         public static EditorUser TestEditorUser()
         {
-            EditorUser user = new EditorUser();
-            user.Id = Guid.NewGuid();
-            user.Username = "DefaultUsername";
-            user.Password = "DefaultPassword";
-            user.Name = "DefaultName";
-            user.Surname = "DefaultSurname";
-            user.Email = "DefaultEmail@DefaultEmail.com";
+            EditorUser user = new EditorUser
+            {
+                Id = Guid.NewGuid(),
+                Username = "DefaultUsername",
+                Password = "DefaultPassword",
+                Name = "DefaultName",
+                Surname = "DefaultSurname",
+                Email = "DefaultEmail@DefaultEmail.com"
+            };
             return user;
         }
         public static StyleClass TestStyleClass()
@@ -46,13 +50,15 @@ namespace DocumentsManagerTesting
         }
         public static AdminUser TestAdminUser()
         {
-            AdminUser user = new AdminUser();
-            user.Id = Guid.NewGuid();
-            user.Username = "DefaultUsername";
-            user.Password = "DefaultPassword";
-            user.Name = "DefaultName";
-            user.Surname = "DefaultSurname";
-            user.Email = "DefaultEmail@DefaultEmail.com";
+            AdminUser user = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Username = "DefaultUsername",
+                Password = "DefaultPassword",
+                Name = "DefaultName",
+                Surname = "DefaultSurname",
+                Email = "DefaultEmail@DefaultEmail.com"
+            };
             return user;
         }
     }
