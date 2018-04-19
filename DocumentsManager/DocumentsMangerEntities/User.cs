@@ -31,7 +31,7 @@ namespace DocumentsMangerEntities
             return Username.Equals(anUser.Username);
         }
         public bool Authenticate(string possiblePassword) {
-            return true;
+            return Password.Equals(possiblePassword);
         }
     }
 }
