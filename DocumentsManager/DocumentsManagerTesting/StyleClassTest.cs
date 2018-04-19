@@ -11,9 +11,9 @@ namespace DocumentsManagerTesting
         StyleClass TestStyleClass()
         {
             StyleClass testStyleClass = new StyleClass();
-            testStyleClass.Underline = true;
-            testStyleClass.Italics = false;
-            testStyleClass.Bold = false;
+            testStyleClass.Underline = ApplyValue.NotSpecified;
+            testStyleClass.Italics = ApplyValue.Apply;
+            testStyleClass.Bold = ApplyValue.NoApply;
             testStyleClass.FontSize = 10;
             testStyleClass.Alignment = TextAlignment.Center;
             testStyleClass.Color = TextColor.Red;
@@ -24,9 +24,9 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void StyleClassConstructorTest()
         {
-            bool underline = true;
-            bool italics = false;
-            bool bold = false;
+            ApplyValue underline = ApplyValue.NotSpecified;
+            ApplyValue italics = ApplyValue.Apply;
+            ApplyValue bold = ApplyValue.NoApply;
             int fontSize = 10;
             TextAlignment alignment = TextAlignment.Center;
             TextColor color = TextColor.Red;
