@@ -28,7 +28,7 @@ namespace DocumentsMangerEntities
         }
         public bool IsSameUserByUsername(User anUser)
         {
-            return true;
+            return Username.Equals(anUser.Username);
         }
     }
 }
