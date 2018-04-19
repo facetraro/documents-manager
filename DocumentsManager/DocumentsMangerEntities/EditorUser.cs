@@ -6,24 +6,8 @@ using System.Threading.Tasks;
 
 namespace DocumentsMangerEntities
 {
-    public class EditorUser
+    public class EditorUser:User
     {
-        public Guid Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Email { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            EditorUser anotherEditorUser = obj as EditorUser;
-            if ((System.Object)anotherEditorUser == null)
-            {
-                return false;
-            }
-            return Id.Equals(anotherEditorUser.Id);
-        }
-
+        
     }
 }
