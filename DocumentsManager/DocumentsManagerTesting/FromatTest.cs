@@ -16,7 +16,7 @@ namespace DocumentsManagerTesting
             Guid Id = Guid.NewGuid();
             string name = "FormatName";
             List<StyleClass> styles = new List<StyleClass>();
-            StyleClass style = TestStyleClass();
+            StyleClass style = ExampleInstances.TestStyleClass();
             styles.Add(style);
             Format format = new Format();
             format.Id = Id;
@@ -24,7 +24,7 @@ namespace DocumentsManagerTesting
             format.StyleClasses = styles;
             Assert.AreEqual(format.Id,Id);
             Assert.AreEqual(format.Name,name);
-            Assert.AreEqual(format.StyleClass,styles);
+            Assert.AreEqual(format.StyleClasses,styles);
         }
         [TestMethod]
         public void TestFormatBuilderNotSame()
@@ -32,15 +32,15 @@ namespace DocumentsManagerTesting
             Guid Id = Guid.NewGuid();
             string name = "FormatName";
             List<StyleClass> styles = new List<StyleClass>();
-            StyleClass style = TestStyleClass();
+            StyleClass style = ExampleInstances.TestStyleClass();
             styles.Add(style);
             Format format = new Format();
             format.Id = Id;
             format.Name = name;
             format.StyleClasses = styles;
-            Assert.AreNotEqual(format.Id, Guid.NewGuid);
+            Assert.AreNotEqual(format.Id, Guid.NewGuid());
             Assert.AreNotEqual(format.Name, "anotherName");
-            Assert.AreNotEqual(format.StyleClass, new List<StyleClass>());
+            Assert.AreNotEqual(format.StyleClasses, new List<StyleClass>());
         }
     }
 }

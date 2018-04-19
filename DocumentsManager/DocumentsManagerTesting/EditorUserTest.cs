@@ -11,17 +11,7 @@ namespace DocumentsManagerTesting
     [TestClass]
     public class EditorUserTest {
 
-        EditorUser TestEditorUser()
-        {
-            EditorUser user = new EditorUser();
-            user.Id = Guid.NewGuid();
-            user.Username = "DefaultUsername";
-            user.Password = "DefaultPassword";
-            user.Name = "DefaultName";
-            user.Surname = "DefaultSurname";
-            user.Email = "DefaultEmail@DefaultEmail.com";
-            return user;
-        }
+        
 
         [TestMethod]
        public void EditorUserBuilderTestSameAttributes()
@@ -31,7 +21,7 @@ namespace DocumentsManagerTesting
             string DefaultName = "DefaultName";
             string DefaultSurname = "DefaultSurname";
             string DefaultEmail = "DefaultEmail@DefaultEmail.com";
-            EditorUser user = TestEditorUser();
+            EditorUser user = ExampleInstances.TestEditorUser();
             Assert.AreEqual(user.Username,DefaultUsername);
             Assert.AreEqual(user.Password, DefaultPassword);
             Assert.AreEqual(user.Name, DefaultName);
@@ -41,7 +31,7 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void EditorUserBuilderTestDifferentAttributes()
         {
-            EditorUser user = TestEditorUser();
+            EditorUser user = ExampleInstances.TestEditorUser();
             Assert.AreNotEqual(user.Username, "DefaultUsername2");
             Assert.AreNotEqual(user.Password, "DefaultUsername2");
             Assert.AreNotEqual(user.Name, "DefaultName2");
@@ -51,21 +41,21 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void EditorUserEqualsTest()
         {
-            EditorUser user = TestEditorUser();
+            EditorUser user = ExampleInstances.TestEditorUser();
             Assert.IsTrue(user.Equals(user));
         }
         [TestMethod]
         public void EditorUserNotUSerEqualsTest()
         {
-            EditorUser user = TestEditorUser();
+            EditorUser user = ExampleInstances.TestEditorUser();
             string otherObject = "NotAnUser";
             Assert.IsFalse(user.Equals(otherObject));
         }
         [TestMethod]
         public void EditorUserNotEqualsTest()
         {
-            EditorUser user = TestEditorUser();
-            EditorUser differentUser = TestEditorUser();
+            EditorUser user = ExampleInstances.TestEditorUser();
+            EditorUser differentUser = ExampleInstances.TestEditorUser();
             Assert.AreNotEqual(user,differentUser);
         }
     }
