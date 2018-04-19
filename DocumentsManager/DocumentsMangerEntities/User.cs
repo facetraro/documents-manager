@@ -23,5 +23,8 @@ namespace DocumentsMangerEntities
             }
             return Id.Equals(anotherUser.Id);
         }
+        public bool SameUserByEmail(User anUser) {
+            return Email.Equals(anUser.Email);
+        }
     }
 }
