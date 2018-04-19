@@ -43,6 +43,7 @@
     <Compile Include="AdminUser.cs" />
     <Compile Include="EditorUser.cs" />
     <Compile Include="FontType.cs" />
+    <Compile Include="Format.cs" />
     <Compile Include="StyleClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextAlignment.cs" />
