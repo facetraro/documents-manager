@@ -58,7 +58,7 @@ namespace DocumentsManagerTesting
         public void EditorUserNotUSerEqualsTest()
         {
             EditorUser user = TestEditorUser();
-            string otherObject = "NotTheUser";
+            string otherObject = "NotAnUser";
             Assert.IsFalse(user.Equals(otherObject));
         }
         [TestMethod]
