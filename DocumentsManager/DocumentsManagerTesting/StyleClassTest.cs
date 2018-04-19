@@ -45,6 +45,14 @@ namespace DocumentsManagerTesting
             StyleClass testStyleClass = TestStyleClass();
             Assert.AreEqual(testStyleClass, testStyleClass);
         }
-       
+        [TestMethod]
+        public void StyleClassNotEqualsTest()
+        {
+            StyleClass testStyleClass = TestStyleClass();
+            StyleClass anotherTestStyleClass = TestStyleClass();
+            testStyleClass.Id = Guid.NewGuid();
+            anotherTestStyleClass.Id = Guid.NewGuid();
+            Assert.AreNotEqual(testStyleClass, anotherTestStyleClass);
+        }
     }
 }
