@@ -71,5 +71,12 @@ namespace DocumentsManagerTesting
             user2.Email = "Different Email";
             Assert.IsTrue(user.IsSameUserByUsername(user2));
         }
+
+        [TestMethod]
+        public void TestUserAuthenticate() {
+            User user = TestUser();
+            Assert.IsTrue(user.Authenticate(user.Password));
+        }
+
     }
 }
