@@ -15,5 +15,9 @@ namespace DocumentsMangerEntities
         public int FontSize { get; set; }
         public bool Italics { get; set; }
         public bool Underline { get; set; }
+        public override bool Equals(object obj)
+        {
+            return true;
+        }        
     }
 }
