@@ -48,5 +48,25 @@ namespace DocumentsManagerTesting
             Assert.AreNotEqual(user.Surname, "DefaultSurname2");
             Assert.AreNotEqual(user.Email, "DefaultEmail@DefaultEmail.com2");
         }
+        [TestMethod]
+        public void AdminUserEqualsTest()
+        {
+            AdminUser user = TestAdminUser();
+            Assert.IsTrue(user.Equals(user));
+        }
+        [TestMethod]
+        public void AdminUserNotEqualsTest()
+        {
+            AdminUser user = TestAdminUser();
+            AdminUser user2 = TestAdminUser();
+            Assert.IsFalse(user.Equals(user2));
+        }
+        [TestMethod]
+        public void AdminUserNotUserEqualsTest()
+        {
+            AdminUser user = TestAdminUser();
+            string otherObject = "NotAnUser";
+            Assert.IsFalse(user.Equals(otherObject));
+        }
     }
 }
