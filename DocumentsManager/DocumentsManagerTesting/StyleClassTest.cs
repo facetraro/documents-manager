@@ -14,7 +14,8 @@ namespace DocumentsManagerTesting
             testStyleClass.Underline = ApplyValue.NotSpecified;
             testStyleClass.Italics = ApplyValue.Apply;
             testStyleClass.Bold = ApplyValue.NoApply;
-            testStyleClass.FontSize = 10;
+            testStyleClass.FontSize.Size = 10;
+            testStyleClass.FontSize.Specified = SpecifiedValue.Specified;
             testStyleClass.Alignment = TextAlignment.Center;
             testStyleClass.Color = TextColor.Red;
             testStyleClass.Font = FontType.Arial;
@@ -27,7 +28,9 @@ namespace DocumentsManagerTesting
             ApplyValue underline = ApplyValue.NotSpecified;
             ApplyValue italics = ApplyValue.Apply;
             ApplyValue bold = ApplyValue.NoApply;
-            int fontSize = 10;
+            FontSize fontSize = new FontSize();
+            fontSize.Specified = SpecifiedValue.Specified;
+            fontSize.Size = 10;
             TextAlignment alignment = TextAlignment.Center;
             TextColor color = TextColor.Red;
             FontType fontType = FontType.Arial;
@@ -85,15 +88,16 @@ namespace DocumentsManagerTesting
         }
         [TestMethod]
         public void GetBasedOnEmptyBasedTest()
+
         {
             StyleClass childStyleClass = TestStyleClass();
             StyleClass testStyleClass = new StyleClass();
 
-            testStyleClass.Alignment = ApplyValue.NotSpecified;
+            testStyleClass.Alignment = TextAlignment.NotSpecified;
             testStyleClass.Bold = ApplyValue.NotSpecified;
-            testStyleClass.Color = ApplyValue.NotSpecified;
-            testStyleClass.Font = ApplyValue.NotSpecified;
-            testStyleClass.FontSize = ApplyValue.NotSpecified;
+            testStyleClass.Color = TextColor.NotSpecified;
+            testStyleClass.Font = FontType.NotSpecified;
+            testStyleClass.FontSize.Specified = SpecifiedValue.NotSpecified;
             testStyleClass.Italics = ApplyValue.NotSpecified;
             testStyleClass.Underline = ApplyValue.NotSpecified;
             childStyleClass.Based = testStyleClass;
