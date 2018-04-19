@@ -13,11 +13,13 @@ namespace DocumentsMangerEntities
         public TextColor Color { get; set; }
         public FontType Font { get; set; }
         public int FontSize { get; set; }
+        public Guid Id { get; set; }
         public bool Italics { get; set; }
         public bool Underline { get; set; }
         public override bool Equals(object obj)
         {
-            return true;
+            StyleClass anotherStyleClass = (StyleClass)obj;
+            return Id.Equals(anotherStyleClass.Id);
         }        
     }
 }
