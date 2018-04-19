@@ -15,5 +15,14 @@ namespace DocumentsMangerEntities
         public string Surname { get; set; }
         public string Email { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            AdminUser anotherAdminUser = obj as AdminUser;
+            if ((System.Object)anotherAdminUser == null)
+            {
+                return false;
+            }
+            return Id.Equals(anotherAdminUser.Id);
+        }
     }
 }
