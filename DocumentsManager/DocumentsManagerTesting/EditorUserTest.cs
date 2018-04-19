@@ -55,11 +55,18 @@ namespace DocumentsManagerTesting
             Assert.IsTrue(user.Equals(user));
         }
         [TestMethod]
-        public void EditorUserNotEqualsTest()
+        public void EditorUserNotUSerEqualsTest()
         {
             EditorUser user = TestEditorUser();
             string otherObject = "NotTheUser";
             Assert.IsFalse(user.Equals(otherObject));
+        }
+        [TestMethod]
+        public void EditorUserNotEqualsTest()
+        {
+            EditorUser user = TestEditorUser();
+            EditorUser differentUser = TestEditorUser();
+            Assert.AreNotEqual(user,differentUser);
         }
     }
 }
