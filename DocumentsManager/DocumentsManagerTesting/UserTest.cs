@@ -77,6 +77,10 @@ namespace DocumentsManagerTesting
             User user = TestUser();
             Assert.IsTrue(user.Authenticate(user.Password));
         }
-
+        [TestMethod]
+        public void TestUserAuthenticateFalse() {
+            User user = TestUser();
+            Assert.IsFalse(user.Authenticate("NotThePassword"));
+        }
     }
 }
