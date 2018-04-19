@@ -18,7 +18,11 @@ namespace DocumentsMangerEntities
         public bool Underline { get; set; }
         public override bool Equals(object obj)
         {
-            StyleClass anotherStyleClass = (StyleClass)obj;
+            StyleClass anotherStyleClass = obj as StyleClass;
+            if ((System.Object)anotherStyleClass == null)
+            {
+                return false;
+            }
             return Id.Equals(anotherStyleClass.Id);
         }        
     }
