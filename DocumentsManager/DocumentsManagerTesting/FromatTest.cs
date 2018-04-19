@@ -14,13 +14,11 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void TestFormatBuilder() {
             Guid Id = Guid.NewGuid();
-            string name = "FormatName";
+            string name = "DefaultFormatName";
             List<StyleClass> styles = new List<StyleClass>();
-            StyleClass style = ExampleInstances.TestStyleClass();
-            styles.Add(style);
-            Format format = new Format();
+            styles.Add(ExampleInstances.TestStyleClass());
+            Format format = ExampleInstances.TestFormat();
             format.Id = Id;
-            format.Name = name;
             format.StyleClasses = styles;
             Assert.AreEqual(format.Id,Id);
             Assert.AreEqual(format.Name,name);
@@ -29,44 +27,22 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void TestFormatBuilderNotSame()
         {
-            Guid Id = Guid.NewGuid();
-            string name = "FormatName";
-            List<StyleClass> styles = new List<StyleClass>();
-            StyleClass style = ExampleInstances.TestStyleClass();
-            styles.Add(style);
-            Format format = new Format();
-            format.Id = Id;
-            format.Name = name;
-            format.StyleClasses = styles;
+            
+            Format format = ExampleInstances.TestFormat();
             Assert.AreNotEqual(format.Id, Guid.NewGuid());
             Assert.AreNotEqual(format.Name, "anotherName");
             Assert.AreNotEqual(format.StyleClasses, new List<StyleClass>());
         }
         [TestMethod]
         public void TestFormatEquals() {
-
-            Format format = new Format();
-            Guid Id = Guid.NewGuid();
-            List<StyleClass> styles = new List<StyleClass>();
-            StyleClass style = ExampleInstances.TestStyleClass();
-            styles.Add(style);
-            format.Id = Id;
-            format.Name = "FormatName";
-            format.StyleClasses = styles;
+            Format format = ExampleInstances.TestFormat();
             Assert.IsTrue(format.Equals(format));
         }
         [TestMethod]
         public void TestFormatNotEquals()
         {
-            Format format = new Format();
-            List<StyleClass> styles = new List<StyleClass>();
-            StyleClass style = ExampleInstances.TestStyleClass();
-            styles.Add(style);
-            format.Id = Guid.NewGuid(); ;
-            format.Name = "FormatName";
-            format.StyleClasses = styles;
-            Format anotherFormat = new Format();
-            anotherFormat.Id = Guid.NewGuid(); 
+            Format format = ExampleInstances.TestFormat();
+            Format anotherFormat = ExampleInstances.TestFormat();
             anotherFormat.Name = "anotherFormatName";
             format.StyleClasses = new List<StyleClass>();
             Assert.IsFalse(format.Equals(anotherFormat));
@@ -74,14 +50,8 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void TestFormatDifferentButEquals()
         {
-            Format format = new Format();
-            List<StyleClass> styles = new List<StyleClass>();
-            StyleClass style = ExampleInstances.TestStyleClass();
-            styles.Add(style);
-            format.Id = Guid.NewGuid(); ;
-            format.Name = "FormatName";
-            format.StyleClasses = styles;
-            Format anotherFormat = new Format();
+            Format format = ExampleInstances.TestFormat();
+            Format anotherFormat = ExampleInstances.TestFormat();
             anotherFormat.Id = format.Id; 
             anotherFormat.Name = "anotherFormatName";
             format.StyleClasses = new List<StyleClass>();

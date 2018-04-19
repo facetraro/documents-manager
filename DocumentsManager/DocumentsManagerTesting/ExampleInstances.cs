@@ -61,5 +61,17 @@ namespace DocumentsManagerTesting
             };
             return user;
         }
+        public static Format TestFormat()
+        {
+            List<StyleClass> styles = new List<StyleClass>();
+            styles.Add(TestStyleClass());
+            Format format = new Format
+            {
+                Id = Guid.NewGuid(),
+                Name = "DefaultFormatName",
+                StyleClasses = styles
+            };
+            return format;
+        }
     }
 }
