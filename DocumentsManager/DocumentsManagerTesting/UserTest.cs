@@ -52,6 +52,14 @@ namespace DocumentsManagerTesting
             User user = TestUser();
             Assert.IsTrue(user.IsSameUserByUsername(user));
         }
+        [TestMethod]
+        public void UserNotSameUserByUsername()
+        {
+            User user = TestUser();
+            User user2 = TestUser();
+            user2.Username = "Different Username";
+            Assert.IsFalse(user.IsSameUserByUsername(user));
+        }
 
     }
 }
