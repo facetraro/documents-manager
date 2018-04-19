@@ -9,6 +9,7 @@ namespace DocumentsMangerEntities
     public class StyleClass
     {
         public TextAlignment Alignment { get; set; }
+        public StyleClass Based { get; set; }
         public ApplyValue Bold { get; set; }
         public TextColor Color { get; set; }
         public FontType Font { get; set; }
