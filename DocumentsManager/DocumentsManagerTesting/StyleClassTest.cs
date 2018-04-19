@@ -39,5 +39,12 @@ namespace DocumentsManagerTesting
             Assert.IsTrue(testStyleClass.Color.Equals(color));
             Assert.IsTrue(testStyleClass.Font.Equals(fontType));
         }
+        [TestMethod]
+        public void StyleClassEqualsTest()
+        {
+            StyleClass testStyleClass = TestStyleClass();
+            Assert.AreEqual(testStyleClass, testStyleClass);
+        }
+       
     }
 }
