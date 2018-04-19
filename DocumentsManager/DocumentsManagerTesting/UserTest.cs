@@ -11,55 +11,35 @@ namespace DocumentsManagerTesting
     [TestClass]
     public class UserTest
     {
+        User TestUser()
+        {
+            User user = new AdminUser();
+            user.Id = Guid.NewGuid();
+            user.Username = "DefaultUsername";
+            user.Password = "DefaultPassword";
+            user.Name = "DefaultName";
+            user.Surname = "DefaultSurname";
+            user.Email = "DefaultEmail@DefaultEmail.com";
+            return user;
+        }
         [TestMethod]
         public void UserSameUserByEmail()
         {
-            string DefaultUsername = "DefaultUsername";
-            string DefaultPassword = "DefaultPassword";
-            string DefaultName = "DefaultName";
-            string DefaultSurname = "DefaultSurname";
-            string DefaultEmail = "DefaultEmail@DefaultEmail.com";
-            AdminUser user = new AdminUser();
-            user.Username = DefaultUsername;
-            user.Password = DefaultPassword;
-            user.Name = DefaultName;
-            user.Surname = DefaultSurname;
-            user.Email = DefaultEmail;
+            User user = TestUser();
             Assert.IsTrue(user.IsSameUserByEmail(user));
         }
         [TestMethod]
         public void UserNotSameUserByEmail()
         {
-            string DefaultUsername = "DefaultUsername";
-            string DefaultPassword = "DefaultPassword";
-            string DefaultName = "DefaultName";
-            string DefaultSurname = "DefaultSurname";
-            string DefaultEmail = "DefaultEmail@DefaultEmail.com";
-            AdminUser user = new AdminUser();
-            user.Username = DefaultUsername;
-            user.Password = DefaultPassword;
-            user.Name = DefaultName;
-            user.Surname = DefaultSurname;
-            user.Email = DefaultEmail;
-            AdminUser user2 = user;
-            user.Email = "NewEmail";
-            Assert.IsFalse(user.IsSameUserByEmail(user));
+            User user = TestUser();
+            User user2 = TestUser();
+            user2.Email = "NewEmail";
+            Assert.IsFalse(user.IsSameUserByEmail(user2));
         }
         [TestMethod]
         public void UserSameUserByOnlyEmail()
-        {
-            string DefaultUsername = "DefaultUsername";
-            string DefaultPassword = "DefaultPassword";
-            string DefaultName = "DefaultName";
-            string DefaultSurname = "DefaultSurname";
-            string DefaultEmail = "DefaultEmail@DefaultEmail.com";
-            AdminUser user = new AdminUser();
-            user.Username = DefaultUsername;
-            user.Password = DefaultPassword;
-            user.Name = DefaultName;
-            user.Surname = DefaultSurname;
-            user.Email = DefaultEmail;
-            AdminUser user2 = user;
+        {   User user = TestUser();
+            User user2 = TestUser();
             user.Username = "DifferentAttribute";
             user.Password = "DifferentAttribute";
             user.Name = "DifferentAttribute";
