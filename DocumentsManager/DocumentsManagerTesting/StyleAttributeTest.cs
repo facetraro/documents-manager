@@ -33,5 +33,11 @@ namespace DocumentsManagerTesting
             StyleAttribute testAttribute = new FontSize();
             Assert.IsTrue(testAttribute.Name.Equals("Tamaño"));
         }
+        [TestMethod]
+        public void StyleAttributeItalicsConstructor()
+        {
+            StyleAttribute testAttribute = new Italics();
+            Assert.IsTrue(testAttribute.Name.Equals("Cursiva"));
+        }
     }
 }
