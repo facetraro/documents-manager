@@ -2,7 +2,7 @@
 
 namespace DocumentsManagerTesting
 {
-    internal class StyleColor : StyleAttribute
+    public class StyleColor : StyleAttribute
     {
     }
 }
