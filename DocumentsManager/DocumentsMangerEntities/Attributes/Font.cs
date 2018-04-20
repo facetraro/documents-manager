@@ -2,7 +2,7 @@
 
 namespace DocumentsManagerTesting
 {
-    internal class Font : StyleAttribute
+    public class Font : StyleAttribute
     {
         public Font()
         {

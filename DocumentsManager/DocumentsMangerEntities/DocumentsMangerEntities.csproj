@@ -43,6 +43,7 @@
     <Compile Include="AdminUser.cs" />
     <Compile Include="Attributes\Alignment.cs" />
     <Compile Include="Attributes\Bold.cs" />
+    <Compile Include="Attributes\Font.cs" />
     <Compile Include="Attributes\Italics.cs" />
     <Compile Include="StyleAttribute.cs" />
     <Compile Include="SpecifiedValue.cs" />
