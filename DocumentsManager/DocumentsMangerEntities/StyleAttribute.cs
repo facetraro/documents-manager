@@ -8,5 +8,6 @@ namespace DocumentsMangerEntities
 {
     abstract public class StyleAttribute
     {
+        public String Name { get; set; }
     }
 }
