@@ -2,7 +2,7 @@
 
 namespace DocumentsManagerTesting
 {
-    internal class Bold : StyleAttribute
+    public class Bold : StyleAttribute
     {
         public Bold()
         {
