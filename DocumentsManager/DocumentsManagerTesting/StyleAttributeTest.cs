@@ -39,5 +39,12 @@ namespace DocumentsManagerTesting
             StyleAttribute testAttribute = new Italics();
             Assert.IsTrue(testAttribute.Name.Equals("Cursiva"));
         }
+        [TestMethod]
+        public void StyleAttributeUnderlineConstructor()
+        {
+            StyleAttribute testAttribute = new Underline();
+            Assert.IsTrue(testAttribute.Name.Equals("Subrayado"));
+        }
+        
     }
 }
