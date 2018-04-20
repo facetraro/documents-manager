@@ -21,5 +21,11 @@ namespace DocumentsManagerTesting
             StyleAttribute anotherAttribute = new StyleColor();
             Assert.IsFalse(anotherAttribute.Equals(fontSizeTest));
         }
+        [TestMethod]
+        public void StyleAttributeConstructor()
+        {
+            StyleAttribute testAttribute = new Alignment();
+            Assert.IsTrue(testAttribute.Name.Equals("Alineación"));
+        }
     }
 }
