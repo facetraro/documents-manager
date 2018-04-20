@@ -51,6 +51,11 @@ namespace DocumentsManagerTesting
             StyleAttribute testAttribute = new Bold();
             Assert.IsTrue(testAttribute.Name.Equals("Negrita"));
         }
-
+        [TestMethod]
+        public void StyleAttributeFontConstructor()
+        {
+            StyleAttribute testAttribute = new Font();
+            Assert.IsTrue(testAttribute.Name.Equals("Tipo de Letra"));
+        }
     }
 }
