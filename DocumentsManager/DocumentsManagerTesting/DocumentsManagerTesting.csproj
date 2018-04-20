@@ -53,6 +53,7 @@
     <Compile Include="EditorUserTest.cs" />
     <Compile Include="ExampleInstances.cs" />
     <Compile Include="FromatTest.cs" />
+    <Compile Include="AttributeTest.cs" />
     <Compile Include="StyleClassTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AdminUserTest.cs" />
