@@ -57,5 +57,11 @@ namespace DocumentsManagerTesting
             StyleAttribute testAttribute = new Font();
             Assert.IsTrue(testAttribute.Name.Equals("Tipo de Letra"));
         }
+        [TestMethod]
+        public void StyleAttributeColorConstructor()
+        {
+            StyleAttribute testAttribute = new StyleColor();
+            Assert.IsTrue(testAttribute.Name.Equals("Color"));
+        }
     }
 }
