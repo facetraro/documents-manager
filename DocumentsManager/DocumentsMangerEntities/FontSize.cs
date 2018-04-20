@@ -10,6 +10,7 @@ namespace DocumentsMangerEntities
     {
         public FontSize()
         {
+            Name = "Tamaño";
             Size = 10;
             Specified = SpecifiedValue.NotSpecified;
         }
