@@ -12,7 +12,14 @@ namespace DocumentsManagerTesting
         public void StyleAttributeEquals()
         {
             StyleAttribute fontSizeTest = new FontSize();
-            fontSizeTest.Equals(fontSizeTest);
+            Assert.IsTrue(fontSizeTest.Equals(fontSizeTest));
+        }
+        [TestMethod]
+        public void StyleAttributeNotEquals()
+        {
+            StyleAttribute fontSizeTest = new FontSize();
+            StyleAttribute anotherAttribute = new StyleColor();
+            Assert.IsFalse(anotherAttribute.Equals(fontSizeTest));
         }
     }
 }
