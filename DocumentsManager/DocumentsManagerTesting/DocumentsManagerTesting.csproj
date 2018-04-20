@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="EditorUserTest.cs" />
     <Compile Include="ExampleInstances.cs" />
+    <Compile Include="Font.cs" />
     <Compile Include="FromatTest.cs" />
     <Compile Include="StyleAttributeTest.cs" />
     <Compile Include="StyleClassTest.cs" />
