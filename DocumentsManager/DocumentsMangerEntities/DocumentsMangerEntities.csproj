@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AdminUser.cs" />
     <Compile Include="Alignment.cs" />
+    <Compile Include="Italics.cs" />
     <Compile Include="StyleAttribute.cs" />
     <Compile Include="SpecifiedValue.cs" />
     <Compile Include="EditorUser.cs" />

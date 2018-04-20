@@ -2,7 +2,7 @@
 
 namespace DocumentsManagerTesting
 {
-    internal class Italics : StyleAttribute
+    public class Italics : StyleAttribute
     {
         public Italics()
         {
