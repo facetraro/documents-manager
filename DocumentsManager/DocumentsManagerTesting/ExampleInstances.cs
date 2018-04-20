@@ -38,10 +38,11 @@ namespace DocumentsManagerTesting
         public static StyleClass TestStyleClass()
         {
             StyleClass testStyleClass = new StyleClass();
-            testStyleClass.Underline = true;
-            testStyleClass.Italics = false;
-            testStyleClass.Bold = false;
-            testStyleClass.FontSize = 10;
+            testStyleClass.Underline = ApplyValue.NotSpecified;
+            testStyleClass.Italics = ApplyValue.Apply;
+            testStyleClass.Bold = ApplyValue.NoApply;
+            testStyleClass.FontSize.Size = 10;
+            testStyleClass.FontSize.Specified = SpecifiedValue.Specified;
             testStyleClass.Alignment = TextAlignment.Center;
             testStyleClass.Color = TextColor.Red;
             testStyleClass.Font = FontType.Arial;
