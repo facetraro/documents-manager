@@ -57,6 +57,7 @@
     <Compile Include="StyleClassTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AdminUserTest.cs" />
+    <Compile Include="StyleColor.cs" />
     <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
