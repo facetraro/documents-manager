@@ -11,10 +11,11 @@ namespace DocumentsManagerTesting
         StyleClass TestStyleClass()
         {
             StyleClass testStyleClass = new StyleClass();
-            testStyleClass.Underline = true;
-            testStyleClass.Italics = false;
-            testStyleClass.Bold = false;
-            testStyleClass.FontSize = 10;
+            testStyleClass.Underline = ApplyValue.NotSpecified;
+            testStyleClass.Italics = ApplyValue.Apply;
+            testStyleClass.Bold = ApplyValue.NoApply;
+            testStyleClass.FontSize.Size = 10;
+            testStyleClass.FontSize.Specified = SpecifiedValue.Specified;
             testStyleClass.Alignment = TextAlignment.Center;
             testStyleClass.Color = TextColor.Red;
             testStyleClass.Font = FontType.Arial;
@@ -24,10 +25,12 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void StyleClassConstructorTest()
         {
-            bool underline = true;
-            bool italics = false;
-            bool bold = false;
-            int fontSize = 10;
+            ApplyValue underline = ApplyValue.NotSpecified;
+            ApplyValue italics = ApplyValue.Apply;
+            ApplyValue bold = ApplyValue.NoApply;
+            FontSize fontSize = new FontSize();
+            fontSize.Specified = SpecifiedValue.Specified;
+            fontSize.Size = 10;
             TextAlignment alignment = TextAlignment.Center;
             TextColor color = TextColor.Red;
             FontType fontType = FontType.Arial;
@@ -59,6 +62,54 @@ namespace DocumentsManagerTesting
             StyleClass testStyleClass = TestStyleClass();
             int otherObject = 10;
             Assert.AreNotEqual(testStyleClass, otherObject);
+        }
+        [TestMethod]
+        public void StyleClassBasedTest()
+        {
+            StyleClass testStyleClass = TestStyleClass();
+            StyleClass childStyleClass = new StyleClass();
+            childStyleClass.Based = testStyleClass;
+            Assert.AreEqual(testStyleClass, childStyleClass.Based);
+        }
+        [TestMethod]
+        public void GetBasedOnStyleClassTest()
+        {
+            StyleClass testStyleClass = TestStyleClass();
+            StyleClass childStyleClass = new StyleClass();
+            childStyleClass.Based = testStyleClass;
+            StyleClass basedOnStyleClass = childStyleClass.GetBasedOnStyleClass();
+            Assert.IsTrue(testStyleClass.Underline.Equals(basedOnStyleClass.Underline));
+            Assert.IsTrue(testStyleClass.Italics.Equals(basedOnStyleClass.Italics));
+            Assert.IsTrue(testStyleClass.Bold.Equals(basedOnStyleClass.Bold));
+            Assert.IsTrue(testStyleClass.FontSize.Equals(basedOnStyleClass.FontSize));
+            Assert.IsTrue(testStyleClass.Alignment.Equals(basedOnStyleClass.Alignment));
+            Assert.IsTrue(testStyleClass.Color.Equals(basedOnStyleClass.Color));
+            Assert.IsTrue(testStyleClass.Font.Equals(basedOnStyleClass.Font));
+        }
+        [TestMethod]
+        public void GetBasedOnEmptyBasedTest()
+
+        {
+            StyleClass childStyleClass = TestStyleClass();
+            StyleClass testStyleClass = new StyleClass();
+
+            testStyleClass.Alignment = TextAlignment.NotSpecified;
+            testStyleClass.Bold = ApplyValue.NotSpecified;
+            testStyleClass.Color = TextColor.NotSpecified;
+            testStyleClass.Font = FontType.NotSpecified;
+            testStyleClass.FontSize.Specified = SpecifiedValue.NotSpecified;
+            testStyleClass.Italics = ApplyValue.NotSpecified;
+            testStyleClass.Underline = ApplyValue.NotSpecified;
+            childStyleClass.Based = testStyleClass;
+
+            StyleClass basedOnStyleClass = childStyleClass.GetBasedOnStyleClass();
+            Assert.IsTrue(childStyleClass.Underline.Equals(basedOnStyleClass.Underline));
+            Assert.IsTrue(childStyleClass.Italics.Equals(basedOnStyleClass.Italics));
+            Assert.IsTrue(childStyleClass.Bold.Equals(basedOnStyleClass.Bold));
+            Assert.IsTrue(childStyleClass.FontSize.Equals(basedOnStyleClass.FontSize));
+            Assert.IsTrue(childStyleClass.Alignment.Equals(basedOnStyleClass.Alignment));
+            Assert.IsTrue(childStyleClass.Color.Equals(basedOnStyleClass.Color));
+            Assert.IsTrue(childStyleClass.Font.Equals(basedOnStyleClass.Font));
         }
     }
 }

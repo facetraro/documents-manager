@@ -1,4 +1,4 @@
 ﻿namespace DocumentsMangerEntities
 {
-    public enum TextColor { Red };
+    public enum TextColor { Red, NotSpecified };
 }
