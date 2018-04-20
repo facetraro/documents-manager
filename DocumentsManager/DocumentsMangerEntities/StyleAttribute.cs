@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DocumentsMangerEntities
 {
-    abstract public class Attribute
+    abstract public class StyleAttribute
     {
     }
 }

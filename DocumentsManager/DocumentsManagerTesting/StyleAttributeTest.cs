@@ -6,12 +6,12 @@ namespace DocumentsManagerTesting
 {
 
     [TestClass]
-    public class AttributeTest
+    public class StyleAttributeTest
     {
         [TestMethod]
-        public void AttributeEquals()
+        public void StyleAttributeEquals()
         {
-            DocumentsMangerEntities.Attribute fontSizeTest = new FontSize();
+            StyleAttribute fontSizeTest = new FontSize();
             fontSizeTest.Equals(fontSizeTest);
         }
     }
