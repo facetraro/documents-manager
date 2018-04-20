@@ -45,6 +45,12 @@ namespace DocumentsManagerTesting
             StyleAttribute testAttribute = new Underline();
             Assert.IsTrue(testAttribute.Name.Equals("Subrayado"));
         }
-        
+        [TestMethod]
+        public void StyleAttributeUnderlineConstructor()
+        {
+            StyleAttribute testAttribute = new Bold();
+            Assert.IsTrue(testAttribute.Name.Equals("Negrita"));
+        }
+
     }
 }
