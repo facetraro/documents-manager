@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminUser.cs" />
+    <Compile Include="Attribute.cs" />
     <Compile Include="SpecifiedValue.cs" />
     <Compile Include="EditorUser.cs" />
     <Compile Include="FontSize.cs" />

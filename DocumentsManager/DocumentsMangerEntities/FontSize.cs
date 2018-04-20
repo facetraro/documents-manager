@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DocumentsMangerEntities
 {
-    public class FontSize
+    public class FontSize : Attribute
     {
         public FontSize()
         {
