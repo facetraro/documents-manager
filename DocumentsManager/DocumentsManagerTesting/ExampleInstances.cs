@@ -35,17 +35,36 @@ namespace DocumentsManagerTesting
             };
             return user;
         }
+        public static List<StyleAttribute> TestAttributes()
+        {
+            List<StyleAttribute> attributes = new List<StyleAttribute>();
+            Underline underline = new Underline();
+            underline.Applies = ApplyValue.NoApply;
+            Italics italics = new Italics();
+            italics.Applies = ApplyValue.Apply;
+            Bold bold = new Bold();
+            bold.Applies = ApplyValue.NoApply;
+            FontSize fontSize = new FontSize();
+            fontSize.Size = 10;
+            Alignment alignment = new Alignment();
+            alignment.TextAlignment = TextAlignment.Center;
+            StyleColor color = new StyleColor();
+            color.TextColor = TextColor.Red;
+            Font font = new Font();
+            font.FontType = FontType.Arial;
+            attributes.Add(underline);
+            attributes.Add(italics);
+            attributes.Add(bold);
+            attributes.Add(fontSize);
+            attributes.Add(alignment);
+            attributes.Add(color);
+            attributes.Add(font);
+            return attributes;
+        }
         public static StyleClass TestStyleClass()
         {
             StyleClass testStyleClass = new StyleClass();
-            testStyleClass.Underline = ApplyValue.NotSpecified;
-            testStyleClass.Italics = ApplyValue.Apply;
-            testStyleClass.Bold = ApplyValue.NoApply;
-            testStyleClass.FontSize.Size = 10;
-            testStyleClass.FontSize.Specified = SpecifiedValue.Specified;
-            testStyleClass.Alignment = TextAlignment.Center;
-            testStyleClass.Color = TextColor.Red;
-            testStyleClass.Font = FontType.Arial;
+            testStyleClass.Attributes = TestAttributes();
             testStyleClass.Id = Guid.NewGuid();
             return testStyleClass;
         }
