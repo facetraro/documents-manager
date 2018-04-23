@@ -1,0 +1,19 @@
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace DocumentsManagerTesting
+{
+    [TestClass]
+    public class FontTest
+    {
+        [TestMethod]
+        public void EqualFontTypeTest()
+        {
+            Font testFont = new Font();
+            testFont.FontType = DocumentsMangerEntities.FontType.Arial;
+            Font anotherFont = new Font();
+            testFont.FontType = DocumentsMangerEntities.FontType.TimesNewRoman;
+            Assert.IsFalse(testFont.Equals(anotherFont));
+        }
+    }
+}
