@@ -42,12 +42,24 @@ namespace DocumentsMangerEntities
             ret.Attributes = Based.Attributes;
             foreach (var item in this.Attributes)
             {
-                if (!ret.Attributes.Contains(item))
+                if (!ret.IsAttributeSpecified(item))
                 {
                     ret.Attributes.Add(item);
                 }
             }
             return ret;
+        }
+        public bool IsAttributeSpecified(StyleAttribute attribute)
+        {
+
+            foreach (var item in Attributes)
+            {
+                if (attribute.Name.Equals(item.Name))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

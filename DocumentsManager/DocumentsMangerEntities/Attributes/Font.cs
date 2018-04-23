@@ -9,5 +9,10 @@ namespace DocumentsManagerTesting
         {
             Name = "Tipo de Letra";
         }
+        public override bool Equals(object obj)
+        {
+            Font font = (Font)(obj);
+            return base.Equals(obj)&&this.FontType== font.FontType;
+        }
     }
 }
