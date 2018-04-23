@@ -11,8 +11,12 @@ namespace DocumentsManagerTesting
         }
         public override bool Equals(object obj)
         {
-            Font font = (Font)(obj);
-            return base.Equals(obj) && IsTheSameFont(font);
+            Font anotherFont = obj as Font;
+            if ((System.Object)anotherFont == null)
+            {
+                return false;
+            }
+            return base.Equals(obj) && IsTheSameFont(anotherFont);
         }
         private bool IsTheSameFont(Font font)
         {
