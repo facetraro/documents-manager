@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DocumentsMangerEntities;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace DocumentsManagerTesting
 {
@@ -27,7 +28,6 @@ namespace DocumentsManagerTesting
             Font font = new Font();
             font.FontType = FontType.Arial;
             StyleClass testStyleClass = ExampleInstances.TestStyleClass();
-
           
             Assert.IsTrue(testStyleClass.GetAttributeByName(underline.Name).Equals(underline));
             Assert.IsTrue(testStyleClass.GetAttributeByName(italics.Name).Equals(italics));
@@ -35,8 +35,7 @@ namespace DocumentsManagerTesting
             Assert.IsTrue(testStyleClass.GetAttributeByName(fontSize.Name).Equals(fontSize));
             Assert.IsTrue(testStyleClass.GetAttributeByName(alignment.Name).Equals(alignment));
             Assert.IsTrue(testStyleClass.GetAttributeByName(color.Name).Equals(color));
-            Assert.IsTrue(testStyleClass.GetAttributeByName(font.Name).Equals(font));
-            
+            Assert.IsTrue(testStyleClass.GetAttributeByName(font.Name).Equals(font));      
         }
         [TestMethod]
         public void StyleClassEqualsTest()
@@ -77,14 +76,37 @@ namespace DocumentsManagerTesting
         }
         [TestMethod]
         public void GetBasedOnEmptyBasedTest()
-
         {
             StyleClass childStyleClass = ExampleInstances.TestStyleClass();
             StyleClass testStyleClass = new StyleClass();
             childStyleClass.Based = testStyleClass;
             StyleClass basedOnStyleClass = childStyleClass.GetBasedOnStyleClass();
             Assert.IsTrue(basedOnStyleClass.Attributes.SequenceEqual(childStyleClass.Attributes));
-
+        }
+        [TestMethod]
+        public void GetSomeAttributesFromBasedTest()
+        {
+            StyleClass childStyleClass = new StyleClass();
+            Font fontAttribute = new Font();
+            fontAttribute.FontType = FontType.CourierNew;
+            StyleColor colorAttribute = new StyleColor();
+            colorAttribute.TextColor = TextColor.Blue;
+            Alignment alignmentAttribute = new Alignment();
+            alignmentAttribute.TextAlignment = TextAlignment.Right;
+            childStyleClass.Attributes.Add(fontAttribute);
+            childStyleClass.Attributes.Add(colorAttribute);
+            childStyleClass.Attributes.Add(alignmentAttribute);
+            StyleClass testStyleClass = ExampleInstances.TestStyleClass();
+            testStyleClass.Attributes.Remove(testStyleClass.GetAttributeByName(alignmentAttribute.Name));
+            testStyleClass.Attributes.Remove(testStyleClass.GetAttributeByName(colorAttribute.Name));
+            testStyleClass.Attributes.Remove(testStyleClass.GetAttributeByName(fontAttribute.Name));
+            childStyleClass.Based = testStyleClass;
+            List<StyleAttribute> expectedAttributes = childStyleClass.Based.Attributes;
+            expectedAttributes.Add(fontAttribute);
+            expectedAttributes.Add(colorAttribute);
+            expectedAttributes.Add(alignmentAttribute);
+            StyleClass basedOnStyleClass = childStyleClass.GetBasedOnStyleClass();
+            Assert.IsTrue(basedOnStyleClass.Attributes.SequenceEqual(expectedAttributes));
         }
     }
 }
