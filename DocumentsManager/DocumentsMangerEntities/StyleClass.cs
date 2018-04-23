@@ -17,49 +17,51 @@ namespace DocumentsMangerEntities
         }
         public override bool Equals(object obj)
         {
+            bool validation = false;
             StyleClass anotherStyleClass = obj as StyleClass;
-            if ((System.Object)anotherStyleClass == null)
+            if ((System.Object)anotherStyleClass != null)
             {
-                return false;
+                validation = Id.Equals(anotherStyleClass.Id); ;
             }
-            return Id.Equals(anotherStyleClass.Id);
+            return validation;
         }
         public StyleAttribute GetAttributeByName(string name)
         {
-            foreach (var item in Attributes)
+            StyleAttribute attribute = null;
+            foreach (StyleAttribute item in Attributes)
             {
                 if (item.Name == name)
                 {
-                    return item;
+                    attribute = item;
                 }
             }
-            return null;
+            return attribute;
         }
         public StyleClass GetBasedOnStyleClass()
         {
-            StyleClass ret = new StyleClass();
-            ret.Id = this.Id;
-            ret.Attributes = Based.Attributes;
-            foreach (var item in this.Attributes)
+            StyleClass basedStyleClass = new StyleClass();
+            basedStyleClass.Id = this.Id;
+            basedStyleClass.Attributes = Based.Attributes;
+            foreach (StyleAttribute item in this.Attributes)
             {
-                if (!ret.IsAttributeSpecified(item))
+                if (!basedStyleClass.IsAttributeSpecified(item))
                 {
-                    ret.Attributes.Add(item);
+                    basedStyleClass.Attributes.Add(item);
                 }
             }
-            return ret;
+            return basedStyleClass;
         }
         public bool IsAttributeSpecified(StyleAttribute attribute)
         {
-
-            foreach (var item in Attributes)
+            bool validation = false;
+            foreach (StyleAttribute item in Attributes)
             {
                 if (attribute.Name.Equals(item.Name))
                 {
-                    return true;
+                    validation = true;
                 }
             }
-            return false;
+            return validation;
         }
     }
 }
