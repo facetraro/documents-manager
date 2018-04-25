@@ -18,10 +18,10 @@ namespace DocumentsManagerTesting
             string text = "Default text test";
             StyleClass styleClass = ExampleInstances.TestStyleClass();
             aText.Id = id;
-            aText.Text = text;
+            aText.WrittenText = text;
             aText.StyleClass = styleClass;
             Assert.AreEqual(aText.Id,id);
-            Assert.AreEqual(aText.Text,text);
+            Assert.AreEqual(aText.WrittenText, text);
             Assert.AreEqual(aText.StyleClass,styleClass);
         }
         [TestMethod]
@@ -32,10 +32,10 @@ namespace DocumentsManagerTesting
             string text = "Default text test";
             StyleClass styleClass = ExampleInstances.TestStyleClass();
             aText.Id = id;
-            aText.Text = text;
+            aText.WrittenText = text;
             aText.StyleClass = styleClass;
             Assert.AreEqual(aText.Id, id);
-            Assert.AreNotEqual(aText.Text, "aDifferentText");
+            Assert.AreNotEqual(aText.WrittenText, "aDifferentText");
             Assert.AreNotEqual(aText.StyleClass, ExampleInstances.TestStyleClass());
         }
         [TestMethod]
@@ -46,10 +46,10 @@ namespace DocumentsManagerTesting
             string text = "Default text test";
             StyleClass styleClass = ExampleInstances.TestStyleClass();
             aText.Id = id;
-            aText.Text = text;
+            aText.WrittenText = text;
             aText.StyleClass = styleClass;
             Assert.AreNotEqual(aText.Id, Guid.NewGuid());
-            Assert.AreEqual(aText.Text, "text");
+            Assert.AreEqual(aText.WrittenText, text);
             Assert.AreEqual(aText.StyleClass, styleClass);
         }
     }
