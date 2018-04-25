@@ -27,13 +27,10 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void TextBuilderTestDifferentAttr()
         {
-            Text aText = new Text();
+            Text aText = ExampleInstances.TestText();
             Guid id = Guid.NewGuid();
-            string text = "Default text test";
-            StyleClass styleClass = ExampleInstances.TestStyleClass();
             aText.Id = id;
-            aText.WrittenText = text;
-            aText.StyleClass = styleClass;
+            string text = "Default text test";
             Assert.AreEqual(aText.Id, id);
             Assert.AreNotEqual(aText.WrittenText, "aDifferentText");
             Assert.AreNotEqual(aText.StyleClass, ExampleInstances.TestStyleClass());

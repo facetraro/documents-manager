@@ -74,5 +74,16 @@ namespace DocumentsManagerTesting
             };
             return format;
         }
+        public static Text TestText()
+        {
+            Text aText = new Text
+            {
+                Id = Guid.NewGuid(),
+                WrittenText = "DefaultText",
+                StyleClass = TestStyleClass()
+        };
+            return aText;
+       }
+
     }
 }
