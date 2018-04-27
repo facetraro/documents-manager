@@ -9,15 +9,23 @@ namespace DocumentsMangerEntities
     abstract public class StyleAttribute
     {
         public String Name { get; set; }
-              public override bool Equals(object obj)
+        public override bool Equals(object obj)
         {
             bool validation = false;
             StyleAttribute anotherObject = obj as StyleAttribute;
-            if ((System.Object)anotherObject != null && anotherObject.Name==Name)
+            if (IsEqual(anotherObject))
             {
                 validation = true;
             }
             return validation;
+        }
+        private bool IsEqual(StyleAttribute anotherObject)
+        {
+            return (System.Object)anotherObject != null && HasTheSameName(anotherObject);
+        }
+        private bool HasTheSameName(StyleAttribute anotherObject)
+        {
+            return anotherObject.Name == Name;
         }
     }
 }
