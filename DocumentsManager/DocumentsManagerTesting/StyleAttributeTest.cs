@@ -63,5 +63,11 @@ namespace DocumentsManagerTesting
             StyleAttribute testAttribute = new StyleColor();
             Assert.IsTrue(testAttribute.Name.Equals("Color"));
         }
+        [TestMethod]
+        public void StyleAttributeEqualsDifferentObject()
+        {
+            StyleAttribute fontSizeTest = new FontSize();
+            Assert.IsFalse(fontSizeTest.Equals("Not a StyleAttribute"));
+        }
     }
 }
