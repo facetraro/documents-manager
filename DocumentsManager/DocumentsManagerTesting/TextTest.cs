@@ -71,5 +71,46 @@ namespace DocumentsManagerTesting
             Text anotherText = ExampleInstances.TestText();
             Assert.AreNotEqual(aText, anotherText);
         }
-     }
+        [TestMethod]
+        public void TextHasSameText()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            Assert.IsTrue(aText.HasSameText(anotherText));
+        }
+        [TestMethod]
+        public void TextHasSameTextDifferent()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            anotherText.WrittenText = "A different text";
+            Assert.isFalse(aText.HasSameText(anotherText));
+        }
+        [TestMethod]
+        public void TextHasSameTextEmptyFirst()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            aText.WrittenText = "";
+            Assert.isFalse(aText.HasSameText(anotherText));
+        }
+        [TestMethod]
+        public void TextHasSameTextEmptySecond()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            anotherText.WrittenText = "";
+            Assert.isFalse(aText.HasSameText(anotherText));
+        }
+        [TestMethod]
+        public void TextHasSameTextBothEmpty()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            aText.WrittenText = "";
+            anotherText.WrittenText = "";
+            Assert.IsTrue(aText.HasSameText(anotherText));
+        }
+    }
+
 }
