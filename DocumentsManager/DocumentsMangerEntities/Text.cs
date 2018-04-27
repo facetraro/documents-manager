@@ -21,5 +21,8 @@ namespace DocumentsMangerEntities
         }
         return Id.Equals(anotherText.Id);
     }
+        public bool HasSameText(Text anotherText) {
+            return WrittenText.Equals(anotherText.WrittenText);
+        }
     }
 }

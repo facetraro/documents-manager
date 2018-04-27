@@ -84,7 +84,7 @@ namespace DocumentsManagerTesting
             Text aText = ExampleInstances.TestText();
             Text anotherText = ExampleInstances.TestText();
             anotherText.WrittenText = "A different text";
-            Assert.isFalse(aText.HasSameText(anotherText));
+            Assert.IsFalse(aText.HasSameText(anotherText));
         }
         [TestMethod]
         public void TextHasSameTextEmptyFirst()
@@ -92,7 +92,7 @@ namespace DocumentsManagerTesting
             Text aText = ExampleInstances.TestText();
             Text anotherText = ExampleInstances.TestText();
             aText.WrittenText = "";
-            Assert.isFalse(aText.HasSameText(anotherText));
+            Assert.IsFalse(aText.HasSameText(anotherText));
         }
         [TestMethod]
         public void TextHasSameTextEmptySecond()
@@ -100,7 +100,7 @@ namespace DocumentsManagerTesting
             Text aText = ExampleInstances.TestText();
             Text anotherText = ExampleInstances.TestText();
             anotherText.WrittenText = "";
-            Assert.isFalse(aText.HasSameText(anotherText));
+            Assert.IsFalse(aText.HasSameText(anotherText));
         }
         [TestMethod]
         public void TextHasSameTextBothEmpty()
