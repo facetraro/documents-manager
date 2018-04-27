@@ -1,4 +1,4 @@
 ﻿namespace DocumentsMangerEntities
 {
-    public enum FontType { Arial, NotSpecified, CourierNew, TimesNewRoman } ;
+    public enum FontType { Arial, CourierNew, TimesNewRoman } ;
 }

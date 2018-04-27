@@ -1,4 +1,4 @@
 ﻿namespace DocumentsMangerEntities
 {
-    public enum TextAlignment { Center, NotSpecified, Right };
+    public enum TextAlignment { Center, Right };
 }
