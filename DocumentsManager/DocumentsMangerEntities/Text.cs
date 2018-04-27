@@ -11,5 +11,18 @@ namespace DocumentsMangerEntities
         public Guid Id { get; set; }
         public StyleClass StyleClass { get; set; }
         public string WrittenText { get; set; }
+   
+    public override bool Equals(object obj)
+    {
+        Text anotherText = obj as Text;
+        if ((System.Object)anotherText == null)
+        {
+            return false;
+        }
+        return Id.Equals(anotherText.Id);
+    }
+        public bool HasSameText(Text anotherText) {
+            return WrittenText.Equals(anotherText.WrittenText);
+        }
     }
 }

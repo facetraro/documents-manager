@@ -30,7 +30,6 @@ namespace DocumentsManagerTesting
             Text aText = ExampleInstances.TestText();
             Guid id = Guid.NewGuid();
             aText.Id = id;
-            string text = "Default text test";
             Assert.AreEqual(aText.Id, id);
             Assert.AreNotEqual(aText.WrittenText, "aDifferentText");
             Assert.AreNotEqual(aText.StyleClass, ExampleInstances.TestStyleClass());
@@ -49,5 +48,69 @@ namespace DocumentsManagerTesting
             Assert.AreEqual(aText.WrittenText, text);
             Assert.AreEqual(aText.StyleClass, styleClass);
         }
+        [TestMethod]
+        public void TextEqualsTestSameAttr() {
+            Text aText = ExampleInstances.TestText();
+            Text sameText = ExampleInstances.TestText();
+            sameText.Id = aText.Id;
+            Assert.AreEqual(aText, sameText);
+        }
+        [TestMethod]
+        public void TextEqualsTestDifferentAttr()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            anotherText.StyleClass = new StyleClass();
+            anotherText.WrittenText = "another Text";
+            Assert.AreNotEqual(aText, anotherText);
+        }
+        [TestMethod]
+        public void TextEqualsTestDifferentID()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            Assert.AreNotEqual(aText, anotherText);
+        }
+        [TestMethod]
+        public void TextHasSameText()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            Assert.IsTrue(aText.HasSameText(anotherText));
+        }
+        [TestMethod]
+        public void TextHasSameTextDifferent()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            anotherText.WrittenText = "A different text";
+            Assert.IsFalse(aText.HasSameText(anotherText));
+        }
+        [TestMethod]
+        public void TextHasSameTextEmptyFirst()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            aText.WrittenText = "";
+            Assert.IsFalse(aText.HasSameText(anotherText));
+        }
+        [TestMethod]
+        public void TextHasSameTextEmptySecond()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            anotherText.WrittenText = "";
+            Assert.IsFalse(aText.HasSameText(anotherText));
+        }
+        [TestMethod]
+        public void TextHasSameTextBothEmpty()
+        {
+            Text aText = ExampleInstances.TestText();
+            Text anotherText = ExampleInstances.TestText();
+            aText.WrittenText = "";
+            anotherText.WrittenText = "";
+            Assert.IsTrue(aText.HasSameText(anotherText));
+        }
     }
+
 }
