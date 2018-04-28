@@ -18,7 +18,11 @@ namespace DocumentsMangerEntities
         public override bool Equals(object obj)
         {
             FontSize anotherFontSize = obj as FontSize;
-            return base.Equals(anotherFontSize) && Size == anotherFontSize.Size;
-        } 
+            return base.Equals(anotherFontSize) && IsTheSameSize(anotherFontSize);
+        }
+        private bool IsTheSameSize(FontSize anotherFontSize)
+        {
+            return Size == anotherFontSize.Size;
+        }
     }
 }
