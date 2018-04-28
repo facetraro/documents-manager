@@ -53,6 +53,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AlignmentTest.cs" />
+    <Compile Include="UnderlineTest.cs" />
     <Compile Include="FontSizeTest.cs" />
     <Compile Include="ItalicsTest.cs" />
     <Compile Include="StyleColorTest.cs" />
