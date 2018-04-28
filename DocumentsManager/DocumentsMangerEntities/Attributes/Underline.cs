@@ -1,10 +1,10 @@
 ﻿using DocumentsMangerEntities;
+using DocumentsMangerEntities.Attributes;
 
 namespace DocumentsManagerTesting
 {
-    public class Underline : StyleAttribute
+    public class Underline : BooleanAttribute
     {
-        public ApplyValue Applies { get; set; }
         public Underline()
         {
             Name = "Subrayado";
