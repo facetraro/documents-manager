@@ -9,5 +9,10 @@ namespace DocumentsManagerTesting
         {
             Name = "Negrita";
         }
+        public override bool Equals(object obj)
+        {
+            Bold anotherBold = obj as Bold;
+            return base.Equals(obj) && Applies == anotherBold.Applies;
+        }
     }
 }
