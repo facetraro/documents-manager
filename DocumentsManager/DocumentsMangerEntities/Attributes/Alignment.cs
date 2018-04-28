@@ -12,7 +12,11 @@ namespace DocumentsManagerTesting
         public override bool Equals(object obj)
         {
             Alignment anotherAlignment = obj as Alignment;
-            return base.Equals(obj) && anotherAlignment.TextAlignment==TextAlignment;
+            return base.Equals(obj) && IsTheSameAlignment(anotherAlignment);
+        }
+        private bool IsTheSameAlignment(Alignment anotherAlignment)
+        {
+            return anotherAlignment.TextAlignment == TextAlignment;
         }
     }
 }
