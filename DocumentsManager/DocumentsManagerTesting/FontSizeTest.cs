@@ -14,7 +14,7 @@ namespace DocumentsManagerTesting
             fontSizeTest.Size = 10;
             FontSize anotherFontSize = new FontSize();
             anotherFontSize.Size = 20;
-            Assert.IsFalse(fontSizeTest.Equals(fontSizeTest));
+            Assert.IsFalse(fontSizeTest.Equals(anotherFontSize));
         }
     }
 }

@@ -15,5 +15,10 @@ namespace DocumentsMangerEntities
         }
 
         public int Size { get; set; }
+        public override bool Equals(object obj)
+        {
+            FontSize anotherFontSize = obj as FontSize;
+            return base.Equals(anotherFontSize) && Size == anotherFontSize.Size;
+        } 
     }
 }
