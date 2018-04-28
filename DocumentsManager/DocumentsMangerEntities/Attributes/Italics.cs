@@ -1,18 +1,13 @@
 ﻿using DocumentsMangerEntities;
+using DocumentsMangerEntities.Attributes;
 
 namespace DocumentsManagerTesting
 {
-    public class Italics : StyleAttribute
+    public class Italics : BooleanAttribute
     {
-        public ApplyValue Applies { get; set; }
         public Italics()
         {
             Name = "Cursiva";
-        }
-        public override bool Equals(object obj)
-        {
-            Italics anotherItalics = obj as Italics;
-            return base.Equals(obj) && Applies == anotherItalics.Applies;
         }
     }
 }
