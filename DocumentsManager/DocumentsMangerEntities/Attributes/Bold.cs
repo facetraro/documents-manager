@@ -12,9 +12,9 @@ namespace DocumentsManagerTesting
         public override bool Equals(object obj)
         {
             Bold anotherBold = obj as Bold;
-            return base.Equals(anotherBold) && IsEqual(anotherBold);
+            return base.Equals(anotherBold) && IsTheSameApplication(anotherBold);
         }
-        private bool IsEqual(Bold anotherBold)
+        private bool IsTheSameApplication(Bold anotherBold)
         {
             return Applies == anotherBold.Applies;
         }
