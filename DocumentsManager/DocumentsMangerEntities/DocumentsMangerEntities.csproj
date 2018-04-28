@@ -54,6 +54,7 @@
     <Compile Include="Format.cs" />
     <Compile Include="StyleClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Text.cs" />
     <Compile Include="Attributes\StyleColor.cs" />
     <Compile Include="TextAlignment.cs" />
     <Compile Include="ApplyValue.cs" />
