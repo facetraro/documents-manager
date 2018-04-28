@@ -52,6 +52,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AlignmentTest.cs" />
     <Compile Include="StyleColorTest.cs" />
     <Compile Include="EditorUserTest.cs" />
     <Compile Include="ExampleInstances.cs" />

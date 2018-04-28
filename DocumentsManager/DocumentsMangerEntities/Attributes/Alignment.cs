@@ -9,5 +9,10 @@ namespace DocumentsManagerTesting
         {
             Name = "Alineación";
         }
+        public override bool Equals(object obj)
+        {
+            Alignment anotherAlignment = obj as Alignment;
+            return base.Equals(obj) && anotherAlignment.TextAlignment==TextAlignment;
+        }
     }
 }

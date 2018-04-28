@@ -1,26 +1,20 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DocumentsMangerEntities;
 
 namespace DocumentsManagerTesting
 {
     [TestClass]
-    public class FontTest
+    public class AlignmentTest
     {
         [TestMethod]
-        public void EqualFontTypeTest()
+        public void NotEqualAlignmentTest()
         {
-            Font testFont = new Font();
-            testFont.FontType = DocumentsMangerEntities.FontType.Arial;
-            Font anotherFont = new Font();
-            testFont.FontType = DocumentsMangerEntities.FontType.TimesNewRoman;
-            Assert.IsFalse(testFont.Equals(anotherFont));
-        }
-        [TestMethod]
-        public void NotEqualFontTypeTest()
-        {
-            Font testFont = new Font();
-            testFont.FontType = DocumentsMangerEntities.FontType.Arial;
-            Assert.IsFalse(testFont.Equals("Not a Font"));
-        }
+            Alignment alignmentTest = new Alignment();
+            alignmentTest.TextAlignment = TextAlignment.Justify;
+            Alignment anotherAlignment = new Alignment();
+            anotherAlignment.TextAlignment = TextAlignment.Center;
+            Assert.IsFalse(alignmentTest.Equals(anotherAlignment));
+        }   
     }
 }
