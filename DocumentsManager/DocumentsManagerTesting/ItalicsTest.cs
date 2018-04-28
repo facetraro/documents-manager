@@ -14,5 +14,14 @@ namespace DocumentsManagerTesting
             testItalics.Applies = ApplyValue.Apply;
             Assert.IsTrue(testItalics.Equals(testItalics));
         }
+        [TestMethod]
+        public void NotEqualItalicsTest()
+        {
+            Italics testItalics = new Italics();
+            testItalics.Applies = ApplyValue.Apply;
+            Italics anotherTestItalics = new Italics();
+            anotherTestItalics.Applies = ApplyValue.NoApply;
+            Assert.IsFalse(testItalics.Equals(anotherTestItalics));
+        }
     }
 }

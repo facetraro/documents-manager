@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AlignmentTest.cs" />
     <Compile Include="FontSizeTest.cs" />
+    <Compile Include="ItalicsTest.cs" />
     <Compile Include="StyleColorTest.cs" />
     <Compile Include="EditorUserTest.cs" />
     <Compile Include="ExampleInstances.cs" />
