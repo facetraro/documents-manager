@@ -9,5 +9,10 @@ namespace DocumentsManagerTesting
         {
             Name = "Color";
         }
+        public override bool Equals(object obj)
+        {
+            StyleColor anotherStyleColor = obj as StyleColor;
+            return base.Equals(anotherStyleColor) && TextColor == anotherStyleColor.TextColor;
+        }
     }
 }
