@@ -14,5 +14,14 @@ namespace DocumentsManagerTesting
             testColor.TextColor = TextColor.Black;
             Assert.IsTrue(testColor.Equals(testColor));
         }
+        [TestMethod]
+        public void NotEqualColorTest()
+        {
+            StyleColor testColor = new StyleColor();
+            testColor.TextColor = TextColor.Black;
+            StyleColor anotherColor = new StyleColor();
+            anotherColor.TextColor = TextColor.Blue;
+            Assert.IsFalse(testColor.Equals(anotherColor));
+        }
     }
 }
