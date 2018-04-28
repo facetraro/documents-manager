@@ -14,5 +14,14 @@ namespace DocumentsManagerTesting
             testBold.Applies = ApplyValue.Apply;
             Assert.IsTrue(testBold.Equals(testBold));
         }
+        [TestMethod]
+        public void NotEqualBoldTest()
+        {
+            Bold testBold = new Bold();
+            testBold.Applies = ApplyValue.Apply;
+            Bold anotherBold = new Bold();
+            anotherBold.Applies = ApplyValue.NoApply;
+            Assert.IsFalse(testBold.Equals(anotherBold));
+        }
     }
 }
