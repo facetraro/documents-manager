@@ -15,6 +15,13 @@ namespace DocumentsManagerTesting
             Alignment anotherAlignment = new Alignment();
             anotherAlignment.TextAlignment = TextAlignment.Center;
             Assert.IsFalse(alignmentTest.Equals(anotherAlignment));
-        }   
+        }
+        [TestMethod]
+        public void EqualAlignmentTest()
+        {
+            Alignment alignmentTest = new Alignment();
+            alignmentTest.TextAlignment = TextAlignment.Left;
+            Assert.IsTrue(alignmentTest.Equals(alignmentTest));
+        }
     }
 }
