@@ -13,16 +13,13 @@ namespace DocumentsManagerTesting
         {
             bool validation = false;
             Font anotherFont = obj as Font;
-            validation = IsEqual(anotherFont);
+            validation = base.Equals(obj) && IsEqual(anotherFont);
             return validation;
         }
         private bool IsEqual(Font anotherFont)
         {
             bool validation = false;
-            if ((System.Object)anotherFont != null)
-            {
-                validation = base.Equals(anotherFont) && IsTheSameFont(anotherFont);
-            }
+            validation = IsTheSameFont(anotherFont);
             return validation;
         }
         private bool IsTheSameFont(Font font)
