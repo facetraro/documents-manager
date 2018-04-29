@@ -102,5 +102,24 @@ namespace DocumentsManagerTesting
             Document anotheraDocument = ExampleInstances.TestDocument();
             Assert.IsFalse(aDocument.Equals(anotheraDocument));
         }
+        [TestMethod]
+        public void DocumentAddParragraphTest()
+        {
+            Document aDocument = ExampleInstances.TestDocument();
+            Parragraph aParragraph = ExampleInstances.TestParragraph();
+            aDocument.AddParragraph(aParragraph);
+            Assert.IsTrue(aDocument.Parragraphs.Count == 2);
+        }
+        [TestMethod]
+        public void DocumentAddParragraphTestMultiple()
+        {
+            Document aDocument = ExampleInstances.TestDocument();
+            Parragraph aParragraph = ExampleInstances.TestParragraph();
+            aDocument.AddParragraph(aParragraph);
+            aDocument.AddParragraph(aParragraph);
+            aDocument.AddParragraph(aParragraph);
+            aDocument.AddParragraph(aParragraph);
+            Assert.IsTrue(aDocument.Parragraphs.Count == 5);
+        }
     }
 }
