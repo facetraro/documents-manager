@@ -8,7 +8,6 @@ namespace DocumentsMangerEntities
 {
     public class Parragraph:DocumentObject
     {
-        public Guid Id { get; set; }
         public List<Text> Texts { get; set; }
         public override bool Equals(object obj)
         {

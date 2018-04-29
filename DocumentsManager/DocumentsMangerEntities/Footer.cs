@@ -8,7 +8,6 @@ namespace DocumentsMangerEntities
 {
     public class Footer: DocumentObject
     {
-        public Guid Id { get; set; }
         public Text Text { get; set; }
 
         public override bool Equals(object obj)

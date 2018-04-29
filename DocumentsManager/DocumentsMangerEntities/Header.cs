@@ -8,7 +8,6 @@ namespace DocumentsMangerEntities
 {
     public class Header: DocumentObject
     {
-        public Guid Id { get; set; }
         public Text Text { get; set; }
 
    
