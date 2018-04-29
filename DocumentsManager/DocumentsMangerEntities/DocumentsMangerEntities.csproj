@@ -44,6 +44,7 @@
     <Compile Include="DocumentObject.cs" />
     <Compile Include="Footer.cs" />
     <Compile Include="Header.cs" />
+    <Compile Include="Parragraph.cs" />
     <Compile Include="SpecifiedValue.cs" />
     <Compile Include="EditorUser.cs" />
     <Compile Include="FontSize.cs" />

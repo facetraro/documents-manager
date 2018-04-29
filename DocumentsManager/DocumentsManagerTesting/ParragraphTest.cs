@@ -48,13 +48,15 @@ namespace DocumentsManagerTesting
         {
             Parragraph aParragraph = new Parragraph();
             Guid id = Guid.NewGuid();
-            Text text = ExampleInstances.TestText();
+            Text aText = ExampleInstances.TestText();
+            List<Text> texts = new List<Text>();
+            texts.Add(aText);
             StyleClass style = ExampleInstances.TestStyleClass();
             aParragraph.Id = id;
-            aParragraph.Text = text;
+            aParragraph.Texts = texts;
             aParragraph.StyleClass = style;
             Assert.AreNotEqual(aParragraph.Id, Guid.NewGuid());
-            Assert.AreEqual(aParragraph.Text, text);
+            Assert.AreEqual(aParragraph.Texts, texts);
             Assert.AreEqual(aParragraph.StyleClass, style);
         }
     }
