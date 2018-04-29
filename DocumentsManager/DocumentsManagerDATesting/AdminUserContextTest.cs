@@ -50,5 +50,20 @@ namespace DocumentsManagerDATesting
             Assert.IsFalse(allAdmins.Contains(newUser));
             TearDown();
         }
+        [TestMethod]
+        public void ModifyAdminTest()
+        {
+            AdminUserContext context = new AdminUserContext();
+            AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
+            context.Add(newUser);
+            newUser.Email = "newEmail";
+            newUser.Name = "newName";
+            context.Modify(newUser);
+            List<AdminUser> allAdmins = context.GetLazy();
+            Assert.IsTrue(allAdmins.Contains(newUser));
+            Assert.IsTrue(allAdmins.Find(item => item.Id == newUser.Id).Email == newUser.Email);
+            Assert.IsTrue(allAdmins.Find(item => item.Id == newUser.Id).Name == newUser.Name);
+            TearDown();
+        }
     }
 }
