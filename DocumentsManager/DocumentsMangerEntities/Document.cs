@@ -17,5 +17,14 @@ namespace DocumentsMangerEntities
         public List<Parragraph> Parragraphs { get; set; }
         public StyleClass StyleClass { get; set; }
         public string Title { get; set; }
+        public override bool Equals(object obj)
+        {
+            Document anotherDocument = obj as Document;
+            if ((System.Object)anotherDocument == null)
+            {
+                return false;
+            }
+            return Id.Equals(anotherDocument.Id);
+        }
     }
 }
