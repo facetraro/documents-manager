@@ -9,21 +9,23 @@ namespace DocumentsManagerDATesting
     [TestClass]
     public class AdminUserContextTest
     {
+  
         [TestMethod]
         public void AddAdminTest()
         {
+            AdminUserContext context = new AdminUserContext();
             AdminUser newUser = new AdminUser();
-            ContextDataAccess context = new ContextDataAccess();
+            newUser.Id = Guid.NewGuid();
             context.Add(newUser);
             List<AdminUser> allAdmins = context.GetLazy();
-            Assert.IsTrue(allAdmins.Count==1);
+            Assert.IsTrue(allAdmins.Contains(newUser));
         }
         [TestMethod]
         public void AddSpecificAdminTest()
         {
+            AdminUserContext context = new AdminUserContext();
             AdminUser newUser = new AdminUser();
             newUser.Id = Guid.NewGuid();
-            ContextDataAccess context = new ContextDataAccess();
             context.Add(newUser);
             List<AdminUser> allAdmins = context.GetLazy();
             Assert.IsTrue(allAdmins.Contains(newUser));

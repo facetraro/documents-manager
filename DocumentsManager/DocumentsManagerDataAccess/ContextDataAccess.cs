@@ -11,23 +11,11 @@ namespace DocumentsManagerDataAccess
     public class ContextDataAccess : DbContext
     {
         public ContextDataAccess() : base("name=DocumentsManager") { }
-        public DbSet<AdminUser> admin { get; set; }
+        public DbSet<AdminUser> Admins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AdminUser>().HasKey(A => A.Id);
-        }
-
-        public List<AdminUser> GetLazy()
-        {
-            List<AdminUser> allLazy = new List<AdminUser>();
-            allLazy.Add(new AdminUser());
-            return allLazy;
-        }
-
-        public void Add(AdminUser newUser)
-        {
-           
         }
     }
 }
