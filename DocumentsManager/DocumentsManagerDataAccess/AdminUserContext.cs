@@ -27,5 +27,13 @@ namespace DocumentsManagerDataAccess
                 context.SaveChanges();
             }
         }
+        public void Remove(AdminUser newUser)
+        {
+            using (var context = new ContextDataAccess())
+            {
+                context.Admins.Remove(context.Admins.Find(newUser.Id));
+                context.SaveChanges();
+            }
+        }
     }
 }
