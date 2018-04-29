@@ -25,24 +25,24 @@ namespace DocumentsManagerTesting
             StyleClass aStyle = ExampleInstances.TestStyleClass();
             DateTime aDate = DateTime.Today;
             string title = "This is a Title";
-            Document.Id = id;
-            Document.Format = aFormat;
-            Document.Header = aHeader;
-            Document.Footer = aFooter;
-            Document.Parragraphs = parragraphs;
-            Document.CreatorUser = anUser;
-            Document.StyleClass = aStyle;
-            Document.CreationDate = aDate;
-            Document.Title = title;
-            Assert.AreEqual(Document.Id,id);
-            Assert.AreEqual(Document.Format,aFormat);
-            Assert.AreEqual(Document.Header,aHeader);
-            Assert.AreEqual(Document.Footer,aFooter);
-            Assert.AreEqual(Document.Parragraphs,parragraphs);
-            Assert.AreEqual(Document.CreatorUser,anUser);
-            Assert.AreEqual(Document.StyleClass,aStyle);
-            Assert.AreEqual(Document.CreationDate,aDate);
-            Assert.AreEqual(Document.Title, title);
+            aDocument.Id = id;
+            aDocument.Format = aFormat;
+            aDocument.Header = aHeader;
+            aDocument.Footer = aFooter;
+            aDocument.Parragraphs = parragraphs;
+            aDocument.CreatorUser = anUser;
+            aDocument.StyleClass = aStyle;
+            aDocument.CreationDate = aDate;
+            aDocument.Title = title;
+            Assert.AreEqual(aDocument.Id,id);
+            Assert.AreEqual(aDocument.Format,aFormat);
+            Assert.AreEqual(aDocument.Header,aHeader);
+            Assert.AreEqual(aDocument.Footer,aFooter);
+            Assert.AreEqual(aDocument.Parragraphs,parragraphs);
+            Assert.AreEqual(aDocument.CreatorUser,anUser);
+            Assert.AreEqual(aDocument.StyleClass,aStyle);
+            Assert.AreEqual(aDocument.CreationDate,aDate);
+            Assert.AreEqual(aDocument.Title, title);
         }
         [TestMethod]
         public void DocumentBuilderTestDifferentAttr()
@@ -59,24 +59,24 @@ namespace DocumentsManagerTesting
             StyleClass aStyle = ExampleInstances.TestStyleClass();
             DateTime aDate = DateTime.Today;
             string title = "This is a Title";
-            Document.Id = id;
-            Document.Format = aFormat;
-            Document.Header = aHeader;
-            Document.Footer = aFooter;
-            Document.Parragraphs = parragraphs;
-            Document.CreatorUser = anUser;
-            Document.StyleClass = aStyle;
-            Document.CreationDate = aDate;
-            Document.Title = title;
-            Assert.AreNotEqual(Document.Id, Guid.NewGuid());
-            Assert.AreNotEqual(Document.Format, ExampleInstances.TestFormat());
-            Assert.AreNotEqual(Document.Header, ExampleInstances.TestHeader());
-            Assert.AreNotEqual(Document.Footer, ExampleInstances.TestFooter());
-            Assert.AreNotEqual(Document.Parragraphs, new List<Parragraph>());
-            Assert.AreNotEqual(Document.CreatorUser, ExampleInstances.TestUser());
-            Assert.AreNotEqual(Document.StyleClass, ExampleInstances.TestStyleClass());
-            Assert.AreNotEqual(Document.CreationDate, DateTime.Today.AddDays(1));
-            Assert.AreNotEqual(Document.Title, "");
+            aDocument.Id = id;
+            aDocument.Format = aFormat;
+            aDocument.Header = aHeader;
+            aDocument.Footer = aFooter;
+            aDocument.Parragraphs = parragraphs;
+            aDocument.CreatorUser = anUser;
+            aDocument.StyleClass = aStyle;
+            aDocument.CreationDate = aDate;
+            aDocument.Title = title;
+            Assert.AreNotEqual(aDocument.Id, Guid.NewGuid());
+            Assert.AreNotEqual(aDocument.Format, ExampleInstances.TestFormat());
+            Assert.AreNotEqual(aDocument.Header, ExampleInstances.TestHeader());
+            Assert.AreNotEqual(aDocument.Footer, ExampleInstances.TestFooter());
+            Assert.AreNotEqual(aDocument.Parragraphs, new List<Parragraph>());
+            Assert.AreNotEqual(aDocument.CreatorUser, ExampleInstances.TestUser());
+            Assert.AreNotEqual(aDocument.StyleClass, ExampleInstances.TestStyleClass());
+            Assert.AreNotEqual(aDocument.CreationDate, DateTime.Today.AddDays(1));
+            Assert.AreNotEqual(aDocument.Title, "");
         }
     }
 }

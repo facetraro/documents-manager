@@ -117,6 +117,24 @@ namespace DocumentsManagerTesting
             };
             return aParragraph;
         }
+        public static Document TestDocument() 
+        {
+            List<Parragraph> parragraphs = new List<Parragraph>();
+            parragraphs.Add(ExampleInstances.TestParragraph());
+            Document aDocument = new Document {
+                Id = Guid.NewGuid(),
+                Format = ExampleInstances.TestFormat(),
+                Header = ExampleInstances.TestHeader(),
+                Footer = ExampleInstances.TestFooter(),
+                Parragraphs = parragraphs,
+                CreatorUser = ExampleInstances.TestUser(),
+                StyleClass = ExampleInstances.TestStyleClass(),
+                CreationDate = DateTime.Today,
+                Title = "Default title"
+        };
+           
+            return aDocument;
+        }
 
     }
 }
