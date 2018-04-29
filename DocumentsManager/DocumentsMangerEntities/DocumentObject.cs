@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace DocumentsMangerEntities
 {
-    public class Header: DocumentObject
+    public class DocumentObject
     {
-        public Guid Id { get; set; }
-        public Text Text { get; set; }
-
+        public StyleClass StyleClass { get; set; }
     }
 }
