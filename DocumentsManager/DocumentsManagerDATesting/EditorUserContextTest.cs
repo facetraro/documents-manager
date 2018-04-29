@@ -19,5 +19,15 @@ namespace DocumentsManagerDATesting
             List<EditorUser> allEditors = context.GetLazy();
             Assert.IsTrue(allEditors.Contains(newUser));
         }
+        [TestMethod]
+        public void RemoveSpecificEditorTest()
+        {
+            EditorUserContext context = new EditorUserContext();
+            EditorUser newUser = EntitiesExampleInstances.TestEditorUser();
+            context.Add(newUser);
+            context.Remove(newUser);
+            List<EditorUser> allEditors = context.GetLazy();
+            Assert.IsFalse(allEditors.Contains(newUser));
+        }
     }
 }
