@@ -59,5 +59,29 @@ namespace DocumentsManagerTesting
             Assert.AreEqual(aParragraph.Texts, texts);
             Assert.AreEqual(aParragraph.StyleClass, style);
         }
+        [TestMethod]
+        public void ParragraphEqualsTestSameAttr()
+        {
+            Parragraph aParragraph = ExampleInstances.TestParragraph();
+            Parragraph sameParragraph = ExampleInstances.TestParragraph();
+            sameParragraph.Id = aParragraph.Id;
+            Assert.IsTrue(aParragraph.Equals(sameParragraph));
+        }
+        [TestMethod]
+        public void ParragraphEqualsTestDifferentAttr()
+        {
+            Parragraph aParragraph = ExampleInstances.TestParragraph();
+            Parragraph anotheraParragraph = ExampleInstances.TestParragraph();
+            anotheraParragraph.StyleClass = new StyleClass();
+            anotheraParragraph.Texts = new List<Text>();
+            Assert.IsFalse(aParragraph.Equals(anotheraParragraph));
+        }
+        [TestMethod]
+        public void ParragraphEqualsTestDifferentID()
+        {
+            Parragraph aParragraph = ExampleInstances.TestParragraph();
+            Parragraph anotheraParragraph = ExampleInstances.TestParragraph();
+            Assert.IsFalse(aParragraph.Equals(anotheraParragraph));
+        }
     }
 }
