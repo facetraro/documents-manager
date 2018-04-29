@@ -10,5 +10,14 @@ namespace DocumentsMangerEntities
     {
         public Guid Id { get; set; }
         public List<Text> Texts { get; set; }
+        public override bool Equals(object obj)
+        {
+            Parragraph anotherParragraph = obj as Parragraph;
+            if ((System.Object)anotherParragraph == null)
+            {
+                return false;
+            }
+            return Id.Equals(anotherParragraph.Id);
+        }
     }
 }
