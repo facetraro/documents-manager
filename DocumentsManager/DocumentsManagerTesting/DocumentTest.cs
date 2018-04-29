@@ -39,7 +39,7 @@ namespace DocumentsManagerTesting
             Assert.AreEqual(Document.Header,aHeader);
             Assert.AreEqual(Document.Footer,aFooter);
             Assert.AreEqual(Document.Parragraphs,parragraphs);
-            Assert.AreEqual(Document.Creatoruser,anUser);
+            Assert.AreEqual(Document.CreatorUser,anUser);
             Assert.AreEqual(Document.StyleClass,aStyle);
             Assert.AreEqual(Document.CreationDate,aDate);
             Assert.AreEqual(Document.Title, title);
@@ -73,7 +73,7 @@ namespace DocumentsManagerTesting
             Assert.AreNotEqual(Document.Header, ExampleInstances.TestHeader());
             Assert.AreNotEqual(Document.Footer, ExampleInstances.TestFooter());
             Assert.AreNotEqual(Document.Parragraphs, new List<Parragraph>());
-            Assert.AreNotEqual(Document.Creatoruser, ExampleInstances.TestUser());
+            Assert.AreNotEqual(Document.CreatorUser, ExampleInstances.TestUser());
             Assert.AreNotEqual(Document.StyleClass, ExampleInstances.TestStyleClass());
             Assert.AreNotEqual(Document.CreationDate, DateTime.Today.AddDays(1));
             Assert.AreNotEqual(Document.Title, "");

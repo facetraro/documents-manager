@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminUser.cs" />
+    <Compile Include="Document.cs" />
     <Compile Include="DocumentObject.cs" />
     <Compile Include="Footer.cs" />
     <Compile Include="Header.cs" />
