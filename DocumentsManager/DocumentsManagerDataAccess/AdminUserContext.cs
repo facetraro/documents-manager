@@ -43,5 +43,14 @@ namespace DocumentsManagerDataAccess
                 context.SaveChanges();
             }
         }
+
+        public void Modify(AdminUser newUser)
+        {
+             using (var context = new ContextDataAccess())
+            {
+                Remove(context.Admins.Find(newUser.Id));
+                Add(newUser);
+            }
+        }
     }
 }
