@@ -83,5 +83,23 @@ namespace DocumentsManagerTesting
             Parragraph anotheraParragraph = ExampleInstances.TestParragraph();
             Assert.IsFalse(aParragraph.Equals(anotheraParragraph));
         }
+        [TestMethod]
+        public void ParragraphAddTextTest() {
+            Parragraph aParragraph = ExampleInstances.TestParragraph();
+            Text aText = ExampleInstances.TestText();
+            aParragraph.AddText(aText);
+            Assert.IsTrue(aParragraph.Texts.Count == 2);
+        }
+        [TestMethod]
+        public void ParragraphAddTextTestMultiple()
+        {
+            Parragraph aParragraph = ExampleInstances.TestParragraph();
+            Text aText = ExampleInstances.TestText();
+            aParragraph.AddText(aText);
+            aParragraph.AddText(aText);
+            aParragraph.AddText(aText);
+            aParragraph.AddText(aText);
+            Assert.IsTrue(aParragraph.Texts.Count == 5);
+        }
     }
 }
