@@ -10,7 +10,15 @@ namespace DocumentsManagerDATesting
     [TestClass]
     public class AdminUserContextTest
     {
-  
+        public void TearDown()
+        {
+            ClearAdminDataBase();
+        }
+        private void ClearAdminDataBase()
+        {
+            AdminUserContext context = new AdminUserContext();
+            context.ClearAll();
+        }
         [TestMethod]
         public void AddAdminTest()
         {
@@ -19,6 +27,7 @@ namespace DocumentsManagerDATesting
             context.Add(newUser);
             List<AdminUser> allAdmins = context.GetLazy();
             Assert.IsTrue(allAdmins.Contains(newUser));
+            TearDown();
         }
         [TestMethod]
         public void AddSpecificAdminTest()
@@ -28,6 +37,7 @@ namespace DocumentsManagerDATesting
             context.Add(newUser);
             List<AdminUser> allAdmins = context.GetLazy();
             Assert.IsTrue(allAdmins.Contains(newUser));
+            TearDown();
         }
         [TestMethod]
         public void RemoveSpecificAdminTest()
@@ -38,6 +48,7 @@ namespace DocumentsManagerDATesting
             context.Remove(newUser);
             List<AdminUser> allAdmins = context.GetLazy();
             Assert.IsFalse(allAdmins.Contains(newUser));
+            TearDown();
         }
     }
 }

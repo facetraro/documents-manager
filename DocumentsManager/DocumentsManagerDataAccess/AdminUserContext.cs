@@ -19,6 +19,14 @@ namespace DocumentsManagerDataAccess
             return allLazy;
         }
 
+        public void ClearAll()
+        {
+            foreach (var item in GetLazy())
+            {
+                Remove(item);
+            }
+        }
+
         public void Add(AdminUser newUser)
         {
             using (var context = new ContextDataAccess())
