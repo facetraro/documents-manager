@@ -44,12 +44,13 @@ namespace DocumentsManagerDataAccess
             }
         }
 
-        public void Modify(AdminUser newUser)
+        public void Modify(AdminUser modifiedUser)
         {
              using (var context = new ContextDataAccess())
             {
-                Remove(context.Admins.Find(newUser.Id));
-                Add(newUser);
+                AdminUser oldUser = context.Admins.Find(modifiedUser.Id);
+                Remove(oldUser);
+                Add(modifiedUser);
             }
         }
     }
