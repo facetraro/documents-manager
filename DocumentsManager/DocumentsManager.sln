@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManagerTesting", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsMangerEntities", "DocumentsMangerEntities\DocumentsMangerEntities.csproj", "{80D195AE-B71A-465A-A588-7397AE023E8F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManagerDATesting", "DocumentsManagerDATesting\DocumentsManagerDATesting.csproj", "{3D06630F-61EC-4AAA-BC6D-294022DC3F89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManagerDataAccess", "DocumentsManagerDataAccess\DocumentsManagerDataAccess.csproj", "{58405487-5C94-4569-8171-0ED3889C9A03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{80D195AE-B71A-465A-A588-7397AE023E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80D195AE-B71A-465A-A588-7397AE023E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80D195AE-B71A-465A-A588-7397AE023E8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D06630F-61EC-4AAA-BC6D-294022DC3F89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D06630F-61EC-4AAA-BC6D-294022DC3F89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D06630F-61EC-4AAA-BC6D-294022DC3F89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D06630F-61EC-4AAA-BC6D-294022DC3F89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58405487-5C94-4569-8171-0ED3889C9A03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58405487-5C94-4569-8171-0ED3889C9A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58405487-5C94-4569-8171-0ED3889C9A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58405487-5C94-4569-8171-0ED3889C9A03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
