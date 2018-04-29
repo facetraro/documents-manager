@@ -94,6 +94,16 @@ namespace DocumentsManagerTesting
             };
             return aHeader;
         }
+        public static Footer TestFooter()
+        {
+            Footer aFooter = new Footer
+            {
+                Id = Guid.NewGuid(),
+                Text = TestText(),
+                StyleClass = TestStyleClass()
+            };
+            return aFooter;
+        }
 
     }
 }

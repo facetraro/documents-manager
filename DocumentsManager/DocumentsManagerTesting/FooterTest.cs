@@ -12,7 +12,7 @@ namespace DocumentsManagerTesting
     public class FooterTest
     {
         [TestMethod]
-        public void HeaderBuilderTestSameAttr()
+        public void FooterBuilderTestSameAttr()
         {
             Footer aFooter = new Footer();
             Guid id = Guid.NewGuid();
@@ -26,7 +26,7 @@ namespace DocumentsManagerTesting
             Assert.AreEqual(aFooter.StyleClass, style);
         }
         [TestMethod]
-        public void HeaderBuilderTestDifferentAttr()
+        public void FooterBuilderTestDifferentAttr()
         {
             Footer aFooter = new Footer();
             Guid id = Guid.NewGuid();
@@ -40,7 +40,7 @@ namespace DocumentsManagerTesting
             Assert.AreNotEqual(aFooter.StyleClass, ExampleInstances.TestStyleClass());
         }
         [TestMethod]
-        public void HeaderBuilderTestDifferentId()
+        public void FooterBuilderTestDifferentId()
         {
             Footer aFooter = new Footer();
             Guid id = Guid.NewGuid();
@@ -52,6 +52,30 @@ namespace DocumentsManagerTesting
             Assert.AreNotEqual(aFooter.Id, Guid.NewGuid());
             Assert.AreEqual(aFooter.Text, text);
             Assert.AreEqual(aFooter.StyleClass, style);
+        }
+        [TestMethod]
+        public void FooterEqualsTestSameAttr()
+        {
+            Footer aFooter = ExampleInstances.TestFooter();
+            Footer sameFooter = ExampleInstances.TestFooter();
+            sameFooter.Id = aFooter.Id;
+            Assert.IsTrue(aFooter.Equals(sameFooter));
+        }
+        [TestMethod]
+        public void FooterEqualsTestDifferentAttr()
+        {
+            Footer aFooter = ExampleInstances.TestFooter();
+            Footer anotheraFooter = ExampleInstances.TestFooter();
+            anotheraFooter.StyleClass = new StyleClass();
+            anotheraFooter.Text = ExampleInstances.TestText();
+            Assert.IsFalse(aFooter.Equals(anotheraFooter));
+        }
+        [TestMethod]
+        public void FooterEqualsTestDifferentID()
+        {
+            Footer aFooter = ExampleInstances.TestFooter();
+            Footer anotheraFooter = ExampleInstances.TestFooter();
+            Assert.IsFalse(aFooter.Equals(anotheraFooter));
         }
     }
 }

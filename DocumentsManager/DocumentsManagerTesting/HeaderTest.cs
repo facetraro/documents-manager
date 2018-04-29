@@ -62,7 +62,7 @@ namespace DocumentsManagerTesting
             Assert.IsTrue(aHeader.Equals(sameHeader));
         }
         [TestMethod]
-        public void TextEqualsTestDifferentAttr()
+        public void HeaderEqualsTestDifferentAttr()
         {
             Header aHeader = ExampleInstances.TestHeader();
             Header anotherHeader = ExampleInstances.TestHeader();
@@ -71,7 +71,7 @@ namespace DocumentsManagerTesting
             Assert.IsFalse(aHeader.Equals(anotherHeader));
         }
         [TestMethod]
-        public void TextEqualsTestDifferentID()
+        public void HeaderEqualsTestDifferentID()
         {
             Header aHeader = ExampleInstances.TestHeader();
             Header anotherHeader = ExampleInstances.TestHeader();
