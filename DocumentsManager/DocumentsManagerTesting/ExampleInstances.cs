@@ -84,6 +84,16 @@ namespace DocumentsManagerTesting
         };
             return aText;
        }
+        public static Header TestHeader()
+        {
+            Header aHeader = new Header
+            {
+                Id = Guid.NewGuid(),
+                Text = TestText(),
+                StyleClass = TestStyleClass()
+            };
+            return aHeader;
+        }
 
     }
 }

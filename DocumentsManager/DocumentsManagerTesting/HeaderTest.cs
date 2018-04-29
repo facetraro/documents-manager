@@ -53,5 +53,29 @@ namespace DocumentsManagerTesting
             Assert.AreEqual(aHeader.Text, text);
             Assert.AreEqual(aHeader.StyleClass, style);
         }
+        [TestMethod]
+        public void HeaderEqualsTestSameAttr()
+        {
+            Header aHeader = ExampleInstances.TestHeader();
+            Header sameHeader = ExampleInstances.TestHeader();
+            sameHeader.Id = aHeader.Id;
+            Assert.IsTrue(aHeader.Equals(sameHeader));
+        }
+        [TestMethod]
+        public void TextEqualsTestDifferentAttr()
+        {
+            Header aHeader = ExampleInstances.TestHeader();
+            Header anotherHeader = ExampleInstances.TestHeader();
+            anotherHeader.StyleClass = new StyleClass();
+            anotherHeader.Text = ExampleInstances.TestText();
+            Assert.IsTrue(aHeader.Equals(anotherHeader));
+        }
+        [TestMethod]
+        public void TextEqualsTestDifferentID()
+        {
+            Header aHeader = ExampleInstances.TestHeader();
+            Header anotherHeader = ExampleInstances.TestHeader();
+            Assert.IsFalse(aHeader.Equals(anotherHeader));
+        }
     }
 }
