@@ -68,7 +68,7 @@ namespace DocumentsManagerTesting
             Header anotherHeader = ExampleInstances.TestHeader();
             anotherHeader.StyleClass = new StyleClass();
             anotherHeader.Text = ExampleInstances.TestText();
-            Assert.IsTrue(aHeader.Equals(anotherHeader));
+            Assert.IsFalse(aHeader.Equals(anotherHeader));
         }
         [TestMethod]
         public void TextEqualsTestDifferentID()

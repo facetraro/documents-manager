@@ -11,5 +11,15 @@ namespace DocumentsMangerEntities
         public Guid Id { get; set; }
         public Text Text { get; set; }
 
+   
+        public override bool Equals(object obj)
+        {
+            Header anotherHeader = obj as Header;
+            if ((System.Object)anotherHeader == null)
+            {
+                return false;
+            }
+            return Id.Equals(anotherHeader.Id);
+        }
     }
 }
