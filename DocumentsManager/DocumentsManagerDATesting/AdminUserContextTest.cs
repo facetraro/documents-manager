@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DocumentsMangerEntities;
 using System.Collections.Generic;
 using DocumentsManagerDataAccess;
+using DocumentsManagerExampleInstances;
 
 namespace DocumentsManagerDATesting
 {
@@ -14,8 +15,7 @@ namespace DocumentsManagerDATesting
         public void AddAdminTest()
         {
             AdminUserContext context = new AdminUserContext();
-            AdminUser newUser = new AdminUser();
-            newUser.Id = Guid.NewGuid();
+            AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
             context.Add(newUser);
             List<AdminUser> allAdmins = context.GetLazy();
             Assert.IsTrue(allAdmins.Contains(newUser));
@@ -24,8 +24,7 @@ namespace DocumentsManagerDATesting
         public void AddSpecificAdminTest()
         {
             AdminUserContext context = new AdminUserContext();
-            AdminUser newUser = new AdminUser();
-            newUser.Id = Guid.NewGuid();
+            AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
             context.Add(newUser);
             List<AdminUser> allAdmins = context.GetLazy();
             Assert.IsTrue(allAdmins.Contains(newUser));

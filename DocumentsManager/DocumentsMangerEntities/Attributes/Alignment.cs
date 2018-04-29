@@ -1,6 +1,6 @@
 ﻿using DocumentsMangerEntities;
 
-namespace DocumentsManagerTesting
+namespace DocumentsMangerEntities
 {
     public class Alignment : StyleAttribute
     {

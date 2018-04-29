@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocumentsManagerTesting
+namespace DocumentsManagerExampleInstances
 {
-    public static class ExampleInstances
+    public class EntitiesExampleInstances
     {
         public static User TestUser()
         {
@@ -100,9 +100,8 @@ namespace DocumentsManagerTesting
                 Id = Guid.NewGuid(),
                 WrittenText = "DefaultText",
                 StyleClass = TestStyleClass()
-        };
+            };
             return aText;
-       }
-
+        }
     }
 }

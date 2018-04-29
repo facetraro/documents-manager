@@ -58,7 +58,6 @@
     <Compile Include="ItalicsTest.cs" />
     <Compile Include="StyleColorTest.cs" />
     <Compile Include="EditorUserTest.cs" />
-    <Compile Include="ExampleInstances.cs" />
     <Compile Include="BoldTest.cs" />
     <Compile Include="FromatTest.cs" />
     <Compile Include="StyleAttributeTest.cs" />
@@ -70,6 +69,10 @@
     <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocumentsManagerExampleInstances\DocumentsManagerExampleInstances.csproj">
+      <Project>{C2B9AED8-4F48-48CB-817E-0D79606DFC6B}</Project>
+      <Name>DocumentsManagerExampleInstances</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsMangerEntities\DocumentsMangerEntities.csproj">
       <Project>{80d195ae-b71a-465a-a588-7397ae023e8f}</Project>
       <Name>DocumentsMangerEntities</Name>

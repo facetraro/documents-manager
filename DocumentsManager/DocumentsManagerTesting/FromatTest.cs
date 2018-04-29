@@ -1,4 +1,5 @@
-﻿using DocumentsMangerEntities;
+﻿using DocumentsManagerExampleInstances;
+using DocumentsMangerEntities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace DocumentsManagerTesting
             Guid Id = Guid.NewGuid();
             string name = "DefaultFormatName";
             List<StyleClass> styles = new List<StyleClass>();
-            styles.Add(ExampleInstances.TestStyleClass());
-            Format format = ExampleInstances.TestFormat();
+            styles.Add(EntitiesExampleInstances.TestStyleClass());
+            Format format = EntitiesExampleInstances.TestFormat();
             format.Id = Id;
             format.StyleClasses = styles;
             Assert.AreEqual(format.Id,Id);
@@ -28,21 +29,21 @@ namespace DocumentsManagerTesting
         public void TestFormatBuilderNotSame()
         {
             
-            Format format = ExampleInstances.TestFormat();
+            Format format = EntitiesExampleInstances.TestFormat();
             Assert.AreNotEqual(format.Id, Guid.NewGuid());
             Assert.AreNotEqual(format.Name, "anotherName");
             Assert.AreNotEqual(format.StyleClasses, new List<StyleClass>());
         }
         [TestMethod]
         public void TestFormatEquals() {
-            Format format = ExampleInstances.TestFormat();
+            Format format = EntitiesExampleInstances.TestFormat();
             Assert.IsTrue(format.Equals(format));
         }
         [TestMethod]
         public void TestFormatNotEquals()
         {
-            Format format = ExampleInstances.TestFormat();
-            Format anotherFormat = ExampleInstances.TestFormat();
+            Format format = EntitiesExampleInstances.TestFormat();
+            Format anotherFormat = EntitiesExampleInstances.TestFormat();
             anotherFormat.Name = "anotherFormatName";
             format.StyleClasses = new List<StyleClass>();
             Assert.IsFalse(format.Equals(anotherFormat));
@@ -50,8 +51,8 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void TestFormatDifferentButEquals()
         {
-            Format format = ExampleInstances.TestFormat();
-            Format anotherFormat = ExampleInstances.TestFormat();
+            Format format = EntitiesExampleInstances.TestFormat();
+            Format anotherFormat = EntitiesExampleInstances.TestFormat();
             anotherFormat.Id = format.Id; 
             anotherFormat.Name = "anotherFormatName";
             format.StyleClasses = new List<StyleClass>();
