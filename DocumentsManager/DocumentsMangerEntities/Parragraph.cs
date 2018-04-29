@@ -19,5 +19,8 @@ namespace DocumentsMangerEntities
             }
             return Id.Equals(anotherParragraph.Id);
         }
+        public void AddText(Text aText) {
+            Texts.Add(aText);
+        }
     }
 }
