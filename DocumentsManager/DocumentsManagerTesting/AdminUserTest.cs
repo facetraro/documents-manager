@@ -12,8 +12,6 @@ namespace DocumentsManagerTesting
     [TestClass]
    public class AdminUserTest
     {
-       
-
         [TestMethod]
         public void EditorUserBuilderTestSameAttributes()
         {
