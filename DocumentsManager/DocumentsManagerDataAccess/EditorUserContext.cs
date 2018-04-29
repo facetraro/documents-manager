@@ -19,12 +19,20 @@ namespace DocumentsManagerDataAccess
             return allLazy;
         }
 
-
         public void Add(EditorUser newUser)
         {
             using (var context = new ContextDataAccess())
             {
                 context.Editors.Add(newUser);
+                context.SaveChanges();
+            }
+        }
+
+        public void Remove(EditorUser newUser)
+        {
+            using (var context = new ContextDataAccess())
+            {
+                context.Editors.Remove(context.Editors.Find(newUser.Id));
                 context.SaveChanges();
             }
         }
