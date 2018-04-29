@@ -1,7 +1,6 @@
 ﻿using DocumentsMangerEntities;
-using DocumentsMangerEntities.Attributes;
 
-namespace DocumentsManagerTesting
+namespace DocumentsMangerEntities
 {
     public class Italics : BooleanAttribute
     {

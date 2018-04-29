@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DocumentsMangerEntities;
 using System.Linq;
 using System.Collections.Generic;
+using DocumentsManagerExampleInstances;
 
 namespace DocumentsManagerTesting
 {
@@ -27,7 +28,7 @@ namespace DocumentsManagerTesting
             color.TextColor = TextColor.Red;
             Font font = new Font();
             font.FontType = FontType.Arial;
-            StyleClass testStyleClass = ExampleInstances.TestStyleClass();
+            StyleClass testStyleClass = EntitiesExampleInstances.TestStyleClass();
           
             Assert.IsTrue(testStyleClass.GetAttributeByName(underline.Name).Equals(underline));
             Assert.IsTrue(testStyleClass.GetAttributeByName(italics.Name).Equals(italics));
@@ -40,27 +41,27 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void StyleClassEqualsTest()
         {
-            StyleClass testStyleClass = ExampleInstances.TestStyleClass();
+            StyleClass testStyleClass = EntitiesExampleInstances.TestStyleClass();
             Assert.AreEqual(testStyleClass, testStyleClass);
         }
         [TestMethod]
         public void StyleClassNotEqualsTest()
         {
-            StyleClass testStyleClass = ExampleInstances.TestStyleClass();
-            StyleClass anotherTestStyleClass = ExampleInstances.TestStyleClass();
+            StyleClass testStyleClass = EntitiesExampleInstances.TestStyleClass();
+            StyleClass anotherTestStyleClass = EntitiesExampleInstances.TestStyleClass();
             Assert.AreNotEqual(testStyleClass, anotherTestStyleClass);
         }
         [TestMethod]
         public void StyleClassEqualsDifferentTypeTest()
         {
-            StyleClass testStyleClass = ExampleInstances.TestStyleClass();
+            StyleClass testStyleClass = EntitiesExampleInstances.TestStyleClass();
             int otherObject = 10;
             Assert.AreNotEqual(testStyleClass, otherObject);
         }
         [TestMethod]
         public void StyleClassBasedTest()
         {
-            StyleClass testStyleClass = ExampleInstances.TestStyleClass();
+            StyleClass testStyleClass = EntitiesExampleInstances.TestStyleClass();
             StyleClass childStyleClass = new StyleClass();
             childStyleClass.Based = testStyleClass;
             Assert.AreEqual(testStyleClass, childStyleClass.Based);
@@ -68,7 +69,7 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void GetBasedOnStyleClassTest()
         {
-            StyleClass testStyleClass = ExampleInstances.TestStyleClass();
+            StyleClass testStyleClass = EntitiesExampleInstances.TestStyleClass();
             StyleClass childStyleClass = new StyleClass();
             childStyleClass.Based = testStyleClass;
             StyleClass basedOnStyleClass = childStyleClass.GetBasedOnStyleClass();
@@ -77,7 +78,7 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void GetBasedOnEmptyBasedTest()
         {
-            StyleClass childStyleClass = ExampleInstances.TestStyleClass();
+            StyleClass childStyleClass = EntitiesExampleInstances.TestStyleClass();
             StyleClass testStyleClass = new StyleClass();
             childStyleClass.Based = testStyleClass;
             StyleClass basedOnStyleClass = childStyleClass.GetBasedOnStyleClass();
@@ -96,7 +97,7 @@ namespace DocumentsManagerTesting
             childStyleClass.Attributes.Add(fontAttribute);
             childStyleClass.Attributes.Add(colorAttribute);
             childStyleClass.Attributes.Add(alignmentAttribute);
-            StyleClass testStyleClass = ExampleInstances.TestStyleClass();
+            StyleClass testStyleClass = EntitiesExampleInstances.TestStyleClass();
             testStyleClass.Attributes.Remove(testStyleClass.GetAttributeByName(alignmentAttribute.Name));
             testStyleClass.Attributes.Remove(testStyleClass.GetAttributeByName(colorAttribute.Name));
             testStyleClass.Attributes.Remove(testStyleClass.GetAttributeByName(fontAttribute.Name));

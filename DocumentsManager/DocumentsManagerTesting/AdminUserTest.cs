@@ -1,4 +1,5 @@
-﻿using DocumentsMangerEntities;
+﻿using DocumentsManagerExampleInstances;
+using DocumentsMangerEntities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,6 @@ namespace DocumentsManagerTesting
     [TestClass]
    public class AdminUserTest
     {
-       
-
         [TestMethod]
         public void EditorUserBuilderTestSameAttributes()
         {
@@ -21,7 +20,7 @@ namespace DocumentsManagerTesting
             string DefaultName = "DefaultName";
             string DefaultSurname = "DefaultSurname";
             string DefaultEmail = "DefaultEmail@DefaultEmail.com";
-            AdminUser user = ExampleInstances.TestAdminUser();
+            AdminUser user = EntitiesExampleInstances.TestAdminUser();
             Assert.AreEqual(user.Username, DefaultUsername);
             Assert.AreEqual(user.Password, DefaultPassword);
             Assert.AreEqual(user.Name, DefaultName);
@@ -31,7 +30,7 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void EditorUserBuilderTestDifferentAttributes()
         {
-            AdminUser user = ExampleInstances.TestAdminUser();
+            AdminUser user = EntitiesExampleInstances.TestAdminUser();
             Assert.AreNotEqual(user.Username, "DefaultUsername2");
             Assert.AreNotEqual(user.Password, "DefaultUsername2");
             Assert.AreNotEqual(user.Name, "DefaultName2");
@@ -41,20 +40,20 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void AdminUserEqualsTest()
         {
-            AdminUser user = ExampleInstances.TestAdminUser();
+            AdminUser user = EntitiesExampleInstances.TestAdminUser();
             Assert.IsTrue(user.Equals(user));
         }
         [TestMethod]
         public void AdminUserNotEqualsTest()
         {
-            AdminUser user = ExampleInstances.TestAdminUser();
-            AdminUser user2 = ExampleInstances.TestAdminUser();
+            AdminUser user = EntitiesExampleInstances.TestAdminUser();
+            AdminUser user2 = EntitiesExampleInstances.TestAdminUser();
             Assert.IsFalse(user.Equals(user2));
         }
         [TestMethod]
         public void AdminUserNotUserEqualsTest()
         {
-            AdminUser user = ExampleInstances.TestAdminUser();
+            AdminUser user = EntitiesExampleInstances.TestAdminUser();
             string otherObject = "NotAnUser";
             Assert.IsFalse(user.Equals(otherObject));
         }
