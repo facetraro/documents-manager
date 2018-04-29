@@ -29,5 +29,15 @@ namespace DocumentsManagerDATesting
             List<AdminUser> allAdmins = context.GetLazy();
             Assert.IsTrue(allAdmins.Contains(newUser));
         }
+        [TestMethod]
+        public void RemoveSpecificAdminTest()
+        {
+            AdminUserContext context = new AdminUserContext();
+            AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
+            context.Add(newUser);
+            context.Remove(newUser);
+            List<AdminUser> allAdmins = context.GetLazy();
+            Assert.IsFalse(allAdmins.Contains(newUser));
+        }
     }
 }

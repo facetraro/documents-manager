@@ -67,6 +67,10 @@
       <Project>{58405487-5C94-4569-8171-0ED3889C9A03}</Project>
       <Name>DocumentsManagerDataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DocumentsManagerExampleInstances\DocumentsManagerExampleInstances.csproj">
+      <Project>{C2B9AED8-4F48-48CB-817E-0D79606DFC6B}</Project>
+      <Name>DocumentsManagerExampleInstances</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsMangerEntities\DocumentsMangerEntities.csproj">
       <Project>{80d195ae-b71a-465a-a588-7397ae023e8f}</Project>
       <Name>DocumentsMangerEntities</Name>
