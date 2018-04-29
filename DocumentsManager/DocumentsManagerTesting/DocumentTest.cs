@@ -78,5 +78,29 @@ namespace DocumentsManagerTesting
             Assert.AreNotEqual(aDocument.CreationDate, DateTime.Today.AddDays(1));
             Assert.AreNotEqual(aDocument.Title, "");
         }
+        [TestMethod]
+        public void DocumentEqualsTestSameAttr()
+        {
+            Document aDocument = ExampleInstances.TestDocument();
+            Document sameDocument = ExampleInstances.TestDocument();
+            sameDocument.Id = aDocument.Id;
+            Assert.IsTrue(aDocument.Equals(sameDocument));
+        }
+        [TestMethod]
+        public void DocumentEqualsTestDifferentAttr()
+        {
+            Document aDocument = ExampleInstances.TestDocument();
+            Document anotheraDocument = ExampleInstances.TestDocument();
+            anotheraDocument.StyleClass = new StyleClass();
+            anotheraDocument.Title = "Another Title";
+            Assert.IsFalse(aDocument.Equals(anotheraDocument));
+        }
+        [TestMethod]
+        public void ParragraphEqualsTestDifferentID()
+        {
+            Document aDocument = ExampleInstances.TestDocument();
+            Document anotheraDocument = ExampleInstances.TestDocument();
+            Assert.IsFalse(aDocument.Equals(anotheraDocument));
+        }
     }
 }
