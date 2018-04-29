@@ -12,10 +12,12 @@ namespace DocumentsManagerDataAccess
     {
         public ContextDataAccess() : base("name=DocumentsManager") { }
         public DbSet<AdminUser> Admins { get; set; }
+        public DbSet<EditorUser> Editors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AdminUser>().HasKey(A => A.Id);
+            modelBuilder.Entity<EditorUser>().HasKey(E => E.Id);
         }
     }
 }
