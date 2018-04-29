@@ -11,5 +11,14 @@ namespace DocumentsMangerEntities
         public Guid Id { get; set; }
         public Text Text { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            Footer anotherFooter = obj as Footer;
+            if ((System.Object)anotherFooter == null)
+            {
+                return false;
+            }
+            return Id.Equals(anotherFooter.Id);
+        }
     }
 }
