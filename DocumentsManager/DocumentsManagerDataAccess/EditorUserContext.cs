@@ -42,12 +42,19 @@ namespace DocumentsManagerDataAccess
                 context.SaveChanges();
             }
         }
-
+        public EditorUser GetById(Guid id)
+        {
+            using (var context = new ContextDataAccess())
+            {
+                return context.Editors.Find(id);
+            }
+        }
         public void Modify(EditorUser modifiedUser)
         {
             using (var context = new ContextDataAccess())
             {
-                Remove(context.Editors.Find(modifiedUser.Id));
+                EditorUser oldUser = GetById(modifiedUser.Id);
+                Remove(oldUser);
                 Add(modifiedUser);
             }
         }

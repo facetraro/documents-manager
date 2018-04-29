@@ -43,12 +43,18 @@ namespace DocumentsManagerDataAccess
                 context.SaveChanges();
             }
         }
-
+        public AdminUser GetById(Guid id)
+        {
+            using (var context = new ContextDataAccess())
+            {
+                return context.Admins.Find(id);
+            }
+        }
         public void Modify(AdminUser modifiedUser)
         {
              using (var context = new ContextDataAccess())
             {
-                AdminUser oldUser = context.Admins.Find(modifiedUser.Id);
+                AdminUser oldUser = GetById(modifiedUser.Id);
                 Remove(oldUser);
                 Add(modifiedUser);
             }
