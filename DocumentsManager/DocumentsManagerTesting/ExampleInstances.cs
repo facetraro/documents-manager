@@ -104,6 +104,19 @@ namespace DocumentsManagerTesting
             };
             return aFooter;
         }
+        public static Parragraph TestParragraph()
+        {
+            Text aText = TestText();
+            List<Text> texts = new List<Text>();
+            texts.Add(aText);
+            Parragraph aParragraph = new Parragraph
+            {
+                Id = Guid.NewGuid(),
+                Texts = texts,
+                StyleClass = TestStyleClass()
+            };
+            return aParragraph;
+        }
 
     }
 }
