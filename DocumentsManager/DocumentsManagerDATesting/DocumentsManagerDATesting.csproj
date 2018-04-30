@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{72648F2B-A491-4D2A-BA67-E66BE79439FE}</ProjectGuid>
+    <ProjectGuid>{3D06630F-61EC-4AAA-BC6D-294022DC3F89}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DocumentsManagerTesting</RootNamespace>
-    <AssemblyName>DocumentsManagerTesting</AssemblyName>
+    <RootNamespace>DocumentsManagerDATesting</RootNamespace>
+    <AssemblyName>DocumentsManagerDATesting</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,7 +35,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -45,29 +54,20 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
-          <Private>False</Private>
-        </Reference>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AlignmentTest.cs" />
-    <Compile Include="UnderlineTest.cs" />
-    <Compile Include="FontSizeTest.cs" />
-    <Compile Include="ItalicsTest.cs" />
-    <Compile Include="StyleColorTest.cs" />
-    <Compile Include="EditorUserTest.cs" />
-    <Compile Include="BoldTest.cs" />
-    <Compile Include="FromatTest.cs" />
-    <Compile Include="StyleAttributeTest.cs" />
-    <Compile Include="StyleClassTest.cs" />
+    <Compile Include="EditorUserContextTest.cs" />
+    <Compile Include="AdminUserContextTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AdminUserTest.cs" />
-    <Compile Include="TextTest.cs" />
-    <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocumentsManagerDataAccess\DocumentsManagerDataAccess.csproj">
+      <Project>{58405487-5C94-4569-8171-0ED3889C9A03}</Project>
+      <Name>DocumentsManagerDataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManagerExampleInstances\DocumentsManagerExampleInstances.csproj">
       <Project>{C2B9AED8-4F48-48CB-817E-0D79606DFC6B}</Project>
       <Name>DocumentsManagerExampleInstances</Name>
@@ -76,6 +76,10 @@
       <Project>{80d195ae-b71a-465a-a588-7397ae023e8f}</Project>
       <Name>DocumentsMangerEntities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

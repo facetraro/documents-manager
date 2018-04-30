@@ -1,4 +1,5 @@
-﻿using DocumentsMangerEntities;
+﻿using DocumentsManagerExampleInstances;
+using DocumentsMangerEntities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace DocumentsManagerTesting
             string DefaultName = "DefaultName";
             string DefaultSurname = "DefaultSurname";
             string DefaultEmail = "DefaultEmail@DefaultEmail.com";
-            EditorUser user = ExampleInstances.TestEditorUser();
+            EditorUser user = EntitiesExampleInstances.TestEditorUser();
             Assert.AreEqual(user.Username,DefaultUsername);
             Assert.AreEqual(user.Password, DefaultPassword);
             Assert.AreEqual(user.Name, DefaultName);
@@ -31,7 +32,7 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void EditorUserBuilderTestDifferentAttributes()
         {
-            EditorUser user = ExampleInstances.TestEditorUser();
+            EditorUser user = EntitiesExampleInstances.TestEditorUser();
             Assert.AreNotEqual(user.Username, "DefaultUsername2");
             Assert.AreNotEqual(user.Password, "DefaultUsername2");
             Assert.AreNotEqual(user.Name, "DefaultName2");
@@ -41,21 +42,21 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void EditorUserEqualsTest()
         {
-            EditorUser user = ExampleInstances.TestEditorUser();
+            EditorUser user = EntitiesExampleInstances.TestEditorUser();
             Assert.IsTrue(user.Equals(user));
         }
         [TestMethod]
         public void EditorUserNotUSerEqualsTest()
         {
-            EditorUser user = ExampleInstances.TestEditorUser();
+            EditorUser user = EntitiesExampleInstances.TestEditorUser();
             string otherObject = "NotAnUser";
             Assert.IsFalse(user.Equals(otherObject));
         }
         [TestMethod]
         public void EditorUserNotEqualsTest()
         {
-            EditorUser user = ExampleInstances.TestEditorUser();
-            EditorUser differentUser = ExampleInstances.TestEditorUser();
+            EditorUser user = EntitiesExampleInstances.TestEditorUser();
+            EditorUser differentUser = EntitiesExampleInstances.TestEditorUser();
             Assert.AreNotEqual(user,differentUser);
         }
     }

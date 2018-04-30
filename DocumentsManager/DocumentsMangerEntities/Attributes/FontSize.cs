@@ -6,19 +6,23 @@ using System.Threading.Tasks;
 
 namespace DocumentsMangerEntities
 {
-    public class FontSize
+    public class FontSize : StyleAttribute
     {
         public FontSize()
         {
+            Name = "Tamaño";
             Size = 10;
-            Specified = SpecifiedValue.NotSpecified;
         }
 
         public int Size { get; set; }
-        public SpecifiedValue Specified { get; set; }
         public override bool Equals(object obj)
         {
-            return true;
+            FontSize anotherFontSize = obj as FontSize;
+            return base.Equals(anotherFontSize) && IsTheSameSize(anotherFontSize);
+        }
+        private bool IsTheSameSize(FontSize anotherFontSize)
+        {
+            return Size == anotherFontSize.Size;
         }
     }
 }

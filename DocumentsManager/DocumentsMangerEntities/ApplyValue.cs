@@ -1,4 +1,4 @@
 ﻿namespace DocumentsMangerEntities
 {
-    public enum ApplyValue { NotSpecified , Apply, NoApply };
+    public enum ApplyValue { Apply, NoApply };
 }
