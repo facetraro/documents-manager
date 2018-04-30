@@ -83,5 +83,11 @@ namespace DocumentsManagerDataAccess
                 return context.Attributes.ToList();
             }
         }
+
+        public void Modify(StyleClass newStyle)
+        {
+            Remove(newStyle);
+            Add(newStyle);
+        }
     }
 }
