@@ -66,5 +66,16 @@ namespace DocumentsManagerDATesting
             }
             TearDown();
         }
+        [TestMethod]
+        public void RemoveAttributesStyleClassTest()
+        {
+            StyleClassContext context = new StyleClassContext();
+            StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
+            context.Add(newStyle);
+            context.Remove(newStyle);
+            List<StyleAttribute> allAttributes = context.GetAllAttributes();
+            Assert.IsTrue(allAttributes.Count == 0);
+            TearDown();
+        }
     }
 }
