@@ -44,5 +44,15 @@ namespace DocumentsManagerDataAccess
                 context.SaveChanges();
             }
         }
+
+        public StyleClass GetById(Guid id)
+        {
+            using (var context = new ContextDataAccess())
+            {
+                StyleClass style = context.Styles.Find(id);
+                context.Styles.Include("Attributes").ToList();
+                return style;
+            }
+        }
     }
 }

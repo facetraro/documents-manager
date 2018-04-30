@@ -34,7 +34,7 @@ namespace DocumentsManagerDATesting
             context.Add(newStyle);
             context.Remove(newStyle);
             List<StyleClass> allStyles = context.GetLazy();
-            Assert.IsTrue(allStyles.Count==0);
+            Assert.IsTrue(allStyles.Count == 0);
             TearDown();
         }
         [TestMethod]
@@ -45,7 +45,11 @@ namespace DocumentsManagerDATesting
             context.Add(newStyle);
             StyleClass obtainedStyleClass = context.GetById(newStyle.Id);
             Assert.IsTrue(obtainedStyleClass.Equals(newStyle));
-            Assert.IsTrue(obtainedStyleClass.Attributes.SequenceEqual(newStyle.Attributes));
+            Assert.IsTrue(obtainedStyleClass.Attributes.Count == newStyle.Attributes.Count);
+            foreach (var item in obtainedStyleClass.Attributes)
+            {
+                Assert.IsTrue(newStyle.GetAttributeByName(item.Name).Equals(item));
+            }
             TearDown();
         }
     }
