@@ -52,5 +52,19 @@ namespace DocumentsManagerDATesting
             }
             TearDown();
         }
+        [TestMethod]
+        public void GetAttributesByStyleClassTest()
+        {
+            StyleClassContext context = new StyleClassContext();
+            StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
+            context.Add(newStyle);
+            List<StyleAttribute> allAttributes = context.GetAttributes(newStyle);
+            Assert.IsTrue(allAttributes.Count == newStyle.Attributes.Count);
+            foreach (var item in allAttributes)
+            {
+                Assert.IsTrue(newStyle.GetAttributeByName(item.Name).Equals(item));
+            }
+            TearDown();
+        }
     }
 }
