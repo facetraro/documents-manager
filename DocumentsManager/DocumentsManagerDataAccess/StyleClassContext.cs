@@ -38,15 +38,18 @@ namespace DocumentsManagerDataAccess
             using (var context = new ContextDataAccess())
             {
                 StyleClass styleClass = GetById(style.Id);
-                int lenghtAttributes = styleClass.Attributes.Count;
-                for (int i = 0; i < lenghtAttributes; i++)
-                {
-
-                    RemoveAttribute(styleClass.Attributes[0]);
-                }
+                RemoveAttributes(styleClass);
                 context.Styles.Attach(styleClass);
                 context.Styles.Remove(styleClass);
                 context.SaveChanges();
+            }
+        }
+        public void RemoveAttributes(StyleClass styleClass)
+        {
+            int lenghtAttributes = styleClass.Attributes.Count;
+            for (int i = 0; i < lenghtAttributes; i++)
+            {
+                RemoveAttribute(styleClass.Attributes[0]);
             }
         }
         public void RemoveAttribute(StyleAttribute attribute)
