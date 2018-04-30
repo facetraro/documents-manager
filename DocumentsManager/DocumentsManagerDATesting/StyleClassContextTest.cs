@@ -18,6 +18,7 @@ namespace DocumentsManagerDATesting
             context.Add(newStyle);
             List<StyleClass> allStyles = context.GetLazy();
             Assert.IsTrue(allStyles.Contains(newStyle));
+            context.ClearAll();
         }
         [TestMethod]
         public void RemoveStyleClassTest()
@@ -28,6 +29,7 @@ namespace DocumentsManagerDATesting
             context.Remove(newStyle);
             List<StyleClass> allStyles = context.GetLazy();
             Assert.IsTrue(allStyles.Count==0);
+            context.ClearAll();
         }
     }
 }

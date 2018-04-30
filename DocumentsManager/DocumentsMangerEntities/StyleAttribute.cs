@@ -10,6 +10,7 @@ namespace DocumentsMangerEntities
     {
         public Guid Id { get; set; }
         public String Name { get; set; }
+        public StyleClass Style { get; set; }
         public StyleAttribute()
         {
             Id = Guid.NewGuid();

@@ -26,5 +26,23 @@ namespace DocumentsManagerDataAccess
             }
             return allLazy;
         }
+        public void ClearAll()
+        {
+            foreach (var item in GetLazy())
+            {
+                Remove(item);
+            }
+        }
+        public void Remove(StyleClass style)
+        {
+            using (var context = new ContextDataAccess())
+            {
+                StyleClass toRemove = context.Styles.Find(style.Id);
+                context.Styles.Include("Attributes").ToList();
+                context.Styles.Attach(toRemove);
+                context.Styles.Remove(toRemove);
+                context.SaveChanges();
+            }
+        }
     }
 }
