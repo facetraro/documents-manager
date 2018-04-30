@@ -61,6 +61,10 @@
     <Compile Include="BoldTest.cs" />
     <Compile Include="FromatTest.cs" />
     <Compile Include="StyleAttributeTest.cs" />
+    <Compile Include="DocumentTest.cs" />
+    <Compile Include="FooterTest.cs" />
+    <Compile Include="HeaderTest.cs" />
+    <Compile Include="ParragraphTest.cs" />
     <Compile Include="StyleClassTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AdminUserTest.cs" />

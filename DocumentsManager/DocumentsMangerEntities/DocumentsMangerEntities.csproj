@@ -48,6 +48,11 @@
     <Compile Include="Attributes\Italics.cs" />
     <Compile Include="Attributes\StyleColor.cs" />
     <Compile Include="StyleAttribute.cs" />
+    <Compile Include="Document.cs" />
+    <Compile Include="DocumentObject.cs" />
+    <Compile Include="Footer.cs" />
+    <Compile Include="Header.cs" />
+    <Compile Include="Parragraph.cs" />
     <Compile Include="SpecifiedValue.cs" />
     <Compile Include="EditorUser.cs" />
     <Compile Include="Attributes\FontSize.cs" />

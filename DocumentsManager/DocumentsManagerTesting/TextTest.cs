@@ -54,7 +54,7 @@ namespace DocumentsManagerTesting
             Text aText = EntitiesExampleInstances.TestText();
             Text sameText = EntitiesExampleInstances.TestText();
             sameText.Id = aText.Id;
-            Assert.AreEqual(aText, sameText);
+            Assert.IsTrue(aText.Equals(sameText));
         }
         [TestMethod]
         public void TextEqualsTestDifferentAttr()
@@ -63,14 +63,14 @@ namespace DocumentsManagerTesting
             Text anotherText = EntitiesExampleInstances.TestText();
             anotherText.StyleClass = new StyleClass();
             anotherText.WrittenText = "another Text";
-            Assert.AreNotEqual(aText, anotherText);
+            Assert.IsFalse(aText.Equals(anotherText));
         }
         [TestMethod]
         public void TextEqualsTestDifferentID()
         {
             Text aText = EntitiesExampleInstances.TestText();
             Text anotherText = EntitiesExampleInstances.TestText();
-            Assert.AreNotEqual(aText, anotherText);
+            Assert.IsFalse(aText.Equals(anotherText));
         }
         [TestMethod]
         public void TextHasSameText()

@@ -102,6 +102,59 @@ namespace DocumentsManagerExampleInstances
                 StyleClass = TestStyleClass()
             };
             return aText;
+       }
+        public static Header TestHeader()
+        {
+            Header aHeader = new Header
+            {
+                Id = Guid.NewGuid(),
+                Text = TestText(),
+                StyleClass = TestStyleClass()
+            };
+            return aHeader;
         }
+        public static Footer TestFooter()
+        {
+            Footer aFooter = new Footer
+            {
+                Id = Guid.NewGuid(),
+                Text = TestText(),
+                StyleClass = TestStyleClass()
+            };
+            return aFooter;
+        }
+        public static Parragraph TestParragraph()
+        {
+            Text aText = TestText();
+            List<Text> texts = new List<Text>();
+            texts.Add(aText);
+            Parragraph aParragraph = new Parragraph
+            {
+                Id = Guid.NewGuid(),
+                Texts = texts,
+                StyleClass = TestStyleClass()
+            };
+            return aParragraph;
+        }
+        public static Document TestDocument() 
+        {
+            List<Parragraph> parragraphs = new List<Parragraph>();
+            parragraphs.Add(EntitiesExampleInstances.TestParragraph());
+            Document aDocument = new Document {
+                Id = Guid.NewGuid(),
+                Format = EntitiesExampleInstances.TestFormat(),
+                Header = EntitiesExampleInstances.TestHeader(),
+                Footer = EntitiesExampleInstances.TestFooter(),
+                Parragraphs = parragraphs,
+                CreatorUser = EntitiesExampleInstances.TestUser(),
+                StyleClass = EntitiesExampleInstances.TestStyleClass(),
+                CreationDate = DateTime.Today,
+                Title = "Default title"
+        };
+           
+            return aDocument;
+        }
+
+
     }
 }
