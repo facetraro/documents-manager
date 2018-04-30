@@ -11,19 +11,11 @@ namespace DocumentsManagerDataAccess
     {
         public void Add(StyleClass newStyleClass)
         {
-            try
+            using (var context = new ContextDataAccess())
             {
-                using (var context = new ContextDataAccess())
-                {
-                    context.Styles.Add(newStyleClass);
-                    context.SaveChanges();
-                }
+                context.Styles.Add(newStyleClass);
+                context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                int a = 0;
-            }
-
         }
         public List<StyleClass> GetLazy()
         {
