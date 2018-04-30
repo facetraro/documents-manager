@@ -10,6 +10,11 @@ namespace DocumentsManagerDATesting
     [TestClass]
     public class StyleClassContextTest
     {
+        public void TearDown()
+        {
+            StyleClassContext context = new StyleClassContext();
+            context.ClearAll();
+        }
         [TestMethod]
         public void AddStyleClassTest()
         {
@@ -18,7 +23,7 @@ namespace DocumentsManagerDATesting
             context.Add(newStyle);
             List<StyleClass> allStyles = context.GetLazy();
             Assert.IsTrue(allStyles.Contains(newStyle));
-            context.ClearAll();
+            TearDown();
         }
         [TestMethod]
         public void RemoveStyleClassTest()
@@ -29,7 +34,7 @@ namespace DocumentsManagerDATesting
             context.Remove(newStyle);
             List<StyleClass> allStyles = context.GetLazy();
             Assert.IsTrue(allStyles.Count==0);
-            context.ClearAll();
+            TearDown();
         }
     }
 }
