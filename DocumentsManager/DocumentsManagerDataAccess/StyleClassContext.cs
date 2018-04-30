@@ -43,7 +43,6 @@ namespace DocumentsManagerDataAccess
                 context.SaveChanges();
             }
         }
-
         public StyleClass GetById(Guid id)
         {
             using (var context = new ContextDataAccess())
@@ -52,6 +51,11 @@ namespace DocumentsManagerDataAccess
                 context.Styles.Include("Attributes").ToList();
                 return style;
             }
+        }
+
+        public List<StyleAttribute> GetAttributes(StyleClass newStyle)
+        {
+            return GetById(newStyle.Id).Attributes;
         }
     }
 }
