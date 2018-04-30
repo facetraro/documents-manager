@@ -37,10 +37,9 @@ namespace DocumentsManagerDataAccess
         {
             using (var context = new ContextDataAccess())
             {
-                StyleClass toRemove = context.Styles.Find(style.Id);
-                context.Styles.Include("Attributes").ToList();
-                context.Styles.Attach(toRemove);
-                context.Styles.Remove(toRemove);
+                StyleClass styleClass = GetById(style.Id);
+                context.Styles.Attach(styleClass);
+                context.Styles.Remove(styleClass);
                 context.SaveChanges();
             }
         }
