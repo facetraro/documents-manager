@@ -8,7 +8,12 @@ namespace DocumentsMangerEntities
 {
     abstract public class StyleAttribute
     {
+        public Guid Id { get; set; }
         public String Name { get; set; }
+        public StyleAttribute()
+        {
+            Id = Guid.NewGuid();
+        }
         public override bool Equals(object obj)
         {
             bool validation = false;

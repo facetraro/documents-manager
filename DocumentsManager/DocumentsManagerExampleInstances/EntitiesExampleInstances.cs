@@ -39,10 +39,13 @@ namespace DocumentsManagerExampleInstances
         {
             List<StyleAttribute> attributes = new List<StyleAttribute>();
             Underline underline = new Underline();
+            underline.Id = Guid.NewGuid();
             underline.Applies = ApplyValue.NoApply;
             Italics italics = new Italics();
+            italics.Id = Guid.NewGuid();
             italics.Applies = ApplyValue.Apply;
             Bold bold = new Bold();
+            bold.Id = Guid.NewGuid();
             bold.Applies = ApplyValue.NoApply;
             FontSize fontSize = new FontSize();
             fontSize.Size = 10;
