@@ -77,5 +77,22 @@ namespace DocumentsManagerDATesting
             Assert.IsTrue(allAttributes.Count == 0);
             TearDown();
         }
+        [TestMethod]
+        public void ModifyStyleClassTest()
+        {
+            StyleClassContext context = new StyleClassContext();
+            StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
+            context.Add(newStyle);
+            StyleAttribute toRemove = newStyle.Attributes[2];
+            newStyle.Attributes.Remove(toRemove);
+            context.Modify(newStyle);
+            List<StyleAttribute> allAttributes = context.GetAttributes(newStyle);
+            Assert.IsTrue(allAttributes.Count == newStyle.Attributes.Count);
+            foreach (var item in allAttributes)
+            {
+                Assert.IsTrue(newStyle.GetAttributeByName(item.Name).Equals(item));
+            }
+            TearDown();
+        }
     }
 }
