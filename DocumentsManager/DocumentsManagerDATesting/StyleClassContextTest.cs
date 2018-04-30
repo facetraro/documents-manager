@@ -4,6 +4,7 @@ using DocumentsMangerEntities;
 using System.Collections.Generic;
 using DocumentsManagerDataAccess;
 using DocumentsManagerExampleInstances;
+using System.Linq;
 
 namespace DocumentsManagerDATesting
 {
@@ -34,6 +35,17 @@ namespace DocumentsManagerDATesting
             context.Remove(newStyle);
             List<StyleClass> allStyles = context.GetLazy();
             Assert.IsTrue(allStyles.Count==0);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetStyleByIdTest()
+        {
+            StyleClassContext context = new StyleClassContext();
+            StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
+            context.Add(newStyle);
+            StyleClass obtainedStyleClass = context.GetById(newStyle.Id);
+            Assert.IsTrue(obtainedStyleClass.Equals(newStyle));
+            Assert.IsTrue(obtainedStyleClass.Attributes.SequenceEqual(newStyle.Attributes));
             TearDown();
         }
     }
