@@ -38,8 +38,23 @@ namespace DocumentsManagerDataAccess
             using (var context = new ContextDataAccess())
             {
                 StyleClass styleClass = GetById(style.Id);
+                int lenghtAttributes = styleClass.Attributes.Count;
+                for (int i = 0; i < lenghtAttributes; i++)
+                {
+
+                    RemoveAttribute(styleClass.Attributes[0]);
+                }
                 context.Styles.Attach(styleClass);
                 context.Styles.Remove(styleClass);
+                context.SaveChanges();
+            }
+        }
+        public void RemoveAttribute(StyleAttribute attribute)
+        {
+            using (var context = new ContextDataAccess())
+            {
+                context.Attributes.Attach(attribute);
+                context.Attributes.Remove(attribute);
                 context.SaveChanges();
             }
         }
@@ -56,6 +71,14 @@ namespace DocumentsManagerDataAccess
         public List<StyleAttribute> GetAttributes(StyleClass newStyle)
         {
             return GetById(newStyle.Id).Attributes;
+        }
+
+        public List<StyleAttribute> GetAllAttributes()
+        {
+            using (var context = new ContextDataAccess())
+            {
+                return context.Attributes.ToList();
+            }
         }
     }
 }

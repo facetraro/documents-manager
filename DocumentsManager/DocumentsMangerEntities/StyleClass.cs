@@ -9,7 +9,7 @@ namespace DocumentsMangerEntities
     public class StyleClass
     {
         public Guid Id { get; set; }
-        public List<StyleAttribute> Attributes { get; set; }
+        public virtual List<StyleAttribute> Attributes { get; set; }
         public StyleClass Based { get; set; }
         public StyleClass()
         {
