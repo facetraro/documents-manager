@@ -18,5 +18,6 @@ namespace DocumentsManager.Data.Repository
         void Delete(object id);
         void Delete(TEntity entityToDelete);
         void Update(TEntity entityToUpdate);
+        bool Exists(object id);
     }
 }

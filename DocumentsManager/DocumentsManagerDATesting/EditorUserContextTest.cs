@@ -41,6 +41,29 @@ namespace DocumentsManagerDATesting
             TearDown(); 
         }
         [TestMethod]
+        public void RemoveSpecificEditorIdTest()
+        {
+            EditorUserContext context = new EditorUserContext();
+            EditorUser newUser = EntitiesExampleInstances.TestEditorUser();
+            context.Add(newUser);
+            context.Remove(newUser.Id);
+            List<EditorUser> allEditors = context.GetLazy();
+            Assert.IsFalse(allEditors.Contains(newUser));
+            TearDown();
+        }
+        [TestMethod]
+        public void NotRemoveSpecificEditorTest()
+        {
+            EditorUserContext context = new EditorUserContext();
+            EditorUser newUser = EntitiesExampleInstances.TestEditorUser();
+            context.Add(newUser);
+            context.Remove(Guid.NewGuid());
+            List<EditorUser> allEditors = context.GetLazy();
+            Assert.IsTrue(allEditors.Contains(newUser));
+            TearDown();
+        }
+
+        [TestMethod]
         public void ModifyEditorTest()
         {
             EditorUserContext context = new EditorUserContext();

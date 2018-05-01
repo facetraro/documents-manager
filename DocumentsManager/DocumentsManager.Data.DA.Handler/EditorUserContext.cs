@@ -1,5 +1,4 @@
 ﻿using DocumentsManager.Data.Repository;
-using DocumentsManagerDataAccess;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -7,21 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
-namespace DocumentsManager.Data.DA.Handler
+namespace DocumentsManagerDataAccess
 {
-    public class AdminUserContext
+    public class EditorUserContext
     {
-        public List<AdminUser> GetLazy()
+        public List<EditorUser> GetLazy()
         {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                return unitOfWork.AdminRepository.Get().ToList();
+                return unitOfWork.EditorRepository.Get().ToList();
             }
         }
-
         public void ClearAll()
         {
             foreach (var item in GetLazy())
@@ -29,21 +25,21 @@ namespace DocumentsManager.Data.DA.Handler
                 Remove(item);
             }
         }
-
-        public void Add(AdminUser newUser)
+        public void Add(EditorUser newUser)
         {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.AdminRepository.Insert(newUser);
+                unitOfWork.EditorRepository.Insert(newUser);
             }
         }
-        public void Remove(AdminUser userToDelete)
+
+        public void Remove(EditorUser userToDelete)
         {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.AdminRepository.Delete(userToDelete);
+                unitOfWork.EditorRepository.Delete(userToDelete);
             }
         }
         public void Remove(Guid id)
@@ -51,23 +47,23 @@ namespace DocumentsManager.Data.DA.Handler
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.AdminRepository.Delete(id);
+                unitOfWork.EditorRepository.Delete(id);
             }
         }
-        public AdminUser GetById(Guid id)
+        public EditorUser GetById(Guid id)
         {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                return unitOfWork.AdminRepository.GetByID(id);
+                return unitOfWork.EditorRepository.GetByID(id);
             }
         }
-        public void Modify(AdminUser modifiedUser)
+        public void Modify(EditorUser modifiedUser)
         {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.AdminRepository.Update(modifiedUser);
+                unitOfWork.EditorRepository.Update(modifiedUser);
             }
         }
     }
