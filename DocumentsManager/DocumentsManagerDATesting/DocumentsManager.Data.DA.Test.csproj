@@ -65,6 +65,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocumentsManager.Data.DA.Handler\DocumentsManager.Data.DA.Handler.csproj">
+      <Project>{08679660-b159-4575-9066-71059a3c33af}</Project>
+      <Name>DocumentsManager.Data.DA.Handler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Data.Repository\DocumentsManager.Data.Repository.csproj">
       <Project>{A0A4683D-CDE9-41C7-BE95-040B11E302E7}</Project>
       <Name>DocumentsManager.Data.Repository</Name>

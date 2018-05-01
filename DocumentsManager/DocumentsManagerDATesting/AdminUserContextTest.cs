@@ -4,6 +4,7 @@ using DocumentsMangerEntities;
 using System.Collections.Generic;
 using DocumentsManagerDataAccess;
 using DocumentsManagerExampleInstances;
+using DocumentsManager.Data.DA.Handler;
 
 namespace DocumentsManagerDATesting
 {
@@ -48,6 +49,28 @@ namespace DocumentsManagerDATesting
             context.Remove(newUser);
             List<AdminUser> allAdmins = context.GetLazy();
             Assert.IsFalse(allAdmins.Contains(newUser));
+            TearDown();
+        }
+        [TestMethod]
+        public void RemoveSpecificAdminIdTest()
+        {
+            AdminUserContext context = new AdminUserContext();
+            AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
+            context.Add(newUser);
+            context.Remove(newUser.Id);
+            List<AdminUser> allAdmins = context.GetLazy();
+            Assert.IsFalse(allAdmins.Contains(newUser));
+            TearDown();
+        }
+        [TestMethod]
+        public void NotRemoveSpecificAdminIdTest()
+        {
+            AdminUserContext context = new AdminUserContext();
+            AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
+            context.Add(newUser);
+            context.Remove(Guid.NewGuid());
+            List<AdminUser> allAdmins = context.GetLazy();
+            Assert.IsTrue(allAdmins.Contains(newUser));
             TearDown();
         }
         [TestMethod]
