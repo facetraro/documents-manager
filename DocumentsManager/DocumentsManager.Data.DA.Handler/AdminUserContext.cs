@@ -44,8 +44,6 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.AdminRepository.Delete(userToDelete);
-                //context.Admins.Remove(context.Admins.Find(newUser.Id));
-                //context.SaveChanges();
             }
         }
         public void Remove(Guid id)
@@ -54,8 +52,6 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.AdminRepository.Delete(id);
-                //context.Admins.Remove(context.Admins.Find(newUser.Id));
-                //context.SaveChanges();
             }
         }
         public AdminUser GetById(Guid id)
@@ -72,9 +68,6 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.AdminRepository.Update(modifiedUser);
-                //AdminUser oldUser = GetById(modifiedUser.Id);
-                //Remove(oldUser);
-                //Add(modifiedUser);
             }
         }
     }
