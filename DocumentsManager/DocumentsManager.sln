@@ -9,11 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManger.Data", "Doc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.DA.Test", "DocumentsManagerDATesting\DocumentsManager.Data.DA.Test.csproj", "{3D06630F-61EC-4AAA-BC6D-294022DC3F89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.DataAccess", "DocumentsManagerDataAccess\DocumentsManager.Data.DataAccess.csproj", "{58405487-5C94-4569-8171-0ED3889C9A03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.DA", "DocumentsManagerDataAccess\DocumentsManager.Data.DA.csproj", "{58405487-5C94-4569-8171-0ED3889C9A03}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.Instances", "DocumentsManagerExampleInstances\DocumentsManager.Data.Instances.csproj", "{C2B9AED8-4F48-48CB-817E-0D79606DFC6B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.Repository", "DocumentsManager.Data.Repository\DocumentsManager.Data.Repository.csproj", "{A0A4683D-CDE9-41C7-BE95-040B11E302E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.DA.Handler", "DocumentsManager.Data.DA.Handler\DocumentsManager.Data.DA.Handler.csproj", "{08679660-B159-4575-9066-71059A3C33AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A0A4683D-CDE9-41C7-BE95-040B11E302E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0A4683D-CDE9-41C7-BE95-040B11E302E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0A4683D-CDE9-41C7-BE95-040B11E302E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08679660-B159-4575-9066-71059A3C33AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08679660-B159-4575-9066-71059A3C33AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08679660-B159-4575-9066-71059A3C33AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08679660-B159-4575-9066-71059A3C33AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

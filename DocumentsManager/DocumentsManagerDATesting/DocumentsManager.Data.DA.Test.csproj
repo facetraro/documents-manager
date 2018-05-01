@@ -69,9 +69,9 @@
       <Project>{A0A4683D-CDE9-41C7-BE95-040B11E302E7}</Project>
       <Name>DocumentsManager.Data.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DocumentsManagerDataAccess\DocumentsManager.Data.DataAccess.csproj">
+    <ProjectReference Include="..\DocumentsManagerDataAccess\DocumentsManager.Data.DA.csproj">
       <Project>{58405487-5C94-4569-8171-0ED3889C9A03}</Project>
-      <Name>DocumentsManager.Data.DataAccess</Name>
+      <Name>DocumentsManager.Data.DA</Name>
     </ProjectReference>
     <ProjectReference Include="..\DocumentsManagerExampleInstances\DocumentsManager.Data.Instances.csproj">
       <Project>{C2B9AED8-4F48-48CB-817E-0D79606DFC6B}</Project>

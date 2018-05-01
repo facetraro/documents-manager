@@ -60,9 +60,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DocumentsManagerDataAccess\DocumentsManager.Data.DataAccess.csproj">
+    <ProjectReference Include="..\DocumentsManagerDataAccess\DocumentsManager.Data.DA.csproj">
       <Project>{58405487-5C94-4569-8171-0ED3889C9A03}</Project>
-      <Name>DocumentsManager.Data.DataAccess</Name>
+      <Name>DocumentsManager.Data.DA</Name>
     </ProjectReference>
     <ProjectReference Include="..\DocumentsMangerEntities\DocumentsManger.Data.csproj">
       <Project>{80D195AE-B71A-465A-A588-7397AE023E8F}</Project>
