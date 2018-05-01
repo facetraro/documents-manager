@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManagerTesting", "DocumentsManagerTesting\DocumentsManagerTesting.csproj", "{72648F2B-A491-4D2A-BA67-E66BE79439FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.Test", "DocumentsManagerTesting\DocumentsManager.Data.Test.csproj", "{72648F2B-A491-4D2A-BA67-E66BE79439FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsMangerEntities", "DocumentsMangerEntities\DocumentsMangerEntities.csproj", "{80D195AE-B71A-465A-A588-7397AE023E8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManger.Data", "DocumentsMangerEntities\DocumentsManger.Data.csproj", "{80D195AE-B71A-465A-A588-7397AE023E8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManagerDATesting", "DocumentsManagerDATesting\DocumentsManagerDATesting.csproj", "{3D06630F-61EC-4AAA-BC6D-294022DC3F89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.DA.Test", "DocumentsManagerDATesting\DocumentsManager.Data.DA.Test.csproj", "{3D06630F-61EC-4AAA-BC6D-294022DC3F89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManagerDataAccess", "DocumentsManagerDataAccess\DocumentsManagerDataAccess.csproj", "{58405487-5C94-4569-8171-0ED3889C9A03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.DataAccess", "DocumentsManagerDataAccess\DocumentsManager.Data.DataAccess.csproj", "{58405487-5C94-4569-8171-0ED3889C9A03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManagerExampleInstances", "DocumentsManagerExampleInstances\DocumentsManagerExampleInstances.csproj", "{C2B9AED8-4F48-48CB-817E-0D79606DFC6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.Instances", "DocumentsManagerExampleInstances\DocumentsManager.Data.Instances.csproj", "{C2B9AED8-4F48-48CB-817E-0D79606DFC6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.Repository", "DocumentsManager.Data.Repository\DocumentsManager.Data.Repository.csproj", "{A0A4683D-CDE9-41C7-BE95-040B11E302E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C2B9AED8-4F48-48CB-817E-0D79606DFC6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2B9AED8-4F48-48CB-817E-0D79606DFC6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2B9AED8-4F48-48CB-817E-0D79606DFC6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0A4683D-CDE9-41C7-BE95-040B11E302E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0A4683D-CDE9-41C7-BE95-040B11E302E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0A4683D-CDE9-41C7-BE95-040B11E302E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0A4683D-CDE9-41C7-BE95-040B11E302E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
