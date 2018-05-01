@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StyleClassContext.cs" />
     <Compile Include="EditorUserContext.cs" />
     <Compile Include="AdminUserContext.cs" />
     <Compile Include="ContextDataAccess.cs" />

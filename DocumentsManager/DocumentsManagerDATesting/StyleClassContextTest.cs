@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using DocumentsManagerDataAccess;
 using DocumentsManagerExampleInstances;
 using System.Linq;
+using DocumentsManager.Data.DA.Handler;
 
 namespace DocumentsManagerDATesting
 {
@@ -13,13 +14,13 @@ namespace DocumentsManagerDATesting
     {
         public void TearDown()
         {
-            StyleClassContext context = new StyleClassContext();
+            StyleClassContextHandler context = new StyleClassContextHandler();
             context.ClearAll();
         }
         [TestMethod]
         public void AddStyleClassTest()
         {
-            StyleClassContext context = new StyleClassContext();
+            StyleClassContextHandler context = new StyleClassContextHandler();
             StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
             context.Add(newStyle);
             List<StyleClass> allStyles = context.GetLazy();
@@ -29,7 +30,7 @@ namespace DocumentsManagerDATesting
         [TestMethod]
         public void RemoveStyleClassTest()
         {
-            StyleClassContext context = new StyleClassContext();
+            StyleClassContextHandler context = new StyleClassContextHandler();
             StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
             context.Add(newStyle);
             context.Remove(newStyle);
@@ -40,7 +41,7 @@ namespace DocumentsManagerDATesting
         [TestMethod]
         public void GetStyleByIdTest()
         {
-            StyleClassContext context = new StyleClassContext();
+            StyleClassContextHandler context = new StyleClassContextHandler();
             StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
             context.Add(newStyle);
             StyleClass obtainedStyleClass = context.GetById(newStyle.Id);
@@ -55,7 +56,7 @@ namespace DocumentsManagerDATesting
         [TestMethod]
         public void GetAttributesByStyleClassTest()
         {
-            StyleClassContext context = new StyleClassContext();
+            StyleClassContextHandler context = new StyleClassContextHandler();
             StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
             context.Add(newStyle);
             List<StyleAttribute> allAttributes = context.GetAttributes(newStyle);
@@ -69,7 +70,7 @@ namespace DocumentsManagerDATesting
         [TestMethod]
         public void RemoveAttributesStyleClassTest()
         {
-            StyleClassContext context = new StyleClassContext();
+            StyleClassContextHandler context = new StyleClassContextHandler();
             StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
             context.Add(newStyle);
             context.Remove(newStyle);
@@ -80,7 +81,7 @@ namespace DocumentsManagerDATesting
         [TestMethod]
         public void ModifyStyleClassTest()
         {
-            StyleClassContext context = new StyleClassContext();
+            StyleClassContextHandler context = new StyleClassContextHandler();
             StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
             context.Add(newStyle);
             StyleAttribute toRemove = newStyle.Attributes[2];
