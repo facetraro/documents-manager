@@ -63,6 +63,7 @@
     <Compile Include="EditorUserContextTest.cs" />
     <Compile Include="AdminUserContextTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextContextTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DocumentsManager.Data.DA.Handler\DocumentsManager.Data.DA.Handler.csproj">

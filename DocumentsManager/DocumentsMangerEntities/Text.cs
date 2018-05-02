@@ -9,7 +9,7 @@ namespace DocumentsMangerEntities
     public class Text
     {
         public Guid Id { get; set; }
-        public StyleClass StyleClass { get; set; }
+        public virtual StyleClass StyleClass { get; set; }
         public string WrittenText { get; set; }
    
     public override bool Equals(object obj)
