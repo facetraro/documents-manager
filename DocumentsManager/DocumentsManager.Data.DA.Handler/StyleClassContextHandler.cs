@@ -3,6 +3,7 @@ using DocumentsManagerDataAccess;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,10 @@ namespace DocumentsManager.Data.DA.Handler
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
+                if (newStyleClass.Based != null)
+                {
+                    db.Styles.Attach(newStyleClass.Based);
+                }
                 unitOfWork.StyleClassRepository.Insert(newStyleClass);
             }
         }
@@ -44,7 +49,11 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.StyleClassRepository.Delete(style);
             }
         }
-        public void RemoveAttributes(StyleClass style)
+        private bool IsStyleBasedInStyle(StyleClass child, StyleClass father)
+        {
+            return child.IsBasedOnOtherStyle() && child.Based.Equals(father);
+        }
+        private void RemoveAttributes(StyleClass style)
         {
             StyleClass styleClass = GetById(style.Id);
             int lenghtAttributes = styleClass.Attributes.Count;
@@ -53,7 +62,24 @@ namespace DocumentsManager.Data.DA.Handler
                 RemoveAttribute(styleClass.Attributes[0]);
             }
         }
-        public void RemoveAttribute(StyleAttribute attribute)
+        private void AddAttributes(StyleClass styleClass)
+        {
+            int lenghtAttributes = styleClass.Attributes.Count;
+            for (int i = 0; i < lenghtAttributes; i++)
+            {
+                AddAttribute(styleClass.Attributes[i]);
+            }
+        }
+        private void AddAttribute(StyleAttribute attribute)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                db.Styles.Attach(attribute.Style);
+                unitOfWork.StyleAttributeRepository.Insert(attribute);
+            }
+        }
+        private void RemoveAttribute(StyleAttribute attribute)
         {
             using (var db = new ContextDataAccess())
             {
@@ -71,12 +97,10 @@ namespace DocumentsManager.Data.DA.Handler
                 return style;
             }
         }
-
         public List<StyleAttribute> GetAttributes(StyleClass newStyle)
         {
             return GetById(newStyle.Id).Attributes;
         }
-
         public List<StyleAttribute> GetAllAttributes()
         {
             using (var db = new ContextDataAccess())
@@ -85,13 +109,38 @@ namespace DocumentsManager.Data.DA.Handler
                 return unitOfWork.StyleAttributeRepository.Get().ToList();
             }
         }
-
-        public void Modify(StyleClass newStyle)
+        private void UpdateAttributes(StyleClass modifiedStyle)
         {
-            List<StyleAttribute> newAttributes = newStyle.Attributes;
-            Remove(newStyle);
-            newStyle.Attributes = newAttributes;
-            Add(newStyle);
+            RemoveAttributes(modifiedStyle);
+            AddAttributes(modifiedStyle);
+        }
+        private StyleClass GetBasedStyleClass(ContextDataAccess db, StyleClass style)
+        {
+            db.Styles.Include("Attributes").ToList();
+            StyleClass basedOnStyle = null;
+            if (style.Based != null)
+            {
+                basedOnStyle = db.Styles.Find(style.Based.Id);
+                db.Styles.Include("Attributes").ToList();
+            }
+            return basedOnStyle;
+        }
+        private void UpdateData(StyleClass modifiedStyle)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                StyleClass styleClassEntity = db.Styles.Find(modifiedStyle.Id);
+                styleClassEntity.Based = GetBasedStyleClass(db, modifiedStyle);
+                styleClassEntity.Name = modifiedStyle.Name;
+                unitOfWork.StyleClassRepository.Update(styleClassEntity);
+                unitOfWork.Save();
+            }
+        }
+        public void Modify(StyleClass modifiedStyle)
+        {
+            UpdateAttributes(modifiedStyle);
+            UpdateData(modifiedStyle);
         }
     }
 }

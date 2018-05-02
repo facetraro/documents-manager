@@ -109,5 +109,13 @@ namespace DocumentsManagerTesting
             StyleClass basedOnStyleClass = childStyleClass.GetBasedOnStyleClass();
             Assert.IsTrue(basedOnStyleClass.Attributes.SequenceEqual(expectedAttributes));
         }
+        [TestMethod]
+        public void IsTheSameNameStyleClassTest()
+        {
+            string name = "nameTest";
+            StyleClass testStyleClass = EntitiesExampleInstances.TestStyleClass();
+            testStyleClass.Name = name;
+            Assert.AreEqual(testStyleClass.Name, name);
+        }
     }
 }

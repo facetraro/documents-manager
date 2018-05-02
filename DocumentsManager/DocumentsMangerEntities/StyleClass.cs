@@ -9,6 +9,7 @@ namespace DocumentsMangerEntities
     public class StyleClass
     {
         public Guid Id { get; set; }
+        public string Name { get; set; }
         public virtual List<StyleAttribute> Attributes { get; set; }
         public StyleClass Based { get; set; }
         public StyleClass()
@@ -24,6 +25,10 @@ namespace DocumentsMangerEntities
                 validation = Id.Equals(anotherStyleClass.Id); ;
             }
             return validation;
+        }
+        public bool IsBasedOnOtherStyle()
+        {
+            return Based != null;
         }
         public StyleAttribute GetAttributeByName(string name)
         {
