@@ -95,5 +95,20 @@ namespace DocumentsManagerDATesting
             }
             TearDown();
         }
+        [TestMethod]
+        public void DeleteStyleClassBased()
+        {
+            StyleClassContextHandler context = new StyleClassContextHandler();
+            StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
+            StyleAttribute toRemove = newStyle.Attributes[2];
+            newStyle.Attributes.Remove(toRemove);
+            StyleClass fatherStyle = EntitiesExampleInstances.TestStyleClass();
+            newStyle.Based = fatherStyle;
+            context.Add(fatherStyle);
+            context.Add(newStyle);
+            context.Remove(fatherStyle);
+            Assert.AreEqual(context.GetLazy().Count, 1);
+            TearDown();
+        }
     }
 }
