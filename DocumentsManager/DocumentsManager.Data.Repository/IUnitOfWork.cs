@@ -14,6 +14,7 @@ namespace DocumentsManager.Data.Repository
         IRepository<StyleClass> StyleClassRepository { get; }
         IRepository<StyleAttribute> StyleAttributeRepository { get; }
         IRepository<Text> TextRepository { get; }
+        IRepository<Format> FormatRepository { get; }
         void Save();
     }
 }

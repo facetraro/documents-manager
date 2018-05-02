@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormatContext.cs" />
     <Compile Include="EditorUserContext.cs" />
     <Compile Include="StyleClassContextHandler.cs" />
     <Compile Include="AdminUserContext.cs" />

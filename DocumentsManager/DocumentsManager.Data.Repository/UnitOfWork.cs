@@ -16,6 +16,7 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<StyleClass> styleClassRepository;
         private GenericRepository<StyleAttribute> styleAttributeRepository;
         private GenericRepository<Text> textRepository;
+        private GenericRepository<Format> formatRepository;
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
         {
@@ -78,6 +79,17 @@ namespace DocumentsManager.Data.Repository
                     this.textRepository = new GenericRepository<Text>(context);
                 }
                 return textRepository;
+            }
+        }
+        public IRepository<Format> FormatRepository
+        {
+            get
+            {
+                if (this.formatRepository == null)
+                {
+                    this.formatRepository = new GenericRepository<Format>(context);
+                }
+                return formatRepository;
             }
         }
         public void Save()

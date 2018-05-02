@@ -29,6 +29,6 @@ namespace DocumentsManagerDATesting
             context.Add(newFormat);
             List<Format> allFormats = context.GetLazy();
             Assert.IsTrue(allFormats.Contains(newFormat));
-        }
+        }  
     }
 }
