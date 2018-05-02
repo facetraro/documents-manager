@@ -68,6 +68,7 @@ namespace DocumentsManagerExampleInstances
         {
             StyleClass testStyleClass = new StyleClass();
             testStyleClass.Attributes = TestAttributes();
+            testStyleClass.Name = "DefaultName";
             testStyleClass.Id = Guid.NewGuid();
             return testStyleClass;
         }
