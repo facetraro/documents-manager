@@ -97,12 +97,10 @@ namespace DocumentsManager.Data.DA.Handler
                 return style;
             }
         }
-
         public List<StyleAttribute> GetAttributes(StyleClass newStyle)
         {
             return GetById(newStyle.Id).Attributes;
         }
-
         public List<StyleAttribute> GetAllAttributes()
         {
             using (var db = new ContextDataAccess())
@@ -116,20 +114,24 @@ namespace DocumentsManager.Data.DA.Handler
             RemoveAttributes(modifiedStyle);
             AddAttributes(modifiedStyle);
         }
+        private StyleClass GetBasedStyleClass(ContextDataAccess db, StyleClass style)
+        {
+            db.Styles.Include("Attributes").ToList();
+            StyleClass basedOnStyle = null;
+            if (style.Based != null)
+            {
+                basedOnStyle = db.Styles.Find(style.Based.Id);
+                db.Styles.Include("Attributes").ToList();
+            }
+            return basedOnStyle;
+        }
         private void UpdateData(StyleClass modifiedStyle)
         {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 StyleClass styleClassEntity = db.Styles.Find(modifiedStyle.Id);
-                db.Styles.Include("Attributes").ToList();
-                StyleClass basedOnStyle = null;
-                if (modifiedStyle.Based != null)
-                {
-                    basedOnStyle = db.Styles.Find(modifiedStyle.Based.Id);
-                    db.Styles.Include("Attributes").ToList();
-                }
-                styleClassEntity.Based = basedOnStyle;
+                styleClassEntity.Based = GetBasedStyleClass(db, modifiedStyle);
                 styleClassEntity.Name = modifiedStyle.Name;
                 unitOfWork.StyleClassRepository.Update(styleClassEntity);
                 unitOfWork.Save();
