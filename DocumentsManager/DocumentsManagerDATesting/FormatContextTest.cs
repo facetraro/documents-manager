@@ -29,6 +29,24 @@ namespace DocumentsManagerDATesting
             context.Add(newFormat);
             List<Format> allFormats = context.GetLazy();
             Assert.IsTrue(allFormats.Contains(newFormat));
-        }  
+        }
+        [TestMethod]
+        public void RemoveFormatTest()
+        {
+            FormatContext context = new FormatContext();
+            StyleClassContextHandler contextStyle = new StyleClassContextHandler();
+            Format newFormat = EntitiesExampleInstances.TestFormat();
+            StyleClass anotherStyle = EntitiesExampleInstances.TestStyleClass();
+            anotherStyle.Name = "anotherStyle";
+            newFormat.StyleClasses.Add(anotherStyle);
+            foreach (var item in newFormat.StyleClasses)
+            {
+                contextStyle.Add(item);
+            }
+            context.Add(newFormat);
+            context.Remove(newFormat);
+            List<Format> allFormats = context.GetLazy();
+            Assert.AreEqual(allFormats.Count, 0);
+        }
     }
 }
