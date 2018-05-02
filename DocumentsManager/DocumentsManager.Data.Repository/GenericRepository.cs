@@ -71,12 +71,19 @@ namespace DocumentsManager.Data.Repository
 
         public virtual void Delete(TEntity entityToDelete)
         {
-            if (context.Entry(entityToDelete).State == EntityState.Detached)
+            try
             {
-                dbSet.Attach(entityToDelete);
+                if (context.Entry(entityToDelete).State == EntityState.Detached)
+                {
+                    dbSet.Attach(entityToDelete);
+                }
+                dbSet.Remove(entityToDelete);
+                context.SaveChanges();
+            } catch (Exception e)
+            {
+                int a = 0;
             }
-            dbSet.Remove(entityToDelete);
-            context.SaveChanges();
+          
         }
 
         public virtual void Update(TEntity entityToUpdate)

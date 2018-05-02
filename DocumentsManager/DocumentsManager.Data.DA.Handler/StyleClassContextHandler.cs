@@ -3,6 +3,7 @@ using DocumentsManagerDataAccess;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,6 @@ namespace DocumentsManager.Data.DA.Handler
         public void Remove(StyleClass style)
         {
             RemoveAttributes(style);
-            ModifyBasedIn(style);
             style.Attributes = null;
             using (var db = new ContextDataAccess())
             {
@@ -53,19 +53,6 @@ namespace DocumentsManager.Data.DA.Handler
         {
             return child.IsBasedOnOtherStyle() && child.Based.Equals(father);
         }
-        private void ModifyBasedIn(StyleClass style)
-        {
-            foreach (var item in GetLazy())
-            {
-                if (IsStyleBasedInStyle(item, style))
-                {
-                    StyleClass childStyle = GetById(style.Id);
-                    childStyle.Based = null;
-                    Modify(childStyle);
-                }
-            }
-        }
-
         private void RemoveAttributes(StyleClass style)
         {
             StyleClass styleClass = GetById(style.Id);
@@ -134,8 +121,15 @@ namespace DocumentsManager.Data.DA.Handler
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                StyleClass styleClassEntity = unitOfWork.StyleClassRepository.GetByID(modifiedStyle.Id);
-                styleClassEntity.Based = modifiedStyle.Based;
+                StyleClass styleClassEntity = db.Styles.Find(modifiedStyle.Id);
+                db.Styles.Include("Attributes").ToList();
+                StyleClass basedOnStyle = null;
+                if (modifiedStyle.Based != null)
+                {
+                    basedOnStyle = db.Styles.Find(modifiedStyle.Based.Id);
+                    db.Styles.Include("Attributes").ToList();
+                }
+                styleClassEntity.Based = basedOnStyle;
                 styleClassEntity.Name = modifiedStyle.Name;
                 unitOfWork.StyleClassRepository.Update(styleClassEntity);
                 unitOfWork.Save();
