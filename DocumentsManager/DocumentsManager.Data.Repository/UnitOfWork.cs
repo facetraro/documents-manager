@@ -15,6 +15,7 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<EditorUser> editorUserRepository;
         private GenericRepository<StyleClass> styleClassRepository;
         private GenericRepository<StyleAttribute> styleAttributeRepository;
+        private GenericRepository<Text> textRepository;
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
         {
@@ -66,6 +67,17 @@ namespace DocumentsManager.Data.Repository
                     this.styleAttributeRepository = new GenericRepository<StyleAttribute>(context);
                 }
                 return styleAttributeRepository;
+            }
+        }
+        public IRepository<Text> TextRepository
+        {
+            get
+            {
+                if (this.textRepository == null)
+                {
+                    this.textRepository = new GenericRepository<Text>(context);
+                }
+                return textRepository;
             }
         }
         public void Save()
