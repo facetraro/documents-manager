@@ -34,5 +34,22 @@ namespace DocumentsManager.Data.DA.Handler
                 return unitOfWork.FormatRepository.Get().ToList();
             }
         }
+
+        public void Remove(Format formatToDelete)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                unitOfWork.FormatRepository.Delete(formatToDelete);
+            }
+        }
+
+        public void ClearAll()
+        {
+            foreach (var item in GetLazy())
+            {
+                Remove(item);
+            }
+        }
     }
 }

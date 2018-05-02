@@ -13,6 +13,24 @@ namespace DocumentsManagerDATesting
     [TestClass]
     public class FormatContextTest
     {
+        private void TearDown()
+        {
+            ClearFormatDataBase();
+            ClearStyleClassDataBase();
+        }
+
+        private void ClearStyleClassDataBase()
+        {
+            StyleClassContextHandler contextStyleClass = new StyleClassContextHandler();
+            contextStyleClass.ClearAll();
+        }
+
+        private void ClearFormatDataBase()
+        {
+            FormatContext context = new FormatContext();
+            context.ClearAll();
+        }
+
         [TestMethod]
         public void AddFormatTest()
         {
@@ -29,6 +47,7 @@ namespace DocumentsManagerDATesting
             context.Add(newFormat);
             List<Format> allFormats = context.GetLazy();
             Assert.IsTrue(allFormats.Contains(newFormat));
+            TearDown();
         }
         [TestMethod]
         public void RemoveFormatTest()
@@ -46,7 +65,8 @@ namespace DocumentsManagerDATesting
             context.Add(newFormat);
             context.Remove(newFormat);
             List<Format> allFormats = context.GetLazy();
-            Assert.AreEqual(allFormats.Count, 0);
+            Assert.AreEqual(0, allFormats.Count);
+            TearDown();
         }
     }
 }
