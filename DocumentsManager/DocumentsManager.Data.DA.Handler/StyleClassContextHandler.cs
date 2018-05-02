@@ -41,6 +41,7 @@ namespace DocumentsManager.Data.DA.Handler
         public void Remove(StyleClass style)
         {
             RemoveAttributes(style);
+            ModifyBasedIn(style);
             style.Attributes = null;
             using (var db = new ContextDataAccess())
             {
@@ -48,6 +49,20 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.StyleClassRepository.Delete(style);
             }
         }
+
+        private void ModifyBasedIn(StyleClass style)
+        {
+            foreach (var item in GetLazy())
+            {
+                if (item.Based != null && item.Based.Equals(style))
+                {
+                    StyleClass childStyle = GetById(style.Id);
+                    childStyle.Based = null;
+                    Modify(childStyle);
+                }
+            }
+        }
+
         private void RemoveAttributes(StyleClass style)
         {
             StyleClass styleClass = GetById(style.Id);
@@ -116,10 +131,13 @@ namespace DocumentsManager.Data.DA.Handler
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.StyleClassRepository.Update(modifiedStyle);
+                StyleClass styleClassEntity = unitOfWork.StyleClassRepository.GetByID(modifiedStyle.Id);
+                styleClassEntity.Based = modifiedStyle.Based;
+                styleClassEntity.Name = modifiedStyle.Name;
+                unitOfWork.StyleClassRepository.Update(styleClassEntity);
+                unitOfWork.Save();
             }
         }
-
         public void Modify(StyleClass modifiedStyle)
         {
             UpdateAttributes(modifiedStyle);

@@ -22,6 +22,7 @@ namespace DocumentsManagerDataAccess
             modelBuilder.Entity<EditorUser>().HasKey(E => E.Id);
             modelBuilder.Entity<StyleClass>().HasKey(S => S.Id);
             modelBuilder.Entity<StyleAttribute>().HasKey(S => S.Id);
+            modelBuilder.Entity<StyleClass>().HasOptional(c => c.Based).WithOptionalPrincipal();
         }
     }
 }
