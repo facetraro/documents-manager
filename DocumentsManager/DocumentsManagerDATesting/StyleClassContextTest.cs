@@ -110,5 +110,24 @@ namespace DocumentsManagerDATesting
             Assert.AreEqual(context.GetLazy().Count, 1);
             TearDown();
         }
+        [TestMethod]
+        public void ModifyStyleClassBased()
+        {
+            StyleClassContextHandler context = new StyleClassContextHandler();
+            StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
+            StyleAttribute toRemove = newStyle.Attributes[2];
+            newStyle.Attributes.Remove(toRemove);
+            StyleClass fatherStyle = EntitiesExampleInstances.TestStyleClass();
+            StyleClass newFather = EntitiesExampleInstances.TestStyleClass();
+            newStyle.Based = fatherStyle;
+            context.Add(fatherStyle);
+            context.Add(newFather);
+            context.Add(newStyle);
+            newStyle.Based = newFather;
+            context.Modify(newStyle);
+            StyleClass GetBasedStyleClass = context.GetById(newStyle.Id).Based;
+            Assert.AreEqual(GetBasedStyleClass, newFather);
+            TearDown();
+        }
     }
 }
