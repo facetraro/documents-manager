@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EditorUserContext.cs" />
+    <Compile Include="HeaderContext.cs" />
     <Compile Include="StyleClassContextHandler.cs" />
     <Compile Include="AdminUserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

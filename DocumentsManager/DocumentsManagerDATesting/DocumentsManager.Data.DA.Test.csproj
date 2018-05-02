@@ -59,6 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="HeaderContextTest.cs" />
     <Compile Include="StyleClassContextTest.cs" />
     <Compile Include="EditorUserContextTest.cs" />
     <Compile Include="AdminUserContextTest.cs" />
