@@ -49,12 +49,15 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.StyleClassRepository.Delete(style);
             }
         }
-
+        private bool IsStyleBasedInStyle(StyleClass child, StyleClass father)
+        {
+            return child.IsBasedOnOtherStyle() && child.Based.Equals(father);
+        }
         private void ModifyBasedIn(StyleClass style)
         {
             foreach (var item in GetLazy())
             {
-                if (item.Based != null && item.Based.Equals(style))
+                if (IsStyleBasedInStyle(item, style))
                 {
                     StyleClass childStyle = GetById(style.Id);
                     childStyle.Based = null;

@@ -26,6 +26,10 @@ namespace DocumentsMangerEntities
             }
             return validation;
         }
+        public bool IsBasedOnOtherStyle()
+        {
+            return Based != null;
+        }
         public StyleAttribute GetAttributeByName(string name)
         {
             StyleAttribute attribute = null;
