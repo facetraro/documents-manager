@@ -43,7 +43,15 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.FormatRepository.Delete(formatToDelete);
             }
         }
-
+        public Format GetById(Guid id)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                Format format = unitOfWork.FormatRepository.GetByID(id);
+                return format;
+            }
+        }
         public void ClearAll()
         {
             foreach (var item in GetLazy())
