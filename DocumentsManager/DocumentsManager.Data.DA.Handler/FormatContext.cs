@@ -69,8 +69,8 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 modifiedFormat = db.Set<Format>().Attach(modifiedFormat);
                 db.Entry(modifiedFormat).Collection(p => p.StyleClasses).Load();
-                db.Entry(modifiedFormat).State = EntityState.Modified;
-                db.SaveChanges();
+                var unitOfWork = new UnitOfWork(db);
+                unitOfWork.FormatRepository.Update(modifiedFormat);
             }
         }
     }
