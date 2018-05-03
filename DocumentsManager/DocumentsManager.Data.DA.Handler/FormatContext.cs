@@ -49,6 +49,7 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 Format format = unitOfWork.FormatRepository.GetByID(id);
+                db.Formats.Include("StyleClasses").ToList();
                 return format;
             }
         }
