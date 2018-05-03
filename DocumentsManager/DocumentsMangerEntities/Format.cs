@@ -10,7 +10,7 @@ namespace DocumentsMangerEntities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<StyleClass> StyleClasses { get; set; }
+        public virtual List<StyleClass> StyleClasses { get; set; }
         public override bool Equals(object obj)
         {
             Format anotherFormat = obj as Format;

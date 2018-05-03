@@ -106,7 +106,7 @@ namespace DocumentsManagerDATesting
         }
         [TestMethod]
         public void ModifyFormatTest()
-        {
+          {
             FormatContext context = new FormatContext();
             StyleClassContextHandler contextStyle = new StyleClassContextHandler();
             Format newFormat = EntitiesExampleInstances.TestFormat();

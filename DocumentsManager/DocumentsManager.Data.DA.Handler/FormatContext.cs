@@ -3,6 +3,7 @@ using DocumentsManagerDataAccess;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,18 @@ namespace DocumentsManager.Data.DA.Handler
             foreach (var item in GetLazy())
             {
                 Remove(item);
+            }
+        }
+
+        public void Modify(Format modifiedFormat)
+        {
+            Format oldFormat = GetById(modifiedFormat.Id);
+            using (var db = new ContextDataAccess())
+            {
+                modifiedFormat = db.Set<Format>().Attach(modifiedFormat);
+                db.Entry(modifiedFormat).Collection(p => p.StyleClasses).Load();
+                db.Entry(modifiedFormat).State = EntityState.Modified;
+                db.SaveChanges();
             }
         }
     }
