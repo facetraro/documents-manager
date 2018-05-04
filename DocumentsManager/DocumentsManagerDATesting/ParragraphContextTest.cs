@@ -13,7 +13,20 @@ namespace DocumentsManagerDATesting
     [TestClass]
     public class ParragraphContextTest
     {
-        
+        public void TearDown()
+        {
+            ClearParragraphDataBase();
+        }
+        private void ClearParragraphDataBase()
+        {
+            ParragraphContext context = new ParragraphContext();
+            StyleClassContextHandler contextSC = new StyleClassContextHandler();
+            TextContext contextT = new TextContext();
+            context.ClearAll();
+            contextT.ClearAll();
+            contextSC.ClearAll();
+        }
+
         [TestMethod]
         public void AddParragraphTest()
         {
@@ -22,16 +35,14 @@ namespace DocumentsManagerDATesting
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
-            TextContext contextT = new TextContext();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newParragraph.StyleClass = style;
             newParragraph.AddText(newText);
             context.Add(newParragraph);
             List<Parragraph> allnewParragraphs = context.GetLazy();
             Assert.IsTrue(allnewParragraphs.Contains(newParragraph));
-           
+            TearDown();
         }
         [TestMethod]
         public void AddTwoParragraphsTest()
@@ -41,21 +52,40 @@ namespace DocumentsManagerDATesting
             Parragraph sndParragraph = EntitiesExampleInstances.TestParragraph();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             Text newText = EntitiesExampleInstances.TestText();
+            Text newSndText = EntitiesExampleInstances.TestText();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
-            TextContext contextT = new TextContext();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newParragraph.StyleClass = style;
             newParragraph.AddText(newText);
-            sndParragraph.StyleClass = style;
-            sndParragraph.AddText(newText);
+            sndParragraph.StyleClass = style; 
+            sndParragraph.AddText(newSndText);
             context.Add(newParragraph);
             context.Add(sndParragraph);
             List<Parragraph> allParragraphs = context.GetLazy();
             Assert.IsTrue(allParragraphs.Contains(sndParragraph) && allParragraphs.Contains(newParragraph));
-           
+            TearDown();
+        }
+        [TestMethod]
+        public void RemoveParragraphTest()
+        {
+            ParragraphContext context = new ParragraphContext();
+            Parragraph newParragraph = EntitiesExampleInstances.TestParragraph();
+            Text newText = EntitiesExampleInstances.TestText();
+            StyleClass style = EntitiesExampleInstances.TestStyleClass();
+            StyleClassContextHandler contextsc = new StyleClassContextHandler();
+            contextsc.Add(style);
+            newText.StyleClass = style;
+            newParragraph.StyleClass = style;
+            newParragraph.AddText(newText);
+            context.Add(newParragraph);
+            context.Remove(newParragraph);
+            List<Parragraph> allParragraphs = context.GetLazy();
+            Assert.IsFalse(allParragraphs.Contains(newParragraph));
+            TearDown();
         }
        
+       
+
     }
 }

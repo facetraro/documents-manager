@@ -18,6 +18,7 @@ namespace DocumentsManagerDataAccess
         public DbSet<Text> Texts { get; set; }
         public DbSet<Header> Headers { get; set; }
         public DbSet<Footer> Footers { get; set; }
+        public DbSet<Parragraph> Parragraphs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
