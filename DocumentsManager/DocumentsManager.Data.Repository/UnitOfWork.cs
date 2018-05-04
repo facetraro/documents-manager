@@ -18,6 +18,7 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<Text> textRepository;
         private GenericRepository<Header> headerRepository;
         private GenericRepository<Footer> footerRepository;
+        private GenericRepository<Parragraph> parragraphRepository;
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
         {
@@ -102,6 +103,17 @@ namespace DocumentsManager.Data.Repository
                     this.footerRepository = new GenericRepository<Footer>(context);
                 }
                 return footerRepository;
+            }
+        }
+        public IRepository<Parragraph> ParragraphRepository
+        {
+            get
+            {
+                if (this.parragraphRepository == null)
+                {
+                    this.parragraphRepository = new GenericRepository<Parragraph>(context);
+                }
+                return parragraphRepository;
             }
         }
         public void Save()

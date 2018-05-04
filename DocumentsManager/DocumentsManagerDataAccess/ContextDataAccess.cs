@@ -29,6 +29,9 @@ namespace DocumentsManagerDataAccess
             modelBuilder.Entity<StyleClass>().HasOptional(c => c.Based).WithOptionalPrincipal();
             modelBuilder.Entity<Header>().HasKey(H => H.Id);
             modelBuilder.Entity<Footer>().HasKey(F => F.Id);
+            modelBuilder.Entity<Parragraph>().HasKey(P => P.Id);
         }
     }
 }
+
+

@@ -16,6 +16,7 @@ namespace DocumentsManager.Data.Repository
         IRepository<Text> TextRepository { get; }
         IRepository<Header> HeaderRepository { get; }
         IRepository<Footer> FooterRepository { get; }
+        IRepository<Parragraph> ParragraphRepository { get; }
         void Save();
     }
 }
