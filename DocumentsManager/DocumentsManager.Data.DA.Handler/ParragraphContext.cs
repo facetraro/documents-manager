@@ -19,25 +19,50 @@ namespace DocumentsManager.Data.DA.Handler
                 return unitOfWork.ParragraphRepository.Get().ToList();
             }
         }
-       
+        public void ClearAll()
+        {
+            foreach (var item in GetLazy())
+            {
+                Remove(item);
+            }
+        }
         public void Add(Parragraph aParragraph)
         {
-            List<Text> texts = aParragraph.Texts;
-            Parragraph newParragraph = new Parragraph();
-            newParragraph.StyleClass = aParragraph.StyleClass;
-            newParragraph.Id = aParragraph.Id;
-            newParragraph.Texts = new List<Text>();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                db.Styles.Attach(newParragraph.StyleClass);
-                foreach (Text texti in texts)
-                {
-                    newParragraph.AddText(db.Texts.Find(texti.Id));
-                }
-                unitOfWork.ParragraphRepository.Insert(newParragraph);
+                db.Styles.Attach(aParragraph.StyleClass);
+                unitOfWork.ParragraphRepository.Insert(aParragraph);
             }
         }
-       
+        public void Remove(Parragraph parragraphToDelete)
+        {
+           
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                Parragraph parragraph = GetById(parragraphToDelete.Id);
+                int lenghtText = parragraph.Texts.Count;
+                for (int i = 0; i < lenghtText; i++)
+                {
+                    unitOfWork.TextRepository.Delete(parragraph.Texts[i]);
+                }
+                parragraph = GetById(parragraphToDelete.Id);
+                parragraph.StyleClass = null;
+                unitOfWork.ParragraphRepository.Delete(parragraph);
+            }
+        }
+        public Parragraph GetById(Guid id)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+
+                Parragraph theParragraph = unitOfWork.ParragraphRepository.GetByID(id);
+                db.Parragraphs.Include("StyleClass").ToList().FirstOrDefault();
+                db.Parragraphs.Include("Texts").ToList();
+                return theParragraph;
+            }
+        }
     }
 }
