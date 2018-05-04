@@ -13,12 +13,7 @@ namespace DocumentsManagerDATesting
     {
         public void TearDown()
         {
-            ClearAdminDataBase();
-        }
-        private void ClearAdminDataBase()
-        {
-            AdminUserContext context = new AdminUserContext();
-            context.ClearAll();
+            ClearDataBase.ClearAll();
         }
         [TestMethod]
         public void AddAdminTest()

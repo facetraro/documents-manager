@@ -14,8 +14,7 @@ namespace DocumentsManagerDATesting
     {
         public void TearDown()
         {
-            StyleClassContextHandler context = new StyleClassContextHandler();
-            context.ClearAll();
+            ClearDataBase.ClearAll();
         }
         [TestMethod]
         public void AddStyleClassTest()

@@ -15,12 +15,7 @@ namespace DocumentsManagerDATesting
     {
         public void TearDown()
         {
-            ClearTextDataBase();
-        }
-        private void ClearTextDataBase()
-        {
-            TextContext context = new TextContext();
-            context.ClearAll();
+            ClearDataBase.ClearAll();
         }
         [TestMethod]
         public void AddTextTest()

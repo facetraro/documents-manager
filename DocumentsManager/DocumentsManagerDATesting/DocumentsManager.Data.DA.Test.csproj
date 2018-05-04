@@ -61,10 +61,12 @@
   <ItemGroup>
     <Compile Include="FooterContextTest.cs" />
     <Compile Include="HeaderContextTest.cs" />
+    <Compile Include="ClearDataBase.cs" />
     <Compile Include="StyleClassContextTest.cs" />
     <Compile Include="EditorUserContextTest.cs" />
     <Compile Include="AdminUserContextTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FormatContextTest.cs" />
     <Compile Include="TextContextTest.cs" />
   </ItemGroup>
   <ItemGroup>

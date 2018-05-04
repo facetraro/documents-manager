@@ -66,24 +66,17 @@ namespace DocumentsManager.Data.Repository
                 TEntity entityToDelete = dbSet.Find(id);
                 Delete(entityToDelete);
             }
-            
+
         }
 
         public virtual void Delete(TEntity entityToDelete)
         {
-            try
+            if (context.Entry(entityToDelete).State == EntityState.Detached)
             {
-                if (context.Entry(entityToDelete).State == EntityState.Detached)
-                {
-                    dbSet.Attach(entityToDelete);
-                }
-                dbSet.Remove(entityToDelete);
-                context.SaveChanges();
-            } catch (Exception e)
-            {
-                int a = 0;
+                dbSet.Attach(entityToDelete);
             }
-          
+            dbSet.Remove(entityToDelete);
+            context.SaveChanges();
         }
 
         public virtual void Update(TEntity entityToUpdate)
@@ -92,7 +85,8 @@ namespace DocumentsManager.Data.Repository
             context.Entry(entityToUpdate).State = EntityState.Modified;
             context.SaveChanges();
         }
-        public virtual bool Exists(object id) {
+        public virtual bool Exists(object id)
+        {
             return dbSet.Find(id) != null;
         }
     }

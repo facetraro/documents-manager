@@ -18,6 +18,7 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<Text> textRepository;
         private GenericRepository<Header> headerRepository;
         private GenericRepository<Footer> footerRepository;
+        private GenericRepository<Format> formatRepository;
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
         {
@@ -102,6 +103,17 @@ namespace DocumentsManager.Data.Repository
                     this.footerRepository = new GenericRepository<Footer>(context);
                 }
                 return footerRepository;
+            }
+        }
+        public IRepository<Format> FormatRepository
+        {
+            get
+            {
+                if (this.formatRepository == null)
+                {
+                    this.formatRepository = new GenericRepository<Format>(context);
+                }
+                return formatRepository;
             }
         }
         public void Save()

@@ -12,6 +12,7 @@ namespace DocumentsMangerEntities
         public string Name { get; set; }
         public virtual List<StyleAttribute> Attributes { get; set; }
         public StyleClass Based { get; set; }
+        public virtual List<Format> Formats { get; set; }
         public StyleClass()
         {
             Attributes = new List<StyleAttribute>();
