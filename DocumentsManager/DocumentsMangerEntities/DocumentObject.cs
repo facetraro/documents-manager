@@ -8,7 +8,7 @@ namespace DocumentsMangerEntities
 {
     public abstract class DocumentObject
     {
-        public StyleClass StyleClass { get; set; }
+        public virtual StyleClass StyleClass { get; set; }
         public Guid Id { get; set; }
 
     }

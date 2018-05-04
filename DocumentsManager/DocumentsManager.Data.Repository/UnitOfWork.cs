@@ -17,6 +17,7 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<StyleAttribute> styleAttributeRepository;
         private GenericRepository<Text> textRepository;
         private GenericRepository<Header> headerRepository;
+        private GenericRepository<Footer> footerRepository;
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
         {
@@ -90,6 +91,17 @@ namespace DocumentsManager.Data.Repository
                     this.headerRepository = new GenericRepository<Header>(context);
                 }
                 return headerRepository;
+            }
+        }
+        public IRepository<Footer> FooterRepository
+        {
+            get
+            {
+                if (this.footerRepository == null)
+                {
+                    this.footerRepository = new GenericRepository<Footer>(context);
+                }
+                return footerRepository;
             }
         }
         public void Save()

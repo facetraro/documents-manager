@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 namespace DocumentsManagerDATesting
 {
     [TestClass]
-    public class HeaderContextTest
+    public class FooterContextTest
     {
         public void TearDown()
         {
-            ClearHeaderDataBase();
+            ClearFooterDataBase();
         }
-        private void ClearHeaderDataBase()
+        private void ClearFooterDataBase()
         {
-            HeaderContext context = new HeaderContext();
+            FooterContext context = new FooterContext();
             StyleClassContextHandler contextSC = new StyleClassContextHandler();
             TextContext contextT = new TextContext();
             context.ClearAll();
@@ -27,10 +27,10 @@ namespace DocumentsManagerDATesting
             contextSC.ClearAll();
         }
         [TestMethod]
-        public void AddHeaderTest()
+        public void AddFooterTest()
         {
-            HeaderContext context = new HeaderContext();
-            Header newHeader = EntitiesExampleInstances.TestHeader();
+            FooterContext context = new FooterContext();
+            Footer newFooter = EntitiesExampleInstances.TestFooter();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
@@ -38,19 +38,19 @@ namespace DocumentsManagerDATesting
             contextsc.Add(style);
             newText.StyleClass = style;
             contextT.Add(newText);
-            newHeader.StyleClass = style;
-            newHeader.Text = newText;
-            context.Add(newHeader);
-            List<Header> allHeaderss = context.GetLazy();
-            Assert.IsTrue(allHeaderss.Contains(newHeader));
+            newFooter.StyleClass = style;
+            newFooter.Text = newText;
+            context.Add(newFooter);
+            List<Footer> allFooters = context.GetLazy();
+            Assert.IsTrue(allFooters.Contains(newFooter));
             TearDown();
         }
         [TestMethod]
-        public void AddTwoHeaderTest()
+        public void AddTwoFootersTest()
         {
-            HeaderContext context = new HeaderContext();
-            Header newHeader = EntitiesExampleInstances.TestHeader();
-            Header sndHeader = EntitiesExampleInstances.TestHeader();
+            FooterContext context = new FooterContext();
+            Footer newFooter = EntitiesExampleInstances.TestFooter();
+            Footer sndFooter = EntitiesExampleInstances.TestFooter();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
@@ -58,74 +58,74 @@ namespace DocumentsManagerDATesting
             contextsc.Add(style);
             newText.StyleClass = style;
             contextT.Add(newText);
-            newHeader.StyleClass = style;
-            newHeader.Text = newText;
-            sndHeader.StyleClass = style;
-            sndHeader.Text = newText;
-            context.Add(newHeader);
-            context.Add(sndHeader);
-            List<Header> allHeaderss = context.GetLazy();
-            Assert.IsTrue(allHeaderss.Count == 2);
+            newFooter.StyleClass = style;
+            newFooter.Text = newText;
+            sndFooter.StyleClass = style;
+            sndFooter.Text = newText;
+            context.Add(newFooter);
+            context.Add(sndFooter);
+            List<Footer> allFooters = context.GetLazy();
+            Assert.IsTrue(allFooters.Count == 2);
             TearDown();
         }
         [TestMethod]
-        public void RemoveHeaderTest()
+        public void RemoveFooterTest()
         {
-            HeaderContext context = new HeaderContext();
+            FooterContext context = new FooterContext();
             TextContext contextT = new TextContext();
-            Header newHeader = EntitiesExampleInstances.TestHeader();
+            Footer newFooter = EntitiesExampleInstances.TestFooter();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
             contextsc.Add(style);
             newText.StyleClass = style;
             contextT.Add(newText);
-            newHeader.StyleClass = style;
-            newHeader.Text = newText;
-            context.Add(newHeader);
-            context.Remove(newHeader);
-            List<Header> allHeaders = context.GetLazy();
-            Assert.IsFalse(allHeaders.Contains(newHeader));
+            newFooter.StyleClass = style;
+            newFooter.Text = newText;
+            context.Add(newFooter);
+            context.Remove(newFooter);
+            List<Footer> allFooters = context.GetLazy();
+            Assert.IsFalse(allFooters.Contains(newFooter));
             TearDown();
         }
         [TestMethod]
-        public void RemoveHeaderIdTest()
+        public void RemoveFooterIdTest()
         {
-            HeaderContext context = new HeaderContext();
+            FooterContext context = new FooterContext();
             TextContext contextT = new TextContext();
-            Header newHeader = EntitiesExampleInstances.TestHeader();
+            Footer newFooter = EntitiesExampleInstances.TestFooter();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
             contextsc.Add(style);
             newText.StyleClass = style;
             contextT.Add(newText);
-            newHeader.StyleClass = style;
-            newHeader.Text = newText;
-            context.Add(newHeader);
-            context.Remove(newHeader.Id);
-            List<Header> allHeaders = context.GetLazy();
-            Assert.IsFalse(allHeaders.Contains(newHeader));
+            newFooter.StyleClass = style;
+            newFooter.Text = newText;
+            context.Add(newFooter);
+            context.Remove(newFooter.Id);
+            List<Footer> allFooter = context.GetLazy();
+            Assert.IsFalse(allFooter.Contains(newFooter));
             TearDown();
         }
         [TestMethod]
-        public void NotRemoveHeaderIdTest()
+        public void NotRemoveFooterIdTest()
         {
-            HeaderContext context = new HeaderContext();
+            FooterContext context = new FooterContext();
             TextContext contextT = new TextContext();
-            Header newHeader = EntitiesExampleInstances.TestHeader();
+            Footer newFooter = EntitiesExampleInstances.TestFooter();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
             contextsc.Add(style);
             newText.StyleClass = style;
             contextT.Add(newText);
-            newHeader.StyleClass = style;
-            newHeader.Text = newText;
-            context.Add(newHeader);
+            newFooter.StyleClass = style;
+            newFooter.Text = newText;
+            context.Add(newFooter);
             context.Remove(Guid.NewGuid());
-            List<Header> allHeaders = context.GetLazy();
-            Assert.IsTrue(allHeaders.Contains(newHeader));
+            List<Footer> allFooter = context.GetLazy();
+            Assert.IsTrue(allFooter.Contains(newFooter));
             TearDown();
         }
     }
