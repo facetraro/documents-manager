@@ -15,9 +15,9 @@ namespace DocumentsManagerDATesting
     {
         public void TearDown()
         {
-            ClearTextDataBase();
+            ClearHeaderDataBase();
         }
-        private void ClearTextDataBase()
+        private void ClearHeaderDataBase()
         {
             HeaderContext context = new HeaderContext();
             StyleClassContextHandler contextSC = new StyleClassContextHandler();
