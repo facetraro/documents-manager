@@ -13,18 +13,10 @@ namespace DocumentsManagerDATesting
     [TestClass]
     public class FormatContextTest
     {
-        private void TearDown()
+        public void TearDown()
         {
-            ClearFormatDataBase();
-            ClearStyleClassDataBase();
+            ClearDataBase.ClearAll();
         }
-
-        private void ClearStyleClassDataBase()
-        {
-            StyleClassContextHandler contextStyleClass = new StyleClassContextHandler();
-            contextStyleClass.ClearAll();
-        }
-
         private void ClearFormatDataBase()
         {
             FormatContext context = new FormatContext();

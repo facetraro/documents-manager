@@ -34,10 +34,27 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void ClearAll()
         {
+            int totalStyles = GetLazy().Count;
+            while (totalStyles != 0)
+            {
+                foreach (var item in GetLazy())
+                {
+                    if (!AreStyleBasedOnHim(item))
+                        Remove(item);
+                }
+                totalStyles = GetLazy().Count;
+            }
+        }
+        private bool AreStyleBasedOnHim(StyleClass style)
+        {
             foreach (var item in GetLazy())
             {
-                Remove(item);
+                if (IsStyleBasedInStyle(item, style))
+                {
+                    return true;
+                }
             }
+            return false;
         }
         public void Remove(StyleClass style)
         {

@@ -12,12 +12,7 @@ namespace DocumentsManagerDATesting
     {
         public void TearDown()
         {
-            ClearEditorDataBase();
-        }
-        private void ClearEditorDataBase()
-        {
-            EditorUserContext context = new EditorUserContext();
-            context.ClearAll();
+            ClearDataBase.ClearAll();
         }
         [TestMethod]
         public void AddEditorTest()
