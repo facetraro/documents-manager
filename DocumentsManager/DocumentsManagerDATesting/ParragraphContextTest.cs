@@ -84,8 +84,42 @@ namespace DocumentsManagerDATesting
             Assert.IsFalse(allParragraphs.Contains(newParragraph));
             TearDown();
         }
-       
-       
+        [TestMethod]
+        public void RemoveParragraphIdTest()
+        {
+            ParragraphContext context = new ParragraphContext();
+            Parragraph newParragraph = EntitiesExampleInstances.TestParragraph();
+            Text newText = EntitiesExampleInstances.TestText();
+            StyleClass style = EntitiesExampleInstances.TestStyleClass();
+            StyleClassContextHandler contextsc = new StyleClassContextHandler();
+            contextsc.Add(style);
+            newText.StyleClass = style;
+            newParragraph.StyleClass = style;
+            newParragraph.AddText(newText);
+            context.Add(newParragraph);
+            context.Remove(newParragraph.Id);
+            List<Parragraph> allParragraphs = context.GetLazy();
+            Assert.IsFalse(allParragraphs.Contains(newParragraph));
+            TearDown();
+        }
+        [TestMethod]
+        public void NotRemoveHeaderIdTest()
+        {
+            ParragraphContext context = new ParragraphContext();
+            Parragraph newParragraph = EntitiesExampleInstances.TestParragraph();
+            Text newText = EntitiesExampleInstances.TestText();
+            StyleClass style = EntitiesExampleInstances.TestStyleClass();
+            StyleClassContextHandler contextsc = new StyleClassContextHandler();
+            contextsc.Add(style);
+            newText.StyleClass = style;
+            newParragraph.StyleClass = style;
+            newParragraph.AddText(newText);
+            context.Add(newParragraph);
+            context.Remove(Guid.NewGuid());
+            List<Parragraph> allParragraphs = context.GetLazy();
+            Assert.IsTrue(allParragraphs.Contains(newParragraph));
+            TearDown();
+        }
 
     }
 }
