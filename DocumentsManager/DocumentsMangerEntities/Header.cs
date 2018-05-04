@@ -8,7 +8,7 @@ namespace DocumentsMangerEntities
 {
     public class Header: DocumentObject
     {
-        public Text Text { get; set; }
+        public virtual Text Text { get; set; }
 
    
         public override bool Equals(object obj)
