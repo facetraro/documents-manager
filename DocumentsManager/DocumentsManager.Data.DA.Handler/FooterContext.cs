@@ -64,7 +64,7 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
 
                 Footer theFooter = unitOfWork.FooterRepository.GetByID(id);
-                db.Headers.Include("StyleClass").ToList().FirstOrDefault();// tiene que ser con style y text
+                db.Headers.Include("StyleClass").ToList().FirstOrDefault();
                 db.Headers.Include("Text").ToList().FirstOrDefault();
                 return theFooter;
             }

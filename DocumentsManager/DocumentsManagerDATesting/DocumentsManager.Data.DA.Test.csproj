@@ -62,6 +62,7 @@
     <Compile Include="FooterContextTest.cs" />
     <Compile Include="HeaderContextTest.cs" />
     <Compile Include="ClearDataBase.cs" />
+    <Compile Include="ParragraphContextTest.cs" />
     <Compile Include="StyleClassContextTest.cs" />
     <Compile Include="EditorUserContextTest.cs" />
     <Compile Include="AdminUserContextTest.cs" />

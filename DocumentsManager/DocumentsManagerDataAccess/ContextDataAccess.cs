@@ -19,6 +19,7 @@ namespace DocumentsManagerDataAccess
         public DbSet<Text> Texts { get; set; }
         public DbSet<Header> Headers { get; set; }
         public DbSet<Footer> Footers { get; set; }
+        public DbSet<Parragraph> Parragraphs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -31,6 +32,9 @@ namespace DocumentsManagerDataAccess
             modelBuilder.Entity<StyleClass>().HasOptional(c => c.Based).WithOptionalPrincipal();
             modelBuilder.Entity<Header>().HasKey(H => H.Id);
             modelBuilder.Entity<Footer>().HasKey(F => F.Id);
+            modelBuilder.Entity<Parragraph>().HasKey(P => P.Id);
         }
     }
 }
+
+

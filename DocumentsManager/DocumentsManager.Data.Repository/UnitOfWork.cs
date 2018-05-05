@@ -19,6 +19,8 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<Header> headerRepository;
         private GenericRepository<Footer> footerRepository;
         private GenericRepository<Format> formatRepository;
+        private GenericRepository<Parragraph> parragraphRepository;
+
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
         {
@@ -105,6 +107,7 @@ namespace DocumentsManager.Data.Repository
                 return footerRepository;
             }
         }
+
         public IRepository<Format> FormatRepository
         {
             get
@@ -114,6 +117,17 @@ namespace DocumentsManager.Data.Repository
                     this.formatRepository = new GenericRepository<Format>(context);
                 }
                 return formatRepository;
+            }
+        }
+        public IRepository<Parragraph> ParragraphRepository
+        {
+            get
+            {
+                if (this.parragraphRepository == null)
+                {
+                    this.parragraphRepository = new GenericRepository<Parragraph>(context);
+                }
+                return parragraphRepository;
             }
         }
         public void Save()
