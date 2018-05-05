@@ -103,7 +103,7 @@ namespace DocumentsManagerDATesting
             TearDown();
         }
         [TestMethod]
-        public void NotRemoveHeaderIdTest()
+        public void NotRemovParragraphIdTest()
         {
             ParragraphContext context = new ParragraphContext();
             Parragraph newParragraph = EntitiesExampleInstances.TestParragraph();

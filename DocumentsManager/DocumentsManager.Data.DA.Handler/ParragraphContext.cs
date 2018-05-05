@@ -52,6 +52,25 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.ParragraphRepository.Delete(parragraph);
             }
         }
+        public void Remove(Guid id)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                Parragraph parragraph = GetById(id);
+                if (parragraph!=null)
+                {
+                  int lenghtText = parragraph.Texts.Count;
+                  for (int i = 0; i < lenghtText; i++)
+                  {
+                      unitOfWork.TextRepository.Delete(parragraph.Texts[i]);
+                  }
+                  db.Styles.Attach(parragraph.StyleClass);
+                  unitOfWork.ParragraphRepository.Delete(id);
+                }
+                
+            }
+        }
         public Parragraph GetById(Guid id)
         {
             using (var db = new ContextDataAccess())
@@ -64,5 +83,7 @@ namespace DocumentsManager.Data.DA.Handler
                 return theParragraph;
             }
         }
+      
+        
     }
 }
