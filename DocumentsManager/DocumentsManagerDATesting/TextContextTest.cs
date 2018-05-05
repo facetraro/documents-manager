@@ -93,26 +93,26 @@ namespace DocumentsManagerDATesting
             Assert.IsTrue(allTexts.Contains(newText));
             TearDown();
         }
-        //[TestMethod]
-        //public void ModifyTextTest()
-        //{
-        //    TextContext context = new TextContext();
-        //    Text newText = EntitiesExampleInstances.TestText();
-        //    StyleClass style = EntitiesExampleInstances.TestStyleClass();
-        //    StyleClass style2 = EntitiesExampleInstances.TestStyleClass();
-        //    newText.StyleClass = style;
-        //    StyleClassContextHandler contextsc = new StyleClassContextHandler();
-        //    contextsc.Add(style);
-        //    contextsc.Add(style2);
-        //    context.Add(newText);
-        //    newText.WrittenText = "newText";
-        //    newText.StyleClass = contextsc.GetById(style2.Id);
-        //    context.Modify(newText);
-        //    Text dbText = context.GetById(newText.Id);
-        //    StyleClass dbStyle = contextsc.GetById(style2.Id);
-        //    Assert.IsTrue(dbText.WrittenText.Equals(newText.WrittenText));
-        //    Assert.IsTrue(dbText.StyleClass.Equals(dbStyle));
-        //    TearDown();
-        //}
+        [TestMethod]
+        public void ModifyTextTest()
+        {
+            TextContext context = new TextContext();
+            Text newText = EntitiesExampleInstances.TestText();
+            StyleClass style = EntitiesExampleInstances.TestStyleClass();
+            StyleClass style2 = EntitiesExampleInstances.TestStyleClass();
+            newText.StyleClass = style;
+            StyleClassContextHandler contextsc = new StyleClassContextHandler();
+            contextsc.Add(style);
+            contextsc.Add(style2);
+            context.Add(newText);
+            newText.WrittenText = "newText";
+            newText.StyleClass = contextsc.GetById(style2.Id);
+            context.Modify(newText);
+            Text dbText = context.GetById(newText.Id);
+            StyleClass dbStyle = contextsc.GetById(style2.Id);
+            Assert.IsTrue(dbText.WrittenText.Equals(newText.WrittenText));
+            Assert.IsTrue(dbText.StyleClass.Equals(dbStyle));
+            TearDown();
+        }
     }
 }

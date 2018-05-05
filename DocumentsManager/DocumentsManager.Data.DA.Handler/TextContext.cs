@@ -63,24 +63,20 @@ namespace DocumentsManager.Data.DA.Handler
                 return theText;
             }
         }
-        private void UpdateStyle(Text modifiedText)
-        {
-            using (var db = new ContextDataAccess())
-            {
-                db.Texts.Attach(modifiedText);
-                db.Entry(modifiedText).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-        }
+       
         public void Modify(Text modifiedText)
         {
-            
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.TextRepository.Update(modifiedText);
+                Text textEntity = db.Texts.Find(modifiedText.Id);
+                textEntity.WrittenText = modifiedText.WrittenText;
+                db.Styles.Attach(modifiedText.StyleClass);
+                textEntity.StyleClass = modifiedText.StyleClass;
+                unitOfWork.TextRepository.Update(textEntity);
+               
+                unitOfWork.Save();
             }
-            UpdateStyle(modifiedText);
         }
     }
 }
