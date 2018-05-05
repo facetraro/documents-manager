@@ -83,8 +83,26 @@ namespace DocumentsManager.Data.DA.Handler
                 return theParragraph;
             }
         }
+        public void Modify(Parragraph modifiedParragraph,Parragraph oldParragraph)
+        {
+            modifiedParragraph.StyleClass.Attributes = new List<StyleAttribute>();
+            TextContext contextT = new TextContext();
+            for (int i = 0; i < oldParragraph.Texts.Count; i++)
+            {
+                contextT.Remove(oldParragraph.Texts.ElementAt(i));
+            }
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                Parragraph parragraphEntity = db.Parragraphs.Find(modifiedParragraph.Id);
+                parragraphEntity.Texts = modifiedParragraph.Texts;
+                parragraphEntity.StyleClass = modifiedParragraph.StyleClass;
+                db.Styles.Attach(parragraphEntity.StyleClass);
+                unitOfWork.ParragraphRepository.Update(parragraphEntity);
+                unitOfWork.Save();
+            }
+        }
 
-      
-        
+
     }
 }

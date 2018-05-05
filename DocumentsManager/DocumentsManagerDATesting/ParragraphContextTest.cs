@@ -125,20 +125,30 @@ namespace DocumentsManagerDATesting
         {
             ParragraphContext context = new ParragraphContext();
             Parragraph aParragraph = EntitiesExampleInstances.TestParragraph();
-            Text newText = EntitiesExampleInstances.TestText();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
-            newText.StyleClass = style;
+            Text newText = EntitiesExampleInstances.TestText();
             StyleClassContextHandler contextSC = new StyleClassContextHandler();
             contextSC.Add(style);
+            newText.StyleClass = style;
+            aParragraph.StyleClass = style;
             aParragraph.AddText(newText);
             context.Add(aParragraph);
+
+           
+            Parragraph oldParragraph = new Parragraph
+            {
+                Id = aParragraph.Id,
+                StyleClass = aParragraph.StyleClass,
+                Texts = aParragraph.Texts
+            };
             aParragraph.Texts = new List<Text>();
             Text modText = EntitiesExampleInstances.TestText();
             modText.WrittenText = "Modified Text";
             StyleClass style2 = EntitiesExampleInstances.TestStyleClass();
+            contextSC.Add(style2);
             aParragraph.AddText(modText);
             aParragraph.StyleClass = style2;
-            context.Modify(aParragraph);
+            context.Modify(aParragraph,oldParragraph);
             Parragraph dbParragraph = context.GetById(aParragraph.Id);
             Assert.AreEqual(dbParragraph.StyleClass,style2);
             Assert.AreEqual(dbParragraph.Texts.ElementAt(0), modText);
