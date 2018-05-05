@@ -120,6 +120,32 @@ namespace DocumentsManagerDATesting
             Assert.IsTrue(allParragraphs.Contains(newParragraph));
             TearDown();
         }
+        [TestMethod]
+        public void ModifyParragraphTest()
+        {
+            ParragraphContext context = new ParragraphContext();
+            Parragraph aParragraph = EntitiesExampleInstances.TestParragraph();
+            Text newText = EntitiesExampleInstances.TestText();
+            StyleClass style = EntitiesExampleInstances.TestStyleClass();
+            newText.StyleClass = style;
+            StyleClassContextHandler contextSC = new StyleClassContextHandler();
+            contextSC.Add(style);
+            aParragraph.AddText(newText);
+            context.Add(aParragraph);
+            aParragraph.Texts = new List<Text>();
+            Text modText = EntitiesExampleInstances.TestText();
+            modText.WrittenText = "Modified Text";
+            StyleClass style2 = EntitiesExampleInstances.TestStyleClass();
+            aParragraph.AddText(modText);
+            aParragraph.StyleClass = style2;
+            context.Modify(aParragraph);
+            Parragraph dbParragraph = context.GetById(aParragraph.Id);
+            Assert.AreEqual(dbParragraph.StyleClass,style2);
+            Assert.AreEqual(dbParragraph.Texts.ElementAt(0), modText);
+            Assert.AreEqual(dbParragraph.Texts.Count, 1);
+
+            TearDown();
+        }
 
     }
 }
