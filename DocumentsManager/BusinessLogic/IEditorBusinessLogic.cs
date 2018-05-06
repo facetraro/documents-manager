@@ -13,6 +13,6 @@ namespace DocumentsManager.BusinessLogic
         EditorUser GetByID(Guid id);
         Guid Add(EditorUser editor);
         bool Delete(Guid id);
-        bool Update(EditorUser newEditor);
+        bool Update(Guid id, EditorUser newEditor);
     }
 }

@@ -61,8 +61,17 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/Editor/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(Guid id, [FromBody]EditorUser editor)
         {
+            try
+            {
+                bool updateResult = editorsBuisnessLogic.Update(id, editor);
+                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, editor);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/Editor/5

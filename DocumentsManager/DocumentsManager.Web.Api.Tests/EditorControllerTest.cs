@@ -158,13 +158,13 @@ namespace DocumentsManager.Web.Api.Tests
 
             var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
             mockEditorBusinessLogic
-                .Setup(bl => bl.Update(It.IsAny<EditorUser>()))
+                .Setup(bl => bl.Update(It.IsAny<Guid>(), It.IsAny<EditorUser>()))
                 .Returns(true);
 
             var controller = new EditorController(mockEditorBusinessLogic.Object);
 
             //Act
-            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(fakeEditor);
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(new Guid(), fakeEditor);
             var createdResult = obtainedResult as CreatedAtRouteNegotiatedContentResult<EditorUser>;
 
             //Assert
@@ -183,13 +183,13 @@ namespace DocumentsManager.Web.Api.Tests
 
             var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
             mockEditorBusinessLogic
-                .Setup(bl => bl.Update(It.IsAny<EditorUser>()))
+                .Setup(bl => bl.Update(new Guid(), It.IsAny<EditorUser>()))
                 .Throws(new ArgumentNullException());
 
             var controller = new EditorController(mockEditorBusinessLogic.Object);
 
             //Act
-            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(fakeEditor);
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(new Guid(), fakeEditor);
 
             //Assert
             mockEditorBusinessLogic.VerifyAll();
