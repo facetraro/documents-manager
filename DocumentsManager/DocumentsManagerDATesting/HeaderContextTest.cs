@@ -37,7 +37,6 @@ namespace DocumentsManagerDATesting
             TextContext contextT = new TextContext();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newHeader.StyleClass = style;
             newHeader.Text = newText;
             context.Add(newHeader);
@@ -54,32 +53,27 @@ namespace DocumentsManagerDATesting
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
-            TextContext contextT = new TextContext();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newHeader.StyleClass = style;
             newHeader.Text = newText;
             sndHeader.StyleClass = style;
-            sndHeader.Text = newText;
             context.Add(newHeader);
             context.Add(sndHeader);
             List<Header> allHeaderss = context.GetLazy();
-            Assert.IsTrue(allHeaderss.Count == 2);
+            Assert.IsTrue(allHeaderss.Count==2);
             TearDown();
         }
         [TestMethod]
         public void RemoveHeaderTest()
         {
             HeaderContext context = new HeaderContext();
-            TextContext contextT = new TextContext();
             Header newHeader = EntitiesExampleInstances.TestHeader();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newHeader.StyleClass = style;
             newHeader.Text = newText;
             context.Add(newHeader);
@@ -92,14 +86,12 @@ namespace DocumentsManagerDATesting
         public void RemoveHeaderIdTest()
         {
             HeaderContext context = new HeaderContext();
-            TextContext contextT = new TextContext();
             Header newHeader = EntitiesExampleInstances.TestHeader();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newHeader.StyleClass = style;
             newHeader.Text = newText;
             context.Add(newHeader);
@@ -112,20 +104,42 @@ namespace DocumentsManagerDATesting
         public void NotRemoveHeaderIdTest()
         {
             HeaderContext context = new HeaderContext();
-            TextContext contextT = new TextContext();
             Header newHeader = EntitiesExampleInstances.TestHeader();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newHeader.StyleClass = style;
             newHeader.Text = newText;
             context.Add(newHeader);
             context.Remove(Guid.NewGuid());
             List<Header> allHeaders = context.GetLazy();
             Assert.IsTrue(allHeaders.Contains(newHeader));
+            TearDown();
+        }
+        [TestMethod]
+        public void ModifyHeaderTest()
+        {
+            HeaderContext context = new HeaderContext();
+            Header newHeader = EntitiesExampleInstances.TestHeader();
+            StyleClass style = EntitiesExampleInstances.TestStyleClass();
+            StyleClass style2 = EntitiesExampleInstances.TestStyleClass();
+            newHeader.StyleClass = style;
+            StyleClassContextHandler contextsc = new StyleClassContextHandler();
+            contextsc.Add(style);
+            contextsc.Add(style2);
+            context.Add(newHeader);
+            Text newText = EntitiesExampleInstances.TestText();
+            newText.WrittenText = "newText";
+            newText.StyleClass = style;
+            newHeader.Text = newText;
+            newHeader.StyleClass = style2;
+            context.Modify(newHeader);
+            Header dbHeader = context.GetById(newHeader.Id);
+            StyleClass dbStyle = contextsc.GetById(style2.Id);
+            Assert.IsTrue(dbHeader.Text.WrittenText.Equals(newText.WrittenText));
+            Assert.IsTrue(dbHeader.StyleClass.Equals(dbStyle));
             TearDown();
         }
     }
