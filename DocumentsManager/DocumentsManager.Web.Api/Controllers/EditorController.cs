@@ -31,7 +31,19 @@ namespace DocumentsManager.Web.Api.Controllers
         // GET: api/Editor/5
         public IHttpActionResult Get(Guid id)
         {
-            return BadRequest();
+            try
+            {
+                EditorUser editor = editorsBuisnessLogic.GetByID(id);
+                if (editor == null)
+                {
+                    return NotFound();
+                }
+                return Ok(editor);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest();
+            }
         }
 
         // POST: api/Editor
