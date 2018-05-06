@@ -42,23 +42,50 @@ namespace DocumentsManager.Web.Api.Controllers
             }
             catch (ArgumentNullException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest();
             }
         }
 
         // POST: api/Editor
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]EditorUser editor)
         {
+            try
+            {
+                Guid id = editorsBuisnessLogic.Add(editor);
+                return CreatedAtRoute("DefaultApi", new { id = id }, editor);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/Editor/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(Guid id, [FromBody]EditorUser editor)
         {
+            try
+            {
+                bool updateResult = editorsBuisnessLogic.Update(id, editor);
+                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, editor);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/Editor/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(Guid id)
         {
+            try
+            {
+                bool updateResult = editorsBuisnessLogic.Delete(id);
+                return Request.CreateResponse(HttpStatusCode.NoContent, updateResult);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
         }
     }
 }
