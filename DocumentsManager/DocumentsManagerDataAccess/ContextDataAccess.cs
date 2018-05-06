@@ -11,8 +11,7 @@ namespace DocumentsManagerDataAccess
     public class ContextDataAccess : DbContext
     {
         public ContextDataAccess() : base("name=DocumentsManager") { }
-        public DbSet<AdminUser> Admins { get; set; }
-        public DbSet<EditorUser> Editors { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<StyleClass> Styles { get; set; }
         public DbSet<StyleAttribute> Attributes { get; set; }
         public DbSet<Format> Formats { get; set; }
