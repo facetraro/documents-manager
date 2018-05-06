@@ -14,8 +14,7 @@ namespace DocumentsManagerDATesting
         {
             ClearAllTexts();
             ClearAllFormats();
-            ClearAllAdmins();
-            ClearAllEditors();
+            ClearAllUsers();
             ClearAllStyleClasses(); 
         }
 
@@ -24,16 +23,9 @@ namespace DocumentsManagerDATesting
             StyleClassContextHandler context = new StyleClassContextHandler();
             context.ClearAll();
         }
-
-        private static void ClearAllEditors()
+        private static void ClearAllUsers()
         {
-            EditorUserContext context = new EditorUserContext();
-            context.ClearAll();
-        }
-
-        private static void ClearAllAdmins()
-        {
-            AdminUserContext context = new AdminUserContext();
+            UserContext context = new UserContext();
             context.ClearAll();
         }
 

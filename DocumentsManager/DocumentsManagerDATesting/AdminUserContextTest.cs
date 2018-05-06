@@ -18,69 +18,69 @@ namespace DocumentsManagerDATesting
         [TestMethod]
         public void AddAdminTest()
         {
-            AdminUserContext context = new AdminUserContext();
+            UserContext context = new UserContext();
             AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
             context.Add(newUser);
-            List<AdminUser> allAdmins = context.GetLazy();
-            Assert.IsTrue(allAdmins.Contains(newUser));
+            List<User> allUsers = context.GetLazy();
+            Assert.IsTrue(allUsers.Contains(newUser));
             TearDown();
         }
         [TestMethod]
         public void AddSpecificAdminTest()
         {
-            AdminUserContext context = new AdminUserContext();
+            UserContext context = new UserContext();
             AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
             context.Add(newUser);
-            List<AdminUser> allAdmins = context.GetLazy();
-            Assert.IsTrue(allAdmins.Contains(newUser));
+            List<User> allUsers = context.GetLazy();
+            Assert.IsTrue(allUsers.Contains(newUser));
             TearDown();
         }
         [TestMethod]
         public void RemoveSpecificAdminTest()
         {
-            AdminUserContext context = new AdminUserContext();
+            UserContext context = new UserContext();
             AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
             context.Add(newUser);
             context.Remove(newUser);
-            List<AdminUser> allAdmins = context.GetLazy();
-            Assert.IsFalse(allAdmins.Contains(newUser));
+            List<User> allUsers = context.GetLazy();
+            Assert.IsFalse(allUsers.Contains(newUser));
             TearDown();
         }
         [TestMethod]
         public void RemoveSpecificAdminIdTest()
         {
-            AdminUserContext context = new AdminUserContext();
+            UserContext context = new UserContext();
             AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
             context.Add(newUser);
             context.Remove(newUser.Id);
-            List<AdminUser> allAdmins = context.GetLazy();
-            Assert.IsFalse(allAdmins.Contains(newUser));
+            List<User> allUsers = context.GetLazy();
+            Assert.IsFalse(allUsers.Contains(newUser));
             TearDown();
         }
         [TestMethod]
         public void NotRemoveSpecificAdminIdTest()
         {
-            AdminUserContext context = new AdminUserContext();
+            UserContext context = new UserContext();
             AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
             context.Add(newUser);
             context.Remove(Guid.NewGuid());
-            List<AdminUser> allAdmins = context.GetLazy();
-            Assert.IsTrue(allAdmins.Contains(newUser));
+            List<User> allUsers = context.GetLazy();
+            Assert.IsTrue(allUsers.Contains(newUser));
             TearDown();
         }
         [TestMethod]
         public void ModifyAdminTest()
         {
-            AdminUserContext context = new AdminUserContext();
+            UserContext context = new UserContext();
             AdminUser newUser = EntitiesExampleInstances.TestAdminUser();
             context.Add(newUser);
             newUser.Email = "newEmail";
             newUser.Name = "newName";
             context.Modify(newUser);
-            List<AdminUser> allAdmins = context.GetLazy();
-            Assert.IsTrue(allAdmins.Contains(newUser));
-            Assert.IsTrue(allAdmins.Find(item => item.Id == newUser.Id).Email == newUser.Email);
-            Assert.IsTrue(allAdmins.Find(item => item.Id == newUser.Id).Name == newUser.Name);
+            List<User> allUsers = context.GetLazy();
+            Assert.IsTrue(allUsers.Contains(newUser));
+            Assert.IsTrue(allUsers.Find(item => item.Id == newUser.Id).Email == newUser.Email);
+            Assert.IsTrue(allUsers.Find(item => item.Id == newUser.Id).Name == newUser.Name);
             TearDown();
         }
     }

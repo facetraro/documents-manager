@@ -9,13 +9,13 @@ namespace DocumentsMangerEntities
     public class Document
     {
         public DateTime CreationDate { get; set; }
-        public User CreatorUser { get; set; }
-        public Footer Footer { get; set; }
-        public Format Format { get; set; }
-        public Header Header { get; set; }
+        public virtual User CreatorUser { get; set; }
+        public virtual Footer Footer { get; set; }
+        public virtual Format Format { get; set; }
+        public virtual Header Header { get; set; }
         public Guid Id { get; set; }
-        public List<Parragraph> Parragraphs { get; set; }
-        public StyleClass StyleClass { get; set; }
+        public virtual List<Parragraph> Parragraphs { get; set; }
+        public virtual StyleClass StyleClass { get; set; }
         public string Title { get; set; }
         public override bool Equals(object obj)
         {
