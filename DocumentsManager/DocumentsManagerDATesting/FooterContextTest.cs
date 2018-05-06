@@ -34,10 +34,8 @@ namespace DocumentsManagerDATesting
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
-            TextContext contextT = new TextContext();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newFooter.StyleClass = style;
             newFooter.Text = newText;
             context.Add(newFooter);
@@ -53,15 +51,14 @@ namespace DocumentsManagerDATesting
             Footer sndFooter = EntitiesExampleInstances.TestFooter();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             Text newText = EntitiesExampleInstances.TestText();
+            Text sndNewText = EntitiesExampleInstances.TestText();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
-            TextContext contextT = new TextContext();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newFooter.StyleClass = style;
             newFooter.Text = newText;
             sndFooter.StyleClass = style;
-            sndFooter.Text = newText;
+            sndFooter.Text = sndNewText;
             context.Add(newFooter);
             context.Add(sndFooter);
             List<Footer> allFooters = context.GetLazy();
@@ -72,14 +69,12 @@ namespace DocumentsManagerDATesting
         public void RemoveFooterTest()
         {
             FooterContext context = new FooterContext();
-            TextContext contextT = new TextContext();
             Footer newFooter = EntitiesExampleInstances.TestFooter();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newFooter.StyleClass = style;
             newFooter.Text = newText;
             context.Add(newFooter);
@@ -92,14 +87,12 @@ namespace DocumentsManagerDATesting
         public void RemoveFooterIdTest()
         {
             FooterContext context = new FooterContext();
-            TextContext contextT = new TextContext();
             Footer newFooter = EntitiesExampleInstances.TestFooter();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newFooter.StyleClass = style;
             newFooter.Text = newText;
             context.Add(newFooter);
@@ -112,14 +105,12 @@ namespace DocumentsManagerDATesting
         public void NotRemoveFooterIdTest()
         {
             FooterContext context = new FooterContext();
-            TextContext contextT = new TextContext();
             Footer newFooter = EntitiesExampleInstances.TestFooter();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
             contextsc.Add(style);
             newText.StyleClass = style;
-            contextT.Add(newText);
             newFooter.StyleClass = style;
             newFooter.Text = newText;
             context.Add(newFooter);

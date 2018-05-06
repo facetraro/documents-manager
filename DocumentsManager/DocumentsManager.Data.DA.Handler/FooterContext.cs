@@ -33,21 +33,16 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(newFooter.StyleClass);
-               // newFooter.Text = db.Texts.Find(newFooter.Text.Id);
-
                 unitOfWork.FooterRepository.Insert(newFooter);
             }
         }
         public void Remove(Footer footerToDelete)
         {
-            //TextContext contextT = new TextContext();
-            //Text textToDelete = contextT.GetById(headerToDelete.Text.Id);
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.FooterRepository.Delete(footerToDelete);
             }
-            //contextT.Remove(textToDelete);
         }
         public void Remove(Guid id)
         {
@@ -95,22 +90,5 @@ namespace DocumentsManager.Data.DA.Handler
             TextContext tContext = new TextContext();
             tContext.Modify(oldText);
         }
-        //public void Modify(Header modifiedHeader)
-        //{
-        //    Text oldText = new Text();
-        //    using (var db = new ContextDataAccess())
-        //    {
-        //        var unitOfWork = new UnitOfWork(db);
-        //        Header headerEntity = db.Headers.Find(modifiedHeader.Id);
-        //        oldText.WrittenText = modifiedHeader.Text.WrittenText;
-        //        oldText.Id = headerEntity.Text.Id;
-        //        oldText.StyleClass = modifiedHeader.Text.StyleClass;
-        //        db.Styles.Attach(modifiedHeader.StyleClass);
-        //        headerEntity.StyleClass = modifiedHeader.StyleClass;
-        //        unitOfWork.HeaderRepository.Update(headerEntity);
-        //    }
-        //    TextContext tContext = new TextContext();
-        //    tContext.Modify(oldText);
-        //}
     }
 }

@@ -33,8 +33,6 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(newHeader.StyleClass);
-               // newHeader.Text=db.Texts.Find(newHeader.Text.Id);
-                
                 unitOfWork.HeaderRepository.Insert(newHeader);
             }
         }
