@@ -103,6 +103,51 @@ namespace DocumentsManager.Web.Api.Tests
             mockEditorBusinessLogic.VerifyAll();
             Assert.IsInstanceOfType(obtainedResult, typeof(NotFoundResult));
         }
+        [TestMethod]
+        public void CreateNewEditorTest()
+        {
+            //Arrange
+            var fakeEditor = GetAFakeEditor();
+
+            var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
+            mockEditorBusinessLogic
+                .Setup(e => e.Add(fakeEditor))
+                .Returns(fakeEditor.Id);
+
+            var controller = new EditorController(mockEditorBusinessLogic.Object);
+
+            //Act
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Post(fakeEditor);
+            var createdResult = obtainedResult as CreatedAtRouteNegotiatedContentResult<EditorUser>;
+
+            //Assert
+            mockEditorBusinessLogic.VerifyAll();
+            Assert.IsNotNull(createdResult);
+            Assert.AreEqual("DefaultApi", createdResult.RouteName);
+            Assert.AreEqual(fakeEditor.Id, createdResult.RouteValues["id"]);
+            Assert.AreEqual(fakeEditor, createdResult.Content);
+        }
+
+        [TestMethod]
+        public void CreateNullEditorErrorTest()
+        {
+            //Arrange
+            EditorUser fakeEditor = null;
+
+            var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
+            mockEditorBusinessLogic
+                .Setup(bl => bl.Add(fakeEditor))
+                .Throws(new ArgumentNullException());
+
+            var controller = new EditorController(mockEditorBusinessLogic.Object);
+
+            //Act
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Post(fakeEditor);
+
+            //Assert
+            mockEditorBusinessLogic.VerifyAll();
+            Assert.IsInstanceOfType(obtainedResult, typeof(BadRequestErrorMessageResult));
+        }
 
         private EditorUser GetAFakeEditor()
         {
