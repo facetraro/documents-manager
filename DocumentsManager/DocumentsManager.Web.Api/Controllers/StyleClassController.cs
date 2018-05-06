@@ -18,8 +18,7 @@ namespace DocumentsManager.Web.Api.Controllers
             styleClassBusinessLogic = logic;
         }
 
-        // GET: api/Breeds
-        // Ejemplo usando IHttpActionResult
+        // GET: api/StyleClass
         public IHttpActionResult Get()
         {
             IEnumerable<StyleClass> styles = styleClassBusinessLogic.GetAllStyleClasses();
@@ -30,8 +29,7 @@ namespace DocumentsManager.Web.Api.Controllers
             return Ok(styles);
         }
 
-        // GET: api/Breeds/5
-        // Ejemplo usando HttpResponseMessage
+        // GET: api/StyleClass/5
         public IHttpActionResult Get(Guid id)
         {
             try
@@ -49,7 +47,7 @@ namespace DocumentsManager.Web.Api.Controllers
             }
         }
 
-        // POST: api/Breeds
+        // POST: api/StyleClass
         public IHttpActionResult Post([FromBody] StyleClass style)
         {
             try
@@ -63,7 +61,7 @@ namespace DocumentsManager.Web.Api.Controllers
             }
         }
 
-        // PUT: api/Breeds/5
+        // PUT: api/StyleClass/5
         public IHttpActionResult Put(Guid id, [FromBody]StyleClass style)
         {
             try
@@ -77,7 +75,7 @@ namespace DocumentsManager.Web.Api.Controllers
             }
         }
 
-        //  DELETE: api/Breeds/5
+        //  DELETE: api/StyleClass/5
         public HttpResponseMessage Delete(Guid id)
         {
             try
