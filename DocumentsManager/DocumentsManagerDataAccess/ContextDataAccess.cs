@@ -20,11 +20,11 @@ namespace DocumentsManagerDataAccess
         public DbSet<Header> Headers { get; set; }
         public DbSet<Footer> Footers { get; set; }
         public DbSet<Parragraph> Parragraphs { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AdminUser>().HasKey(A => A.Id);
-            modelBuilder.Entity<EditorUser>().HasKey(E => E.Id);
+            modelBuilder.Entity<User>().HasKey(E => E.Id);
             modelBuilder.Entity<StyleClass>().HasKey(S => S.Id);
             modelBuilder.Entity<Format>().HasKey(F => F.Id);
             modelBuilder.Entity<StyleAttribute>().HasKey(S => S.Id);
@@ -33,6 +33,7 @@ namespace DocumentsManagerDataAccess
             modelBuilder.Entity<Header>().HasKey(H => H.Id);
             modelBuilder.Entity<Footer>().HasKey(F => F.Id);
             modelBuilder.Entity<Parragraph>().HasKey(P => P.Id);
+            modelBuilder.Entity<Document>().HasKey(D => D.Id);
         }
     }
 }

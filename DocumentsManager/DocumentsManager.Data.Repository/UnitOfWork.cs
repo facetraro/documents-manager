@@ -11,8 +11,7 @@ namespace DocumentsManager.Data.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private ContextDataAccess context;
-        private GenericRepository<AdminUser> adminUserRepository;
-        private GenericRepository<EditorUser> editorUserRepository;
+        private GenericRepository<User> userRepository;
         private GenericRepository<StyleClass> styleClassRepository;
         private GenericRepository<StyleAttribute> styleAttributeRepository;
         private GenericRepository<Text> textRepository;
@@ -20,6 +19,7 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<Footer> footerRepository;
         private GenericRepository<Format> formatRepository;
         private GenericRepository<Parragraph> parragraphRepository;
+        private GenericRepository<Document> documentRepository;
 
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
@@ -27,30 +27,18 @@ namespace DocumentsManager.Data.Repository
             context = documentsManagerContext;
         }
 
-        public IRepository<AdminUser> AdminRepository
+        public IRepository<User> UserRepository
         {
             get
             {
-                if (this.adminUserRepository == null)
+                if (this.userRepository == null)
                 {
-                    this.adminUserRepository = new GenericRepository<AdminUser>(context);
+                    this.userRepository = new GenericRepository<User>(context);
                 }
-                return adminUserRepository;
+                return userRepository;
             }
         }
-
-        public IRepository<EditorUser> EditorRepository
-        {
-            get
-            {
-                if (this.editorUserRepository == null)
-                {
-                    this.editorUserRepository = new GenericRepository<EditorUser>(context);
-                }
-                return editorUserRepository;
-            }
-        }
-
+      
         public IRepository<StyleClass> StyleClassRepository
         {
             get
@@ -128,6 +116,17 @@ namespace DocumentsManager.Data.Repository
                     this.parragraphRepository = new GenericRepository<Parragraph>(context);
                 }
                 return parragraphRepository;
+            }
+        }
+        public IRepository<Document> DocumentRepository
+        {
+            get
+            {
+                if (this.documentRepository == null)
+                {
+                    this.documentRepository = new GenericRepository<Document>(context);
+                }
+                return documentRepository;
             }
         }
         public void Save()

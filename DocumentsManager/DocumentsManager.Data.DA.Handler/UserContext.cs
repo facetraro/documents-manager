@@ -7,18 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
 namespace DocumentsManager.Data.DA.Handler
 {
-    public class AdminUserContext
+    public class UserContext
     {
-        public List<AdminUser> GetLazy()
+        public List<User> GetLazy()
         {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                return unitOfWork.AdminRepository.Get().ToList();
+                return unitOfWork.UserRepository.Get().ToList();
             }
         }
 
@@ -30,20 +28,20 @@ namespace DocumentsManager.Data.DA.Handler
             }
         }
 
-        public void Add(AdminUser newUser)
+        public void Add(User newUser)
         {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.AdminRepository.Insert(newUser);
+                unitOfWork.UserRepository.Insert(newUser);
             }
         }
-        public void Remove(AdminUser userToDelete)
+        public void Remove(User userToDelete)
         {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.AdminRepository.Delete(userToDelete);
+                unitOfWork.UserRepository.Delete(userToDelete);
             }
         }
         public void Remove(Guid id)
@@ -51,24 +49,25 @@ namespace DocumentsManager.Data.DA.Handler
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.AdminRepository.Delete(id);
+                unitOfWork.UserRepository.Delete(id);
             }
         }
-        public AdminUser GetById(Guid id)
+        public User GetById(Guid id)
         {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                return unitOfWork.AdminRepository.GetByID(id);
+                return unitOfWork.UserRepository.GetByID(id);
             }
         }
-        public void Modify(AdminUser modifiedUser)
+        public void Modify(User modifiedUser)
         {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.AdminRepository.Update(modifiedUser);
+                unitOfWork.UserRepository.Update(modifiedUser);
             }
         }
     }
 }
+

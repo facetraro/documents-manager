@@ -4,6 +4,7 @@ using DocumentsMangerEntities;
 using System.Collections.Generic;
 using DocumentsManagerDataAccess;
 using DocumentsManagerExampleInstances;
+using DocumentsManager.Data.DA.Handler;
 
 namespace DocumentsManagerDATesting
 {
@@ -17,60 +18,60 @@ namespace DocumentsManagerDATesting
         [TestMethod]
         public void AddEditorTest()
         {
-            EditorUserContext context = new EditorUserContext();
+            UserContext context = new UserContext();
             EditorUser newUser = EntitiesExampleInstances.TestEditorUser();
             context.Add(newUser);
-            List<EditorUser> allEditors = context.GetLazy();
-            Assert.IsTrue(allEditors.Contains(newUser));
+            List<User> allUsers = context.GetLazy();
+            Assert.IsTrue(allUsers.Contains(newUser));
             TearDown();
         }
         [TestMethod]
         public void RemoveSpecificEditorTest()
         {
-            EditorUserContext context = new EditorUserContext();
+            UserContext context = new UserContext();
             EditorUser newUser = EntitiesExampleInstances.TestEditorUser();
             context.Add(newUser);
             context.Remove(newUser);
-            List<EditorUser> allEditors = context.GetLazy();
-            Assert.IsFalse(allEditors.Contains(newUser));
+            List<User> allUsers = context.GetLazy();
+            Assert.IsFalse(allUsers.Contains(newUser));
             TearDown(); 
         }
         [TestMethod]
         public void RemoveSpecificEditorIdTest()
         {
-            EditorUserContext context = new EditorUserContext();
+            UserContext context = new UserContext();
             EditorUser newUser = EntitiesExampleInstances.TestEditorUser();
             context.Add(newUser);
             context.Remove(newUser.Id);
-            List<EditorUser> allEditors = context.GetLazy();
-            Assert.IsFalse(allEditors.Contains(newUser));
+            List<User> allUsers = context.GetLazy();
+            Assert.IsFalse(allUsers.Contains(newUser));
             TearDown();
         }
         [TestMethod]
         public void NotRemoveSpecificEditorTest()
         {
-            EditorUserContext context = new EditorUserContext();
+            UserContext context = new UserContext();
             EditorUser newUser = EntitiesExampleInstances.TestEditorUser();
             context.Add(newUser);
             context.Remove(Guid.NewGuid());
-            List<EditorUser> allEditors = context.GetLazy();
-            Assert.IsTrue(allEditors.Contains(newUser));
+            List<User> allUsers = context.GetLazy();
+            Assert.IsTrue(allUsers.Contains(newUser));
             TearDown();
         }
 
         [TestMethod]
         public void ModifyEditorTest()
         {
-            EditorUserContext context = new EditorUserContext();
+            UserContext context = new UserContext();
             EditorUser newUser = EntitiesExampleInstances.TestEditorUser();
             context.Add(newUser);
             newUser.Email = "newEmail";
             newUser.Name = "newName";
             context.Modify(newUser);
-            List<EditorUser> allEditors = context.GetLazy();
-            Assert.IsTrue(allEditors.Contains(newUser));
-            Assert.IsTrue(allEditors.Find(item => item.Id == newUser.Id).Email == newUser.Email);
-            Assert.IsTrue(allEditors.Find(item => item.Id == newUser.Id).Name == newUser.Name);
+            List<User> allUsers = context.GetLazy();
+            Assert.IsTrue(allUsers.Contains(newUser));
+            Assert.IsTrue(allUsers.Find(item => item.Id == newUser.Id).Email == newUser.Email);
+            Assert.IsTrue(allUsers.Find(item => item.Id == newUser.Id).Name == newUser.Name);
             TearDown();
         }
     }

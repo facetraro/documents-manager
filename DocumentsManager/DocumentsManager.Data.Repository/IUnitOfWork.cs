@@ -9,8 +9,7 @@ namespace DocumentsManager.Data.Repository
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<AdminUser> AdminRepository { get; }
-        IRepository<EditorUser> EditorRepository { get; }
+        IRepository<User> UserRepository { get; }
         IRepository<StyleClass> StyleClassRepository { get; }
         IRepository<StyleAttribute> StyleAttributeRepository { get; }
         IRepository<Text> TextRepository { get; }
@@ -18,6 +17,7 @@ namespace DocumentsManager.Data.Repository
         IRepository<Footer> FooterRepository { get; }
         IRepository<Format> FormatRepository { get; }
         IRepository<Parragraph> ParragraphRepository { get; }
+        IRepository<Document> DocumentRepository { get; }
         void Save();
     }
 }
