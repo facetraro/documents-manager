@@ -63,7 +63,7 @@ namespace DocumentsManager.Web.Api.Tests
         {
             //Arrange
             var fakeEditor = GetAFakeEditor();
-            var fakeGuid = GetARandomFakeGuid();
+            var fakeGuid = fakeEditor.Id;
 
             var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
             mockEditorBusinessLogic
@@ -81,6 +81,27 @@ namespace DocumentsManager.Web.Api.Tests
             Assert.IsNotNull(contentResult);
             Assert.IsNotNull(contentResult.Content);
             Assert.AreEqual(fakeGuid, contentResult.Content.Id);
+        }
+
+        [TestMethod]
+        public void GetEditorByIdNotFoundErrorTest()
+        {
+            //Arrange
+            var fakeGuid = Guid.NewGuid();
+
+            var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
+            mockEditorBusinessLogic
+                .Setup(bl => bl.GetByID(fakeGuid))
+                .Returns((EditorUser)null);
+
+            var controller = new EditorController(mockEditorBusinessLogic.Object);
+
+            //Act
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Get(fakeGuid);
+
+            //Assert
+            mockEditorBusinessLogic.VerifyAll();
+            Assert.IsInstanceOfType(obtainedResult, typeof(NotFoundResult));
         }
 
         private EditorUser GetAFakeEditor()
