@@ -28,7 +28,6 @@ namespace DocumentsManager.Web.Api.Tests
 
             var controller = new EditorController(mockEditorBusinessLogic.Object);
             //Act}
-            //controller.Get();
             IHttpActionResult obtainedResult = controller.Get();
             var contentResult = obtainedResult as OkNegotiatedContentResult<IEnumerable<EditorUser>>;
 

@@ -33,21 +33,16 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(newHeader.StyleClass);
-                newHeader.Text=db.Texts.Find(newHeader.Text.Id);
-                
                 unitOfWork.HeaderRepository.Insert(newHeader);
             }
         }
         public void Remove(Header headerToDelete)
         {
-            //TextContext contextT = new TextContext();
-            //Text textToDelete = contextT.GetById(headerToDelete.Text.Id);
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.HeaderRepository.Delete(headerToDelete);
             }
-            //contextT.Remove(textToDelete);
         }
         public void Remove(Guid id)
         {
@@ -64,7 +59,7 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
                  
                 Header theHeader = unitOfWork.HeaderRepository.GetByID(id);
-                db.Headers.Include("StyleClass").ToList().FirstOrDefault();// tiene que ser con style y text
+                db.Headers.Include("StyleClass").ToList().FirstOrDefault();
                 db.Headers.Include("Text").ToList().FirstOrDefault();
                 return theHeader;
             }
@@ -80,15 +75,20 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Modify(Header modifiedHeader)
         {
-
+            Text oldText = new Text();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.HeaderRepository.Update(modifiedHeader);
+                Header headerEntity = db.Headers.Find(modifiedHeader.Id);
+                oldText.WrittenText = modifiedHeader.Text.WrittenText;
+                oldText.Id = headerEntity.Text.Id;
+                oldText.StyleClass = modifiedHeader.Text.StyleClass;
+                db.Styles.Attach(modifiedHeader.StyleClass);
+                headerEntity.StyleClass = modifiedHeader.StyleClass;
+                unitOfWork.HeaderRepository.Update(headerEntity);
             }
-            UpdateStyle(modifiedHeader);
             TextContext tContext = new TextContext();
-            tContext.Modify(tContext.GetById(modifiedHeader.Text.Id));
+            tContext.Modify(oldText);
         }
     }
 }
