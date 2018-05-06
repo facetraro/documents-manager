@@ -208,14 +208,7 @@ namespace DocumentsManager.Web.Api.Tests
                 .Returns(It.IsAny<bool>());
 
             var controller = new EditorController(mockEditorBusinessLogic.Object);
-            // Configuramos la Request (dado que estamos utilziando HttpResponseMessage)
-            // Y usando el objeto Request adentro.
-            controller.Request = new HttpRequestMessage();
-            controller.Configuration = new HttpConfiguration();
-            controller.Configuration.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional });
+            ConfigureHttpRequest(controller);
 
             //Act
             HttpResponseMessage obtainedResult = controller.Delete(fakeGuid);
@@ -223,6 +216,16 @@ namespace DocumentsManager.Web.Api.Tests
             //Assert
             mockEditorBusinessLogic.VerifyAll();
             Assert.IsNotNull(obtainedResult);
+        }
+
+        private void ConfigureHttpRequest(EditorController controller)
+        {
+            controller.Request = new HttpRequestMessage();
+            controller.Configuration = new HttpConfiguration();
+            controller.Configuration.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional });
         }
 
         private EditorUser GetAFakeEditor()
