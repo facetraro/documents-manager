@@ -128,5 +128,29 @@ namespace DocumentsManagerDATesting
             Assert.IsTrue(allFooter.Contains(newFooter));
             TearDown();
         }
+        [TestMethod]
+        public void ModifyFooterTest()
+        {
+            FooterContext context = new FooterContext();
+            Footer newFooter = EntitiesExampleInstances.TestFooter();
+            StyleClass style = EntitiesExampleInstances.TestStyleClass();
+            StyleClass style2 = EntitiesExampleInstances.TestStyleClass();
+            newFooter.StyleClass = style;
+            StyleClassContextHandler contextsc = new StyleClassContextHandler();
+            contextsc.Add(style);
+            contextsc.Add(style2);
+            context.Add(newFooter);
+            Text newText = EntitiesExampleInstances.TestText();
+            newText.WrittenText = "newText";
+            newText.StyleClass = style;
+            newFooter.Text = newText;
+            newFooter.StyleClass = style2;
+            context.Modify(newFooter);
+            Footer dbFooter = context.GetById(newFooter.Id);
+            StyleClass dbStyle = contextsc.GetById(style2.Id);
+            Assert.AreEqual(dbFooter.Text.WrittenText, newText.WrittenText);
+            Assert.AreEqual(dbFooter.StyleClass, dbStyle);
+            TearDown();
+        }
     }
 }
