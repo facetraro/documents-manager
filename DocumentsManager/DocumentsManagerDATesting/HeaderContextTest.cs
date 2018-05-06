@@ -138,8 +138,8 @@ namespace DocumentsManagerDATesting
             context.Modify(newHeader);
             Header dbHeader = context.GetById(newHeader.Id);
             StyleClass dbStyle = contextsc.GetById(style2.Id);
-            Assert.IsTrue(dbHeader.Text.WrittenText.Equals(newText.WrittenText));
-            Assert.IsTrue(dbHeader.StyleClass.Equals(dbStyle));
+            Assert.AreEqual(dbHeader.Text.WrittenText,newText.WrittenText);
+            Assert.AreEqual(dbHeader.StyleClass,dbStyle);
             TearDown();
         }
     }
