@@ -207,12 +207,7 @@ namespace DocumentsManager.Web.Api.Tests
                 .Returns(It.IsAny<bool>());
 
             var controller = new StyleClassController(mockStyleClassBusinessLogic.Object);
-            controller.Request = new HttpRequestMessage();
-            controller.Configuration = new HttpConfiguration();
-            controller.Configuration.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional });
+            ConfigureHttpRequest(controller);
 
             //Act
             HttpResponseMessage obtainedResult = controller.Delete(fakeGuid);
@@ -220,6 +215,16 @@ namespace DocumentsManager.Web.Api.Tests
             //Assert
             mockStyleClassBusinessLogic.VerifyAll();
             Assert.IsNotNull(obtainedResult);
+        }
+
+        private void ConfigureHttpRequest(StyleClassController controller)
+        {
+            controller.Request = new HttpRequestMessage();
+            controller.Configuration = new HttpConfiguration();
+            controller.Configuration.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional });
         }
 
         private StyleClass GetAFakeStyleClass()
