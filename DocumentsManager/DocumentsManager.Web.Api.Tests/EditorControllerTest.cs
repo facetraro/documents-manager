@@ -9,6 +9,7 @@ using DocumentsManagerExampleInstances;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Results;
+using System.Net.Http;
 
 namespace DocumentsManager.Web.Api.Tests
 {
@@ -194,6 +195,34 @@ namespace DocumentsManager.Web.Api.Tests
             //Assert
             mockEditorBusinessLogic.VerifyAll();
             Assert.IsInstanceOfType(obtainedResult, typeof(BadRequestErrorMessageResult));
+        }
+        [TestMethod]
+        public void DeleteEditorOkTest()
+        {
+            //Arrange
+            Guid fakeGuid = Guid.NewGuid();
+
+            var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
+            mockEditorBusinessLogic
+                .Setup(bl => bl.Delete(It.IsAny<Guid>()))
+                .Returns(It.IsAny<bool>());
+
+            var controller = new EditorController(mockEditorBusinessLogic.Object);
+            // Configuramos la Request (dado que estamos utilziando HttpResponseMessage)
+            // Y usando el objeto Request adentro.
+            controller.Request = new HttpRequestMessage();
+            controller.Configuration = new HttpConfiguration();
+            controller.Configuration.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional });
+
+            //Act
+            HttpResponseMessage obtainedResult = controller.Delete(fakeGuid);
+
+            //Assert
+            mockEditorBusinessLogic.VerifyAll();
+            Assert.IsNotNull(obtainedResult);
         }
 
         private EditorUser GetAFakeEditor()
