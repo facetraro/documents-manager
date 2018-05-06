@@ -77,6 +77,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormatControllerTest.cs" />
     <Compile Include="StyleClassControllerTest.cs" />
     <Compile Include="EditorControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

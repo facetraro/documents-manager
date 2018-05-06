@@ -6,54 +6,53 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
 namespace DocumentsManager.Web.Api.Controllers
 {
-    public class StyleClassController : ApiController
+    public class FormatController : ApiController
     {
-        private IStyleClassBusinessLogic styleClassBusinessLogic { get; set; }
+        private IFormatsBusinessLogic editorsBuisnessLogic { get; set; }
 
-        public StyleClassController(IStyleClassBusinessLogic logic)
+        public FormatController(IFormatsBusinessLogic logic)
         {
-            styleClassBusinessLogic = logic;
+            this.editorsBuisnessLogic = logic;
         }
 
-        // GET: api/StyleClass
+        // GET: api/Format
         public IHttpActionResult Get()
         {
-            IEnumerable<StyleClass> styles = styleClassBusinessLogic.GetAllStyleClasses();
-            if (styles == null)
+            IEnumerable<Format> editors = editorsBuisnessLogic.GetAllFormats();
+            if (editors == null)
             {
                 return NotFound();
             }
-            return Ok(styles);
+            return Ok(editors);
         }
 
-        // GET: api/StyleClass/5
+        // GET: api/Format/5
         public IHttpActionResult Get(Guid id)
         {
             try
             {
-                StyleClass style = styleClassBusinessLogic.GetByID(id);
-                if (style == null)
+                Format editor = editorsBuisnessLogic.GetByID(id);
+                if (editor == null)
                 {
                     return NotFound();
                 }
-                return Ok(style);
+                return Ok(editor);
             }
             catch (ArgumentNullException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest();
             }
         }
 
-        // POST: api/StyleClass
-        public IHttpActionResult Post([FromBody] StyleClass style)
+        // POST: api/Format
+        public IHttpActionResult Post([FromBody]Format editor)
         {
             try
             {
-                Guid id = styleClassBusinessLogic.Add(style);
-                return CreatedAtRoute("DefaultApi", new { id = id }, style);
+                Guid id = editorsBuisnessLogic.Add(editor);
+                return CreatedAtRoute("DefaultApi", new { id = id }, editor);
             }
             catch (ArgumentNullException ex)
             {
@@ -61,13 +60,13 @@ namespace DocumentsManager.Web.Api.Controllers
             }
         }
 
-        // PUT: api/StyleClass/5
-        public IHttpActionResult Put(Guid id, [FromBody]StyleClass style)
+        // PUT: api/Format/5
+        public IHttpActionResult Put(Guid id, [FromBody]Format editor)
         {
             try
             {
-                bool updateResult = styleClassBusinessLogic.Update(id, style);
-                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, style);
+                bool updateResult = editorsBuisnessLogic.Update(id, editor);
+                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, editor);
             }
             catch (ArgumentNullException ex)
             {
@@ -75,12 +74,12 @@ namespace DocumentsManager.Web.Api.Controllers
             }
         }
 
-        //  DELETE: api/StyleClass/5
+        // DELETE: api/Format/5
         public HttpResponseMessage Delete(Guid id)
         {
             try
             {
-                bool updateResult = styleClassBusinessLogic.Delete(id);
+                bool updateResult = editorsBuisnessLogic.Delete(id);
                 return Request.CreateResponse(HttpStatusCode.NoContent, updateResult);
             }
             catch (ArgumentNullException ex)
