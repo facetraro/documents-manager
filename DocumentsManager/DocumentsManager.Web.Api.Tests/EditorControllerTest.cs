@@ -149,6 +149,53 @@ namespace DocumentsManager.Web.Api.Tests
             Assert.IsInstanceOfType(obtainedResult, typeof(BadRequestErrorMessageResult));
         }
 
+        [TestMethod]
+        public void UpdateExistingEditorOkTest()
+        {
+            //Arrange
+            var fakeEditor = GetAFakeEditor();
+            var expectedResult = true;
+
+            var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
+            mockEditorBusinessLogic
+                .Setup(bl => bl.Update(It.IsAny<EditorUser>()))
+                .Returns(true);
+
+            var controller = new EditorController(mockEditorBusinessLogic.Object);
+
+            //Act
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(fakeEditor);
+            var createdResult = obtainedResult as CreatedAtRouteNegotiatedContentResult<EditorUser>;
+
+            //Assert
+            mockEditorBusinessLogic.VerifyAll();
+            Assert.IsNotNull(createdResult);
+            Assert.AreEqual("DefaultApi", createdResult.RouteName);
+            Assert.AreEqual(expectedResult, createdResult.RouteValues["updated"]);
+            Assert.AreEqual(fakeEditor, createdResult.Content);
+        }
+
+        [TestMethod]
+        public void UpdateEditorWithNullIdErrorTest()
+        {
+            //Arrange
+            EditorUser fakeEditor = null;
+
+            var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
+            mockEditorBusinessLogic
+                .Setup(bl => bl.Update(It.IsAny<EditorUser>()))
+                .Throws(new ArgumentNullException());
+
+            var controller = new EditorController(mockEditorBusinessLogic.Object);
+
+            //Act
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(fakeEditor);
+
+            //Assert
+            mockEditorBusinessLogic.VerifyAll();
+            Assert.IsInstanceOfType(obtainedResult, typeof(BadRequestErrorMessageResult));
+        }
+
         private EditorUser GetAFakeEditor()
         {
             List<EditorUser> editors = GetFakeEditors().ToList();
