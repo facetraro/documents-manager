@@ -19,13 +19,22 @@ namespace DocumentsManager.Data.DA.Handler
                 return unitOfWork.DocumentRepository.Get().ToList();
             }
         }
-        public void Add(Document aDocument)
-        {
+        private void AddDocumentParts(Document aDocument) {
             FooterContext fContext = new FooterContext();
             HeaderContext hContext = new HeaderContext();
-            ParragraphContext pContext = new ParragraphContext();
             fContext.Add(aDocument.Footer);
             hContext.Add(aDocument.Header);
+        }
+        private void AddDocumentParragraphs(List<Parragraph> theParragraphs) {
+            ParragraphContext pContext = new ParragraphContext();
+            for (int i = 0; i < theParragraphs.Count; i++)
+            {
+                pContext.Add(theParragraphs.ElementAt(i));
+            }
+        }
+        public void Add(Document aDocument)
+        {
+            AddDocumentParts(aDocument);
             List<Parragraph> theParragraphs = aDocument.Parragraphs;
             aDocument.Parragraphs = new List<Parragraph>();
             using (var db = new ContextDataAccess())
@@ -38,10 +47,7 @@ namespace DocumentsManager.Data.DA.Handler
                 aDocument.Header = db.Headers.Find(aDocument.Header.Id);
                 unitOfWork.DocumentRepository.Insert(aDocument);
             }
-            for (int i = 0; i < theParragraphs.Count; i++)
-            {
-                pContext.Add(theParragraphs.ElementAt(i));
-            }
+            AddDocumentParragraphs(theParragraphs);
         }
     }
 }

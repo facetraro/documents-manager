@@ -39,7 +39,6 @@ namespace DocumentsManagerDATesting
             context.Add(newDocument);
             List<Document> allDocumentss = context.GetLazy();
             Assert.IsTrue(allDocumentss.Contains(newDocument));
-            //TearDown();
         }
     }
 }
