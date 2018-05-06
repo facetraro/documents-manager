@@ -33,7 +33,7 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(newFooter.StyleClass);
-                newFooter.Text = db.Texts.Find(newFooter.Text.Id);
+               // newFooter.Text = db.Texts.Find(newFooter.Text.Id);
 
                 unitOfWork.FooterRepository.Insert(newFooter);
             }
@@ -64,8 +64,8 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
 
                 Footer theFooter = unitOfWork.FooterRepository.GetByID(id);
-                db.Headers.Include("StyleClass").ToList().FirstOrDefault();
-                db.Headers.Include("Text").ToList().FirstOrDefault();
+                db.Footers.Include("StyleClass").ToList().FirstOrDefault();
+                db.Footers.Include("Text").ToList().FirstOrDefault();
                 return theFooter;
             }
         }
@@ -80,15 +80,37 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Modify(Footer modifiedFooter)
         {
-
+            Text oldText = new Text();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.FooterRepository.Update(modifiedFooter);
+                Footer footerEntity = db.Footers.Find(modifiedFooter.Id);
+                oldText.WrittenText = modifiedFooter.Text.WrittenText;
+                oldText.Id = footerEntity.Text.Id;
+                oldText.StyleClass = modifiedFooter.Text.StyleClass;
+                db.Styles.Attach(modifiedFooter.StyleClass);
+                footerEntity.StyleClass = modifiedFooter.StyleClass;
+                unitOfWork.FooterRepository.Update(footerEntity);
             }
-            UpdateStyle(modifiedFooter);
             TextContext tContext = new TextContext();
-            tContext.Modify(tContext.GetById(modifiedFooter.Text.Id));
+            tContext.Modify(oldText);
         }
+        //public void Modify(Header modifiedHeader)
+        //{
+        //    Text oldText = new Text();
+        //    using (var db = new ContextDataAccess())
+        //    {
+        //        var unitOfWork = new UnitOfWork(db);
+        //        Header headerEntity = db.Headers.Find(modifiedHeader.Id);
+        //        oldText.WrittenText = modifiedHeader.Text.WrittenText;
+        //        oldText.Id = headerEntity.Text.Id;
+        //        oldText.StyleClass = modifiedHeader.Text.StyleClass;
+        //        db.Styles.Attach(modifiedHeader.StyleClass);
+        //        headerEntity.StyleClass = modifiedHeader.StyleClass;
+        //        unitOfWork.HeaderRepository.Update(headerEntity);
+        //    }
+        //    TextContext tContext = new TextContext();
+        //    tContext.Modify(oldText);
+        //}
     }
 }
