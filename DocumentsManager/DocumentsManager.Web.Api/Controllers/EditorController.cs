@@ -75,8 +75,17 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // DELETE: api/Editor/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(Guid id)
         {
+            try
+            {
+                bool updateResult = editorsBuisnessLogic.Delete(id);
+                return Request.CreateResponse(HttpStatusCode.NoContent, updateResult);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
         }
     }
 }
