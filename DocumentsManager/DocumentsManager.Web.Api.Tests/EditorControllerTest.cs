@@ -38,10 +38,59 @@ namespace DocumentsManager.Web.Api.Tests
             Assert.IsNotNull(contentResult.Content);
             Assert.AreEqual(expectedEditors, contentResult.Content);
         }
+        [TestMethod]
+        public void GetAllEditorsErrorNotFoundTest()
+        {
+            //Arrange
+            List<EditorUser> expectedEditors = null;
+
+            var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
+            mockEditorBusinessLogic
+                .Setup(e => e.GetAllEditors())
+                .Returns(expectedEditors);
+
+            var controller = new EditorController(mockEditorBusinessLogic.Object);
+
+            //Act
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Get();
+
+            //Assert
+            mockEditorBusinessLogic.VerifyAll();
+            Assert.IsInstanceOfType(obtainedResult, typeof(NotFoundResult));
+        }
+        [TestMethod]
+        public void GetEditorByIdOkTest()
+        {
+            //Arrange
+            var fakeEditor = GetAFakeEditor();
+            var fakeGuid = GetARandomFakeGuid();
+
+            var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
+            mockEditorBusinessLogic
+               .Setup(e => e.GetByID(fakeGuid))
+               .Returns(fakeEditor);
+
+            var controller = new EditorController(mockEditorBusinessLogic.Object);
+
+            //Act
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Get(fakeGuid);
+            var contentResult = obtainedResult as OkNegotiatedContentResult<EditorUser>;
+
+            //Assert
+            mockEditorBusinessLogic.VerifyAll();
+            Assert.IsNotNull(contentResult);
+            Assert.IsNotNull(contentResult.Content);
+            Assert.AreEqual(fakeGuid, contentResult.Content.Id);
+        }
+
         private EditorUser GetAFakeEditor()
         {
             List<EditorUser> editors = GetFakeEditors().ToList();
             return editors.FirstOrDefault();
+        }
+        private Guid GetARandomFakeGuid()
+        {
+            return GetAFakeEditor().Id;
         }
         private IEnumerable<EditorUser> GetFakeEditors()
         {
