@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FormatController.cs" />
     <Compile Include="Controllers\EditorController.cs" />
     <Compile Include="Controllers\StyleClassController.cs" />
     <Compile Include="Global.asax.cs">
