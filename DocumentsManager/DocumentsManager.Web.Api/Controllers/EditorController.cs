@@ -47,8 +47,17 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/Editor
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]EditorUser editor)
         {
+            try
+            {
+                Guid id = editorsBuisnessLogic.Add(editor);
+                return CreatedAtRoute("DefaultApi", new { id = id }, editor);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/Editor/5
