@@ -33,21 +33,16 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(newFooter.StyleClass);
-                newFooter.Text = db.Texts.Find(newFooter.Text.Id);
-
                 unitOfWork.FooterRepository.Insert(newFooter);
             }
         }
         public void Remove(Footer footerToDelete)
         {
-            //TextContext contextT = new TextContext();
-            //Text textToDelete = contextT.GetById(headerToDelete.Text.Id);
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.FooterRepository.Delete(footerToDelete);
             }
-            //contextT.Remove(textToDelete);
         }
         public void Remove(Guid id)
         {
@@ -64,8 +59,8 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
 
                 Footer theFooter = unitOfWork.FooterRepository.GetByID(id);
-                db.Headers.Include("StyleClass").ToList().FirstOrDefault();
-                db.Headers.Include("Text").ToList().FirstOrDefault();
+                db.Footers.Include("StyleClass").ToList().FirstOrDefault();
+                db.Footers.Include("Text").ToList().FirstOrDefault();
                 return theFooter;
             }
         }
@@ -80,15 +75,20 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Modify(Footer modifiedFooter)
         {
-
+            Text oldText = new Text();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.FooterRepository.Update(modifiedFooter);
+                Footer footerEntity = db.Footers.Find(modifiedFooter.Id);
+                oldText.WrittenText = modifiedFooter.Text.WrittenText;
+                oldText.Id = footerEntity.Text.Id;
+                oldText.StyleClass = modifiedFooter.Text.StyleClass;
+                db.Styles.Attach(modifiedFooter.StyleClass);
+                footerEntity.StyleClass = modifiedFooter.StyleClass;
+                unitOfWork.FooterRepository.Update(footerEntity);
             }
-            UpdateStyle(modifiedFooter);
             TextContext tContext = new TextContext();
-            tContext.Modify(tContext.GetById(modifiedFooter.Text.Id));
+            tContext.Modify(oldText);
         }
     }
 }
