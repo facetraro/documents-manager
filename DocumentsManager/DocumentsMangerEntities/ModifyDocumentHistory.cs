@@ -26,5 +26,10 @@ namespace DocumentsMangerEntities
         {
             return User.Equals(user);
         }
+
+        public bool IsOfDocument(Document document)
+        {
+            return Document.Equals(document);
+        }
     }
 }
