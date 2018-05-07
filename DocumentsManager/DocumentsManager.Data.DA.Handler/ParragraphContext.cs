@@ -32,6 +32,10 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(aParragraph.StyleClass);
+                if (aParragraph.Document!=null)
+                {
+                    aParragraph.Document = db.Documents.Find(aParragraph.Document.Id);
+                }
                 unitOfWork.ParragraphRepository.Insert(aParragraph);
             }
         }

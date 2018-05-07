@@ -11,6 +11,13 @@ namespace DocumentsManager.Data.DA.Handler
 {
     public class DocumentContext
     {
+        public void ClearAll()
+        {
+            foreach (var item in GetLazy())
+            {
+                Remove(item);
+            }
+        }
         public List<Document> GetLazy()
         {
             using (var db = new ContextDataAccess())
@@ -48,6 +55,66 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.DocumentRepository.Insert(aDocument);
             }
             AddDocumentParragraphs(theParragraphs);
+        }
+        private void DeleteDocumentParts(Document aDocument)
+        {
+            FooterContext fContext = new FooterContext();
+            HeaderContext hContext = new HeaderContext();
+            fContext.Remove(aDocument.Footer);
+            hContext.Remove(aDocument.Header);
+        }
+        private void RemoveDocumentParagraphs(Document aDocument) {
+            Document document = GetById(aDocument.Id);
+            int lenghtParragraphs = document.Parragraphs.Count;
+            ParragraphContext pContext = new ParragraphContext();
+            for (int i = 0; i < lenghtParragraphs; i++)
+            {
+                pContext.Remove(document.Parragraphs.ElementAt(i));
+            }
+        }
+        public void Remove(Document documentToDelete)
+        {
+            Document document = new Document();
+            RemoveDocumentParagraphs(documentToDelete);
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                document = GetById(documentToDelete.Id);
+                document.StyleClass = null;
+                unitOfWork.DocumentRepository.Delete(documentToDelete);
+            }
+            DeleteDocumentParts(document);
+        }
+
+        public List<Parragraph> GetParragraphOfDocument(Document aDocument)
+        {
+            ParragraphContext context = new ParragraphContext();
+            List<Parragraph> parragraphs = new List<Parragraph>();
+            foreach (var item in context.GetLazy())
+            {
+                Parragraph aParragraph = context.GetById(item.Id);
+                if (aParragraph.Document.Equals(aDocument))
+                {
+                    parragraphs.Add(aParragraph);
+                }
+            }
+            return parragraphs;
+        }
+
+        public Document GetById(Guid id)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                Document theDocument = unitOfWork.DocumentRepository.GetByID(id);
+                db.Documents.Include("StyleClass").ToList().FirstOrDefault();
+                db.Documents.Include("Footer").ToList().FirstOrDefault();
+                db.Documents.Include("Header").ToList().FirstOrDefault();
+                db.Documents.Include("Format").ToList().FirstOrDefault();
+                db.Documents.Include("CreatorUser").ToList().FirstOrDefault();
+                db.Documents.Include("Parragraphs").ToList();
+                return theDocument;
+            }
         }
     }
 }

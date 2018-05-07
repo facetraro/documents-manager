@@ -9,6 +9,7 @@ namespace DocumentsMangerEntities
     public class Parragraph:DocumentObject
     {
         public List<Text> Texts { get; set; }
+        public Document Document { get; set; }
         public override bool Equals(object obj)
         {
             Parragraph anotherParragraph = obj as Parragraph;

@@ -13,6 +13,7 @@ namespace DocumentsManagerDATesting
         public static void ClearAll()
         {
             ClearAllParragraph();
+            ClearAllDocuments();
             ClearAllFormats();
             ClearAllFooters();
             ClearAllHeaders();
@@ -56,6 +57,11 @@ namespace DocumentsManagerDATesting
         private static void ClearAllHeaders()
         {
            HeaderContext context = new HeaderContext();
+            context.ClearAll();
+        }
+        private static void ClearAllDocuments()
+        {
+            DocumentContext context = new DocumentContext();
             context.ClearAll();
         }
 

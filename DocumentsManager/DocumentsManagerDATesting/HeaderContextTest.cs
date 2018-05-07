@@ -15,17 +15,9 @@ namespace DocumentsManagerDATesting
     {
         public void TearDown()
         {
-            ClearHeaderDataBase();
+            ClearDataBase.ClearAll();
         }
-        private void ClearHeaderDataBase()
-        {
-            HeaderContext context = new HeaderContext();
-            StyleClassContextHandler contextSC = new StyleClassContextHandler();
-            TextContext contextT = new TextContext();
-            context.ClearAll();
-            contextT.ClearAll();
-            contextSC.ClearAll();
-        }
+        
         [TestMethod]
         public void AddHeaderTest()
         {
