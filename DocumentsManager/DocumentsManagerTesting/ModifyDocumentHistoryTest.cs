@@ -46,5 +46,18 @@ namespace DocumentsManagerTesting
             ModifyDocumentHistory newHistroy = EntitiesExampleInstances.TestModifyDocumentHistory();
             Assert.IsFalse(newHistroy.Equals("aTestString"));
         }
+        [TestMethod]
+        public void IsDocumentFromUserFalse()
+        {
+            ModifyDocumentHistory newHistroy = EntitiesExampleInstances.TestModifyDocumentHistory();
+            User newUser = EntitiesExampleInstances.TestAdminUser();
+            Assert.IsFalse(newHistroy.IsFromUser(newUser));
+        }
+        [TestMethod]
+        public void IsDocumentFromUserTrue()
+        {
+            ModifyDocumentHistory newHistroy = EntitiesExampleInstances.TestModifyDocumentHistory();
+            Assert.IsTrue(newHistroy.IsFromUser(newHistroy.User));
+        }
     }
 }
