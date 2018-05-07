@@ -76,6 +76,7 @@ namespace DocumentsManager.Data.DA.Handler
         {
             Document document = new Document();
             RemoveDocumentParagraphs(documentToDelete);
+            documentToDelete.Parragraphs = new List<Parragraph>();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -115,6 +116,15 @@ namespace DocumentsManager.Data.DA.Handler
                 db.Documents.Include("Parragraphs").ToList();
                 return theDocument;
             }
+        }
+        public void Remove(Guid id)
+        {
+            Document toDelete = GetById(id);
+            if (toDelete != null)
+            {
+                Remove(toDelete);
+            }
+           
         }
     }
 }
