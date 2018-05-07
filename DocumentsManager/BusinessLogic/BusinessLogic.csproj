@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAdminsBusinessLogic.cs" />
     <Compile Include="IFormatsBusinessLogic.cs" />
     <Compile Include="IStyleClassBusinessLogic.cs" />
     <Compile Include="IEditorBusinessLogic.cs" />
