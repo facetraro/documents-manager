@@ -78,8 +78,8 @@ namespace DocumentsManagerDATesting
             List<ModifyDocumentHistory> allHistories = context.GetAllHistories();
             Assert.IsTrue(allHistories.Contains(newHistory));
             Assert.AreEqual(allHistories.ElementAt(0).User, newHistory.User);
-            Assert.AreEqual(allHistories.ElementAt(0), newHistory.Document);
-            Assert.AreEqual(allHistories.ElementAt(0), newHistory.Id);
+            Assert.AreEqual(allHistories.ElementAt(0).Document, newHistory.Document);
+            Assert.AreEqual(allHistories.ElementAt(0).Id, newHistory.Id);
             TearDown();
         }
     }

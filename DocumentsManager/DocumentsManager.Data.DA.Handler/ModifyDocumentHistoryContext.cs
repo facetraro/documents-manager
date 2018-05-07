@@ -26,7 +26,13 @@ namespace DocumentsManager.Data.DA.Handler
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                return unitOfWork.HistoryRepository.Get().ToList();
+                List<ModifyDocumentHistory> lazy = unitOfWork.HistoryRepository.Get().ToList();
+                List<ModifyDocumentHistory> allHistories = new List<ModifyDocumentHistory>();
+                foreach (var item in lazy)
+                {
+                    allHistories.Add(GetById(item.Id));
+                }
+                return allHistories;
             }
         }
         public void ClearAll()
