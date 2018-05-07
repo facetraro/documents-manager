@@ -40,5 +40,11 @@ namespace DocumentsManagerTesting
             anotherHistory.Id = newHistroy.Id;
             Assert.IsTrue(newHistroy.Equals(anotherHistory));
         }
+        [TestMethod]
+        public void ModifyDocumentHistoryEqualsAnotherObject()
+        {
+            ModifyDocumentHistory newHistroy = EntitiesExampleInstances.TestModifyDocumentHistory();
+            Assert.IsFalse(newHistroy.Equals("aTestString"));
+        }
     }
 }
