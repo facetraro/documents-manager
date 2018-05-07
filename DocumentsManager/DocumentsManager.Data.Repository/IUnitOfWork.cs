@@ -17,6 +17,7 @@ namespace DocumentsManager.Data.Repository
         IRepository<Footer> FooterRepository { get; }
         IRepository<Format> FormatRepository { get; }
         IRepository<Parragraph> ParragraphRepository { get; }
+        IRepository<ModifyDocumentHistory> HistoryRepository { get; }
         IRepository<Document> DocumentRepository { get; }
         void Save();
     }

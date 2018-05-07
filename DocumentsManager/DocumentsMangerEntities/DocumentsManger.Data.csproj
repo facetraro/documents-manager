@@ -47,6 +47,7 @@
     <Compile Include="Attributes\Font.cs" />
     <Compile Include="Attributes\Italics.cs" />
     <Compile Include="Attributes\StyleColor.cs" />
+    <Compile Include="ModifyDocumentHistory.cs" />
     <Compile Include="StyleAttribute.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="DocumentObject.cs" />

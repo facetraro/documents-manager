@@ -20,6 +20,7 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<Format> formatRepository;
         private GenericRepository<Parragraph> parragraphRepository;
         private GenericRepository<Document> documentRepository;
+        private GenericRepository<ModifyDocumentHistory> historyRepository;
 
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
@@ -38,7 +39,7 @@ namespace DocumentsManager.Data.Repository
                 return userRepository;
             }
         }
-      
+
         public IRepository<StyleClass> StyleClassRepository
         {
             get
@@ -129,6 +130,19 @@ namespace DocumentsManager.Data.Repository
                 return documentRepository;
             }
         }
+
+        public IRepository<ModifyDocumentHistory> HistoryRepository
+        {
+            get
+            {
+                if (this.historyRepository == null)
+                {
+                    this.historyRepository = new GenericRepository<ModifyDocumentHistory>(context);
+                }
+                return historyRepository;
+            }
+        }
+
         public void Save()
         {
             context.SaveChanges();
