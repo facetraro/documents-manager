@@ -60,5 +60,27 @@ namespace DocumentsManagerDATesting
             Assert.IsFalse(allDocumentss.Contains(newDocument));
             TearDown();
         }
+        [TestMethod]
+        public void RemoveByIdDocumentTest()
+    {
+            DocumentContext context = new DocumentContext();
+            Document newDocument = setUp(context);
+            context.Remove(newDocument.Id);
+            List<Document> allDocumentss = context.GetLazy();
+            Assert.IsFalse(allDocumentss.Contains(newDocument));
+            TearDown();
     }
+        [TestMethod]
+        public void NotRemoveByIdDocumentTest()
+    {
+            DocumentContext context = new DocumentContext();
+            Document newDocument = setUp(context);
+            context.Remove(Guid.NewGuid());
+            List<Document> allDocumentss = context.GetLazy();
+            Assert.IsTrue(allDocumentss.Contains(newDocument));
+            TearDown();
+        }
+    }
+   
+
 }
