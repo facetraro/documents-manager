@@ -12,23 +12,19 @@ namespace DocumentsManagerDATesting
     [TestClass]
     public class ModifyDocumentHistoryContextTest
     {
-        public void TearDown()
-        {
-            ClearDataBase.ClearAll();
-        }
         [TestMethod]
         public void AddModifyDocumentHistoryTest()
         {
             ModifyDocumentHistory newHistory = EntitiesExampleInstances.TestModifyDocumentHistory();
             UserContext contextUser = new UserContext();
             contextUser.Add(newHistory.User);
-            DocumentContext contextDocument = new DocumentContext();
-            contextDocument.Add(newHistory.Document);
+            DocumentContext dContext = new DocumentContext();
+            DocumentContextTest documentTest = new DocumentContextTest();
+            newHistory.Document = documentTest.setUp(dContext);
             ModifyDocumentHistoryContext context = new ModifyDocumentHistoryContext();
             context.Add(newHistory);
             List<ModifyDocumentHistory> allHistories = context.GetAllHistories();
             Assert.IsTrue(allHistories.Contains(newHistory));
-            TearDown();
         }
     }
 }

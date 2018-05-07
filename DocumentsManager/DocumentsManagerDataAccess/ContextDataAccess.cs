@@ -20,6 +20,7 @@ namespace DocumentsManagerDataAccess
         public DbSet<Footer> Footers { get; set; }
         public DbSet<Parragraph> Parragraphs { get; set; }
         public DbSet<Document> Documents { get; set; }
+        public DbSet<ModifyDocumentHistory> Histories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -33,6 +34,7 @@ namespace DocumentsManagerDataAccess
             modelBuilder.Entity<Footer>().HasKey(F => F.Id);
             modelBuilder.Entity<Parragraph>().HasKey(P => P.Id);
             modelBuilder.Entity<Document>().HasKey(D => D.Id);
+            modelBuilder.Entity<ModifyDocumentHistory>().HasKey(MDH => MDH.Id);
         }
     }
 }

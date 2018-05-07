@@ -53,6 +53,7 @@
     <Compile Include="FormatContext.cs" />
     <Compile Include="FooterContext.cs" />
     <Compile Include="HeaderContext.cs" />
+    <Compile Include="ModifyDocumentHistoryContext.cs" />
     <Compile Include="ParragraphContext.cs" />
     <Compile Include="StyleClassContextHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

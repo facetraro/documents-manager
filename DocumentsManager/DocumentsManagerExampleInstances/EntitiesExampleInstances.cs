@@ -165,7 +165,7 @@ namespace DocumentsManagerExampleInstances
                 Id = Guid.NewGuid(),
                 User = TestAdminUser(),
                 Document = TestDocument(),
-                Date = new DateTime(),  
+                Date = DateTime.Now,  
             };
             return history;
         }
