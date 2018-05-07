@@ -44,5 +44,16 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.HistoryRepository.Delete(newHistory);
             }
         }
+        public ModifyDocumentHistory GetById(Guid id)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                ModifyDocumentHistory history = unitOfWork.HistoryRepository.GetByID(id);
+                db.Histories.Include("User").ToList();
+                db.Histories.Include("Document").ToList();
+                return history;
+            }
+        }
     }
 }
