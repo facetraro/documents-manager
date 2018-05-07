@@ -77,15 +77,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminControllerTest.cs" />
     <Compile Include="FormatControllerTest.cs" />
     <Compile Include="StyleClassControllerTest.cs" />
     <Compile Include="EditorControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+    <ProjectReference Include="..\BusinessLogic\DocumentsManager.BusinessLogic.csproj">
       <Project>{8B29DE6D-2EE3-4C95-8DF7-F890263F52CD}</Project>
-      <Name>BusinessLogic</Name>
+      <Name>DocumentsManager.BusinessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Web.Api\DocumentsManager.Web.Api.csproj">
       <Project>{4F1E9CEE-1F58-4B0C-87C0-2C8C4CA57B00}</Project>

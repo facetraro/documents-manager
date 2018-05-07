@@ -7,8 +7,8 @@
     <ProjectGuid>{8B29DE6D-2EE3-4C95-8DF7-F890263F52CD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BusinessLogic</RootNamespace>
-    <AssemblyName>BusinessLogic</AssemblyName>
+    <RootNamespace>DocumentsManager.BusinessLogic</RootNamespace>
+    <AssemblyName>DocumentsManager.BusinessLogic</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAdminsBusinessLogic.cs" />
     <Compile Include="IFormatsBusinessLogic.cs" />
     <Compile Include="IStyleClassBusinessLogic.cs" />
     <Compile Include="IEditorBusinessLogic.cs" />
