@@ -64,5 +64,23 @@ namespace DocumentsManagerDATesting
             Assert.AreEqual(result.Id, newHistory.Id);
             TearDown();
         }
+        [TestMethod]
+        public void GetAllHistoriesTest()
+        {
+            ModifyDocumentHistory newHistory = EntitiesExampleInstances.TestModifyDocumentHistory();
+            UserContext contextUser = new UserContext();
+            contextUser.Add(newHistory.User);
+            DocumentContext dContext = new DocumentContext();
+            DocumentContextTest documentTest = new DocumentContextTest();
+            newHistory.Document = documentTest.setUp(dContext);
+            ModifyDocumentHistoryContext context = new ModifyDocumentHistoryContext();
+            context.Add(newHistory);
+            List<ModifyDocumentHistory> allHistories = context.GetAllHistories();
+            Assert.IsTrue(allHistories.Contains(newHistory));
+            Assert.AreEqual(allHistories.ElementAt(0).User, newHistory.User);
+            Assert.AreEqual(allHistories.ElementAt(0), newHistory.Document);
+            Assert.AreEqual(allHistories.ElementAt(0), newHistory.Id);
+            TearDown();
+        }
     }
 }
