@@ -15,17 +15,9 @@ namespace DocumentsManagerDATesting
     {
         public void TearDown()
         {
-            ClearFooterDataBase();
+            ClearDataBase.ClearAll();
         }
-        private void ClearFooterDataBase()
-        {
-            FooterContext context = new FooterContext();
-            StyleClassContextHandler contextSC = new StyleClassContextHandler();
-            TextContext contextT = new TextContext();
-            context.ClearAll();
-            contextT.ClearAll();
-            contextSC.ClearAll();
-        }
+       
         [TestMethod]
         public void AddFooterTest()
         {

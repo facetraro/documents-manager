@@ -15,17 +15,9 @@ namespace DocumentsManagerDATesting
     {
         public void TearDown()
         {
-            ClearParragraphDataBase();
+            ClearDataBase.ClearAll();
         }
-        private void ClearParragraphDataBase()
-        {
-            ParragraphContext context = new ParragraphContext();
-            StyleClassContextHandler contextSC = new StyleClassContextHandler();
-            TextContext contextT = new TextContext();
-            context.ClearAll();
-            contextT.ClearAll();
-            contextSC.ClearAll();
-        }
+        
 
         [TestMethod]
         public void AddParragraphTest()

@@ -59,6 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DocumentContextTest.cs" />
     <Compile Include="FooterContextTest.cs" />
     <Compile Include="HeaderContextTest.cs" />
     <Compile Include="ClearDataBase.cs" />

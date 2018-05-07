@@ -12,8 +12,12 @@ namespace DocumentsManagerDATesting
     {
         public static void ClearAll()
         {
-            ClearAllTexts();
+            ClearAllParragraph();
+            ClearAllDocuments();
             ClearAllFormats();
+            ClearAllFooters();
+            ClearAllHeaders();
+            ClearAllTexts();
             ClearAllUsers();
             ClearAllStyleClasses(); 
         }
@@ -40,5 +44,26 @@ namespace DocumentsManagerDATesting
             TextContext context = new TextContext();
             context.ClearAll();
         }
+        private static void ClearAllParragraph()
+        {
+            ParragraphContext context = new ParragraphContext();
+            context.ClearAll();
+        }
+        private static void ClearAllFooters()
+        {
+            FooterContext context = new FooterContext();
+            context.ClearAll();
+        }
+        private static void ClearAllHeaders()
+        {
+           HeaderContext context = new HeaderContext();
+            context.ClearAll();
+        }
+        private static void ClearAllDocuments()
+        {
+            DocumentContext context = new DocumentContext();
+            context.ClearAll();
+        }
+
     }
 }
