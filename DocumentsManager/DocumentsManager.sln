@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Web.Api", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Web.Api.Tests", "DocumentsManager.Web.Api.Tests\DocumentsManager.Web.Api.Tests.csproj", "{D726DF9F-E972-4E41-9B68-824099DF0005}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{8B29DE6D-2EE3-4C95-8DF7-F890263F52CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.BusinessLogic", "BusinessLogic\DocumentsManager.BusinessLogic.csproj", "{8B29DE6D-2EE3-4C95-8DF7-F890263F52CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
