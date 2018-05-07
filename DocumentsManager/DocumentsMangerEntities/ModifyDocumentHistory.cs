@@ -12,5 +12,10 @@ namespace DocumentsMangerEntities
         public User User { get; set; }
         public Document Document { get; set; }
         public DateTime Date { get; set; }
+        public override bool Equals(object obj)
+        {
+            ModifyDocumentHistory anotherHistory = obj as ModifyDocumentHistory;
+            return Id.Equals(anotherHistory.Id);    
+        }
     }
 }
