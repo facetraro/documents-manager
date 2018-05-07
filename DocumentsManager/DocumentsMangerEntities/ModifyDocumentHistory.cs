@@ -15,6 +15,10 @@ namespace DocumentsMangerEntities
         public override bool Equals(object obj)
         {
             ModifyDocumentHistory anotherHistory = obj as ModifyDocumentHistory;
+            if ((System.Object)anotherHistory == null)
+            {
+                return false;
+            }
             return Id.Equals(anotherHistory.Id);    
         }
     }
