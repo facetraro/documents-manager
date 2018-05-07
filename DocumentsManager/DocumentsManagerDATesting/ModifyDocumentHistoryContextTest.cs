@@ -26,5 +26,20 @@ namespace DocumentsManagerDATesting
             List<ModifyDocumentHistory> allHistories = context.GetAllHistories();
             Assert.IsTrue(allHistories.Contains(newHistory));
         }
+        [TestMethod]
+        public void RemoveModifyDocumentHistoryTest()
+        {
+            ModifyDocumentHistory newHistory = EntitiesExampleInstances.TestModifyDocumentHistory();
+            UserContext contextUser = new UserContext();
+            contextUser.Add(newHistory.User);
+            DocumentContext dContext = new DocumentContext();
+            DocumentContextTest documentTest = new DocumentContextTest();
+            newHistory.Document = documentTest.setUp(dContext);
+            ModifyDocumentHistoryContext context = new ModifyDocumentHistoryContext();
+            context.Add(newHistory);
+            context.Remove(newHistory);
+            List<ModifyDocumentHistory> allHistories = context.GetAllHistories();
+            Assert.IsTrue(allHistories.Count==0);
+        }
     }
 }
