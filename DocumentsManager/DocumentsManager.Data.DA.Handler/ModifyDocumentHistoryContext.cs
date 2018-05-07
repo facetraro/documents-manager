@@ -29,5 +29,20 @@ namespace DocumentsManager.Data.DA.Handler
                 return unitOfWork.HistoryRepository.Get().ToList();
             }
         }
+        public void ClearAll()
+        {
+            foreach (var item in GetAllHistories())
+            {
+                Remove(item);
+            }
+        }
+        public void Remove(ModifyDocumentHistory newHistory)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                unitOfWork.HistoryRepository.Delete(newHistory);
+            }
+        }
     }
 }

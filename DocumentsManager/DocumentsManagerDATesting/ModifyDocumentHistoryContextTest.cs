@@ -12,6 +12,10 @@ namespace DocumentsManagerDATesting
     [TestClass]
     public class ModifyDocumentHistoryContextTest
     {
+        public void TearDown()
+        {
+            ClearDataBase.ClearAll();
+        }
         [TestMethod]
         public void AddModifyDocumentHistoryTest()
         {
@@ -25,6 +29,7 @@ namespace DocumentsManagerDATesting
             context.Add(newHistory);
             List<ModifyDocumentHistory> allHistories = context.GetAllHistories();
             Assert.IsTrue(allHistories.Contains(newHistory));
+            TearDown();
         }
         [TestMethod]
         public void RemoveModifyDocumentHistoryTest()
@@ -40,6 +45,7 @@ namespace DocumentsManagerDATesting
             context.Remove(newHistory);
             List<ModifyDocumentHistory> allHistories = context.GetAllHistories();
             Assert.IsTrue(allHistories.Count==0);
+            TearDown();
         }
     }
 }
