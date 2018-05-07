@@ -158,7 +158,17 @@ namespace DocumentsManagerExampleInstances
            
             return aDocument;
         }
-
+        public static ModifyDocumentHistory TestModifyDocumentHistory()
+        {
+            ModifyDocumentHistory history = new ModifyDocumentHistory
+            {
+                Id = Guid.NewGuid(),
+                User = TestAdminUser(),
+                Document = TestDocument(),
+                Date = new DateTime(),  
+            };
+            return history;
+        }
 
     }
 }
