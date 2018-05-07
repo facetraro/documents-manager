@@ -25,5 +25,36 @@ namespace DocumentsManagerTesting
             Assert.AreEqual(newHistroy.Id, newGuid);
             Assert.AreEqual(newHistroy.Date, newDate);
         }
+        [TestMethod]
+        public void ModifyDocumentHistoryEqualsFalse()
+        {
+            ModifyDocumentHistory newHistroy = new ModifyDocumentHistory();
+            Guid newGuid = Guid.NewGuid();
+            DateTime newDate = new DateTime();
+            User newUser = EntitiesExampleInstances.TestAdminUser();
+            Document newDocument = EntitiesExampleInstances.TestDocument();
+            newHistroy.Date = newDate;
+            newHistroy.Document = newDocument;
+            newHistroy.Id = newGuid;
+            newHistroy.User = newUser;
+            ModifyDocumentHistory anotherHistory = new ModifyDocumentHistory();
+            Assert.IsFalse(newHistroy.Equals(anotherHistory));
+        }
+        [TestMethod]
+        public void ModifyDocumentHistoryEqualsTrue()
+        {
+            ModifyDocumentHistory newHistroy = new ModifyDocumentHistory();
+            Guid newGuid = Guid.NewGuid();
+            DateTime newDate = new DateTime();
+            User newUser = EntitiesExampleInstances.TestAdminUser();
+            Document newDocument = EntitiesExampleInstances.TestDocument();
+            newHistroy.Date = newDate;
+            newHistroy.Document = newDocument;
+            newHistroy.Id = newGuid;
+            newHistroy.User = newUser;
+            ModifyDocumentHistory anotherHistory = new ModifyDocumentHistory();
+            anotherHistory.Id = newGuid;
+            Assert.IsTrue(newHistroy.Equals(anotherHistory));
+        }
     }
 }
