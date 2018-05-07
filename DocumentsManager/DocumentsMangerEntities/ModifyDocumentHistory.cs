@@ -21,5 +21,10 @@ namespace DocumentsMangerEntities
             }
             return Id.Equals(anotherHistory.Id);    
         }
+
+        public bool IsFromUser(User user)
+        {
+            return User.Equals(user);
+        }
     }
 }
