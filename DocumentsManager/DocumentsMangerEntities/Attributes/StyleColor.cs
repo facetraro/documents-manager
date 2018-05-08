@@ -1,4 +1,5 @@
-﻿using DocumentsMangerEntities;
+﻿using System;
+using DocumentsMangerEntities;
 
 namespace DocumentsMangerEntities
 {
@@ -17,6 +18,30 @@ namespace DocumentsMangerEntities
         private bool IsSameColor(StyleColor anotherStyleColor)
         {
             return TextColor == anotherStyleColor.TextColor;
+        }
+
+        private string GetHTMLValue()
+        {
+            return $"color: {GetHTMLColor()}";
+        }
+        private string GetHTMLColor()
+        {
+            return TextColorToHTML.GetString(TextColor);
+        }
+
+        public override string GetStyle()
+        {
+            return $" {GetHTMLValue()} ; ";
+        }
+
+        public override string GetInitialTag()
+        {
+            return String.Empty;
+        }
+
+        public override string GetEndTag()
+        {
+            return String.Empty;
         }
     }
 }

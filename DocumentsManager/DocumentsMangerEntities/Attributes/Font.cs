@@ -1,4 +1,5 @@
-﻿using DocumentsMangerEntities;
+﻿using System;
+using DocumentsMangerEntities;
 
 namespace DocumentsMangerEntities
 {
@@ -25,6 +26,30 @@ namespace DocumentsMangerEntities
         private bool IsTheSameFont(Font font)
         {
             return FontType == font.FontType;
+        }
+
+        public string GetHTMLValue()
+        {
+            return $"font-family: {GetHTMLFont()}";
+        }
+        private string GetHTMLFont()
+        {
+            return FontTypeToHTML.GetString(FontType);
+        }
+
+        public override string GetStyle()
+        {
+            return $" {GetHTMLValue()} ; ";
+        }
+
+        public override string GetInitialTag()
+        {
+            return String.Empty;
+        }
+
+        public override string GetEndTag()
+        {
+            return String.Empty;
         }
     }
 }

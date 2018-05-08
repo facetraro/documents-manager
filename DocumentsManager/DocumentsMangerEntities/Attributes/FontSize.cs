@@ -20,9 +20,33 @@ namespace DocumentsMangerEntities
             FontSize anotherFontSize = obj as FontSize;
             return base.Equals(anotherFontSize) && IsTheSameSize(anotherFontSize);
         }
+
         private bool IsTheSameSize(FontSize anotherFontSize)
         {
             return Size == anotherFontSize.Size;
+        }
+        public string GetHTMLValue()
+        {
+            return $"font-size: {Size}pt";
+        }
+        public bool IsAppliedInTheHTML()
+        {
+            return true;
+        }
+
+        public override string GetStyle()
+        {
+            return $" {GetHTMLValue()};";
+        }
+
+        public override string GetInitialTag()
+        {
+            return String.Empty;
+        }
+
+        public override string GetEndTag()
+        {
+            return String.Empty;
         }
     }
 }

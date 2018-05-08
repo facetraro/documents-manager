@@ -15,7 +15,7 @@ namespace DocumentsMangerEntities
         {
             Id = Guid.NewGuid();
         }
-        public override bool Equals(object obj)
+        public virtual bool Equals(object obj)
         {
             bool validation = false;
             StyleAttribute anotherObject = obj as StyleAttribute;
@@ -33,5 +33,8 @@ namespace DocumentsMangerEntities
         {
             return anotherObject.Name == Name;
         }
+        public abstract string GetStyle();
+        public abstract string GetInitialTag();
+        public abstract string GetEndTag();
     }
 }
