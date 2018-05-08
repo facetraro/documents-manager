@@ -125,8 +125,6 @@ namespace DocumentsManagerDATesting
             aParragraph.StyleClass = style;
             aParragraph.AddText(newText);
             context.Add(aParragraph);
-
-           
             Parragraph oldParragraph = new Parragraph
             {
                 Id = aParragraph.Id,
