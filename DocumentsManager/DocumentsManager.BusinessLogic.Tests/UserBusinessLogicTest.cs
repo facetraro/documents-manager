@@ -32,8 +32,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             UserBusinessLogic logic = new UserBusinessLogic();
             ChartIntDate result = logic.GetChartFromDocuments(SetUpDocuments(), date1, date2);
             ChartIntDate expected = ExpectedResult(date1);
-            expected.AddDocumentByDate(new DateTime(2018, 8, 5, 0, 0, 0));
-            expected.AddDocumentByDate(new DateTime(2018, 8, 5, 0, 0, 0));
+            expected.AddValueToDate(new DateTime(2018, 8, 5, 0, 0, 0));
+            expected.AddValueToDate(new DateTime(2018, 8, 5, 0, 0, 0));
             Assert.IsTrue(expected.Equals(result));
         }
         [TestMethod]

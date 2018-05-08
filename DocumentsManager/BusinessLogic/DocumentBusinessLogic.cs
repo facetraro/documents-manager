@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace DocumentsManager.BusinessLogic
 {
-    public class UserBusinessLogic
+    public class DocumentBusinessLogic
     {
-        private void AddDocumentByDate(List<Document> documents, ChartIntDate chart)
+        private void AddDateValue(List<DateTime> allDates, ChartIntDate chart)
         {
-            foreach (var item in documents)
+            foreach (var item in allDates)
             {
-                chart.AddValueToDate(item.CreationDate);
+                chart.AddValueToDate(item);
             }
         }
-        public ChartIntDate GetChartFromDocuments(List<Document> documents, DateTime since, DateTime until)
+        public ChartIntDate GetChartFromDocument(List<DateTime> allDates, DateTime since, DateTime until)
         {
             ChartIntDate chart = new ChartIntDate();
             chart.GenerateDates(since, until);
-            AddDocumentByDate(documents, chart);
+            AddDateValue(allDates, chart);
             return chart;
         }
     }

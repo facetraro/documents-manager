@@ -44,7 +44,7 @@ namespace DocumentsManager.BusinessLogic
         {
             return Date[i].ToString(formatDate).Equals(date.ToString(formatDate));
         }
-        public void AddDocumentByDate(DateTime date)
+        public void AddValueToDate(DateTime date)
         {
             for (int i = 0; i < Date.Count; i++)
             {
