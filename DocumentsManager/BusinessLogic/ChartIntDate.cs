@@ -76,7 +76,21 @@ namespace DocumentsManager.BusinessLogic
         public override bool Equals(object obj)
         {
             ChartIntDate anotherChart = obj as ChartIntDate;
-            return AreSequenceEquals(anotherChart);
+
+            return AreSameLength(anotherChart) && AreSequenceEquals(anotherChart);
+        }
+        private bool AreSameLength(ChartIntDate anotherChart)
+        {
+            return HasValidLength() && anotherChart.HasValidLength() && anotherChart.GetLength() == GetLength();
+        }
+
+        private bool HasValidLength()
+        {
+            return Date.Count == Value.Count;
+        }
+        private int GetLength()
+        {
+            return Date.Count;
         }
     }
 }
