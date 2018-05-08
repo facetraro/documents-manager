@@ -81,9 +81,16 @@ namespace DocumentsManager.BusinessLogic
         }
         private bool AreSameLength(ChartIntDate anotherChart)
         {
-            return HasValidLength() && anotherChart.HasValidLength() && anotherChart.GetLength() == GetLength();
+            return AreValidLength(anotherChart) && AreTheSameLength(anotherChart);
         }
-
+        private bool AreTheSameLength(ChartIntDate anotherChart)
+        {
+            return anotherChart.GetLength() == GetLength();
+        }
+        private bool AreValidLength(ChartIntDate anotherChart)
+        {
+            return HasValidLength() && anotherChart.HasValidLength();
+        }
         private bool HasValidLength()
         {
             return Date.Count == Value.Count;
