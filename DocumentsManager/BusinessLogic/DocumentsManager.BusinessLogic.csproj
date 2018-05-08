@@ -45,6 +45,7 @@
     <Compile Include="IStyleClassBusinessLogic.cs" />
     <Compile Include="IEditorBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StyleClassBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DocumentsMangerEntities\DocumentsManger.Data.csproj">

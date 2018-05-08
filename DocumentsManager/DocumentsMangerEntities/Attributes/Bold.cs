@@ -1,4 +1,5 @@
-﻿using DocumentsMangerEntities;
+﻿using System;
+using DocumentsMangerEntities;
 
 namespace DocumentsMangerEntities
 {
@@ -7,6 +8,25 @@ namespace DocumentsMangerEntities
         public Bold()
         {
             Name = "Negrita";
+        }
+
+        public override string GetEndTag()
+        {
+            return $"</{GetHTMLValue()}>";
+        }
+
+        public override string GetInitialTag()
+        {
+            return $"<{GetHTMLValue()}>";
+        }
+
+        public override string GetStyle()
+        {
+            return String.Empty;
+        }
+        private string GetHTMLValue()
+        {
+            return "strong";
         }
     }
 }

@@ -18,5 +18,6 @@ namespace DocumentsMangerEntities
         {
             return Applies == anotherBold.Applies;
         }
+     
     }
 }
