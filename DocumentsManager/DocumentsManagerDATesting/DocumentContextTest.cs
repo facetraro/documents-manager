@@ -23,6 +23,9 @@ namespace DocumentsManagerDATesting
             StyleClass style = EntitiesExampleInstances.TestStyleClass();
             Text newText = EntitiesExampleInstances.TestText();
             StyleClassContextHandler contextsc = new StyleClassContextHandler();
+            UserContext uContext = new UserContext();
+            User creatorUser = EntitiesExampleInstances.TestAdminUser();
+            uContext.Add(creatorUser);
             contextsc.Add(style);
             contextsc.Add(newDocument.Footer.StyleClass);
             contextsc.Add(newDocument.Header.StyleClass);
@@ -38,6 +41,8 @@ namespace DocumentsManagerDATesting
             newText.StyleClass = style;
             newDocument.StyleClass = style;
             newDocument.Parragraphs.ElementAt(0).Document = newDocument;
+            newDocument.CreatorUser = creatorUser;
+            newDocument.CreationDate = DateTime.Today;
             context.Add(newDocument);
             return newDocument;
         }
