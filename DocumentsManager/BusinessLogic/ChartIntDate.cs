@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace DocumentsManager.BusinessLogic
 {
-
     public class ChartIntDate
     {
         private static string formatDate = "d";
