@@ -49,7 +49,7 @@ namespace DocumentsManager.BusinessLogic.Tests
                     item.CreationDate = new DateTime(2011, 8, 5, 0, 0, 0);
                 }
             }
-            ChartIntDate expected=ExpectedResult(date1);
+            ChartIntDate expected = ExpectedResult(date1);
             UserBusinessLogic logic = new UserBusinessLogic();
             ChartIntDate result = logic.GetChartFromDocuments(documents, date1, date2);
             Assert.IsTrue(expected.Equals(result));
@@ -62,6 +62,16 @@ namespace DocumentsManager.BusinessLogic.Tests
             DateTime date2 = new DateTime(2018, 1, 12, 0, 0, 0);
             UserBusinessLogic logic = new UserBusinessLogic();
             ChartIntDate result = logic.GetChartFromDocuments(new List<Document>(), date1, date2);
+        }
+        [TestMethod]
+        public void CompareChartsBad()
+        {
+            DateTime date1 = new DateTime(2018, 8, 1, 0, 0, 0);
+            DateTime date2 = new DateTime(2018, 8, 2, 0, 0, 0);
+            ChartIntDate expected = ExpectedResult(date1);
+            UserBusinessLogic logic = new UserBusinessLogic();
+            ChartIntDate result = logic.GetChartFromDocuments(new List<Document>(), date1, date2);
+            Assert.IsFalse(expected.Equals(result));
         }
         private ChartIntDate ExpectedResult(DateTime date1)
         {
