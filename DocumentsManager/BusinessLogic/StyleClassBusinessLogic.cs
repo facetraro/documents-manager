@@ -9,19 +9,30 @@ namespace DocumentsManager.BusinessLogic
 {
     public class StyleClassBusinessLogic
     {
-        private string GetInitialTag(StyleClass style)
+        private static string LastTag ="</p>";
+        private string GetAttributesInitialTag(StyleClass style)
         {
-            string htmlResult = "<p";
             string allHTMLStyles = String.Empty;
             foreach (var item in style.Attributes)
             {
                 allHTMLStyles = allHTMLStyles + item.GetStyle();
             }
+            return allHTMLStyles;
+        }
+        private string GetStylesInitialTag(StyleClass style)
+        {
+            string htmlResult = String.Empty;
+            string allHTMLStyles = GetAttributesInitialTag(style);
             if (allHTMLStyles.Length != 0)
             {
                 htmlResult = $"{htmlResult} style=\"{allHTMLStyles}\"";
             }
-            htmlResult = $"{htmlResult}>";
+            return htmlResult;
+        }
+        private string GetInitialTag(StyleClass style)
+        {
+            string htmlResult = "<p";
+            htmlResult = $"{htmlResult}{GetStylesInitialTag(style)}>";
             return htmlResult;
         }
 
@@ -47,7 +58,7 @@ namespace DocumentsManager.BusinessLogic
         public string GetHtmlText(StyleClass style, string text)
         {
             string htmlResult = String.Empty;
-            htmlResult = GetInitialTag(style) + GetAllIncialAttributesTags(style) + text + GetAllEndAttributesTags(style) + "</p>";
+            htmlResult = GetInitialTag(style) + GetAllIncialAttributesTags(style) + text + GetAllEndAttributesTags(style) + LastTag;
             return htmlResult;
         }
 
