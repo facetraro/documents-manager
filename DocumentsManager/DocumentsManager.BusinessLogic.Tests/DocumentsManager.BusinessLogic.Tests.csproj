@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="StyleClassLogicTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DocumentBusinessLogicTest.cs" />
     <Compile Include="UserBusinessLogicTest.cs" />
   </ItemGroup>
   <ItemGroup>
