@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.BusinessLo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.BusinessLogic.Tests", "DocumentsManager.BusinessLogic.Tests\DocumentsManager.BusinessLogic.Tests.csproj", "{F731CE6A-1AEB-4394-AC3E-B4B273B1DE49}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Exceptions", "DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj", "{34E362D2-1A27-48BB-8FE5-91A89124B556}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{F731CE6A-1AEB-4394-AC3E-B4B273B1DE49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F731CE6A-1AEB-4394-AC3E-B4B273B1DE49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F731CE6A-1AEB-4394-AC3E-B4B273B1DE49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34E362D2-1A27-48BB-8FE5-91A89124B556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34E362D2-1A27-48BB-8FE5-91A89124B556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34E362D2-1A27-48BB-8FE5-91A89124B556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34E362D2-1A27-48BB-8FE5-91A89124B556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
