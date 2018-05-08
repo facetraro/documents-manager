@@ -106,6 +106,13 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.Save();
             }
         }
+        public bool Exists(Parragraph aParragraph) {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                return unitOfWork.ParragraphRepository.Exists(aParragraph.Id);
+            }
+        }
 
 
     }

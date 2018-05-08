@@ -32,11 +32,23 @@ namespace DocumentsManager.Data.DA.Handler
             fContext.Add(aDocument.Footer);
             hContext.Add(aDocument.Header);
         }
-        private void AddDocumentParragraphs(List<Parragraph> theParragraphs) {
+        private void AddDocumentParragraphs(List<Parragraph> theParragraphs,Document modifiedDocument) {
             ParragraphContext pContext = new ParragraphContext();
             for (int i = 0; i < theParragraphs.Count; i++)
             {
-                pContext.Add(theParragraphs.ElementAt(i));
+                Parragraph parragraphi = theParragraphs.ElementAt(i);
+                if (pContext.Exists(parragraphi))
+                {
+                    parragraphi = pContext.GetById(parragraphi.Id);
+                    using (var db = new ContextDataAccess())
+                    {
+                        db.Parragraphs.Attach(parragraphi);
+                    }
+                }
+                else {
+                    parragraphi.Document = modifiedDocument;
+                    pContext.Add(parragraphi);
+                }
             }
         }
         public void Add(Document aDocument)
@@ -54,7 +66,7 @@ namespace DocumentsManager.Data.DA.Handler
                 aDocument.Header = db.Headers.Find(aDocument.Header.Id);
                 unitOfWork.DocumentRepository.Insert(aDocument);
             }
-            AddDocumentParragraphs(theParragraphs);
+            AddDocumentParragraphs(theParragraphs,aDocument);
         }
         private void DeleteDocumentParts(Document aDocument)
         {
@@ -76,6 +88,7 @@ namespace DocumentsManager.Data.DA.Handler
         {
             Document document = new Document();
             RemoveDocumentParagraphs(documentToDelete);
+            documentToDelete.Parragraphs = new List<Parragraph>();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -115,6 +128,52 @@ namespace DocumentsManager.Data.DA.Handler
                 db.Documents.Include("Parragraphs").ToList();
                 return theDocument;
             }
+        }
+        public void Remove(Guid id)
+        {
+            Document toDelete = GetById(id);
+            if (toDelete != null)
+            {
+                Remove(toDelete);
+            }
+        }
+        private void transferParragraphInformation(Document modifiedDocument, Document oldDocument) {
+            ParragraphContext contextP = new ParragraphContext();
+            for (int i = 0; i < modifiedDocument.Parragraphs.Count; i++)
+            {
+                if (contextP.Exists(modifiedDocument.Parragraphs.ElementAt(i)))
+                {
+                    modifiedDocument.Parragraphs.ElementAt(i).StyleClass = contextP.GetById(modifiedDocument.Parragraphs.ElementAt(i).Id).StyleClass;
+                    
+                }
+            }
+            for (int i = 0; i < oldDocument.Parragraphs.Count; i++)
+            {
+                contextP.Remove(oldDocument.Parragraphs.ElementAt(i));
+            }
+          }
+        public void Modify(Document modifiedDocument, Document oldDocument)
+        {
+            modifiedDocument.StyleClass.Attributes = new List<StyleAttribute>();
+            transferParragraphInformation(modifiedDocument,oldDocument);
+            AddDocumentParts(modifiedDocument);
+
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                Document documenthEntity = db.Documents.Find(modifiedDocument.Id);
+                documenthEntity.Parragraphs =new List<Parragraph>();
+                documenthEntity.StyleClass = modifiedDocument.StyleClass;
+                db.Styles.Attach(documenthEntity.StyleClass);
+                documenthEntity.Format = db.Formats.Find(modifiedDocument.Format.Id);
+                documenthEntity.CreatorUser = db.Users.Find(modifiedDocument.CreatorUser.Id);
+                documenthEntity.Footer = db.Footers.Find(modifiedDocument.Footer.Id);
+                documenthEntity.Header = db.Headers.Find(modifiedDocument.Header.Id);
+                unitOfWork.DocumentRepository.Update(documenthEntity);
+                unitOfWork.Save();
+            }
+            DeleteDocumentParts(oldDocument);
+            AddDocumentParragraphs(modifiedDocument.Parragraphs,modifiedDocument);
         }
     }
 }

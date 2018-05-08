@@ -17,6 +17,22 @@ namespace DocumentsMangerEntities
         public virtual List<Parragraph> Parragraphs { get; set; }
         public virtual StyleClass StyleClass { get; set; }
         public string Title { get; set; }
+        public Document copyDocument(Document aDocument) {
+            CreationDate = aDocument.CreationDate;
+            CreatorUser = aDocument.CreatorUser;
+            Footer = aDocument.Footer;
+            Format = aDocument.Format;
+            Header = aDocument.Header;
+            Id = aDocument.Id;
+            StyleClass = aDocument.StyleClass;
+            Title = aDocument.Title;
+            Parragraphs = new List<Parragraph>();
+            foreach (var item in aDocument.Parragraphs)
+            {
+                Parragraphs.Add(item);
+            }
+            return this;
+        }
         public override bool Equals(object obj)
         {
             Document anotherDocument = obj as Document;
