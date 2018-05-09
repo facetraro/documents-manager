@@ -144,15 +144,6 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
-        [TestMethod]
-        public void GetByIdEditorTestNone()
-        {
-            EditorBusinessLogic editorBL = new EditorBusinessLogic();
-            bool expectedResult = true;
-            bool result = editorBL.GetByID(Guid.NewGuid()).Equals(null);
-            Assert.AreEqual(expectedResult, result);
-            TearDown();
-        }
 
     }
 }

@@ -26,16 +26,23 @@ namespace DocumentsManager.BusinessLogic
 
         public bool Delete(Guid id)
         {
+            bool deleted = false;
             UserContext uContext = new UserContext();
+            int quantity = GetAllEditors().Count();
             try
             {
                 uContext.Remove(id);
             }
             catch (Exception e)
             {
-
+                deleted= false;
             }
-            return true;
+            int newQuantity= GetAllEditors().Count();
+            if (quantity>newQuantity)
+            {
+                deleted = true;
+            }
+            return deleted;
         }
 
         public IEnumerable<EditorUser> GetAllEditors()
@@ -46,7 +53,17 @@ namespace DocumentsManager.BusinessLogic
 
         public EditorUser GetByID(Guid id)
         {
-            throw new NotImplementedException();
+            EditorUser userToReturn = new EditorUser();
+            UserContext uContext = new UserContext();
+            try
+            {
+                userToReturn= uContext.GetById(id) as EditorUser;
+            }
+            catch (Exception e)
+            {
+                return null; 
+            }
+            return userToReturn;
         }
 
         public bool Update(Guid id, EditorUser newEditor)
