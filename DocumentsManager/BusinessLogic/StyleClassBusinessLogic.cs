@@ -1,4 +1,5 @@
-﻿using DocumentsMangerEntities;
+﻿using DocumentsManager.Data.DA.Handler;
+using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +62,10 @@ namespace DocumentsManager.BusinessLogic
             htmlResult = GetInitialTag(style) + GetAllIncialAttributesTags(style) + text + GetAllEndAttributesTags(style) + LastTag;
             return htmlResult;
         }
-
+        public StyleClass GetById(Guid id)
+        {
+            StyleClassContextHandler context = new StyleClassContextHandler();
+            return context.GetById(id);
+        }
     }
 }
