@@ -55,5 +55,27 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
+        [TestMethod]
+        public void AddEditorTest()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            UserContext uContext = new UserContext();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            Guid expectedResult = editorBL.Add(anEditor);
+            Guid result = uContext.GetById(expectedResult).Id;
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void AddEditorTestVerify()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            editorBL.Add(anEditor);
+            bool expectedResult = true;
+            bool result = editorBL.GetAllEditors().Count() == 1;
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
     }
 }
