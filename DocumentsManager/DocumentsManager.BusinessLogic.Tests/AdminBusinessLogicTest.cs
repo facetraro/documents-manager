@@ -210,5 +210,50 @@ namespace DocumentsManager.BusinessLogic.Tests
             adminBL.GetByID(anEditor.Id);
             TearDown();
         }
+        [TestMethod]
+        public void UpdateAdminTestOnlyEmail()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid IdUserAdded = adminBL.Add(anAdmin);
+            anAdmin.Email = "modified@gmail.com";
+            bool expectedResult = true;
+            bool result = adminBL.Update(IdUserAdded, anAdmin);
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void UpdateAdminTestCheckEmail()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid IdUserAdded = adminBL.Add(anAdmin);
+            anAdmin.Email = "modified@gmail.com";
+            adminBL.Update(IdUserAdded, anAdmin);
+            Assert.AreEqual(adminBL.GetByID(IdUserAdded).Email, "modified@gmail.com");
+            TearDown();
+        }
+        [TestMethod]
+        public void UpdateAdminTestCheckAttrs()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid IdUserAdded = adminBL.Add(anAdmin);
+            anAdmin.Name = "George";
+            anAdmin.Password = "newPassword";
+            anAdmin.Surname = "Gomez";
+            anAdmin.Username = "modifiedUsername";
+            adminBL.Update(IdUserAdded, anAdmin);
+            AdminUser modifiedUser = adminBL.GetByID(IdUserAdded);
+            Assert.AreEqual(modifiedUser.Name, "George");
+            Assert.AreEqual(modifiedUser.Password, "newPassword");
+            Assert.AreEqual(modifiedUser.Surname, "Gomez");
+            Assert.AreEqual(modifiedUser.Username, "modifiedUsername");
+            Assert.AreEqual(modifiedUser.Id, IdUserAdded);
+            TearDown();
+        }
     }
 }
