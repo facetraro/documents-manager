@@ -69,15 +69,8 @@ namespace DocumentsManager.BusinessLogic
         public bool Update(Guid id, EditorUser newEditor)
         {
             UserContext uContext = new UserContext();
-            bool updated = true;
-            try
-            {
-                uContext.Modify(newEditor);
-            }
-            catch (Exception e)
-            {
-                updated = false;
-            }
+            bool updated = false;
+            updated = uContext.Modify(newEditor);
             User dbUser = GetByID(id);
             if (!dbUser.hasSameInformation(newEditor))
             {
