@@ -59,13 +59,16 @@ namespace DocumentsManager.Data.DA.Handler
                 return unitOfWork.UserRepository.GetByID(id);
             }
         }
-        public void Modify(User modifiedUser)
+        public bool Modify(User modifiedUser)
         {
+            bool modified = false;
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.UserRepository.Update(modifiedUser);
+                modified = true;
             }
+            return modified;
         }
         public List<EditorUser> GetEditors() {
             List<EditorUser> editors = new List<EditorUser>();

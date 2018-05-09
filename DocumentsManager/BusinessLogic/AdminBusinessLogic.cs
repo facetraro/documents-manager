@@ -68,7 +68,15 @@ namespace DocumentsManager.BusinessLogic
 
         public bool Update(Guid id, AdminUser newAdmin)
         {
-            throw new NotImplementedException();
+            UserContext uContext = new UserContext();
+            bool updated = false;
+            updated = uContext.Modify(newAdmin);
+            User dbUser = GetByID(id);
+            if (!dbUser.hasSameInformation(newAdmin))
+            {
+                updated = false;
+            }
+            return updated;
         }
     }
 }
