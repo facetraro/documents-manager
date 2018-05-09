@@ -31,18 +31,14 @@ namespace DocumentsManagerTesting
             aDocument.Header = aHeader;
             aDocument.Footer = aFooter;
             aDocument.Parragraphs = parragraphs;
-            aDocument.CreatorUser = anUser;
             aDocument.StyleClass = aStyle;
-            aDocument.CreationDate = aDate;
             aDocument.Title = title;
             Assert.AreEqual(aDocument.Id,id);
             Assert.AreEqual(aDocument.Format,aFormat);
             Assert.AreEqual(aDocument.Header,aHeader);
             Assert.AreEqual(aDocument.Footer,aFooter);
             Assert.AreEqual(aDocument.Parragraphs,parragraphs);
-            Assert.AreEqual(aDocument.CreatorUser,anUser);
             Assert.AreEqual(aDocument.StyleClass,aStyle);
-            Assert.AreEqual(aDocument.CreationDate,aDate);
             Assert.AreEqual(aDocument.Title, title);
         }
         [TestMethod]
@@ -65,18 +61,14 @@ namespace DocumentsManagerTesting
             aDocument.Header = aHeader;
             aDocument.Footer = aFooter;
             aDocument.Parragraphs = parragraphs;
-            aDocument.CreatorUser = anUser;
             aDocument.StyleClass = aStyle;
-            aDocument.CreationDate = aDate;
             aDocument.Title = title;
             Assert.AreNotEqual(aDocument.Id, Guid.NewGuid());
             Assert.AreNotEqual(aDocument.Format, EntitiesExampleInstances.TestFormat());
             Assert.AreNotEqual(aDocument.Header, EntitiesExampleInstances.TestHeader());
             Assert.AreNotEqual(aDocument.Footer, EntitiesExampleInstances.TestFooter());
             Assert.AreNotEqual(aDocument.Parragraphs, new List<Parragraph>());
-            Assert.AreNotEqual(aDocument.CreatorUser, EntitiesExampleInstances.TestUser());
             Assert.AreNotEqual(aDocument.StyleClass, EntitiesExampleInstances.TestStyleClass());
-            Assert.AreNotEqual(aDocument.CreationDate, DateTime.Today.AddDays(1));
             Assert.AreNotEqual(aDocument.Title, "");
         }
         [TestMethod]

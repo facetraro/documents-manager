@@ -61,7 +61,6 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(aDocument.StyleClass);
                 aDocument.Format = db.Formats.Find(aDocument.Format.Id);
-                aDocument.CreatorUser = db.Users.Find(aDocument.CreatorUser.Id);
                 aDocument.Footer = db.Footers.Find(aDocument.Footer.Id);
                 aDocument.Header = db.Headers.Find(aDocument.Header.Id);
                 unitOfWork.DocumentRepository.Insert(aDocument);
@@ -124,7 +123,6 @@ namespace DocumentsManager.Data.DA.Handler
                 db.Documents.Include("Footer").ToList().FirstOrDefault();
                 db.Documents.Include("Header").ToList().FirstOrDefault();
                 db.Documents.Include("Format").ToList().FirstOrDefault();
-                db.Documents.Include("CreatorUser").ToList().FirstOrDefault();
                 db.Documents.Include("Parragraphs").ToList();
                 return theDocument;
             }
@@ -166,7 +164,6 @@ namespace DocumentsManager.Data.DA.Handler
                 documenthEntity.StyleClass = modifiedDocument.StyleClass;
                 db.Styles.Attach(documenthEntity.StyleClass);
                 documenthEntity.Format = db.Formats.Find(modifiedDocument.Format.Id);
-                documenthEntity.CreatorUser = db.Users.Find(modifiedDocument.CreatorUser.Id);
                 documenthEntity.Footer = db.Footers.Find(modifiedDocument.Footer.Id);
                 documenthEntity.Header = db.Headers.Find(modifiedDocument.Header.Id);
                 unitOfWork.DocumentRepository.Update(documenthEntity);

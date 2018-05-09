@@ -150,9 +150,7 @@ namespace DocumentsManagerExampleInstances
                 Header = EntitiesExampleInstances.TestHeader(),
                 Footer = EntitiesExampleInstances.TestFooter(),
                 Parragraphs = parragraphs,
-                CreatorUser = EntitiesExampleInstances.TestUser(),
                 StyleClass = EntitiesExampleInstances.TestStyleClass(),
-                CreationDate = DateTime.Today,
                 Title = "Default title"
         };
            
@@ -165,7 +163,8 @@ namespace DocumentsManagerExampleInstances
                 Id = Guid.NewGuid(),
                 User = TestAdminUser(),
                 Document = TestDocument(),
-                Date = DateTime.Now,  
+                Date = DateTime.Now,
+                State = ModifyState.Added,
             };
             return history;
         }

@@ -8,8 +8,6 @@ namespace DocumentsMangerEntities
 {
     public class Document
     {
-        public DateTime CreationDate { get; set; }
-        public virtual User CreatorUser { get; set; }
         public virtual Footer Footer { get; set; }
         public virtual Format Format { get; set; }
         public virtual Header Header { get; set; }
@@ -18,8 +16,6 @@ namespace DocumentsMangerEntities
         public virtual StyleClass StyleClass { get; set; }
         public string Title { get; set; }
         public Document copyDocument(Document aDocument) {
-            CreationDate = aDocument.CreationDate;
-            CreatorUser = aDocument.CreatorUser;
             Footer = aDocument.Footer;
             Format = aDocument.Format;
             Header = aDocument.Header;
