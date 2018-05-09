@@ -128,7 +128,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void DeleteEditorTestVerify()
+        public void DeleteAdminTestVerify()
         {
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
@@ -141,7 +141,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void DeleteEditorTestMethodResult()
+        public void DeleteAdminTestMethodResult()
         {
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
@@ -154,11 +154,48 @@ namespace DocumentsManager.BusinessLogic.Tests
         }
         [ExpectedException(typeof(ObjectDoesNotExists))]
         [TestMethod]
-        public void DoNotDeleteEditorTest()
+        public void DoNotDeleteAdminTest()
         {
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             adminBL.Delete(Guid.NewGuid());
+            TearDown();
+        }
+        [TestMethod]
+        public void GetByIdAdminTest()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid IdUserAdded = adminBL.Add(anAdmin);
+            bool expectedResult = true;
+            bool result = adminBL.GetByID(IdUserAdded).Equals(anAdmin);
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [ExpectedException(typeof(ObjectDoesNotExists))]
+        [TestMethod]
+        public void NoGetByIdAdminTest()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            adminBL.GetByID(Guid.NewGuid());
+            TearDown();
+        }
+        [TestMethod]
+        public void GetByIdEAdminTestWithOthers()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid IdUserAdded = adminBL.Add(anAdmin);
+            AdminUser anotherAdmin = EntitiesExampleInstances.TestAdminUser();
+            anotherAdmin.Username = "UserName2";
+            anotherAdmin.Email = "Email2";
+            adminBL.Add(anotherAdmin);
+            bool expectedResult = true;
+            bool result = adminBL.GetByID(IdUserAdded).Equals(anAdmin);
+            Assert.AreEqual(expectedResult, result);
             TearDown();
         }
     }
