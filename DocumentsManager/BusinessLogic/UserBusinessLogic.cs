@@ -29,9 +29,8 @@ namespace DocumentsManager.BusinessLogic
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             return documentLogic.GetChartFromDocument(documentLogic.GetDatesFromModifyDocument(document), since, until);
         }
-        public void ModifyDocument(User user, Document doc)
+        private void AddModifyHistory(User user, Document doc)
         {
-            DocumentContext documentContext = new DocumentContext();
             ModifyDocumentHistory history = new ModifyDocumentHistory();
             history.Document = doc;
             history.User = user;
@@ -39,6 +38,10 @@ namespace DocumentsManager.BusinessLogic
             history.Id = Guid.NewGuid();
             ModifyDocumentHistoryContext modifyContext = new ModifyDocumentHistoryContext();
             modifyContext.Add(history);
+        }
+        public void ModifyDocument(User user, Document doc)
+        {
+            AddModifyHistory(user, doc);
         }
     }
 }
