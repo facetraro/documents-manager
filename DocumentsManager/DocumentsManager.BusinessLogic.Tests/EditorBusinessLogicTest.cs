@@ -77,5 +77,28 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
+        [TestMethod]
+        public void DeleteEditorTest()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            editorBL.Delete(editorBL.Add(anEditor));
+            bool expectedResult = true;
+            bool result = editorBL.GetAllEditors().Count() == 0;
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void DeleteEditorTestVerify()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            editorBL.Delete(editorBL.Add(anEditor));
+            bool expectedResult = true;
+            bool result = !editorBL.GetAllEditors().Contains(anEditor);
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+
     }
 }
