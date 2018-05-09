@@ -44,7 +44,7 @@ namespace DocumentsManagerDATesting
             newDocument.CreatorUser = creatorUser;
             newDocument.CreationDate = DateTime.Today;
             context.Add(newDocument);
-            return newDocument;
+            return context.GetById(newDocument.Id); 
         }
         [TestMethod]
         public void AddDocumentTest()

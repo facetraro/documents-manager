@@ -1,4 +1,5 @@
-﻿using DocumentsMangerEntities;
+﻿using DocumentsManager.Data.DA.Handler;
+using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,17 @@ namespace DocumentsManager.BusinessLogic
         {
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             return documentLogic.GetChartFromDocument(documentLogic.GetDatesFromModifyDocument(document), since, until);
+        }
+        public void ModifyDocument(User user, Document doc)
+        {
+            DocumentContext documentContext = new DocumentContext();
+            ModifyDocumentHistory history = new ModifyDocumentHistory();
+            history.Document = doc;
+            history.User = user;
+            history.Date = DateTime.Today;
+            history.Id = Guid.NewGuid();
+            ModifyDocumentHistoryContext modifyContext = new ModifyDocumentHistoryContext();
+            modifyContext.Add(history);
         }
     }
 }
