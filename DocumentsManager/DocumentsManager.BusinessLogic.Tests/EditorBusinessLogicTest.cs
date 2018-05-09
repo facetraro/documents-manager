@@ -82,7 +82,8 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            editorBL.Delete(editorBL.Add(anEditor));
+            Guid idUserToDelete = editorBL.Add(anEditor);
+            editorBL.Delete(idUserToDelete);
             bool expectedResult = true;
             bool result = editorBL.GetAllEditors().Count() == 0;
             Assert.AreEqual(expectedResult, result);
@@ -93,7 +94,8 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            editorBL.Delete(editorBL.Add(anEditor));
+            Guid idUserToDelete = editorBL.Add(anEditor);
+            editorBL.Delete(idUserToDelete);
             bool expectedResult = true;
             bool result = !editorBL.GetAllEditors().Contains(anEditor);
             Assert.AreEqual(expectedResult, result);
