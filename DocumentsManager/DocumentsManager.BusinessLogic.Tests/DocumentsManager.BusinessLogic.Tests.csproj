@@ -61,6 +61,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AdminBusinessLogicTest.cs" />
     <Compile Include="EditorBusinessLogicTest.cs" />
     <Compile Include="StyleClassLogicTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

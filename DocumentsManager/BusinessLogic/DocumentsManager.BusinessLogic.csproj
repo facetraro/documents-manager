@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminBusinessLogic.cs" />
     <Compile Include="ChartIntDate.cs" />
     <Compile Include="EditorBusinessLogic.cs" />
     <Compile Include="IAdminsBusinessLogic.cs" />
