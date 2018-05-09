@@ -101,6 +101,58 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
+        [TestMethod]
+        public void DeleteEditorTestMethodResult()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            Guid idUserToDelete = editorBL.Add(anEditor);
+            bool expectedResult = true;
+            bool result = editorBL.Delete(idUserToDelete);
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void DoNotDeleteEditorTest()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            bool expectedResult = false;
+            bool result = editorBL.Delete(Guid.NewGuid());
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetByIdEditorTest()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            Guid IdUserAdded = editorBL.Add(anEditor);
+            bool expectedResult = true;
+            bool result = editorBL.GetByID(IdUserAdded).Equals(anEditor);
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetByIdEditorTestWithOthers()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            Guid IdUserAdded = editorBL.Add(anEditor);
+            editorBL.Add(EntitiesExampleInstances.TestEditorUser());
+            bool expectedResult = true;
+            bool result = editorBL.GetByID(IdUserAdded).Equals(anEditor);
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetByIdEditorTestNone()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            bool expectedResult = true;
+            bool result = editorBL.GetByID(Guid.NewGuid()).Equals(null);
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
 
     }
 }
