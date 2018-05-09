@@ -13,7 +13,14 @@ namespace DocumentsManager.BusinessLogic
         public Guid Add(EditorUser editor)
         {
             UserContext uContext = new UserContext();
-            uContext.Add(editor);
+            try
+            {
+                uContext.Add(editor);
+            }
+            catch (Exception e)
+            {
+
+            }
             return editor.Id;
         }
 
