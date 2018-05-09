@@ -43,12 +43,17 @@
     <Compile Include="AdminBusinessLogic.cs" />
     <Compile Include="ChartIntDate.cs" />
     <Compile Include="EditorBusinessLogic.cs" />
+    <Compile Include="FooterBusinessLogic.cs" />
+    <Compile Include="FormatBusinessLogic.cs" />
+    <Compile Include="HeaderBusinessLogic.cs" />
     <Compile Include="IAdminsBusinessLogic.cs" />
     <Compile Include="IFormatsBusinessLogic.cs" />
     <Compile Include="IStyleClassBusinessLogic.cs" />
     <Compile Include="IEditorBusinessLogic.cs" />
+    <Compile Include="ParragraphBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DocumentBusinessLogic.cs" />
+    <Compile Include="TextBusinessLogic.cs" />
     <Compile Include="UserBusinessLogic.cs" />
     <Compile Include="StyleClassBusinessLogic.cs" />
   </ItemGroup>

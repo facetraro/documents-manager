@@ -111,6 +111,7 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
                 StyleClass style = unitOfWork.StyleClassRepository.GetByID(id);
                 db.Styles.Include("Attributes").ToList();
+                db.Styles.Include("Formats").ToList();
                 return style;
             }
         }
