@@ -1,4 +1,5 @@
 ﻿using DocumentsManager.Data.DA.Handler;
+using DocumentsManager.Exceptions;
 using DocumentsManagerDATesting;
 using DocumentsManagerExampleInstances;
 using DocumentsMangerEntities;
@@ -53,6 +54,38 @@ namespace DocumentsManager.BusinessLogic.Tests
             bool expectedResult = true;
             bool result = adminBL.GetAllAdmins().Count() == 0;
             Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void AddAdminTest()
+        {
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            UserContext uContext = new UserContext();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid expectedResult = adminBL.Add(anAdmin);
+            Guid result = uContext.GetById(expectedResult).Id;
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void AddAdminTestVerify()
+        {
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            adminBL.Add(anAdmin);
+            bool expectedResult = true;
+            bool result = adminBL.GetAllAdmins().Count() == 1;
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [ExpectedException(typeof(ObjectAlreadyExistsException))]
+        [TestMethod]
+        public void AddAdminTestExists()
+        {
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            adminBL.Add(anAdmin);
+            adminBL.Add(anAdmin);
             TearDown();
         }
     }
