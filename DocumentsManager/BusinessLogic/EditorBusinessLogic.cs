@@ -68,7 +68,17 @@ namespace DocumentsManager.BusinessLogic
 
         public bool Update(Guid id, EditorUser newEditor)
         {
-            throw new NotImplementedException();
+            UserContext uContext = new UserContext();
+            bool updated = true;
+            try
+            {
+                uContext.Modify(newEditor);
+            }
+            catch (Exception e)
+            {
+                updated=false;
+            }
+            return updated;
         }
     }
 }

@@ -167,6 +167,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(editorBL.GetByID(IdUserAdded).Email, "modified@gmail.com");
             TearDown();
         }
+        [TestMethod]
         public void UpdateEditorTestCheckAttrs()
         {
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
@@ -182,6 +183,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(modifiedUser.Password, "newPassword");
             Assert.AreEqual(modifiedUser.Surname, "Gomez");
             Assert.AreEqual(modifiedUser.Username, "modifiedUsername");
+            Assert.AreEqual(modifiedUser.Id, IdUserAdded);
             TearDown();
         }
 
