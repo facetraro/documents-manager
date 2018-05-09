@@ -74,5 +74,38 @@ namespace DocumentsManagerDATesting
             Assert.IsTrue(allUsers.Find(item => item.Id == newUser.Id).Name == newUser.Name);
             TearDown();
         }
+        [TestMethod]
+        public void GetEditorsTestZero()
+        {
+            UserContext context = new UserContext();
+            List<EditorUser> allEditors = context.GetEditors();
+            Assert.IsTrue(allEditors.Count == 0);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetEditorsTestOne()
+        {
+            UserContext context = new UserContext();
+            EditorUser newUser = EntitiesExampleInstances.TestEditorUser();
+            context.Add(newUser);
+            List<EditorUser> allEditors = context.GetEditors();
+            Assert.IsTrue(allEditors.Count==1);
+            Assert.IsTrue(allEditors.Contains(newUser));
+            TearDown();
+        }
+        [TestMethod]
+        public void GetEditorsTestTwo()
+        {
+            UserContext context = new UserContext();
+            EditorUser newUser = EntitiesExampleInstances.TestEditorUser();
+            EditorUser anotherUser = EntitiesExampleInstances.TestEditorUser();
+            context.Add(newUser);
+            context.Add(anotherUser);
+            List<EditorUser> allEditors = context.GetEditors();
+            Assert.IsTrue(allEditors.Count == 2);
+            Assert.IsTrue(allEditors.Contains(newUser));
+            Assert.IsTrue(allEditors.Contains(anotherUser));
+            TearDown();
+        }
     }
 }
