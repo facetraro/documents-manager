@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChartIntDate.cs" />
+    <Compile Include="EditorBusinessLogic.cs" />
     <Compile Include="IAdminsBusinessLogic.cs" />
     <Compile Include="IFormatsBusinessLogic.cs" />
     <Compile Include="IStyleClassBusinessLogic.cs" />
@@ -51,6 +52,10 @@
     <Compile Include="StyleClassBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocumentsManager.Data.DA.Handler\DocumentsManager.Data.DA.Handler.csproj">
+      <Project>{08679660-B159-4575-9066-71059A3C33AF}</Project>
+      <Name>DocumentsManager.Data.DA.Handler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj">
       <Project>{34E362D2-1A27-48BB-8FE5-91A89124B556}</Project>
       <Name>DocumentsManager.Exceptions</Name>

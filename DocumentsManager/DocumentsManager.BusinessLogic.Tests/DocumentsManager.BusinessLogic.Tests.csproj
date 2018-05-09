@@ -35,7 +35,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -52,6 +61,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="EditorBusinessLogicTest.cs" />
     <Compile Include="StyleClassLogicTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DocumentBusinessLogicTest.cs" />
@@ -62,9 +72,17 @@
       <Project>{8B29DE6D-2EE3-4C95-8DF7-F890263F52CD}</Project>
       <Name>DocumentsManager.BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.Data.DA.Handler\DocumentsManager.Data.DA.Handler.csproj">
+      <Project>{08679660-B159-4575-9066-71059A3C33AF}</Project>
+      <Name>DocumentsManager.Data.DA.Handler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj">
       <Project>{34E362D2-1A27-48BB-8FE5-91A89124B556}</Project>
       <Name>DocumentsManager.Exceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsManagerDATesting\DocumentsManager.Data.DA.Test.csproj">
+      <Project>{3D06630F-61EC-4AAA-BC6D-294022DC3F89}</Project>
+      <Name>DocumentsManager.Data.DA.Test</Name>
     </ProjectReference>
     <ProjectReference Include="..\DocumentsManagerExampleInstances\DocumentsManager.Data.Instances.csproj">
       <Project>{C2B9AED8-4F48-48CB-817E-0D79606DFC6B}</Project>
@@ -74,6 +92,10 @@
       <Project>{80D195AE-B71A-465A-A588-7397AE023E8F}</Project>
       <Name>DocumentsManger.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
