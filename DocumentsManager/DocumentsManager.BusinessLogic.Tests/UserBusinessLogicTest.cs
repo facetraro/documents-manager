@@ -91,6 +91,28 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(expected.Equals(result));
             ClearDataBase.ClearAll();
         }
+        [TestMethod]
+        public void GetChartFromADocumentWithModify()
+        {
+            DateTime date1 = DateTime.Today;
+            DateTime date2 = DateTime.Today.AddDays(10);
+            DocumentContextTest testDocument = new DocumentContextTest();
+            DocumentContext contextDocument = new DocumentContext();
+            Document doc = testDocument.setUp(contextDocument);
+            UserBusinessLogic logic = new UserBusinessLogic();
+            doc.Title = "anotherTitle";
+            logic.ModifyDocument(doc.CreatorUser, doc);
+            doc.Title = "anotherNewTitle";
+            logic.ModifyDocument(doc.CreatorUser, doc);
+            ChartIntDate result = logic.GetChartFromADocument(doc, date1, date2);
+            ChartIntDate expected = new ChartIntDate();
+            expected.GenerateDates(date1, date2);
+            expected.AddValueToDate(date1);
+            expected.AddValueToDate(date1);
+            expected.AddValueToDate(date1);
+            Assert.IsTrue(expected.Equals(result));
+            ClearDataBase.ClearAll();
+        }
         private ChartIntDate ExpectedResult(DateTime date1)
         {
             ChartIntDate expected = new ChartIntDate();
