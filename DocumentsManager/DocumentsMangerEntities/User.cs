@@ -30,6 +30,12 @@ namespace DocumentsMangerEntities
         {
             return Username.Equals(anUser.Username);
         }
+        public bool hasSameInformation(User anUser) {
+            bool password = Password.Equals(anUser.Password);
+            bool name = Name.Equals(anUser.Name);
+            bool surname = Surname.Equals(anUser.Surname);
+            return IsSameUserByUsername(anUser) && IsSameUserByEmail(anUser) && password && name && surname && Equals(anUser);
+        }
         public bool Authenticate(string possiblePassword) {
             return Password.Equals(possiblePassword);
         }

@@ -16,7 +16,10 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             this.editorsBuisnessLogic = logic;
         }
-
+        public EditorController()
+        {
+            this.editorsBuisnessLogic = new EditorBusinessLogic();
+        }
         // GET: api/Editor
         public IHttpActionResult Get()
         {
