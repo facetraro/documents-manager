@@ -36,21 +36,20 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.UserRepository.Insert(newUser);
             }
         }
-        public void Remove(User userToDelete)
+        public bool Remove(User userToDelete)
         {
-            using (var db = new ContextDataAccess())
-            {
-                var unitOfWork = new UnitOfWork(db);
-                unitOfWork.UserRepository.Delete(userToDelete);
-            }
+            return Remove(userToDelete.Id);
         }
-        public void Remove(Guid id)
+        public bool Remove(Guid id)
         {
+            bool deleted = false;
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.UserRepository.Delete(id);
+                deleted = true;
             }
+            return deleted;
         }
         public User GetById(Guid id)
         {
@@ -60,13 +59,16 @@ namespace DocumentsManager.Data.DA.Handler
                 return unitOfWork.UserRepository.GetByID(id);
             }
         }
-        public void Modify(User modifiedUser)
+        public bool Modify(User modifiedUser)
         {
+            bool modified = false;
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.UserRepository.Update(modifiedUser);
+                modified = true;
             }
+            return modified;
         }
         public List<EditorUser> GetEditors() {
             List<EditorUser> editors = new List<EditorUser>();
@@ -102,6 +104,14 @@ namespace DocumentsManager.Data.DA.Handler
                 }
             }
             return admins;
+        }
+        public bool Exists(User anUser)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                return unitOfWork.UserRepository.Exists(anUser.Id);
+            }
         }
     }
 }

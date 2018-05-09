@@ -5,19 +5,42 @@ using System.Text;
 using System.Threading.Tasks;
 using DocumentsMangerEntities;
 using DocumentsManager.Data.DA.Handler;
+using DocumentsManager.Exceptions;
 
 namespace DocumentsManager.BusinessLogic
 {
-    public class AdminBusinessLogic : IAdminsBusinessLogic
+    public class AdminBusinessLogic :UserBusinessLogic, IAdminsBusinessLogic
     {
         public Guid Add(AdminUser admin)
         {
-            throw new NotImplementedException();
+            admin.Id = Guid.NewGuid();
+            UserContext uContext = new UserContext();
+            if (IdRegistered(admin)) 
+            {
+                throw new ObjectAlreadyExistsException("Id");
+            }
+            if (EmailRegistered(admin)) 
+            {
+                throw new ObjectAlreadyExistsException("email");
+            }
+            if (UserNameRegistered(admin)) 
+            {
+                throw new ObjectAlreadyExistsException("username");
+            }
+            uContext.Add(admin);
+            return admin.Id;
         }
 
         public bool Delete(Guid id)
         {
-            throw new NotImplementedException();
+            UserContext uContext = new UserContext();
+            AdminUser idUser = new AdminUser();
+            idUser.Id = id;
+            if (uContext.Exists(idUser))
+            {
+                return uContext.Remove(id);
+            }
+            throw new ObjectDoesNotExists(idUser);
         }
 
         public IEnumerable<AdminUser> GetAllAdmins()
@@ -28,12 +51,32 @@ namespace DocumentsManager.BusinessLogic
 
         public AdminUser GetByID(Guid id)
         {
-            throw new NotImplementedException();
+            AdminUser userToReturn = new AdminUser();
+            UserContext uContext = new UserContext();
+            User userToVerify = uContext.GetById(id);
+            if (userToVerify is EditorUser)
+            {
+                throw new WrongUserType(userToReturn);
+            }
+            userToReturn = userToVerify as AdminUser;
+            if (userToReturn == null)
+            {
+                throw new ObjectDoesNotExists(new EditorUser());
+            }
+            return userToReturn;
         }
 
         public bool Update(Guid id, AdminUser newAdmin)
         {
-            throw new NotImplementedException();
+            UserContext uContext = new UserContext();
+            bool updated = false;
+            updated = uContext.Modify(newAdmin);
+            User dbUser = GetByID(id);
+            if (!dbUser.hasSameInformation(newAdmin))
+            {
+                updated = false;
+            }
+            return updated;
         }
     }
 }
