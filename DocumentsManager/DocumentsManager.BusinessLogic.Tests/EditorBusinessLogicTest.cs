@@ -144,6 +144,46 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
+        [TestMethod]
+        public void UpdateEditorTestOnlyEmail()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            Guid IdUserAdded = editorBL.Add(anEditor);
+            anEditor.Email = "modified@gmail.com";
+            bool expectedResult = true;
+            bool result = editorBL.Update(IdUserAdded, anEditor);
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void UpdateEditorTestCheckEmail()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            Guid IdUserAdded = editorBL.Add(anEditor);
+            anEditor.Email = "modified@gmail.com";
+            editorBL.Update(IdUserAdded, anEditor);
+            Assert.AreEqual(editorBL.GetByID(IdUserAdded).Email, "modified@gmail.com");
+            TearDown();
+        }
+        public void UpdateEditorTestCheckAttrs()
+        {
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            Guid IdUserAdded = editorBL.Add(anEditor);
+            anEditor.Name = "George";
+            anEditor.Password = "newPassword";
+            anEditor.Surname = "Gomez";
+            anEditor.Username = "modifiedUsername";
+            editorBL.Update(IdUserAdded, anEditor);
+            EditorUser modifiedUser = editorBL.GetByID(IdUserAdded);
+            Assert.AreEqual(modifiedUser.Name, "George");
+            Assert.AreEqual(modifiedUser.Password, "newPassword");
+            Assert.AreEqual(modifiedUser.Surname, "Gomez");
+            Assert.AreEqual(modifiedUser.Username, "modifiedUsername");
+            TearDown();
+        }
 
     }
 }
