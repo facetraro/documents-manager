@@ -26,7 +26,16 @@ namespace DocumentsManager.BusinessLogic
 
         public bool Delete(Guid id)
         {
-            throw new NotImplementedException();
+            UserContext uContext = new UserContext();
+            try
+            {
+                uContext.Remove(id);
+            }
+            catch (Exception e)
+            {
+
+            }
+            return true;
         }
 
         public IEnumerable<EditorUser> GetAllEditors()
