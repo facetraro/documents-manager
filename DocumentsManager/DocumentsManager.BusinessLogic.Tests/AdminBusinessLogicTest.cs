@@ -204,20 +204,8 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             DateTime date1 = DateTime.Today;
             DateTime date2 = DateTime.Today.AddDays(10);
-            UserBusinessLogic userLogic = new UserBusinessLogic();
-            DocumentContextTest documentContext = new DocumentContextTest();
-            DocumentContext context = new DocumentContext();
-            UserContext userContext = new UserContext();
-            User newUser = EntitiesExampleInstances.TestAdminUser();
-            userContext.Add(newUser);
-            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            Document documentInBD = documentContext.setUp(context);
-            Document anotherDocumentInBD = documentContext.setUp(context);
-            userLogic.ModifyDocument(newUser, documentInBD, ModifyState.Added);
-            userLogic.ModifyDocument(newUser, documentInBD, ModifyState.Modified);
-            userLogic.ModifyDocument(newUser, anotherDocumentInBD, ModifyState.Added);
             AdminBusinessLogic logic = new AdminBusinessLogic();
-            ChartIntDate result = logic.GetChartModificationsByUser(newUser, date1, date2);
+            ChartIntDate result = logic.GetChartModificationsByUser(SetUpChart(ModifyState.Modified), date1, date2);
             ChartIntDate expected = new ChartIntDate();
             expected.AddTuple(3, date1);
             date1 = date1.AddDays(1);
@@ -234,20 +222,8 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             DateTime date1 = DateTime.Today;
             DateTime date2 = DateTime.Today.AddDays(10);
-            UserBusinessLogic userLogic = new UserBusinessLogic();
-            DocumentContextTest documentContext = new DocumentContextTest();
-            DocumentContext context = new DocumentContext();
-            UserContext userContext = new UserContext();
-            User newUser = EntitiesExampleInstances.TestAdminUser();
-            userContext.Add(newUser);
-            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            Document documentInBD = documentContext.setUp(context);
-            Document anotherDocumentInBD = documentContext.setUp(context);
-            userLogic.ModifyDocument(newUser, documentInBD, ModifyState.Added);
-            userLogic.ModifyDocument(newUser, documentInBD, ModifyState.Removed);
-            userLogic.ModifyDocument(newUser, anotherDocumentInBD, ModifyState.Added);
             AdminBusinessLogic logic = new AdminBusinessLogic();
-            ChartIntDate result = logic.GetChartModificationsByUser(newUser, date1, date2);
+            ChartIntDate result = logic.GetChartModificationsByUser(SetUpChart(ModifyState.Removed), date1, date2);
             ChartIntDate expected = new ChartIntDate();
             expected.AddTuple(3, date1);
             date1 = date1.AddDays(1);
@@ -258,6 +234,22 @@ namespace DocumentsManager.BusinessLogic.Tests
             }
             Assert.IsTrue(expected.Equals(result));
             TearDown();
+        }
+        private User SetUpChart(ModifyState state)
+        {
+            UserBusinessLogic userLogic = new UserBusinessLogic();
+            DocumentContextTest documentContext = new DocumentContextTest();
+            DocumentContext context = new DocumentContext();
+            UserContext userContext = new UserContext();
+            User newUser = EntitiesExampleInstances.TestAdminUser();
+            userContext.Add(newUser);
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            Document documentInBD = documentContext.setUp(context);
+            Document anotherDocumentInBD = documentContext.setUp(context);
+            userLogic.ModifyDocument(newUser, documentInBD, ModifyState.Added);
+            userLogic.ModifyDocument(newUser, documentInBD, state);
+            userLogic.ModifyDocument(newUser, anotherDocumentInBD, ModifyState.Added);
+            return newUser;
         }
     }
 }
