@@ -1,4 +1,5 @@
 ﻿using DocumentsManager.Data.DA.Handler;
+using DocumentsManager.Exceptions;
 using DocumentsManagerDATesting;
 using DocumentsManagerExampleInstances;
 using DocumentsMangerEntities;
@@ -19,8 +20,13 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             ClearDataBase.ClearAll();
         }
+        public void SetUp()
+        {
+            TearDown();
+        }
         [TestMethod]
-        public void GetEditorsTest() {
+        public void GetEditorsBLTest() {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             UserContext uContext = new UserContext();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
@@ -31,8 +37,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void GetEditorsTestSeveral()
+        public void GetEditorsBLTestSeveral()
         {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             UserContext uContext = new UserContext();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
@@ -47,8 +54,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void GetEditorsTestEmpty()
+        public void GetEditorsBLTestEmpty()
         {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             bool expectedResult = true;
             bool result = editorBL.GetAllEditors().Count() == 0;
@@ -56,8 +64,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void AddEditorTest()
+        public void AddEditorBLTest()
         {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             UserContext uContext = new UserContext();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
@@ -67,8 +76,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void AddEditorTestVerify()
+        public void AddEditorBLTestVerify()
         {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             editorBL.Add(anEditor);
@@ -77,9 +87,37 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
+
+        [ExpectedException(typeof(ObjectAlreadyExistsException))]
         [TestMethod]
-        public void DeleteEditorTest()
+        public void AddEditorBLTestExistsEmail()
         {
+            SetUp();
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            EditorUser anotherEditor = EntitiesExampleInstances.TestEditorUser();
+            anotherEditor.Email = "differentEmail";
+            editorBL.Add(anEditor);
+            editorBL.Add(anotherEditor);
+            TearDown();
+        }
+        [ExpectedException(typeof(ObjectAlreadyExistsException))]
+        [TestMethod]
+        public void AddEditorBLTestExistsUserName()
+        {
+            SetUp();
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            EditorUser anotherEditor = EntitiesExampleInstances.TestEditorUser();
+            anotherEditor.Username = "differentUserName";
+            editorBL.Add(anEditor);
+            editorBL.Add(anotherEditor);
+            TearDown();
+        }
+        [TestMethod]
+        public void DeleteEditorBLTest()
+        {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             Guid idUserToDelete = editorBL.Add(anEditor);
@@ -90,8 +128,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void DeleteEditorTestVerify()
+        public void DeleteEditorBLTestVerify()
         {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             Guid idUserToDelete = editorBL.Add(anEditor);
@@ -102,8 +141,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void DeleteEditorTestMethodResult()
+        public void DeleteEditorBLTestMethodResult()
         {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             Guid idUserToDelete = editorBL.Add(anEditor);
@@ -112,18 +152,19 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
+        [ExpectedException(typeof(ObjectDoesNotExists))]
         [TestMethod]
-        public void DoNotDeleteEditorTest()
+        public void DoNotDeleteEditorBLTest()
         {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
-            bool expectedResult = false;
-            bool result = editorBL.Delete(Guid.NewGuid());
-            Assert.AreEqual(expectedResult, result);
+            editorBL.Delete(Guid.NewGuid());
             TearDown();
         }
         [TestMethod]
-        public void GetByIdEditorTest()
+        public void GetByIdEditorBLTest()
         {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             Guid IdUserAdded = editorBL.Add(anEditor);
@@ -132,21 +173,35 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
+        [ExpectedException(typeof(ObjectDoesNotExists))]
         [TestMethod]
-        public void GetByIdEditorTestWithOthers()
+        public void NoGetByIdEditorBLTest()
         {
+            SetUp();
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            editorBL.GetByID(Guid.NewGuid());
+            TearDown();
+        }
+        [TestMethod]
+        public void GetByIdEditorBLTestWithOthers()
+        {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             Guid IdUserAdded = editorBL.Add(anEditor);
-            editorBL.Add(EntitiesExampleInstances.TestEditorUser());
+            EditorUser anotherEditor = EntitiesExampleInstances.TestEditorUser();
+            anotherEditor.Username = "UserName2";
+            anotherEditor.Email = "Email2";
+            editorBL.Add(anotherEditor);
             bool expectedResult = true;
             bool result = editorBL.GetByID(IdUserAdded).Equals(anEditor);
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
         [TestMethod]
-        public void UpdateEditorTestOnlyEmail()
+        public void UpdateEditorBLTestOnlyEmail()
         {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             Guid IdUserAdded = editorBL.Add(anEditor);
@@ -157,8 +212,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void UpdateEditorTestCheckEmail()
+        public void UpdateEditorBLTestCheckEmail()
         {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             Guid IdUserAdded = editorBL.Add(anEditor);
@@ -168,8 +224,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void UpdateEditorTestCheckAttrs()
+        public void UpdateEditorBLTestCheckAttrs()
         {
+            SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             Guid IdUserAdded = editorBL.Add(anEditor);
@@ -184,6 +241,18 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(modifiedUser.Surname, "Gomez");
             Assert.AreEqual(modifiedUser.Username, "modifiedUsername");
             Assert.AreEqual(modifiedUser.Id, IdUserAdded);
+            TearDown();
+        }
+        [ExpectedException(typeof(WrongUserType))]
+        [TestMethod]
+        public void AdminInsteadOfGetByIdEditorBLTest()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid IdUserAdded = adminBL.Add(anAdmin);
+            editorBL.GetByID(anAdmin.Id);
             TearDown();
         }
 
