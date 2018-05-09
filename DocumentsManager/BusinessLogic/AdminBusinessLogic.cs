@@ -33,7 +33,14 @@ namespace DocumentsManager.BusinessLogic
 
         public bool Delete(Guid id)
         {
-            throw new NotImplementedException();
+            UserContext uContext = new UserContext();
+            AdminUser idUser = new AdminUser();
+            idUser.Id = id;
+            if (uContext.Exists(idUser))
+            {
+                return uContext.Remove(id);
+            }
+            throw new ObjectDoesNotExists(idUser);
         }
 
         public IEnumerable<AdminUser> GetAllAdmins()
