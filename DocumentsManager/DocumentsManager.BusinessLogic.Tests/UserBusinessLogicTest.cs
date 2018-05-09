@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DocumentsMangerEntities;
 using System.Collections.Generic;
 using DocumentsManager.Exceptions;
+using DocumentsManagerDATesting;
+using DocumentsManager.Data.DA.Handler;
 
 namespace DocumentsManager.BusinessLogic.Tests
 {
@@ -72,6 +74,22 @@ namespace DocumentsManager.BusinessLogic.Tests
             UserBusinessLogic logic = new UserBusinessLogic();
             ChartIntDate result = logic.GetChartFromDocuments(new List<Document>(), date1, date2);
             Assert.IsFalse(expected.Equals(result));
+        }
+        [TestMethod]
+        public void GetChartFromADocumentOnlyCreation()
+        {
+            DateTime date1 = DateTime.Today;
+            DateTime date2 = DateTime.Today.AddDays(10);
+            DocumentContextTest testDocument = new DocumentContextTest();
+            DocumentContext contextDocument = new DocumentContext();
+            Document doc = testDocument.setUp(contextDocument);
+            UserBusinessLogic logic = new UserBusinessLogic();
+            ChartIntDate result = logic.GetChartFromADocument(doc, date1, date2);
+            ChartIntDate expected = new ChartIntDate();
+            expected.GenerateDates(date1, date2);
+            expected.AddValueToDate(date1);
+            Assert.IsTrue(expected.Equals(result));
+            ClearDataBase.ClearAll();
         }
         private ChartIntDate ExpectedResult(DateTime date1)
         {
