@@ -229,5 +229,35 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(expected.Equals(result));
             TearDown();
         }
+        [TestMethod]
+        public void GetChartRemovedByUserAdvanced()
+        {
+            DateTime date1 = DateTime.Today;
+            DateTime date2 = DateTime.Today.AddDays(10);
+            UserBusinessLogic userLogic = new UserBusinessLogic();
+            DocumentContextTest documentContext = new DocumentContextTest();
+            DocumentContext context = new DocumentContext();
+            UserContext userContext = new UserContext();
+            User newUser = EntitiesExampleInstances.TestAdminUser();
+            userContext.Add(newUser);
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            Document documentInBD = documentContext.setUp(context);
+            Document anotherDocumentInBD = documentContext.setUp(context);
+            userLogic.ModifyDocument(newUser, documentInBD, ModifyState.Added);
+            userLogic.ModifyDocument(newUser, documentInBD, ModifyState.Removed);
+            userLogic.ModifyDocument(newUser, anotherDocumentInBD, ModifyState.Added);
+            AdminBusinessLogic logic = new AdminBusinessLogic();
+            ChartIntDate result = logic.GetChartModificationsByUser(newUser, date1, date2);
+            ChartIntDate expected = new ChartIntDate();
+            expected.AddTuple(3, date1);
+            date1 = date1.AddDays(1);
+            while (DateTime.Compare(date1, date2) < 0)
+            {
+                expected.AddTuple(0, date1);
+                date1 = date1.AddDays(1);
+            }
+            Assert.IsTrue(expected.Equals(result));
+            TearDown();
+        }
     }
 }
