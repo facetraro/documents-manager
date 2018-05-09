@@ -23,5 +23,10 @@ namespace DocumentsManager.BusinessLogic
             AddDocumentByDate(documents, chart);
             return chart;
         }
+        public ChartIntDate GetChartFromADocument(Document document, DateTime since, DateTime until)
+        {
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            return documentLogic.GetChartFromDocument(documentLogic.GetDatesFromModifyDocument(document), since, until);
+        }
     }
 }

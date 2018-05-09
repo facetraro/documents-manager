@@ -1,4 +1,5 @@
-﻿using DocumentsMangerEntities;
+﻿using DocumentsManager.Data.DA.Handler;
+using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,20 @@ namespace DocumentsManager.BusinessLogic
             chart.GenerateDates(since, until);
             AddDateValue(allDates, chart);
             return chart;
+        }
+        public List<DateTime> GetDatesFromModifyDocument(Document document)
+        {
+            List<DateTime> allDates = new List<DateTime>();
+            allDates.Add(document.CreationDate);
+            ModifyDocumentHistoryContext contextModify = new ModifyDocumentHistoryContext();
+            foreach (var item in contextModify.GetAllHistories())
+            {
+                if (item.Document.Equals(document))
+                {
+                    allDates.Add(item.Date);
+                }
+            }
+            return allDates;
         }
     }
 }
