@@ -68,6 +68,41 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.UserRepository.Update(modifiedUser);
             }
         }
+        public List<EditorUser> GetEditors() {
+            List<EditorUser> editors = new List<EditorUser>();
+            List<User> allUsers = new List<User>();
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                allUsers = unitOfWork.UserRepository.Get().ToList();
+            }
+            foreach (User useri in allUsers)
+            {
+                if (useri is EditorUser)
+                {
+                    editors.Add(useri as EditorUser);
+                }
+            }
+            return editors;
+        }
+        public List<AdminUser> GetAdmins()
+        {
+            List<AdminUser> admins = new List<AdminUser>();
+            List<User> allUsers = new List<User>();
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                allUsers = unitOfWork.UserRepository.Get().ToList();
+            }
+            foreach (User useri in allUsers)
+            {
+                if (useri is AdminUser)
+                {
+                    admins.Add(useri as AdminUser);
+                }
+            }
+            return admins;
+        }
     }
 }
 
