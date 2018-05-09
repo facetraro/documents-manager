@@ -53,7 +53,12 @@ namespace DocumentsManager.BusinessLogic
         {
             EditorUser userToReturn = new EditorUser();
             UserContext uContext = new UserContext();
-            userToReturn = uContext.GetById(id) as EditorUser;
+            User userToVerify = uContext.GetById(id);
+            if (userToVerify is AdminUser)
+            {
+                throw new WrongUserType(userToReturn);
+            }
+            userToReturn = userToVerify as EditorUser;
             if (userToReturn == null)
             {
                 throw new ObjectDoesNotExists(new EditorUser());
