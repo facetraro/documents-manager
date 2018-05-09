@@ -103,6 +103,14 @@ namespace DocumentsManager.Data.DA.Handler
             }
             return admins;
         }
+        public bool Exists(User anUser)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                return unitOfWork.UserRepository.Exists(anUser.Id);
+            }
+        }
     }
 }
 

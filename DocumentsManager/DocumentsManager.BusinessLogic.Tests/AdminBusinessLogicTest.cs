@@ -80,12 +80,38 @@ namespace DocumentsManager.BusinessLogic.Tests
         }
         [ExpectedException(typeof(ObjectAlreadyExistsException))]
         [TestMethod]
-        public void AddAdminTestExists()
+        public void AddAdminTestExistsId()
         {
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
             adminBL.Add(anAdmin);
+            anAdmin.Username = "differentUserName";
+            anAdmin.Email = "differentEmail";
             adminBL.Add(anAdmin);
+            TearDown();
+        }
+        [ExpectedException(typeof(ObjectAlreadyExistsException))]
+        [TestMethod]
+        public void AddAdminTestExistsEmail()
+        {
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            AdminUser anotherAdmin = EntitiesExampleInstances.TestAdminUser();
+            anotherAdmin.Email = "differentEmail";
+            adminBL.Add(anAdmin);
+            adminBL.Add(anotherAdmin);
+            TearDown();
+        }
+        [ExpectedException(typeof(ObjectAlreadyExistsException))]
+        [TestMethod]
+        public void AddAdminTestExistsUserName()
+        {
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            AdminUser anotherAdmin = EntitiesExampleInstances.TestAdminUser();
+            anotherAdmin.Username = "differentUserName";
+            adminBL.Add(anAdmin);
+            adminBL.Add(anotherAdmin);
             TearDown();
         }
     }
