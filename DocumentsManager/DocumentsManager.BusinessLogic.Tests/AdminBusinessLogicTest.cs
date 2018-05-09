@@ -78,18 +78,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
-        [ExpectedException(typeof(ObjectAlreadyExistsException))]
-        [TestMethod]
-        public void AddAdminTestExistsId()
-        {
-            AdminBusinessLogic adminBL = new AdminBusinessLogic();
-            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            adminBL.Add(anAdmin);
-            anAdmin.Username = "differentUserName";
-            anAdmin.Email = "differentEmail";
-            adminBL.Add(anAdmin);
-            TearDown();
-        }
+        
         [ExpectedException(typeof(ObjectAlreadyExistsException))]
         [TestMethod]
         public void AddAdminTestExistsEmail()

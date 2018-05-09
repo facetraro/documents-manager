@@ -5,44 +5,42 @@ using System.Text;
 using System.Threading.Tasks;
 using DocumentsMangerEntities;
 using DocumentsManager.Data.DA.Handler;
+using DocumentsManager.Exceptions;
 
 namespace DocumentsManager.BusinessLogic
 {
-    public class EditorBusinessLogic : IEditorsBusinessLogic
+    public class EditorBusinessLogic : UserBusinessLogic, IEditorsBusinessLogic
     {
         public Guid Add(EditorUser editor)
         {
+            editor.Id = Guid.NewGuid();
             UserContext uContext = new UserContext();
-            try
+            if (IdRegistered(editor))
             {
-                uContext.Add(editor);
+                throw new ObjectAlreadyExistsException("Id");
             }
-            catch (Exception e)
+            if (EmailRegistered(editor))
             {
-
+                throw new ObjectAlreadyExistsException("email");
             }
+            if (UserNameRegistered(editor))
+            {
+                throw new ObjectAlreadyExistsException("username");
+            }
+            uContext.Add(editor);
             return editor.Id;
         }
 
         public bool Delete(Guid id)
         {
-            bool deleted = false;
             UserContext uContext = new UserContext();
-            int quantity = GetAllEditors().Count();
-            try
+            EditorUser idUser = new EditorUser();
+            idUser.Id = id;
+            if (uContext.Exists(idUser))
             {
-                uContext.Remove(id);
+                return uContext.Remove(id);
             }
-            catch (Exception e)
-            {
-                deleted= false;
-            }
-            int newQuantity= GetAllEditors().Count();
-            if (quantity>newQuantity)
-            {
-                deleted = true;
-            }
-            return deleted;
+            throw new ObjectDoesNotExists(idUser);
         }
 
         public IEnumerable<EditorUser> GetAllEditors()
@@ -55,13 +53,10 @@ namespace DocumentsManager.BusinessLogic
         {
             EditorUser userToReturn = new EditorUser();
             UserContext uContext = new UserContext();
-            try
+            userToReturn = uContext.GetById(id) as EditorUser;
+            if (userToReturn == null)
             {
-                userToReturn= uContext.GetById(id) as EditorUser;
-            }
-            catch (Exception e)
-            {
-                return null; 
+                throw new ObjectDoesNotExists(new EditorUser());
             }
             return userToReturn;
         }
@@ -76,7 +71,7 @@ namespace DocumentsManager.BusinessLogic
             }
             catch (Exception e)
             {
-                updated=false;
+                updated = false;
             }
             User dbUser = GetByID(id);
             if (!dbUser.hasSameInformation(newEditor))

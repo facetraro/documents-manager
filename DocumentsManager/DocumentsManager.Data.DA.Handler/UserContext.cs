@@ -36,21 +36,20 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.UserRepository.Insert(newUser);
             }
         }
-        public void Remove(User userToDelete)
+        public bool Remove(User userToDelete)
         {
-            using (var db = new ContextDataAccess())
-            {
-                var unitOfWork = new UnitOfWork(db);
-                unitOfWork.UserRepository.Delete(userToDelete);
-            }
+            return Remove(userToDelete.Id);
         }
-        public void Remove(Guid id)
+        public bool Remove(Guid id)
         {
+            bool deleted = false;
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.UserRepository.Delete(id);
+                deleted = true;
             }
+            return deleted;
         }
         public User GetById(Guid id)
         {
