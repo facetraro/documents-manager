@@ -51,7 +51,19 @@ namespace DocumentsManager.BusinessLogic
 
         public AdminUser GetByID(Guid id)
         {
-            throw new NotImplementedException();
+            AdminUser userToReturn = new AdminUser();
+            UserContext uContext = new UserContext();
+            User userToVerify = uContext.GetById(id);
+            if (userToVerify is EditorUser)
+            {
+                throw new WrongUserType(userToReturn);
+            }
+            userToReturn = userToVerify as AdminUser;
+            if (userToReturn == null)
+            {
+                throw new ObjectDoesNotExists(new EditorUser());
+            }
+            return userToReturn;
         }
 
         public bool Update(Guid id, AdminUser newAdmin)

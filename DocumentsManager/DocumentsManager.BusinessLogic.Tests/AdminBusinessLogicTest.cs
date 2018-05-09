@@ -198,5 +198,17 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
+        [ExpectedException(typeof(WrongUserType))]
+        [TestMethod]
+        public void EditorInsteadOfGetByIdAdminTest()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            EditorBusinessLogic editorBL = new EditorBusinessLogic();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            Guid IdUserAdded = editorBL.Add(anEditor);
+            adminBL.GetByID(anEditor.Id);
+            TearDown();
+        }
     }
 }
