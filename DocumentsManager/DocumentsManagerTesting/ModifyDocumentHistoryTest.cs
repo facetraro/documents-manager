@@ -20,10 +20,12 @@ namespace DocumentsManagerTesting
             newHistroy.Document = newDocument;
             newHistroy.Id = newGuid;
             newHistroy.User = newUser;
+            newHistroy.State = ModifyState.Added;
             Assert.AreEqual(newHistroy.User, newUser);
             Assert.AreEqual(newHistroy.Document, newDocument);
             Assert.AreEqual(newHistroy.Id, newGuid);
             Assert.AreEqual(newHistroy.Date, newDate);
+            Assert.AreEqual(newHistroy.State, ModifyState.Added);
         }
         [TestMethod]
         public void ModifyDocumentHistoryEqualsFalse()

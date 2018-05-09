@@ -41,8 +41,6 @@ namespace DocumentsManagerDATesting
             newText.StyleClass = style;
             newDocument.StyleClass = style;
             newDocument.Parragraphs.ElementAt(0).Document = newDocument;
-            newDocument.CreatorUser = creatorUser;
-            newDocument.CreationDate = DateTime.Today;
             context.Add(newDocument);
             return context.GetById(newDocument.Id); 
         }
@@ -102,7 +100,6 @@ namespace DocumentsManagerDATesting
             newFooter.Text.WrittenText = "Modified Footer";
             Header newHeader = EntitiesExampleInstances.TestHeader();
             newHeader.Text.WrittenText = "Modified Header";
-            modifiedDocument.CreatorUser = creatorUser;
             modifiedDocument.Footer = newFooter;
             modifiedDocument.Header = newHeader;
             scContext.Add(newFooter.StyleClass);
@@ -145,7 +142,6 @@ namespace DocumentsManagerDATesting
             newFooter.Text.WrittenText = "Modified Footer";
             Header newHeader = EntitiesExampleInstances.TestHeader();
             newHeader.Text.WrittenText = "Modified Header";
-            modifiedDocument.CreatorUser = creatorUser;
             modifiedDocument.Footer = newFooter;
             modifiedDocument.Header = newHeader;
             scContext.Add(newFooter.StyleClass);

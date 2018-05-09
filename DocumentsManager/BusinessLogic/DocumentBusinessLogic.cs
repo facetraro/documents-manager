@@ -10,13 +10,6 @@ namespace DocumentsManager.BusinessLogic
 {
     public class DocumentBusinessLogic
     {
-        private void AddDateValue(List<DateTime> allDates, ChartIntDate chart)
-        {
-            foreach (var item in allDates)
-            {
-                chart.AddValueToDate(item);
-            }
-        }
         private void LoadFooter(Document document)
         {
             FooterBusinessLogic footerLogic = new FooterBusinessLogic();
@@ -61,27 +54,6 @@ namespace DocumentsManager.BusinessLogic
             Document documentFromBD = context.GetById(id);
             LoadRelatinships(documentFromBD);
             return documentFromBD;
-        }
-        public ChartIntDate GetChartFromDocument(List<DateTime> allDates, DateTime since, DateTime until)
-        {
-            ChartIntDate chart = new ChartIntDate();
-            chart.GenerateDates(since, until);
-            AddDateValue(allDates, chart);
-            return chart;
-        }
-        public List<DateTime> GetDatesFromModifyDocument(Document document)
-        {
-            List<DateTime> allDates = new List<DateTime>();
-            allDates.Add(document.CreationDate);
-            ModifyDocumentHistoryContext contextModify = new ModifyDocumentHistoryContext();
-            foreach (var item in contextModify.GetAllHistories())
-            {
-                if (item.Document.Equals(document))
-                {
-                    allDates.Add(item.Date);
-                }
-            }
-            return allDates;
         }
     }
 }
