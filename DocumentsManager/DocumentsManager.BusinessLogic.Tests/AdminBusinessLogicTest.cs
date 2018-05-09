@@ -19,9 +19,14 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             ClearDataBase.ClearAll();
         }
+        public void SetUp()
+        {
+            TearDown();
+        }
         [TestMethod]
         public void GetAdminsTest()
         {
+            SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             UserContext uContext = new UserContext();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
@@ -34,6 +39,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void GetAdminsTestSeveral()
         {
+            SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             UserContext uContext = new UserContext();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
@@ -50,6 +56,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void GetAdminsTestEmpty()
         {
+            SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             bool expectedResult = true;
             bool result = adminBL.GetAllAdmins().Count() == 0;
@@ -59,6 +66,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void AddAdminTest()
         {
+            SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             UserContext uContext = new UserContext();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
@@ -70,6 +78,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void AddAdminTestVerify()
         {
+            SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
             adminBL.Add(anAdmin);
@@ -83,6 +92,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void AddAdminTestExistsEmail()
         {
+            SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
             AdminUser anotherAdmin = EntitiesExampleInstances.TestAdminUser();
@@ -95,12 +105,60 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void AddAdminTestExistsUserName()
         {
+            SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
             AdminUser anotherAdmin = EntitiesExampleInstances.TestAdminUser();
             anotherAdmin.Username = "differentUserName";
             adminBL.Add(anAdmin);
             adminBL.Add(anotherAdmin);
+            TearDown();
+        }
+        [TestMethod]
+        public void DeleteAdminTest()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid idUserToDelete = adminBL.Add(anAdmin);
+            adminBL.Delete(idUserToDelete);
+            bool expectedResult = true;
+            bool result = adminBL.GetAllAdmins().Count() == 0;
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void DeleteEditorTestVerify()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid idUserToDelete = adminBL.Add(anAdmin);
+            adminBL.Delete(idUserToDelete);
+            bool expectedResult = true;
+            bool result = !adminBL.GetAllAdmins().Contains(anAdmin);
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [TestMethod]
+        public void DeleteEditorTestMethodResult()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid idUserToDelete = adminBL.Add(anAdmin);
+            bool expectedResult = true;
+            bool result = adminBL.Delete(idUserToDelete);
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [ExpectedException(typeof(ObjectDoesNotExists))]
+        [TestMethod]
+        public void DoNotDeleteEditorTest()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            adminBL.Delete(Guid.NewGuid());
             TearDown();
         }
     }
