@@ -78,6 +78,11 @@ namespace DocumentsManager.BusinessLogic
             {
                 updated=false;
             }
+            User dbUser = GetByID(id);
+            if (!dbUser.hasSameInformation(newEditor))
+            {
+                updated = false;
+            }
             return updated;
         }
     }
