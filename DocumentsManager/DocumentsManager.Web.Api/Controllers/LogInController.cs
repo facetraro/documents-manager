@@ -1,4 +1,5 @@
 ﻿using DocumentsManager.BusinessLogic;
+using DocumentsManager.Exceptions;
 using DocumentsManager.Web.Api.Models;
 using System;
 using System.Collections.Generic;
@@ -28,20 +29,39 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/LogIn
-        public void Post(string username,[FromBody]LogInModel model)
+        public IHttpActionResult Post(string username,[FromBody]LogInModel model)
         {
-            Guid token = logic.LogIn(username, model.Password);
-            LoggedToken.SetToken(token);
+            try
+            {
+                Guid token = logic.LogIn(username, model.Password);
+                LoggedToken.SetToken(token);
+                return Ok(token);
+            }
+            catch (LostConnectionWithDataBase exception)
+            {
+                return BadRequest(exception.Message);
+            }
+            catch (UserAlreadyLogged alreadyLogged)
+            {
+                return BadRequest(alreadyLogged.Message);
+            }
+            catch (InvalidCredentialException credentialsException)
+            {
+                return BadRequest(credentialsException.Message);
+            }
+
         }
 
         // PUT: api/LogIn/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(int id, [FromBody]string value)
         {
+            return NotFound();
         }
 
         // DELETE: api/LogIn/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            return NotFound();
         }
     }
 }
