@@ -33,6 +33,13 @@ namespace DocumentsManager.Data.DA.Handler
             fContext.Add(aDocument.Footer);
             hContext.Add(aDocument.Header);
         }
+        private void DeleteDocumentParragraphs(Document aDocument) {
+            ParragraphContext pContext = new ParragraphContext();
+            foreach (Parragraph parragraphi in aDocument.Parragraphs)
+            {
+                pContext.Remove(parragraphi);
+            }
+        }
         private void AddDocumentParragraphs(List<Parragraph> theParragraphs, Document modifiedDocument)
         {
             ParragraphContext pContext = new ParragraphContext();
@@ -70,6 +77,14 @@ namespace DocumentsManager.Data.DA.Handler
             }
             AddDocumentParragraphs(theParragraphs, aDocument);
         }
+
+        public void ModifyParragraphs(Document aDocument)
+        {
+            Document oldDocument = GetById(aDocument.Id);
+            DeleteDocumentParragraphs(oldDocument);
+            AddDocumentParragraphs(aDocument.Parragraphs, aDocument);
+        }
+
         private void DeleteDocumentParts(Document aDocument)
         {
             FooterContext fContext = new FooterContext();

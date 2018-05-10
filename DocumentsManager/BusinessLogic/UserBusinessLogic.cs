@@ -23,6 +23,7 @@ namespace DocumentsManager.BusinessLogic
         }
         public void ModifyDocument(User user, Document doc, ModifyState state)
         {
+           
             AddModifyHistory(user, doc, state);
         }
         public bool IdRegistered(User anUser)
@@ -57,19 +58,12 @@ namespace DocumentsManager.BusinessLogic
             }
             return registered;
         }
-        public void ModifyParragraph(Parragraph aParragraph, User responsibleUser) {
-            ParragraphContext pContext = new ParragraphContext();
-            pContext.Modify(aParragraph,pContext.GetById(aParragraph.Id));
-            AddModifyHistory(responsibleUser, aParragraph.Document, ModifyState.Modified);
+        public void ModifyParragraphs(Document aDocument, User responsibleUser) {
+            AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
+            DocumentContext documentContext = new DocumentContext();
+            documentContext.ModifyParragraphs(aDocument);       
         }
-        public void AddParragraph(Parragraph aParragraph) {
-            ParragraphContext pContext = new ParragraphContext();
-            pContext.Add(aParragraph);
-        }
-        public void RemoveParragraph(Parragraph aParragraph) {
-            ParragraphContext pContext = new ParragraphContext();
-            pContext.Remove(aParragraph);
-        }
+       
         public void AddDocument(Document aDocument,User responsibleUser) {
             DocumentContext documentContext = new DocumentContext();
             documentContext.Add(aDocument);
