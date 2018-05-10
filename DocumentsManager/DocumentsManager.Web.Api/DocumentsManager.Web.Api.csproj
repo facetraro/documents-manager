@@ -136,9 +136,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\FormatDto.cs" />
     <Compile Include="Models\FormatModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\EditorModel.cs" />
+    <Compile Include="Models\StyleClassDto.cs" />
     <Compile Include="Models\StyleClassModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

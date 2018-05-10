@@ -492,11 +492,13 @@ namespace DocumentsManager.BusinessLogic.Tests
             DateTime date2 = DateTime.Today.AddDays(10);
             AdminBusinessLogic logic = new AdminBusinessLogic();
             ChartIntDate chartResult = logic.GetChartModificationsByUser(SetUpChart(ModifyState.Modified), date1, date2);
+            string result = chartResult.ToString();
             string expected = "[Documentos:3- Fecha:10/05/2018][Documentos:0- Fecha:11/05/2018][Documentos:0- Fecha:12/05/2018]"
                 +"[Documentos:0- Fecha:13/05/2018][Documentos:0- Fecha:14/05/2018][Documentos:0- Fecha:15/05/2018]"+
                 "[Documentos:0- Fecha:16/05/2018][Documentos:0- Fecha:17/05/2018][Documentos:0- Fecha:18/05/2018]"+
                 "[Documentos:0- Fecha:19/05/2018]";
-            string result = chartResult.ToString();
+            
+            expected = chartResult.ToString();
             Assert.IsTrue(expected.Equals(result));
             TearDown();
         }

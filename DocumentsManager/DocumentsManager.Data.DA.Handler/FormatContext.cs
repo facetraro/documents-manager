@@ -111,5 +111,15 @@ namespace DocumentsManager.Data.DA.Handler
             }
             return formats;
         }
+        public List<Format> GetEagerFormats()
+        {
+            List<Format> formats = new List<Format>();
+            foreach (var item in GetFormats())
+            {
+                formats.Add(GetById(item.Id));
+            }
+            return formats;
+           
+        }
     }
 }

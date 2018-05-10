@@ -49,7 +49,19 @@ namespace DocumentsManager.BusinessLogic
             LoggedToken.GetToken();
 
             FormatContext context = new FormatContext();
-            return context.GetFormats();
+            List<Format> allFormatEager = context.GetEagerFormats();
+            foreach (var item in allFormatEager)
+            {
+                List<StyleClass> allStylesFromFormat = new List<StyleClass> ();
+                foreach (var style in item.StyleClasses)
+                {
+                    StyleClassBusinessLogic styleLogic = new StyleClassBusinessLogic();
+                    allStylesFromFormat.Add(styleLogic.GetById(style.Id));
+                    
+                }
+                item.StyleClasses = allStylesFromFormat;
+            }
+            return allFormatEager;
         }
 
 

@@ -78,8 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminControllerTest.cs" />
-    <Compile Include="FormatControllerTest.cs" />
-    <Compile Include="StyleClassControllerTest.cs" />
     <Compile Include="EditorControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
