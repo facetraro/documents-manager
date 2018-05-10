@@ -11,15 +11,23 @@ namespace DocumentsManager.BusinessLogic
 {
     public class AdminBusinessLogic :UserBusinessLogic, IAdminsBusinessLogic
     {
-        public ChartIntDate GetChartModificationsByUser(User user, DateTime since, DateTime until)
+        private void ValidateAuthorizations()
         {
             Guid Token = LoggedToken.GetToken();
+            if (!(GetUserByToken(Token) is AdminUser))
+            {
+                throw new UserNotAuthorizedException();
+            }
+        }
+        public ChartIntDate GetChartModificationsByUser(User user, DateTime since, DateTime until)
+        {
+            ValidateAuthorizations();
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             return GetChartFromDates(GetDatesFromModifyDocument(user, null), since, until);
         }
         public ChartIntDate GetChartCreationByUser(User user, DateTime since, DateTime until)
         {
-            Guid Token = LoggedToken.GetToken();
+            ValidateAuthorizations();
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             return GetChartFromDates(GetDatesFromModifyDocument(user, ModifyState.Added), since, until);
         }
@@ -62,7 +70,7 @@ namespace DocumentsManager.BusinessLogic
         }
         public Guid Add(AdminUser newAdmin)
         {
-            Guid Token = LoggedToken.GetToken();
+            ValidateAuthorizations();
             newAdmin.Id = Guid.NewGuid();
             UserContext userContext = new UserContext();
             if (IdRegistered(newAdmin)) 
@@ -83,8 +91,8 @@ namespace DocumentsManager.BusinessLogic
 
         public bool Delete(Guid id)
         {
-            Guid Token = LoggedToken.GetToken();
-            if (id.Equals(GetUserByToken(Token).Id))
+            ValidateAuthorizations();
+            if (id.Equals(GetUserByToken(LoggedToken.GetToken())))
             {
                 throw new CantDeleteLoggedUserException();
             }
@@ -100,14 +108,14 @@ namespace DocumentsManager.BusinessLogic
 
         public IEnumerable<AdminUser> GetAllAdmins()
         {
-            Guid Token = LoggedToken.GetToken();
+            ValidateAuthorizations();
             UserContext uContext = new UserContext();
             return uContext.GetAdmins();
         }
 
         public AdminUser GetByID(Guid id)
         {
-            Guid Token = LoggedToken.GetToken();
+            ValidateAuthorizations();
             AdminUser userToReturn = new AdminUser();
             UserContext uContext = new UserContext();
             User userToVerify = uContext.GetById(id);
@@ -125,7 +133,7 @@ namespace DocumentsManager.BusinessLogic
 
         public bool Update(Guid id, AdminUser newAdmin)
         {
-            Guid Token = LoggedToken.GetToken();
+            ValidateAuthorizations();
             UserContext uContext = new UserContext();
             bool updated = false;
             if (!uContext.Exists(newAdmin))
@@ -143,14 +151,14 @@ namespace DocumentsManager.BusinessLogic
 
         public Guid Add(EditorUser user)
         {
-            Guid Token = LoggedToken.GetToken();
+            ValidateAuthorizations();
             EditorBusinessLogic logic = new EditorBusinessLogic();
             return logic.Add(user);
         }
 
         public bool Delete(User user)
         {
-            Guid Token = LoggedToken.GetToken();
+            ValidateAuthorizations();
             return Delete(user.Id);
         }
     }

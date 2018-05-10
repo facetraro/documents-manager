@@ -23,6 +23,13 @@ namespace DocumentsManager.BusinessLogic.Tests
         public void SetUp()
         {
             TearDown();
+            UserContext context = new UserContext();
+            User newuser = EntitiesExampleInstances.TestAdminUser();
+            newuser.Username = "rareusername";
+            newuser.Email = "rareemail";
+            context.Add(newuser);
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            adminBL.LogIn(newuser.Username, newuser.Password);
         }
         [TestMethod]
         public void GetEditorsBLTest() {

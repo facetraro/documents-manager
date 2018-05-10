@@ -117,6 +117,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void GetChartCreationByUserEmpty()
         {
+            SetUp();
             DateTime date1 = new DateTime(2018, 8, 1, 0, 0, 0);
             DateTime date2 = new DateTime(2018, 8, 12, 0, 0, 0);
             AdminBusinessLogic logic = new AdminBusinessLogic();
@@ -132,6 +133,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void GetChartCreationByUser()
         {
+            SetUp();
             DateTime date1 = DateTime.Today;
             DateTime date2 = DateTime.Today.AddDays(10);
             UserBusinessLogic userLogic = new UserBusinessLogic();
@@ -159,6 +161,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void GetChartModificationsByUser()
         {
+            SetUp();
             DateTime date1 = DateTime.Today;
             DateTime date2 = DateTime.Today.AddDays(10);
             UserBusinessLogic userLogic = new UserBusinessLogic();
@@ -186,6 +189,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void GetChartCreationByUserAdvanced()
         {
+            SetUp();
             DateTime date1 = DateTime.Today;
             DateTime date2 = DateTime.Today.AddDays(10);
             UserBusinessLogic userLogic = new UserBusinessLogic();

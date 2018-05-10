@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CantDeleteLoggedUserException.cs" />
+    <Compile Include="UserNotAuthorizedException.cs" />
     <Compile Include="InvalidTokenException.cs" />
     <Compile Include="InvalidChartDatesException.cs" />
     <Compile Include="InvalidCredentialException.cs" />

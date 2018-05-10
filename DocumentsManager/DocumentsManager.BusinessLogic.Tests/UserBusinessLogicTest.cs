@@ -15,9 +15,16 @@ namespace DocumentsManager.BusinessLogic.Tests
     public class UserBusinessLogicTest
     {
 
-        private void SetUp()
+        public void SetUp()
         {
             ClearDataBase.ClearAll();
+            UserContext context = new UserContext();
+            User newuser = EntitiesExampleInstances.TestAdminUser();
+            newuser.Username = "rareusername";
+            newuser.Email = "rareemail";
+            context.Add(newuser);
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            adminBL.LogIn(newuser.Username, newuser.Password);
         }
 
         public void TearDown()
@@ -270,6 +277,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void CreateConnectionAlreadyLogged()
         {
+            SetUp();
             UserBusinessLogic logic = new UserBusinessLogic();
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
             AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
@@ -281,7 +289,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void CheckGetUserByTokenOk()
         {
-            TearDown();
+            SetUp();
             UserBusinessLogic logic = new UserBusinessLogic();
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
             AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
@@ -293,7 +301,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void CreateConnectionAfterLogOut()
         {
-            TearDown();
+            SetUp();
             UserBusinessLogic logic = new UserBusinessLogic();
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
             AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
@@ -308,7 +316,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void InvalidCredential()
         {
-            TearDown();
+            SetUp();
             UserBusinessLogic logic = new UserBusinessLogic();
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
             AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
@@ -328,24 +336,32 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void IsTokenActiveOk()
         {
-            TearDown();
+            ClearDataBase.ClearAll();
+            UserContext context = new UserContext();
+            User newuser = EntitiesExampleInstances.TestAdminUser();
+            newuser.Username = "rareusername";
+            newuser.Email = "rareemail";
+            context.Add(newuser);
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
             UserBusinessLogic logic = new UserBusinessLogic();
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
-            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
-            adminLogic.Add(newAdmin);
-            Guid token = logic.LogIn(newAdmin.Username, newAdmin.Password);
+            Guid token = adminBL.LogIn(newuser.Username, newuser.Password);
             Assert.IsTrue(logic.IsTokenActive(token));
             TearDown();
         }
         [TestMethod]
         public void ReleaseAllSessionsTest()
         {
-            TearDown();
+            ClearDataBase.ClearAll();
+            UserContext context = new UserContext();
+            User newuser = EntitiesExampleInstances.TestAdminUser();
+            newuser.Username = "rareusername";
+            newuser.Email = "rareemail";
+            context.Add(newuser);
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
             UserBusinessLogic logic = new UserBusinessLogic();
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
-            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
-            adminLogic.Add(newAdmin);
-            Guid token = logic.LogIn(newAdmin.Username, newAdmin.Password);
+            Guid token = adminBL.LogIn(newuser.Username, newuser.Password);
             logic.ReleaseAllSessions();
             Assert.IsFalse(logic.IsTokenActive(token));
             TearDown();
