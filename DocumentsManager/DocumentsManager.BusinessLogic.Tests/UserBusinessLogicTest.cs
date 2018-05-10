@@ -142,6 +142,92 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Title.Equals("new Title"));
             TearDown();
         }
+        [TestMethod]
+        public void ModifyParragraphsDocumentTest()
+        {
+            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            FormatContext formatCtx = new FormatContext();
+            Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
+            Text modifiedText = new Text
+            {
+                Id = Guid.NewGuid(),
+                StyleClass = aDocument.StyleClass,
+                WrittenText = "MODIFIED"
+            };
+            List<Text> texts = new List<Text>();
+            texts.Add(modifiedText);
+            Parragraph parragraph = new Parragraph
+            {
+                Id = Guid.NewGuid(),
+                Document = aDocument,
+                StyleClass = aDocument.StyleClass,
+                Texts = texts
+            };
+            UserContext uContext = new UserContext();
+            AdminUser admin = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "modifier@email.com",
+                Name = "testName",
+                Password = "testPassword",
+                Surname = "testSurname",
+                Username = "modifierUsername"
+            };
+            uContext.Add(admin);
+            List<Parragraph> parragraphs = new List<Parragraph>();
+            parragraphs.Add(parragraph);
+            aDocument.Parragraphs = parragraphs;
+            UserBusinessLogic logic = new UserBusinessLogic();
+            logic.ModifyParragraphs(aDocument, admin);
+            
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.Count==1);
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.ElementAt(0).Equals(parragraph));
+            TearDown();
+        }
+        [TestMethod]
+        public void ModifyParragraphsDocumentTestTwice()
+        {
+            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            FormatContext formatCtx = new FormatContext();
+            Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
+            Text modifiedText = new Text
+            {
+                Id = Guid.NewGuid(),
+                StyleClass = aDocument.StyleClass,
+                WrittenText = "MODIFIED"
+            };
+            List<Text> texts = new List<Text>();
+            texts.Add(modifiedText);
+            Parragraph parragraph = new Parragraph
+            {
+                Id = Guid.NewGuid(),
+                Document = aDocument,
+                StyleClass = aDocument.StyleClass,
+                Texts = texts
+            };
+            UserContext uContext = new UserContext();
+            AdminUser admin = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "modifier@email.com",
+                Name = "testName",
+                Password = "testPassword",
+                Surname = "testSurname",
+                Username = "modifierUsername"
+            };
+            uContext.Add(admin);
+            List<Parragraph> parragraphs = new List<Parragraph>();
+            parragraphs.Add(parragraph);
+            aDocument.Parragraphs = parragraphs;
+            UserBusinessLogic logic = new UserBusinessLogic();
+            logic.ModifyParragraphs(aDocument, admin);
+            aDocument.Parragraphs = new List<Parragraph>();
+            logic.ModifyParragraphs(aDocument, admin);
 
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.Count == 0);
+            TearDown();
+        }
     }
 }
