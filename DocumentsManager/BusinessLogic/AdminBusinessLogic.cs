@@ -117,6 +117,10 @@ namespace DocumentsManager.BusinessLogic
         {
             UserContext uContext = new UserContext();
             bool updated = false;
+            if (!uContext.Exists(newAdmin))
+            {
+                throw new ObjectDoesNotExists(newAdmin);
+            }
             updated = uContext.Modify(newAdmin);
             User dbUser = GetByID(id);
             if (!dbUser.hasSameInformation(newAdmin))
@@ -125,5 +129,18 @@ namespace DocumentsManager.BusinessLogic
             }
             return updated;
         }
+
+        public Guid Add(EditorUser user)
+        {
+            EditorBusinessLogic logic = new EditorBusinessLogic();
+            return logic.Add(user);
+        }
+
+        public bool Delete(User user)
+        {
+          return Delete(user.Id);
+        }
+
+      
     }
 }

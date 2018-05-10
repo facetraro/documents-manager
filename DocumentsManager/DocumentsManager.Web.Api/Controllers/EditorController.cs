@@ -1,4 +1,5 @@
 ﻿using DocumentsManager.BusinessLogic;
+using DocumentsManager.Exceptions;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -43,9 +44,17 @@ namespace DocumentsManager.Web.Api.Controllers
                 }
                 return Ok(editor);
             }
+            catch (WrongUserType wrongTypeException)
+            {
+                return BadRequest(wrongTypeException.Message);
+            }
+            catch (ObjectDoesNotExists doesNotExistsException)
+            {
+                return BadRequest(doesNotExistsException.Message);
+            }
             catch (ArgumentNullException ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
 
@@ -56,6 +65,10 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 Guid id = editorsBuisnessLogic.Add(editor);
                 return CreatedAtRoute("DefaultApi", new { id = id }, editor);
+            }
+            catch (ObjectAlreadyExistsException alreadyExistsException)
+            {
+                return BadRequest(alreadyExistsException.Message);
             }
             catch (ArgumentNullException ex)
             {
@@ -71,6 +84,10 @@ namespace DocumentsManager.Web.Api.Controllers
                 bool updateResult = editorsBuisnessLogic.Update(id, editor);
                 return CreatedAtRoute("DefaultApi", new { updated = updateResult }, editor);
             }
+            catch (ObjectDoesNotExists doesNotExists)
+            {
+                return BadRequest(doesNotExists.Message);
+            }
             catch (ArgumentNullException ex)
             {
                 return BadRequest(ex.Message);
@@ -84,6 +101,10 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 bool updateResult = editorsBuisnessLogic.Delete(id);
                 return Request.CreateResponse(HttpStatusCode.NoContent, updateResult);
+            }
+            catch (ObjectDoesNotExists doesNotExists)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, doesNotExists.Message);
             }
             catch (ArgumentNullException ex)
             {

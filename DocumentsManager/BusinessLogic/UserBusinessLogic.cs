@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DocumentsManager.BusinessLogic
 {
-    public class UserBusinessLogic
+    public class UserBusinessLogic : IUsersBusinessLogic
     {
         private void AddModifyHistory(User user, Document doc, ModifyState state)
         {
@@ -98,6 +98,9 @@ namespace DocumentsManager.BusinessLogic
             documentContext.ModifyFooter(aDocument);
             AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
         }
-
+        public void DeleteDocument(Document aDocument, User responsibleUser)
+        {
+            AddModifyHistory(responsibleUser, aDocument, ModifyState.Removed);
+        }
     }
 }

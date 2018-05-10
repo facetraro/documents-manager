@@ -125,12 +125,14 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\FormatController.cs" />
     <Compile Include="Controllers\EditorController.cs" />
     <Compile Include="Controllers\StyleClassController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,12 +149,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\DocumentsManager.BusinessLogic.csproj">
       <Project>{8B29DE6D-2EE3-4C95-8DF7-F890263F52CD}</Project>
       <Name>DocumentsManager.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj">
+      <Project>{34E362D2-1A27-48BB-8FE5-91A89124B556}</Project>
+      <Name>DocumentsManager.Exceptions</Name>
     </ProjectReference>
     <ProjectReference Include="..\DocumentsMangerEntities\DocumentsManger.Data.csproj">
       <Project>{80D195AE-B71A-465A-A588-7397AE023E8F}</Project>
