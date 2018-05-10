@@ -12,20 +12,13 @@ namespace DocumentsManager.BusinessLogic.Tests
     [TestClass]
     public class UserBusinessLogicTest
     {
-        public Text CreateText(StyleClass style)
+        public void TearDown()
         {
-            Text testText = new Text
-            {
-                Id = Guid.NewGuid(),
-                StyleClass = style,
-                WrittenText = "TESTTEXT"
-            };
-            return testText;
+            ClearDataBase.ClearAll();
         }
-        [TestMethod]
-        public void AddDocument()
+        public Document setUpAllSameStyle(FormatContext formatCtx, StyleClassContextHandler styleCtx)
         {
-            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            TearDown();
             StyleClass style = new StyleClass
             {
                 Name = "StyleTest",
@@ -34,7 +27,6 @@ namespace DocumentsManager.BusinessLogic.Tests
                 Based = null,
             };
             styleCtx.Add(style);
-            FormatContext formatCtx = new FormatContext();
             Format format = new Format
             {
                 Name = "formatTest",
@@ -90,10 +82,30 @@ namespace DocumentsManager.BusinessLogic.Tests
             };
             UserBusinessLogic logic = new UserBusinessLogic();
             logic.AddDocument(aDocument);
+            return aDocument;
+        }
+
+        public Text CreateText(StyleClass style)
+        {
+            Text testText = new Text
+            {
+                Id = Guid.NewGuid(),
+                StyleClass = style,
+                WrittenText = "TESTTEXT"
+            };
+            return testText;
+        }
+        [TestMethod]
+        public void AddDocument()
+        {
+            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            FormatContext formatCtx = new FormatContext();
+            Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             IEnumerable<Document> allDocuments = documentLogic.GetAllDocuments();
             Assert.IsTrue(allDocuments.Contains(aDocument));
-            Assert.IsTrue(allDocuments.Count()==1);
+            Assert.IsTrue(allDocuments.Count() == 1);
+            TearDown();
         }
 
     }
