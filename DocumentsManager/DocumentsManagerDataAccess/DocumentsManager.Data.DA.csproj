@@ -61,6 +61,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocumentsManager.AuthenticationToken\DocumentsManager.AuthenticationToken.csproj">
+      <Project>{4E29186B-65BD-422B-B4CB-6E3C81D83241}</Project>
+      <Name>DocumentsManager.AuthenticationToken</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsMangerEntities\DocumentsManger.Data.csproj">
       <Project>{80D195AE-B71A-465A-A588-7397AE023E8F}</Project>
       <Name>DocumentsManger.Data</Name>

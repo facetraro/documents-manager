@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DocumentsMangerEntities;
 using DocumentsManagerDataAccess;
+using DocumentsManager.AuthenticationToken;
 
 namespace DocumentsManager.Data.Repository
 {
@@ -21,6 +22,7 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<Parragraph> parragraphRepository;
         private GenericRepository<Document> documentRepository;
         private GenericRepository<ModifyDocumentHistory> historyRepository;
+        private GenericRepository<Session> sessionRepository;
 
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
@@ -140,6 +142,17 @@ namespace DocumentsManager.Data.Repository
                     this.historyRepository = new GenericRepository<ModifyDocumentHistory>(context);
                 }
                 return historyRepository;
+            }
+        }
+        public IRepository<Session> SessionRepository
+        {
+            get
+            {
+                if (this.sessionRepository == null)
+                {
+                    this.sessionRepository = new GenericRepository<Session>(context);
+                }
+                return sessionRepository;
             }
         }
 

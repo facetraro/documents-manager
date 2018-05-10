@@ -55,15 +55,24 @@
     <Compile Include="HeaderContext.cs" />
     <Compile Include="ModifyDocumentHistoryContext.cs" />
     <Compile Include="ParragraphContext.cs" />
+    <Compile Include="SessionAccess.cs" />
     <Compile Include="StyleClassContextHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextContext.cs" />
     <Compile Include="UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocumentsManager.AuthenticationToken\DocumentsManager.AuthenticationToken.csproj">
+      <Project>{4E29186B-65BD-422B-B4CB-6E3C81D83241}</Project>
+      <Name>DocumentsManager.AuthenticationToken</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Data.Repository\DocumentsManager.Data.Repository.csproj">
       <Project>{A0A4683D-CDE9-41C7-BE95-040B11E302E7}</Project>
       <Name>DocumentsManager.Data.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj">
+      <Project>{34E362D2-1A27-48BB-8FE5-91A89124B556}</Project>
+      <Name>DocumentsManager.Exceptions</Name>
     </ProjectReference>
     <ProjectReference Include="..\DocumentsManagerDataAccess\DocumentsManager.Data.DA.csproj">
       <Project>{58405487-5C94-4569-8171-0ED3889C9A03}</Project>

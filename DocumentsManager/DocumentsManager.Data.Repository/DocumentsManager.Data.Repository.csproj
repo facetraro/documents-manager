@@ -60,6 +60,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocumentsManager.AuthenticationToken\DocumentsManager.AuthenticationToken.csproj">
+      <Project>{4E29186B-65BD-422B-B4CB-6E3C81D83241}</Project>
+      <Name>DocumentsManager.AuthenticationToken</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManagerDataAccess\DocumentsManager.Data.DA.csproj">
       <Project>{58405487-5C94-4569-8171-0ED3889C9A03}</Project>
       <Name>DocumentsManager.Data.DA</Name>

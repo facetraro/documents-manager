@@ -1,4 +1,5 @@
-﻿using DocumentsMangerEntities;
+﻿using DocumentsManager.AuthenticationToken;
+using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,6 +12,7 @@ namespace DocumentsManagerDataAccess
     public class ContextDataAccess : DbContext
     {
         public ContextDataAccess() : base("name=DocumentsManager") { }
+        public DbSet<Session> ActiveSessions { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<StyleClass> Styles { get; set; }
         public DbSet<StyleAttribute> Attributes { get; set; }
@@ -35,6 +37,7 @@ namespace DocumentsManagerDataAccess
             modelBuilder.Entity<Parragraph>().HasKey(P => P.Id);
             modelBuilder.Entity<Document>().HasKey(D => D.Id);
             modelBuilder.Entity<ModifyDocumentHistory>().HasKey(MDH => MDH.Id);
+            modelBuilder.Entity<Session>().HasKey(S => S.token);
         }
     }
 }

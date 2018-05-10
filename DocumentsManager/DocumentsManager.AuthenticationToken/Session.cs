@@ -13,7 +13,6 @@ namespace DocumentsManager.AuthenticationToken
         public override bool Equals(object obj)
         {
             Session anotherSession = obj as Session;
-
             return anotherSession.token == token;
         }
     }
