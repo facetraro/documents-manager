@@ -106,7 +106,7 @@ namespace DocumentsManagerExampleInstances
                 StyleClass = TestStyleClass()
             };
             return aText;
-       }
+        }
         public static Header TestHeader()
         {
             Header aHeader = new Header
@@ -140,11 +140,12 @@ namespace DocumentsManagerExampleInstances
             };
             return aParragraph;
         }
-        public static Document TestDocument() 
+        public static Document TestDocument()
         {
             List<Parragraph> parragraphs = new List<Parragraph>();
             parragraphs.Add(EntitiesExampleInstances.TestParragraph());
-            Document aDocument = new Document {
+            Document aDocument = new Document
+            {
                 Id = Guid.NewGuid(),
                 Format = EntitiesExampleInstances.TestFormat(),
                 Header = EntitiesExampleInstances.TestHeader(),
@@ -152,8 +153,31 @@ namespace DocumentsManagerExampleInstances
                 Parragraphs = parragraphs,
                 StyleClass = EntitiesExampleInstances.TestStyleClass(),
                 Title = "Default title"
-        };
-           
+            };
+
+            return aDocument;
+        }
+        public static Document TestDocumentWithOneStyle()
+        {
+            List<Parragraph> parragraphs = new List<Parragraph>();
+            parragraphs.Add(EntitiesExampleInstances.TestParragraph());
+            Document aDocument = new Document
+            {
+                Id = Guid.NewGuid(),
+                StyleClass = EntitiesExampleInstances.TestStyleClass(),
+                Format = EntitiesExampleInstances.TestFormat(),
+                Header = EntitiesExampleInstances.TestHeader(),
+                Footer = EntitiesExampleInstances.TestFooter(),
+                Parragraphs = parragraphs,
+                Title = "Default title"
+            };
+            foreach (var item in aDocument.Parragraphs)
+            {
+                item.StyleClass = aDocument.StyleClass;
+            }
+            aDocument.Footer.StyleClass = aDocument.StyleClass;
+            aDocument.Header.StyleClass = aDocument.StyleClass;
+            aDocument.Format.StyleClasses[0] = aDocument.StyleClass;
             return aDocument;
         }
         public static ModifyDocumentHistory TestModifyDocumentHistory()

@@ -20,5 +20,17 @@ namespace DocumentsManager.BusinessLogic
             format.StyleClasses = styles;
             return format;
         }
+
+        public bool Exists(Guid id)
+        {
+            FormatContext context = new FormatContext();
+            return context.Exists(id);
+        }
+
+        public void Add(Format format)
+        {
+            FormatContext context = new FormatContext();
+            context.Add(format);
+        }
     }
 }

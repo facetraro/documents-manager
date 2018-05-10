@@ -58,24 +58,24 @@ namespace DocumentsManager.BusinessLogic
             AddRegisterByDate(histories, chart);
             return chart;
         }
-        public Guid Add(AdminUser admin)
+        public Guid Add(AdminUser newAdmin)
         {
-            admin.Id = Guid.NewGuid();
-            UserContext uContext = new UserContext();
-            if (IdRegistered(admin)) 
+            newAdmin.Id = Guid.NewGuid();
+            UserContext userContext = new UserContext();
+            if (IdRegistered(newAdmin)) 
             {
                 throw new ObjectAlreadyExistsException("Id");
             }
-            if (EmailRegistered(admin)) 
+            if (EmailRegistered(newAdmin)) 
             {
                 throw new ObjectAlreadyExistsException("email");
             }
-            if (UserNameRegistered(admin)) 
+            if (UserNameRegistered(newAdmin)) 
             {
                 throw new ObjectAlreadyExistsException("username");
             }
-            uContext.Add(admin);
-            return admin.Id;
+            userContext.Add(newAdmin);
+            return newAdmin.Id;
         }
 
         public bool Delete(Guid id)

@@ -1,4 +1,5 @@
 ﻿using DocumentsManager.Data.DA.Handler;
+using DocumentsManager.Exceptions;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,17 @@ namespace DocumentsManager.BusinessLogic
             ModifyDocumentHistoryContext modifyContext = new ModifyDocumentHistoryContext();
             modifyContext.Add(history);
         }
+        public Guid AddDocument(User user, Document doc)
+        {
+            if (!IdRegistered(user))
+            {
+                throw new ObjectDoesNotExists(user);
+            }
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            Guid id = documentLogic.Add(doc);
+            AddModifyHistory(user, doc, ModifyState.Added);
+            return id;
+        }
         public void ModifyDocument(User user, Document doc, ModifyState state)
         {
             AddModifyHistory(user, doc, state);
@@ -30,7 +42,8 @@ namespace DocumentsManager.BusinessLogic
             UserContext uContext = new UserContext();
             return uContext.Exists(anUser);
         }
-        public bool UserNameRegistered(User anUser) {
+        public bool UserNameRegistered(User anUser)
+        {
             UserContext uContext = new UserContext();
             List<User> allUsers = uContext.GetLazy();
             bool registered = false;
@@ -38,7 +51,7 @@ namespace DocumentsManager.BusinessLogic
             {
                 if (useri.Username.Equals(anUser.Username))
                 {
-                    registered= true;
+                    registered = true;
                 }
             }
             return registered;
