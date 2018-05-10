@@ -336,5 +336,47 @@ namespace DocumentsManager.BusinessLogic.Tests
 
             TearDown();
         }
+        [TestMethod]
+        public void ModifyFooterDocumentTest()
+        {
+            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            FormatContext formatCtx = new FormatContext();
+            Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
+            UserContext uContext = new UserContext();
+            AdminUser admin = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "modifier@email.com",
+                Name = "testName",
+                Password = "testPassword",
+                Surname = "testSurname",
+                Username = "modifierUsername"
+            };
+            uContext.Add(admin);
+            StyleClass style = new StyleClass
+            {
+                Id = Guid.NewGuid(),
+                Name = "ModifiedStyle",
+                Attributes = new List<StyleAttribute>(),
+                Based = null
+            };
+            styleCtx.Add(style);
+            Text newFooterText = new Text
+            {
+                Id = Guid.NewGuid(),
+                StyleClass = style,
+                WrittenText = "ModifiedFooter"
+            };
+            aDocument.Footer.StyleClass = aDocument.StyleClass;
+            aDocument.Footer.Text = newFooterText;
+            UserBusinessLogic logic = new UserBusinessLogic();
+            logic.ModifyDocumentFooter(aDocument, admin);
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            HeaderBusinessLogic hLogic = new HeaderBusinessLogic();
+            Assert.IsTrue(hLogic.GetById(aDocument.Footer.Id).Text.HasSameText(newFooterText));
+            Assert.IsTrue(hLogic.GetById(aDocument.Footer.Id).Text.StyleClass.Equals(newFooterText.StyleClass));
+
+            TearDown();
+        }
     }
 }
