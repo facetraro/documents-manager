@@ -23,6 +23,7 @@ namespace DocumentsManager.BusinessLogic
         }
         public void ModifyDocument(User user, Document doc, ModifyState state)
         {
+           
             AddModifyHistory(user, doc, state);
         }
         public bool IdRegistered(User anUser)
@@ -56,6 +57,22 @@ namespace DocumentsManager.BusinessLogic
                 }
             }
             return registered;
+        }
+        public void ModifyParragraphs(Document aDocument, User responsibleUser) {
+            AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
+            DocumentContext documentContext = new DocumentContext();
+            documentContext.ModifyParragraphs(aDocument);       
+        }
+       
+        public void AddDocument(Document aDocument,User responsibleUser) {
+            DocumentContext documentContext = new DocumentContext();
+            documentContext.Add(aDocument);
+            AddModifyHistory(responsibleUser, aDocument, ModifyState.Added);
+        }
+        public void ModifyDocumentTitle(Document aDocument, User responsibleUser) {
+            DocumentContext documentContext = new DocumentContext();
+            documentContext.ModifyTitle(aDocument);
+            AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
         }
     }
 }

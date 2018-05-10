@@ -78,6 +78,11 @@ namespace DocumentsManager.BusinessLogic
             }
             return htmlDocument;
         }
+        public IEnumerable<Document> GetAllDocuments()
+        {
+            DocumentContext context = new DocumentContext();
+            return context.GetDocuments();
+        }
 
     }
 }
