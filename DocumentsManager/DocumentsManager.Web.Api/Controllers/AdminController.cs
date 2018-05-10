@@ -117,6 +117,10 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, doesNotExists.Message);
             }
+            catch (CantDeleteLoggedUserException ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
             catch (ArgumentNullException ex)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);

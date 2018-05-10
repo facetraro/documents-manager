@@ -12,7 +12,10 @@ namespace DocumentsManager.BusinessLogic
 {
     public class UserBusinessLogic : IUsersBusinessLogic
     {
-        public Guid Token { get; set; }
+        private User GetLoggedUser()
+        {
+            return GetUserByToken(LoggedToken.GetToken());
+        }
         private void AddModifyHistory(User user, Document doc, ModifyState state)
         {
             ModifyDocumentHistory history = new ModifyDocumentHistory();
@@ -26,9 +29,9 @@ namespace DocumentsManager.BusinessLogic
         }
         public Guid AddDocument(Document doc)
         {
-            if (IsTokenActive(Token))
+            if (IsTokenActive(LoggedToken.GetToken()))
             {
-                User user = GetUserByToken(Token);
+                User user = GetUserByToken(LoggedToken.GetToken());
                 if (!IdRegistered(user))
                 {
                     throw new ObjectDoesNotExists(user);
@@ -86,9 +89,9 @@ namespace DocumentsManager.BusinessLogic
         }
         public void ModifyParragraphs(Document aDocument)
         {
-            if (IsTokenActive(Token))
+            if (IsTokenActive(LoggedToken.GetToken()))
             {
-                User responsibleUser = GetUserByToken(Token);
+                User responsibleUser = GetUserByToken(LoggedToken.GetToken());
                 ModifyParragraphs(aDocument, responsibleUser);
             }
             
@@ -101,9 +104,9 @@ namespace DocumentsManager.BusinessLogic
         }
         public void ModifyDocumentProperties(Document aDocument)
         {
-            if (IsTokenActive(Token))
+            if (IsTokenActive(LoggedToken.GetToken()))
             {
-                User responsibleUser = GetUserByToken(Token);
+                User responsibleUser = GetUserByToken(LoggedToken.GetToken());
                 ModifyDocumentProperties(aDocument, responsibleUser);
             }
            
@@ -111,9 +114,9 @@ namespace DocumentsManager.BusinessLogic
 
         public void ModifyDocumentHeader(Document aDocument)
         {
-            if (IsTokenActive(Token))
+            if (IsTokenActive(LoggedToken.GetToken()))
             {
-                User responsibleUser = GetUserByToken(Token);
+                User responsibleUser = GetUserByToken(LoggedToken.GetToken());
                 ModifyDocumentHeader(aDocument, responsibleUser);
             }
             
@@ -121,20 +124,10 @@ namespace DocumentsManager.BusinessLogic
 
         public void ModifyDocumentFooter(Document aDocument)
         {
-            if (IsTokenActive(Token))
+            if (IsTokenActive(LoggedToken.GetToken()))
             {
-                User responsibleUser = GetUserByToken(Token);
+                User responsibleUser = GetUserByToken(LoggedToken.GetToken());
                 ModifyDocumentFooter(aDocument, responsibleUser);
-            }
-            
-        }
-
-        public void DeleteDocument(Document aDocument)
-        {
-            if (IsTokenActive(Token))
-            {
-                User responsibleUser = GetUserByToken(Token);
-                DeleteDocument(aDocument, responsibleUser);
             }
             
         }
@@ -184,7 +177,9 @@ namespace DocumentsManager.BusinessLogic
                 if (userFromDB.Authenticate(password))
                 {
                     SessionAccess sessionAccess = new SessionAccess();
-                    return sessionAccess.Add(userFromDB.Id);
+                    Guid newToken = sessionAccess.Add(userFromDB.Id);
+                    LoggedToken.SetToken(newToken);
+                    return newToken;
                 }
             }
             throw new InvalidCredentialException();
@@ -214,6 +209,10 @@ namespace DocumentsManager.BusinessLogic
         {
             SessionAccess sessionAccess = new SessionAccess();
             sessionAccess.ClearAll();
+        }
+        public void DeleteDocument(Document aDocument)
+        {
+            AddModifyHistory(GetLoggedUser(), aDocument, ModifyState.Removed);
         }
         public void DeleteDocument(Document aDocument, User responsibleUser)
         {

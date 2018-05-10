@@ -10,18 +10,21 @@ namespace DocumentsManager.BusinessLogic
     public class LoggedToken
     {
         static Guid notInitialized = new Guid();
-        private static Guid token = notInitialized;
-        public static Guid GetToken() {
-            if (token.Equals(notInitialized))
+        private static Guid token;
+        public static Guid GetToken()
+        {
+            if (token == notInitialized)
             {
                 throw new NoUserLoggedException();
             }
             return token;
         }
-        public static void SetToken(Guid loggedToken) {
+        public static void SetToken(Guid loggedToken)
+        {
             token = loggedToken;
         }
-        public static void DeleteToken() {
+        public static void DeleteToken()
+        {
             token = notInitialized;
         }
     }
