@@ -47,10 +47,12 @@
     <Compile Include="FormatBusinessLogic.cs" />
     <Compile Include="HeaderBusinessLogic.cs" />
     <Compile Include="IAdminsBusinessLogic.cs" />
+    <Compile Include="IDocumentBusinessLogic.cs" />
     <Compile Include="IFormatsBusinessLogic.cs" />
     <Compile Include="IPrintableObject.cs" />
     <Compile Include="IStyleClassBusinessLogic.cs" />
     <Compile Include="IEditorBusinessLogic.cs" />
+    <Compile Include="IUsersBusinessLogic.cs" />
     <Compile Include="ParragraphBusinessLogic.cs" />
     <Compile Include="PrintableFooter.cs" />
     <Compile Include="PrintableHeader.cs" />

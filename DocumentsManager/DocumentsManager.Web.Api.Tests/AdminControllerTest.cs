@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Results;
 using System.Net.Http;
+using DocumentsManager.Web.Api.Models;
 
 namespace DocumentsManager.Web.Api.Tests
 {
@@ -62,7 +63,7 @@ namespace DocumentsManager.Web.Api.Tests
         public void GetAdminByIdOkTest()
         {
             //Arrange
-            var fakeAdmin = GetAFakeAdmin();
+            var fakeAdmin = GetAFakeAdmin().GetEntityModel();
             var fakeGuid = fakeAdmin.Id;
 
             var mockAdminBusinessLogic = new Mock<IAdminsBusinessLogic>();
@@ -107,7 +108,7 @@ namespace DocumentsManager.Web.Api.Tests
         public void CreateNewAdminTest()
         {
             //Arrange
-            var fakeAdmin = GetAFakeAdmin();
+            var fakeAdmin = GetAFakeAdmin().GetEntityModel();
 
             var mockAdminBusinessLogic = new Mock<IAdminsBusinessLogic>();
             mockAdminBusinessLogic
@@ -115,9 +116,9 @@ namespace DocumentsManager.Web.Api.Tests
                 .Returns(fakeAdmin.Id);
 
             var controller = new AdminController(mockAdminBusinessLogic.Object);
-
+            AdminModel fakeModel = new AdminModel(fakeAdmin);
             //Act
-            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Post(fakeAdmin);
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Post(fakeModel);
             var createdResult = obtainedResult as CreatedAtRouteNegotiatedContentResult<AdminUser>;
 
             //Assert
@@ -140,12 +141,11 @@ namespace DocumentsManager.Web.Api.Tests
                 .Throws(new ArgumentNullException());
 
             var controller = new AdminController(mockAdminBusinessLogic.Object);
-
+            AdminModel fakeModel = null;
             //Act
-            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Post(fakeAdmin);
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Post(fakeModel);
 
-            //Assert
-            mockAdminBusinessLogic.VerifyAll();
+            //Assert       
             Assert.IsInstanceOfType(obtainedResult, typeof(BadRequestErrorMessageResult));
         }
 
@@ -153,7 +153,7 @@ namespace DocumentsManager.Web.Api.Tests
         public void UpdateExistingAdminOkTest()
         {
             //Arrange
-            var fakeAdmin = GetAFakeAdmin();
+            var fakeAdmin = GetAFakeAdmin().GetEntityModel();
             var expectedResult = true;
 
             var mockAdminBusinessLogic = new Mock<IAdminsBusinessLogic>();
@@ -227,10 +227,11 @@ namespace DocumentsManager.Web.Api.Tests
                 defaults: new { id = RouteParameter.Optional });
         }
 
-        private AdminUser GetAFakeAdmin()
+        private AdminModel GetAFakeAdmin()
         {
             List<AdminUser> editors = GetFakeAdmins().ToList();
-            return editors.FirstOrDefault();
+            AdminModel model = new AdminModel(editors.FirstOrDefault());
+            return model;
         }
         private Guid GetARandomFakeGuid()
         {

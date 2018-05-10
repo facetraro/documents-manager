@@ -234,5 +234,13 @@ namespace DocumentsManager.Data.DA.Handler
             }
             return documents;
         }
+        public bool Exists(Document aDocument)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                return unitOfWork.DocumentRepository.Exists(aDocument.Id);
+            }
+        }
     }
 }

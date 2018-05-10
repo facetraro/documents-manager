@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DocumentsManager.BusinessLogic
 {
-    public class DocumentBusinessLogic
+    public class DocumentBusinessLogic : IDocumentBusinessLogic
     {
         private void LoadFooter(Document document)
         {
@@ -114,6 +114,22 @@ namespace DocumentsManager.BusinessLogic
         {
             DocumentContext context = new DocumentContext();
             return context.GetDocuments();
+        }
+
+        public Document GetById(Guid id)
+        {
+            DocumentContext context = new DocumentContext();
+            Document document = new Document();
+            document.Id = id;
+            if (context.Equals(document))
+            {
+                document=context.GetById(id);
+            }
+            else
+            {
+                throw new ObjectDoesNotExists(document);
+            }
+            return document;
         }
     }
 }
