@@ -38,10 +38,17 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Remove(Footer footerToDelete)
         {
+            
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.FooterRepository.Delete(footerToDelete);
+            }
+            Footer footer = GetById(footerToDelete.Id);
+            if (footer != null)
+            {
+                TextContext tContext = new TextContext();
+                tContext.Remove(footer.Text);
             }
         }
         public void Remove(Guid id)
@@ -51,6 +58,13 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.FooterRepository.Delete(id);
             }
+            Footer footer = GetById(id);
+            if (footer!=null)
+            {
+                TextContext tContext = new TextContext();
+                tContext.Remove(footer.Text);
+            }
+            
         }
         public Footer GetById(Guid id)
         {

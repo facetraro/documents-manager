@@ -81,7 +81,18 @@ namespace DocumentsManager.BusinessLogic.Tests
                 Title = "Test Title"
             };
             UserBusinessLogic logic = new UserBusinessLogic();
-            logic.AddDocument(aDocument);
+            AdminUser admin = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "test@email.com",
+                Name = "testName",
+                Password = "testPassword",
+                Surname = "testSurname",
+                Username = "testUsername"
+            };
+            AdminBusinessLogic adminLogic = new AdminBusinessLogic();
+            adminLogic.Add(admin);
+            logic.AddDocument(aDocument, admin);
             return aDocument;
         }
 
@@ -96,7 +107,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             return testText;
         }
         [TestMethod]
-        public void AddDocument()
+        public void AddDocumentTest()
         {
             StyleClassContextHandler styleCtx = new StyleClassContextHandler();
             FormatContext formatCtx = new FormatContext();
@@ -107,6 +118,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(allDocuments.Count() == 1);
             TearDown();
         }
+        
 
     }
 }
