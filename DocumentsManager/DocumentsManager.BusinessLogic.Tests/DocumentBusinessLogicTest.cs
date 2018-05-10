@@ -123,6 +123,5 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(printedDocument.Trim(), expectedResult.Trim());
             TearDown();
         }
-
     }
 }

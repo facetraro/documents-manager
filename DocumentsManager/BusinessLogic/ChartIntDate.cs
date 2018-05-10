@@ -99,5 +99,19 @@ namespace DocumentsManager.BusinessLogic
         {
             return Date.Count;
         }
+        private String GetString()
+        {
+            String toString = string.Empty;
+            for (int i = 0; i < GetLength(); i++)
+            {
+                toString += "[Documentos:" + Value[i] + "- Fecha:" + Date[i].ToString(formatDate) + "]";
+            }
+            return toString;
+        }
+
+        public override string ToString()
+        {
+            return GetString();
+        }
     }
 }
