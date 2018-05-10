@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DocumentsMangerEntities
 {
-    abstract public class StyleAttribute
+    abstract public class StyleAttribute : IComparable<StyleAttribute>
     {
         public Guid Id { get; set; }
         public String Name { get; set; }
@@ -36,5 +36,15 @@ namespace DocumentsMangerEntities
         public abstract string GetStyle();
         public abstract string GetInitialTag();
         public abstract string GetEndTag();
+
+        public int CompareTo(StyleAttribute other)
+        {
+            if (other == null)
+                return 1;
+
+            else
+                return Name.CompareTo(other.Name);
+        }
+
     }
 }

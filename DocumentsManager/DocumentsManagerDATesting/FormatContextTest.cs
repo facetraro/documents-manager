@@ -118,5 +118,29 @@ namespace DocumentsManagerDATesting
             Assert.AreEqual(newFormat.StyleClasses.Count, getFormat.StyleClasses.Count);
             TearDown();
         }
+        [TestMethod]
+        public void ModifyAddStylesFormatTest()
+        {
+            FormatContext context = new FormatContext();
+            StyleClassContextHandler contextStyle = new StyleClassContextHandler();
+            Format newFormat = EntitiesExampleInstances.TestFormat();
+            StyleClass anotherStyle = EntitiesExampleInstances.TestStyleClass();
+            anotherStyle.Name = "anotherStyle";
+            newFormat.StyleClasses.Add(anotherStyle);
+            foreach (var item in newFormat.StyleClasses)
+            {
+                contextStyle.Add(item);
+            }
+            context.Add(newFormat);
+            StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
+            contextStyle.Add(newStyle);
+            newFormat.StyleClasses.Add(newStyle);
+            newFormat.Name = "anotherName";
+            context.Modify(newFormat);
+            Format getFormat = context.GetById(newFormat.Id);
+            Assert.AreEqual(newFormat.Name, getFormat.Name);
+            Assert.AreEqual(newFormat.StyleClasses.Count, getFormat.StyleClasses.Count);
+            TearDown();
+        }
     }
 }
