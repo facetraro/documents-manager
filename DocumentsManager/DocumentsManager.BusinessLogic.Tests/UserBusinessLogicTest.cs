@@ -138,7 +138,7 @@ namespace DocumentsManager.BusinessLogic.Tests
                 Username = "modifierUsername"
             };
             uContext.Add(admin);
-            logic.ModifyDocumentTitle(aDocument, admin);
+            logic.ModifyDocumentProperties(aDocument, admin);
             Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Title.Equals("new Title"));
             TearDown();
         }
@@ -227,6 +227,39 @@ namespace DocumentsManager.BusinessLogic.Tests
 
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.Count == 0);
+            TearDown();
+        }
+        [TestMethod]
+        public void ModifyStyleClassDocumentTest()
+        {
+            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            FormatContext formatCtx = new FormatContext();
+            Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
+            
+            UserContext uContext = new UserContext();
+            AdminUser admin = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "modifier@email.com",
+                Name = "testName",
+                Password = "testPassword",
+                Surname = "testSurname",
+                Username = "modifierUsername"
+            };
+            uContext.Add(admin);
+            StyleClass style = new StyleClass
+            {
+                Id = Guid.NewGuid(),
+                Name = "ModifiedStyle",
+                Attributes = new List<StyleAttribute>(),
+                Based = null
+            };
+            styleCtx.Add(style);
+            aDocument.StyleClass = style;
+            UserBusinessLogic logic = new UserBusinessLogic();
+            logic.ModifyDocumentProperties(aDocument, admin);
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).StyleClass.Name.Equals("ModifiedStyle"));
             TearDown();
         }
     }
