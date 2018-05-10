@@ -7,6 +7,7 @@ using DocumentsManagerDATesting;
 using DocumentsManager.Data.DA.Handler;
 using DocumentsManagerExampleInstances;
 using System.Linq;
+using DocumentsManager.AuthenticationToken;
 
 namespace DocumentsManager.BusinessLogic.Tests
 {
@@ -18,7 +19,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             ClearDataBase.ClearAll();
         }
-     
+
         public void TearDown()
         {
             ClearDataBase.ClearAll();
@@ -152,7 +153,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void ModifyTitleDodcumentTest()
         {
-           
+
         }
         [TestMethod]
         public void ModifyParragraphsDocumentTest()
@@ -191,9 +192,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             aDocument.Parragraphs = parragraphs;
             UserBusinessLogic logic = new UserBusinessLogic();
             logic.ModifyParragraphs(aDocument, admin);
-            
+
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.Count==1);
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.Count == 1);
             Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.ElementAt(0).Equals(parragraph));
             TearDown();
         }
@@ -240,7 +241,119 @@ namespace DocumentsManager.BusinessLogic.Tests
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.Count == 0);
             TearDown();
-        
+        }
+        [TestMethod]
+        public void CreateNewSession()
+        {
+            SessionAccess sessionAccess = new SessionAccess();
+            Guid newGuidUser = Guid.NewGuid();
+            Guid newToken = sessionAccess.Add(newGuidUser);
+            Assert.IsTrue(sessionAccess.SessionAlreadyOpen(newGuidUser));
+            sessionAccess.Remove(newToken);
+            TearDown();
+        }
+        [TestMethod]
+        public void CheckNotCreatedSession()
+        {
+            SessionAccess sessionAccess = new SessionAccess();
+            Guid newGuidUser = Guid.NewGuid();
+            Assert.IsFalse(sessionAccess.SessionAlreadyOpen(newGuidUser));
+            TearDown();
+        }
+        [TestMethod]
+        public void GetUserByToken()
+        {
+            SessionAccess sessionAccess = new SessionAccess();
+            Guid newGuidUser = Guid.NewGuid();
+            Guid token = sessionAccess.Add(newGuidUser);
+            Guid idUser = sessionAccess.GetIdByToken(token);
+            Assert.IsTrue(newGuidUser==idUser);
+            sessionAccess.Remove(token);
+            TearDown();
+        }
+        [ExpectedException(typeof(UserAlreadyLogged))]
+        [TestMethod]
+        public void CreateConnectionAlreadyLogged()
+        {
+            UserBusinessLogic logic = new UserBusinessLogic();
+            AdminBusinessLogic adminLogic = new AdminBusinessLogic();
+            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
+            adminLogic.Add(newAdmin);
+            Guid token = logic.LogIn(newAdmin.Username, newAdmin.Password);
+            Guid anotherToken = logic.LogIn(newAdmin.Username, newAdmin.Password);
+            TearDown();
+        }
+        [TestMethod]
+        public void CheckGetUserByTokenOk()
+        {
+            TearDown();
+            UserBusinessLogic logic = new UserBusinessLogic();
+            AdminBusinessLogic adminLogic = new AdminBusinessLogic();
+            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
+            adminLogic.Add(newAdmin);
+            Guid token = logic.LogIn(newAdmin.Username, newAdmin.Password);
+            Assert.AreEqual(newAdmin, logic.GetUserByToken(token));
+            TearDown();
+        }
+        [TestMethod]
+        public void CreateConnectionAfterLogOut()
+        {
+            TearDown();
+            UserBusinessLogic logic = new UserBusinessLogic();
+            AdminBusinessLogic adminLogic = new AdminBusinessLogic();
+            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
+            adminLogic.Add(newAdmin);
+            Guid token = logic.LogIn(newAdmin.Username, newAdmin.Password);
+            logic.LogOut(token);
+            Guid anotherToken = logic.LogIn(newAdmin.Username, newAdmin.Password);
+            Assert.AreEqual(newAdmin, logic.GetUserByToken(anotherToken));
+            TearDown();
+        }
+        [ExpectedException(typeof(InvalidCredentialException))]
+        [TestMethod]
+        public void InvalidCredential()
+        {
+            TearDown();
+            UserBusinessLogic logic = new UserBusinessLogic();
+            AdminBusinessLogic adminLogic = new AdminBusinessLogic();
+            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
+            adminLogic.Add(newAdmin);
+            Guid token = logic.LogIn(newAdmin.Username, "notThePassword");
+            TearDown();
+        }
+        [TestMethod]
+        public void IsTokenActiveFalse()
+        {
+            TearDown();
+            UserBusinessLogic logic = new UserBusinessLogic();
+            Guid token = Guid.NewGuid();
+            Assert.IsFalse(logic.IsTokenActive(token));
+            TearDown();
+        }
+        [TestMethod]
+        public void IsTokenActiveOk()
+        {
+            TearDown();
+            UserBusinessLogic logic = new UserBusinessLogic();
+            AdminBusinessLogic adminLogic = new AdminBusinessLogic();
+            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
+            adminLogic.Add(newAdmin);
+            Guid token = logic.LogIn(newAdmin.Username, newAdmin.Password);
+            Assert.IsTrue(logic.IsTokenActive(token));
+            TearDown();
+        }
+        [TestMethod]
+        public void ReleaseAllSessionsTest()
+        {
+            TearDown();
+            UserBusinessLogic logic = new UserBusinessLogic();
+            AdminBusinessLogic adminLogic = new AdminBusinessLogic();
+            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
+            adminLogic.Add(newAdmin);
+            Guid token = logic.LogIn(newAdmin.Username, newAdmin.Password);
+            logic.ReleaseAllSessions();
+            Assert.IsFalse(logic.IsTokenActive(token));
+            TearDown();
         }
     }
 }
