@@ -11,6 +11,9 @@ namespace DocumentsManager.BusinessLogic.Tests
     [TestClass]
     public class DocumentBusinessLogicTest
     {
+        public void TearDown() {
+            ClearDataBase.ClearAll();
+        }
         [TestMethod]
         public void GetChartFromDocumentEmpty()
         {
@@ -104,6 +107,34 @@ namespace DocumentsManager.BusinessLogic.Tests
             dates.Add(newDate);
             dates.Add(anotherDate);
             return dates;
+        }
+        [TestMethod]
+        public void PrintDocumentTest()
+        {
+            DocumentBusinessLogic documentBL = new DocumentBusinessLogic();
+            StyleClassBusinessLogic styleClassBL = new StyleClassBusinessLogic();
+            DocumentContextTest test = new DocumentContextTest();
+            DocumentContext dContext = new DocumentContext();
+            FooterContext fContext = new FooterContext();
+            HeaderContext hContext = new HeaderContext();
+            ParragraphContext pContext = new ParragraphContext();
+            TextContext tContext = new TextContext();
+            Document testDocument = dContext.GetById(test.setUp(dContext).Id);
+            Header header = hContext.GetById(testDocument.Header.Id);
+            Footer footer = fContext.GetById(testDocument.Footer.Id);
+            string parragraphText = "DefaultText";
+            string parragraph = "<br>" + styleClassBL.GetHtmlText(new StyleClass(), parragraphText) + "</br>";
+            string printedDocument = documentBL.PrintDocument(testDocument);
+            string openHtml = "<html>";
+            string openBody = "<body>";
+            string documentTitle = "<title>" + testDocument.Title + "</title>";
+            string headerText = "<head>" + styleClassBL.GetHtmlText(new StyleClass(), header.Text.WrittenText) + "</head>";
+            string footerText = "<footer>" + styleClassBL.GetHtmlText(new StyleClass(), footer.Text.WrittenText) + "</footer>";
+            string closeHtml = "</html>";
+            string closeBody = "</body>";
+            string expectedResult = openHtml + openBody + documentTitle + headerText + parragraph + footerText + closeBody + closeHtml;
+            Assert.AreEqual(printedDocument, expectedResult);
+            TearDown();
         }
     }
 }
