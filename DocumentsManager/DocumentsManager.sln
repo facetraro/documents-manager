@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.BusinessLo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Exceptions", "DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj", "{34E362D2-1A27-48BB-8FE5-91A89124B556}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.AuthenticationToken", "DocumentsManager.AuthenticationToken\DocumentsManager.AuthenticationToken.csproj", "{4E29186B-65BD-422B-B4CB-6E3C81D83241}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{34E362D2-1A27-48BB-8FE5-91A89124B556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34E362D2-1A27-48BB-8FE5-91A89124B556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34E362D2-1A27-48BB-8FE5-91A89124B556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E29186B-65BD-422B-B4CB-6E3C81D83241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E29186B-65BD-422B-B4CB-6E3C81D83241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E29186B-65BD-422B-B4CB-6E3C81D83241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E29186B-65BD-422B-B4CB-6E3C81D83241}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

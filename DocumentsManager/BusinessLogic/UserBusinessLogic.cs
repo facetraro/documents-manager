@@ -1,4 +1,5 @@
-﻿using DocumentsManager.Data.DA.Handler;
+﻿using DocumentsManager.AuthenticationToken;
+using DocumentsManager.Data.DA.Handler;
 using DocumentsManager.Exceptions;
 using DocumentsMangerEntities;
 using System;
@@ -35,7 +36,7 @@ namespace DocumentsManager.BusinessLogic
         }
         public void ModifyDocument(User user, Document doc, ModifyState state)
         {
-           
+
             AddModifyHistory(user, doc, state);
         }
         public bool IdRegistered(User anUser)
@@ -71,21 +72,83 @@ namespace DocumentsManager.BusinessLogic
             }
             return registered;
         }
-        public void ModifyParragraphs(Document aDocument, User responsibleUser) {
+        public void ModifyParragraphs(Document aDocument, User responsibleUser)
+        {
             AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
             DocumentContext documentContext = new DocumentContext();
-            documentContext.ModifyParragraphs(aDocument);       
+            documentContext.ModifyParragraphs(aDocument);
         }
-       
-        public void AddDocument(Document aDocument,User responsibleUser) {
+
+        public void AddDocument(Document aDocument, User responsibleUser)
+        {
             DocumentContext documentContext = new DocumentContext();
             documentContext.Add(aDocument);
             AddModifyHistory(responsibleUser, aDocument, ModifyState.Added);
         }
-        public void ModifyDocumentTitle(Document aDocument, User responsibleUser) {
+        public void ModifyDocumentTitle(Document aDocument, User responsibleUser)
+        {
             DocumentContext documentContext = new DocumentContext();
             documentContext.ModifyTitle(aDocument);
             AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
+        }
+        public User GetUserByUsername(string username)
+        {
+            UserContext uContext = new UserContext();
+            List<User> allUsers = uContext.GetLazy();
+            foreach (User useri in allUsers)
+            {
+                if (useri.Username.Equals(username))
+                {
+                    return useri;
+                }
+            }
+            return null;
+        }
+        public User GetUserById(Guid id)
+        {
+            UserContext uContext = new UserContext();
+            return uContext.GetById(id);
+        }
+        public Guid LogIn(string username, string password)
+        {
+            User anUser = new AdminUser();
+            anUser.Username = username;
+            if (UserNameRegistered(anUser))
+            {
+                User userFromDB = GetUserByUsername(username);
+                if (userFromDB.Authenticate(password))
+                {
+                    SessionAccess sessionAccess = new SessionAccess();
+                    return sessionAccess.Add(userFromDB.Id);
+                }
+            }
+            throw new InvalidCredentialException();
+        }
+        private Guid GetIdByToken(Guid token)
+        {
+            SessionAccess sessionAccess = new SessionAccess();
+            return sessionAccess.GetIdByToken(token);
+        }
+        public User GetUserByToken(Guid token)
+        {
+            Guid idUser = GetIdByToken(token);
+            return GetUserById(idUser);
+        }
+        public bool IsTokenActive(Guid token)
+        {
+            SessionAccess sessionAccess = new SessionAccess();
+            return sessionAccess.IsTokenActive(token);
+        }
+        public void LogOut(Guid token)
+        {
+            SessionAccess sessionAccess = new SessionAccess();
+            sessionAccess.Remove(token);
+        }
+
+        public void ReleaseAllSessions()
+        {
+            SessionAccess sessionAccess = new SessionAccess();
+            sessionAccess.ClearAll();
         }
     }
 }
