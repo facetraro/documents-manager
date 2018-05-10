@@ -151,11 +151,6 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void ModifyTitleDodcumentTest()
-        {
-
-        }
-        [TestMethod]
         public void ModifyParragraphsDocumentTest()
         {
             StyleClassContextHandler styleCtx = new StyleClassContextHandler();

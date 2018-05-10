@@ -251,6 +251,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         }
         private User SetUpChart(ModifyState state)
         {
+            SetUp();
             UserBusinessLogic userLogic = new UserBusinessLogic();
             DocumentContextTest documentContext = new DocumentContextTest();
             DocumentContext context = new DocumentContext();
@@ -458,6 +459,41 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.AreEqual(modifiedUser.Surname, "Gomez");
             Assert.AreEqual(modifiedUser.Username, "modifiedUsername");
             Assert.AreEqual(modifiedUser.Id, IdUserAdded);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetStringTestCheck()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid IdUserAdded = adminBL.Add(anAdmin);
+            anAdmin.Name = "George";
+            anAdmin.Password = "newPassword";
+            anAdmin.Surname = "Gomez";
+            anAdmin.Username = "modifiedUsername";
+            adminBL.Update(IdUserAdded, anAdmin);
+            AdminUser modifiedUser = adminBL.GetByID(IdUserAdded);
+            Assert.AreEqual(modifiedUser.Name, "George");
+            Assert.AreEqual(modifiedUser.Password, "newPassword");
+            Assert.AreEqual(modifiedUser.Surname, "Gomez");
+            Assert.AreEqual(modifiedUser.Username, "modifiedUsername");
+            Assert.AreEqual(modifiedUser.Id, IdUserAdded);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetChartModificationsByUserAdvancedToString()
+        {
+            DateTime date1 = DateTime.Today;
+            DateTime date2 = DateTime.Today.AddDays(10);
+            AdminBusinessLogic logic = new AdminBusinessLogic();
+            ChartIntDate chartResult = logic.GetChartModificationsByUser(SetUpChart(ModifyState.Modified), date1, date2);
+            string expected = "[Documentos:3- Fecha:10/05/2018][Documentos:0- Fecha:11/05/2018][Documentos:0- Fecha:12/05/2018]"
+                +"[Documentos:0- Fecha:13/05/2018][Documentos:0- Fecha:14/05/2018][Documentos:0- Fecha:15/05/2018]"+
+                "[Documentos:0- Fecha:16/05/2018][Documentos:0- Fecha:17/05/2018][Documentos:0- Fecha:18/05/2018]"+
+                "[Documentos:0- Fecha:19/05/2018]";
+            string result = chartResult.ToString();
+            Assert.IsTrue(expected.Equals(result));
             TearDown();
         }
     }
