@@ -131,5 +131,17 @@ namespace DocumentsManager.BusinessLogic
             }
             return document;
         }
+        public bool AlreadyDeleted(Document aDocument) {
+            ModifyDocumentHistoryContext context = new ModifyDocumentHistoryContext();
+            List<ModifyDocumentHistory> histories = context.GetAllHistories();
+            foreach (ModifyDocumentHistory history in histories)
+            {
+                if (history.Document.Equals(aDocument) && (history.State == ModifyState.Removed))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

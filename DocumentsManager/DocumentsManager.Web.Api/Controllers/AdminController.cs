@@ -22,6 +22,8 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             this.adminsBuisnessLogic = new AdminBusinessLogic();
         }
+        [HttpGet]
+        [Route("Admins")]
         // GET: api/Admin
         public IHttpActionResult Get()
         {
@@ -59,7 +61,8 @@ namespace DocumentsManager.Web.Api.Controllers
             }
         }
 
-        // POST: api/Admin
+        // POST: api/Admins
+        
         public IHttpActionResult Post([FromBody]AdminModel admin)
         {
             try

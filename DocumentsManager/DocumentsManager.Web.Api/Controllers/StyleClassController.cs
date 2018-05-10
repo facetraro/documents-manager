@@ -24,9 +24,16 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/StyleClass
+        [HttpGet]
+        [Route("viewStyles")]
         public IHttpActionResult Get()
         {
-            IEnumerable<StyleClass> styles = styleClassBusinessLogic.GetAllStyleClasses();
+            IEnumerable<StyleClass> realStyles = styleClassBusinessLogic.GetAllStyleClasses();
+            List<StyleClassDto> styles = new List<StyleClassDto>();
+            foreach (var item in realStyles)
+            {
+                styles.Add(new StyleClassDto(item));
+            }
             if (styles == null)
             {
                 return NotFound();
@@ -39,7 +46,8 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             try
             {
-                StyleClass style = styleClassBusinessLogic.GetById(id);
+                StyleClass styleComplete = styleClassBusinessLogic.GetById(id);
+                StyleClassDto style = new StyleClassDto(styleComplete);
                 if (style == null)
                 {
                     return NotFound();

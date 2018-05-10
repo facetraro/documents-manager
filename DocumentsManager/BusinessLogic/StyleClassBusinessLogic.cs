@@ -92,8 +92,7 @@ namespace DocumentsManager.BusinessLogic
         public IEnumerable<StyleClass> GetAllStyleClasses()
         {
             StyleClassContextHandler context = new StyleClassContextHandler();
-            //context.GetAll();
-            throw new NotImplementedException();
+            return context.GetLazy();
         }
 
       

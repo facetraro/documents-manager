@@ -28,12 +28,24 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             try
             {
-                IEnumerable<Format> editors = editorsBuisnessLogic.GetAllFormats();
-                if (editors == null)
+                IEnumerable<Format> formatsComplete = editorsBuisnessLogic.GetAllFormats();
+                List<FormatDto> formats = new List<FormatDto>();
+                for (int i = 0; i < formatsComplete.Count(); i++)
+                {
+                    Format fi = formatsComplete.ElementAt(i);
+                    formats.Add(new FormatDto(fi));
+                    for (int j = 0; j < fi.StyleClasses.Count; j++)
+                    {
+                        StyleClass sj = fi.StyleClasses.ElementAt(j);
+                        formats.ElementAt(i).StyleClasses.Add(new StyleClassDto(sj));
+                    }
+                    
+                }
+                if (formats == null)
                 {
                     return NotFound();
                 }
-                return Ok(editors);
+                return Ok(formats);
             }
             catch (NoUserLoggedException ex) {
                 return BadRequest(ex.Message);
@@ -51,11 +63,16 @@ namespace DocumentsManager.Web.Api.Controllers
             try
             {
                 Format editor = editorsBuisnessLogic.GetByID(id);
-                if (editor == null)
+                FormatDto format = new FormatDto(editor);
+                foreach (var item in editor.StyleClasses)
+                {
+                    format.StyleClasses.Add(new StyleClassDto(item));
+                }
+                if (format == null)
                 {
                     return NotFound();
                 }
-                return Ok(editor);
+                return Ok(format);
             }
             catch (NoUserLoggedException ex)
             {

@@ -14,7 +14,7 @@ namespace DocumentsManager.Web.Api.Controllers
     {
         private IUsersBusinessLogic usersBuisnessLogic { get; set; }
         private IDocumentBusinessLogic documentBusinessLogic { get; set; }
-        public DocumentController(IUsersBusinessLogic logic,IDocumentBusinessLogic dLogic)
+        public DocumentController(IUsersBusinessLogic logic, IDocumentBusinessLogic dLogic)
         {
             this.usersBuisnessLogic = logic;
             this.documentBusinessLogic = dLogic;
@@ -47,7 +47,7 @@ namespace DocumentsManager.Web.Api.Controllers
                 }
                 return Ok(document);
             }
-            
+
             catch (ObjectDoesNotExists doesNotExistsException)
             {
                 return BadRequest(doesNotExistsException.Message);
@@ -74,11 +74,15 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             try
             {
-                Document documentToDelete=documentBusinessLogic.GetById(id);
-                bool updateResult = true /*usersBuisnessLogic.DeleteDocument(documentToDelete)*/;
+                Document documentToDelete = documentBusinessLogic.GetById(id);
+                bool updateResult = usersBuisnessLogic.DeleteDocument(documentToDelete);
                 return Request.CreateResponse(HttpStatusCode.Accepted, updateResult);
             }
             catch (ObjectDoesNotExists doesNotExists)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, doesNotExists.Message);
+            }
+            catch (DocumentAlreadyDeleted doesNotExists)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, doesNotExists.Message);
             }

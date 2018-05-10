@@ -210,9 +210,16 @@ namespace DocumentsManager.BusinessLogic
             SessionAccess sessionAccess = new SessionAccess();
             sessionAccess.ClearAll();
         }
-        public void DeleteDocument(Document aDocument)
+        public bool DeleteDocument(Document aDocument)
         {
+            DocumentBusinessLogic documentBl = new DocumentBusinessLogic();
+            if (documentBl.AlreadyDeleted(aDocument))
+            {
+                return false;
+                throw new DocumentAlreadyDeleted();
+            }
             AddModifyHistory(GetLoggedUser(), aDocument, ModifyState.Removed);
+            return true;
         }
         public void DeleteDocument(Document aDocument, User responsibleUser)
         {
