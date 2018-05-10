@@ -118,7 +118,30 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(allDocuments.Count() == 1);
             TearDown();
         }
-        
+        [TestMethod]
+        public void ModifyTitleDocumentTest()
+        {
+            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            FormatContext formatCtx = new FormatContext();
+            Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
+            aDocument.Title = "new Title";
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            UserBusinessLogic logic = new UserBusinessLogic();
+            UserContext uContext = new UserContext();
+            AdminUser admin = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "modifier@email.com",
+                Name = "testName",
+                Password = "testPassword",
+                Surname = "testSurname",
+                Username = "modifierUsername"
+            };
+            uContext.Add(admin);
+            logic.ModifyDocumentTitle(aDocument, admin);
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Title.Equals("new Title"));
+            TearDown();
+        }
 
     }
 }
