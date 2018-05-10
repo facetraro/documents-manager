@@ -56,20 +56,33 @@ namespace DocumentsManager.BusinessLogic
             LoadRelatinships(documentFromBD);
             return documentFromBD;
         }
+        private bool IsStyleInBD(StyleClass style)
+        {
+            StyleClassBusinessLogic styleLogic = new StyleClassBusinessLogic();
+            return styleLogic.Exists(style.Id);
+        }
+        private bool IsFormatInBD(Format format)
+        {
+            FormatBusinessLogic formatLogic = new FormatBusinessLogic();
+            return formatLogic.Exists(format.Id);
+        }
+        private bool AreRelationshipAdded(Document document)
+        {
+            if (!IsStyleInBD(document.StyleClass))
+            {
+                throw new ObjectDoesNotExists(document.StyleClass);
+            }
+            if (!IsFormatInBD(document.Format))
+            {
+                throw new ObjectDoesNotExists(document.Format);
+            }
+            return true;
+        }
         public Guid Add(Document document)
         {
             Guid newId = Guid.NewGuid();
             document.Id = newId;
-            StyleClassBusinessLogic styleLogic = new StyleClassBusinessLogic();
-            if (!styleLogic.Exists(document.StyleClass.Id))
-            {
-                throw new ObjectDoesNotExists(document.StyleClass);
-            }
-            FormatBusinessLogic formatBusinessLogic = new FormatBusinessLogic();
-            if (!formatBusinessLogic.Exists(document.Format.Id))
-            {
-                throw new ObjectDoesNotExists(document.Format);
-            }
+            AreRelationshipAdded(document);
             DocumentContext context = new DocumentContext();
             context.Add(document);
             return newId;

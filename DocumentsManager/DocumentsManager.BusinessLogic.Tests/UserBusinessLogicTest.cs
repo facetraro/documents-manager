@@ -15,75 +15,78 @@ namespace DocumentsManager.BusinessLogic.Tests
         [TestMethod]
         public void AddDocumentTestOk()
         {
-            ClearDataBase.ClearAll();
-            UserBusinessLogic logic = new UserBusinessLogic();
-            AdminBusinessLogic adminLogic = new AdminBusinessLogic();
+            SetUp();
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
-            Document newDocument = EntitiesExampleInstances.TestDocumentWithOneStyle();
-            Guid idNewTestAdmin = adminLogic.Add(newAdmin);
-            newAdmin.Id = idNewTestAdmin;
-            StyleClassBusinessLogic styleClassLogic = new StyleClassBusinessLogic();
-            styleClassLogic.Add(newDocument.StyleClass);
-            FormatBusinessLogic formatLogic = new FormatBusinessLogic();
-            formatLogic.Add(newDocument.Format);
+            UserBusinessLogic logic = new UserBusinessLogic();
+            Document newDocument = SetUpDocument();
+            AdminUser newAdmin = SetUpAdminInDB();
             Guid id = logic.AddDocument(newAdmin, newDocument);
             newDocument.Id = id;
             Assert.IsTrue(documentLogic.GetDocumentById(id).Equals(newDocument));
-            ClearDataBase.ClearAll();
+            TearDown();
         }
         [ExpectedException(typeof(ObjectDoesNotExists))]
         [TestMethod]
         public void AddDocumentTestWithoutStyle()
         {
-            ClearDataBase.ClearAll();
+            SetUp();
             UserBusinessLogic logic = new UserBusinessLogic();
-            AdminBusinessLogic adminLogic = new AdminBusinessLogic();
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
-            Document newDocument = EntitiesExampleInstances.TestDocumentWithOneStyle();
-            Guid idNewTestAdmin = adminLogic.Add(newAdmin);
-            newAdmin.Id = idNewTestAdmin;
-            StyleClassBusinessLogic styleClassLogic = new StyleClassBusinessLogic();
-            styleClassLogic.Add(newDocument.StyleClass);
-            FormatBusinessLogic formatLogic = new FormatBusinessLogic();
-            formatLogic.Add(newDocument.Format);
+            Document newDocument = SetUpDocument();
+            AdminUser newAdmin = SetUpAdminInDB();
             newDocument.StyleClass = EntitiesExampleInstances.TestStyleClass();
             Guid id = logic.AddDocument(newAdmin, newDocument);
-            ClearDataBase.ClearAll();
+            TearDown();
         }
         [ExpectedException(typeof(ObjectDoesNotExists))]
         [TestMethod]
         public void AddDocumentTestWithoutFormat()
         {
-            ClearDataBase.ClearAll();
-            UserBusinessLogic logic = new UserBusinessLogic();
-            AdminBusinessLogic adminLogic = new AdminBusinessLogic();
+            SetUp();
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
-            Document newDocument = EntitiesExampleInstances.TestDocumentWithOneStyle();
-            Guid idNewTestAdmin = adminLogic.Add(newAdmin);
-            newAdmin.Id = idNewTestAdmin;
-            StyleClassBusinessLogic styleClassLogic = new StyleClassBusinessLogic();
-            styleClassLogic.Add(newDocument.StyleClass);
+            UserBusinessLogic logic = new UserBusinessLogic();
+            Document newDocument = SetUpDocument();
+            AdminUser newAdmin = SetUpAdminInDB();
+            newDocument.Format = EntitiesExampleInstances.TestFormat();
             Guid id = logic.AddDocument(newAdmin, newDocument);
-            ClearDataBase.ClearAll();
+            TearDown();
         }
         [ExpectedException(typeof(ObjectDoesNotExists))]
         [TestMethod]
         public void AddDocumentTestWithoutUser()
         {
-            ClearDataBase.ClearAll();
+            SetUp();
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             UserBusinessLogic logic = new UserBusinessLogic();
+            Document newDocument = SetUpDocument();
+            Guid id = logic.AddDocument(EntitiesExampleInstances.TestAdminUser(), newDocument);
+            TearDown();
+        }
+        private void SetUp()
+        {
+            ClearDataBase.ClearAll();
+        }
+        private Document SetUpDocument()
+        {
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
             Document newDocument = EntitiesExampleInstances.TestDocumentWithOneStyle();
             StyleClassBusinessLogic styleClassLogic = new StyleClassBusinessLogic();
             styleClassLogic.Add(newDocument.StyleClass);
             FormatBusinessLogic formatLogic = new FormatBusinessLogic();
             formatLogic.Add(newDocument.Format);
-            Guid id = logic.AddDocument(newAdmin, newDocument);
+            return newDocument;
+        }
+        private AdminUser SetUpAdminInDB()
+        {
+            AdminBusinessLogic adminLogic = new AdminBusinessLogic();
+            AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
+            Guid idNewTestAdmin = adminLogic.Add(newAdmin);
+            newAdmin.Id = idNewTestAdmin;
+            return newAdmin;
+        }
+        private void TearDown()
+        {
             ClearDataBase.ClearAll();
         }
     }
