@@ -367,15 +367,15 @@ namespace DocumentsManager.BusinessLogic.Tests
                 StyleClass = style,
                 WrittenText = "ModifiedFooter"
             };
-            aDocument.Footer.StyleClass = aDocument.StyleClass;
+            aDocument.Footer.StyleClass = style;
             aDocument.Footer.Text = newFooterText;
             UserBusinessLogic logic = new UserBusinessLogic();
             logic.ModifyDocumentFooter(aDocument, admin);
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            HeaderBusinessLogic hLogic = new HeaderBusinessLogic();
-            Assert.IsTrue(hLogic.GetById(aDocument.Footer.Id).Text.HasSameText(newFooterText));
-            Assert.IsTrue(hLogic.GetById(aDocument.Footer.Id).Text.StyleClass.Equals(newFooterText.StyleClass));
-
+            FooterBusinessLogic fLogic = new FooterBusinessLogic();
+            Assert.IsTrue(fLogic.GetById(aDocument.Footer.Id).Text.HasSameText(newFooterText));
+            Assert.IsTrue(fLogic.GetById(aDocument.Footer.Id).Text.StyleClass.Equals(newFooterText.StyleClass));
+            Assert.IsTrue(fLogic.GetById(aDocument.Footer.Id).StyleClass.Equals(style));
             TearDown();
         }
     }
