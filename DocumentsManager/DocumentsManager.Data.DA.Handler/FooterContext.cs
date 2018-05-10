@@ -78,15 +78,6 @@ namespace DocumentsManager.Data.DA.Handler
                 return theFooter;
             }
         }
-        private void UpdateStyle(Footer modifiedFooter)
-        {
-            using (var db = new ContextDataAccess())
-            {
-                db.Footers.Attach(modifiedFooter);
-                db.Entry(modifiedFooter).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-        }
         public void Modify(Footer modifiedFooter)
         {
             Text oldText = new Text();
@@ -97,8 +88,7 @@ namespace DocumentsManager.Data.DA.Handler
                 oldText.WrittenText = modifiedFooter.Text.WrittenText;
                 oldText.Id = footerEntity.Text.Id;
                 oldText.StyleClass = modifiedFooter.Text.StyleClass;
-                db.Styles.Attach(modifiedFooter.StyleClass);
-                footerEntity.StyleClass = modifiedFooter.StyleClass;
+                footerEntity.StyleClass = db.Styles.Find(modifiedFooter.StyleClass.Id); 
                 unitOfWork.FooterRepository.Update(footerEntity);
             }
             TextContext tContext = new TextContext();
