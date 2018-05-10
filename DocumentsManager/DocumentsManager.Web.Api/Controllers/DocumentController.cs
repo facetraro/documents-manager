@@ -61,6 +61,7 @@ namespace DocumentsManager.Web.Api.Controllers
         // POST: api/Document
         public void Post([FromBody]string value)
         {
+
         }
 
         // PUT: api/Document/5

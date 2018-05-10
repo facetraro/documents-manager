@@ -12,6 +12,7 @@ namespace DocumentsManager.BusinessLogic
 {
     public class UserBusinessLogic : IUsersBusinessLogic
     {
+        public Guid Token { get; set; }
         private void AddModifyHistory(User user, Document doc, ModifyState state)
         {
             ModifyDocumentHistory history = new ModifyDocumentHistory();
@@ -23,20 +24,25 @@ namespace DocumentsManager.BusinessLogic
             ModifyDocumentHistoryContext modifyContext = new ModifyDocumentHistoryContext();
             modifyContext.Add(history);
         }
-        public Guid AddDocument(User user, Document doc)
+        public Guid AddDocument(Document doc)
         {
-            if (!IdRegistered(user))
+            if (IsTokenActive(Token))
             {
-                throw new ObjectDoesNotExists(user);
+                User user = GetUserByToken(Token);
+                if (!IdRegistered(user))
+                {
+                    throw new ObjectDoesNotExists(user);
+                }
+                DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+                Guid id = documentLogic.Add(doc);
+                AddModifyHistory(user, doc, ModifyState.Added);
+                return id;
             }
-            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            Guid id = documentLogic.Add(doc);
-            AddModifyHistory(user, doc, ModifyState.Added);
-            return id;
+            return doc.Id;
+            
         }
         public void ModifyDocument(User user, Document doc, ModifyState state)
         {
-
             AddModifyHistory(user, doc, state);
         }
         public bool IdRegistered(User anUser)
@@ -78,19 +84,68 @@ namespace DocumentsManager.BusinessLogic
             DocumentContext documentContext = new DocumentContext();
             documentContext.ModifyParragraphs(aDocument);
         }
-
+        public void ModifyParragraphs(Document aDocument)
+        {
+            if (IsTokenActive(Token))
+            {
+                User responsibleUser = GetUserByToken(Token);
+                ModifyParragraphs(aDocument, responsibleUser);
+            }
+            
+        }
         public void AddDocument(Document aDocument, User responsibleUser)
         {
             DocumentContext documentContext = new DocumentContext();
             documentContext.Add(aDocument);
             AddModifyHistory(responsibleUser, aDocument, ModifyState.Added);
         }
-        public void ModifyDocumentProperties(Document aDocument, User responsibleUser) {
+        public void ModifyDocumentProperties(Document aDocument)
+        {
+            if (IsTokenActive(Token))
+            {
+                User responsibleUser = GetUserByToken(Token);
+                ModifyDocumentProperties(aDocument, responsibleUser);
+            }
+           
+        }
+
+        public void ModifyDocumentHeader(Document aDocument)
+        {
+            if (IsTokenActive(Token))
+            {
+                User responsibleUser = GetUserByToken(Token);
+                ModifyDocumentHeader(aDocument, responsibleUser);
+            }
+            
+        }
+
+        public void ModifyDocumentFooter(Document aDocument)
+        {
+            if (IsTokenActive(Token))
+            {
+                User responsibleUser = GetUserByToken(Token);
+                ModifyDocumentFooter(aDocument, responsibleUser);
+            }
+            
+        }
+
+        public void DeleteDocument(Document aDocument)
+        {
+            if (IsTokenActive(Token))
+            {
+                User responsibleUser = GetUserByToken(Token);
+                DeleteDocument(aDocument, responsibleUser);
+            }
+            
+        }
+        public void ModifyDocumentProperties(Document aDocument, User responsibleUser)
+        {
             DocumentContext documentContext = new DocumentContext();
             documentContext.ModifyProperties(aDocument);
             AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
         }
-        public void ModifyDocumentHeader(Document aDocument, User responsibleUser) {
+        public void ModifyDocumentHeader(Document aDocument, User responsibleUser)
+        {
             DocumentContext documentContext = new DocumentContext();
             documentContext.ModifyHeader(aDocument);
             AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);

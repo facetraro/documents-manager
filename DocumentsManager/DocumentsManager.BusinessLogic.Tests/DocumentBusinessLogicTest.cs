@@ -71,6 +71,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsFalse(fullDocument.Parragraphs[0].StyleClass == null);
             Assert.IsFalse(fullDocument.Parragraphs[0].Texts == null);
             Assert.IsFalse(fullDocument.Format.StyleClasses == null);
+            TearDown();
         }
 
         [TestMethod]

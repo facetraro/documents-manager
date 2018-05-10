@@ -67,7 +67,7 @@ namespace DocumentsManager.AuthenticationToken
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new LostConnectionWithDataBase();
             }

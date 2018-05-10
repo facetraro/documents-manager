@@ -10,7 +10,7 @@ namespace DocumentsManager.BusinessLogic
     public interface IStyleClassBusinessLogic
     {
         IEnumerable<StyleClass> GetAllStyleClasses();
-        StyleClass GetByID(Guid id);
+        StyleClass GetById(Guid id);
         Guid Add(StyleClass style);
         bool Delete(Guid id);
         bool Update(Guid id, StyleClass newStyle);

@@ -1,4 +1,5 @@
 ﻿using DocumentsManager.BusinessLogic;
+using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,10 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             styleClassBusinessLogic = logic;
         }
+        public StyleClassController()
+        {
+            styleClassBusinessLogic = new StyleClassBusinessLogic();
+        }
 
         // GET: api/StyleClass
         public IHttpActionResult Get()
@@ -34,7 +39,7 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             try
             {
-                StyleClass style = styleClassBusinessLogic.GetByID(id);
+                StyleClass style = styleClassBusinessLogic.GetById(id);
                 if (style == null)
                 {
                     return NotFound();
@@ -48,12 +53,13 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/StyleClass
-        public IHttpActionResult Post([FromBody] StyleClass style)
+        public IHttpActionResult Post([FromBody] StyleClassModel style)
         {
             try
             {
-                Guid id = styleClassBusinessLogic.Add(style);
-                return CreatedAtRoute("DefaultApi", new { id = id }, style);
+                StyleClass styleToAdd = GetEntityStyleClass(style);
+                Guid id = styleClassBusinessLogic.Add(styleToAdd);
+                return CreatedAtRoute("DefaultApi", new { id = styleToAdd.Id }, styleToAdd);
             }
             catch (ArgumentNullException ex)
             {
@@ -62,12 +68,13 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/StyleClass/5
-        public IHttpActionResult Put(Guid id, [FromBody]StyleClass style)
+        public IHttpActionResult Put(Guid id, [FromBody]StyleClassModel style)
         {
             try
             {
-                bool updateResult = styleClassBusinessLogic.Update(id, style);
-                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, style);
+                StyleClass styleToAdd = GetEntityStyleClass(style);
+                bool updateResult = styleClassBusinessLogic.Update(id, styleToAdd);
+                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, styleToAdd);
             }
             catch (ArgumentNullException ex)
             {
@@ -87,6 +94,10 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
+        }
+        public StyleClass GetEntityStyleClass(StyleClassModel model)
+        {
+            return model.GetEntityModel();
         }
     }
 }
