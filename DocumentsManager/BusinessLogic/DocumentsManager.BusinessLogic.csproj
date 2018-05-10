@@ -63,6 +63,10 @@
     <Compile Include="StyleClassBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocumentsManager.AuthenticationToken\DocumentsManager.AuthenticationToken.csproj">
+      <Project>{4E29186B-65BD-422B-B4CB-6E3C81D83241}</Project>
+      <Name>DocumentsManager.AuthenticationToken</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Data.DA.Handler\DocumentsManager.Data.DA.Handler.csproj">
       <Project>{08679660-B159-4575-9066-71059A3C33AF}</Project>
       <Name>DocumentsManager.Data.DA.Handler</Name>
