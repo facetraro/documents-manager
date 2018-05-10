@@ -96,8 +96,7 @@ namespace DocumentsManager.Data.DA.Handler
                 oldText.WrittenText = modifiedHeader.Text.WrittenText;
                 oldText.Id = headerEntity.Text.Id;
                 oldText.StyleClass = modifiedHeader.Text.StyleClass;
-                db.Styles.Attach(modifiedHeader.StyleClass);
-                headerEntity.StyleClass = modifiedHeader.StyleClass;
+                headerEntity.StyleClass = db.Styles.Find(modifiedHeader.StyleClass.Id);
                 unitOfWork.HeaderRepository.Update(headerEntity);
             }
             TextContext tContext = new TextContext();

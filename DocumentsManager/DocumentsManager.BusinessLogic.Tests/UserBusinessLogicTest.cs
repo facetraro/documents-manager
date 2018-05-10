@@ -145,7 +145,7 @@ namespace DocumentsManager.BusinessLogic.Tests
                 Username = "modifierUsername"
             };
             uContext.Add(admin);
-            logic.ModifyDocumentTitle(aDocument, admin);
+            logic.ModifyDocumentProperties(aDocument, admin);
             Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Title.Equals("new Title"));
             TearDown();
         }
@@ -191,9 +191,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             aDocument.Parragraphs = parragraphs;
             UserBusinessLogic logic = new UserBusinessLogic();
             logic.ModifyParragraphs(aDocument, admin);
-            
+
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.Count==1);
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.Count == 1);
             Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.ElementAt(0).Equals(parragraph));
             TearDown();
         }
@@ -241,6 +241,155 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.Count == 0);
             TearDown();
         
+        }
+        [TestMethod]
+        public void ModifyStyleClassDocumentTest()
+        {
+            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            FormatContext formatCtx = new FormatContext();
+            Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
+
+            UserContext uContext = new UserContext();
+            AdminUser admin = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "modifier@email.com",
+                Name = "testName",
+                Password = "testPassword",
+                Surname = "testSurname",
+                Username = "modifierUsername"
+            };
+            uContext.Add(admin);
+            StyleClass style = new StyleClass
+            {
+                Id = Guid.NewGuid(),
+                Name = "ModifiedStyle",
+                Attributes = new List<StyleAttribute>(),
+                Based = null
+            };
+            styleCtx.Add(style);
+            aDocument.StyleClass = style;
+            UserBusinessLogic logic = new UserBusinessLogic();
+            logic.ModifyDocumentProperties(aDocument, admin);
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).StyleClass.Name.Equals("ModifiedStyle"));
+            TearDown();
+        }
+        [TestMethod]
+        public void ModifyFormatDocumentTest()
+        {
+            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            FormatContext formatCtx = new FormatContext();
+            Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
+
+            UserContext uContext = new UserContext();
+            AdminUser admin = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "modifier@email.com",
+                Name = "testName",
+                Password = "testPassword",
+                Surname = "testSurname",
+                Username = "modifierUsername"
+            };
+            uContext.Add(admin);
+            Format format = new Format
+            {
+                Id = Guid.NewGuid(),
+                Name = "ModifiedFormat",
+                StyleClasses = new List<StyleClass>()
+            };
+            formatCtx.Add(format);
+            aDocument.Format = format;
+            UserBusinessLogic logic = new UserBusinessLogic();
+            logic.ModifyDocumentProperties(aDocument, admin);
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Format.Name.Equals("ModifiedFormat"));
+            TearDown();
+        }
+        [TestMethod]
+        public void ModifyHeaderDocumentTest()
+        {
+            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            FormatContext formatCtx = new FormatContext();
+            Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
+            UserContext uContext = new UserContext();
+            AdminUser admin = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "modifier@email.com",
+                Name = "testName",
+                Password = "testPassword",
+                Surname = "testSurname",
+                Username = "modifierUsername"
+            };
+            uContext.Add(admin);
+            StyleClass style = new StyleClass
+            {
+                Id = Guid.NewGuid(),
+                Name = "ModifiedStyle",
+                Attributes = new List<StyleAttribute>(),
+                Based = null
+            };
+            styleCtx.Add(style);
+            Text newHeaderText = new Text
+            {
+                Id = Guid.NewGuid(),
+                StyleClass = style,
+                WrittenText = "ModifiedHeader"
+            };
+            aDocument.Header.StyleClass = aDocument.StyleClass;
+            aDocument.Header.Text = newHeaderText;
+            UserBusinessLogic logic = new UserBusinessLogic();
+            logic.ModifyDocumentHeader(aDocument, admin);
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            HeaderBusinessLogic hLogic = new HeaderBusinessLogic();
+            Assert.IsTrue(hLogic.GetById(aDocument.Header.Id).Text.HasSameText(newHeaderText));
+            Assert.IsTrue(hLogic.GetById(aDocument.Header.Id).Text.StyleClass.Equals(newHeaderText.StyleClass));
+
+            TearDown();
+        }
+        [TestMethod]
+        public void ModifyFooterDocumentTest()
+        {
+            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            FormatContext formatCtx = new FormatContext();
+            Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
+            UserContext uContext = new UserContext();
+            AdminUser admin = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "modifier@email.com",
+                Name = "testName",
+                Password = "testPassword",
+                Surname = "testSurname",
+                Username = "modifierUsername"
+            };
+            uContext.Add(admin);
+            StyleClass style = new StyleClass
+            {
+                Id = Guid.NewGuid(),
+                Name = "ModifiedStyle",
+                Attributes = new List<StyleAttribute>(),
+                Based = null
+            };
+            styleCtx.Add(style);
+            Text newFooterText = new Text
+            {
+                Id = Guid.NewGuid(),
+                StyleClass = style,
+                WrittenText = "ModifiedFooter"
+            };
+            aDocument.Footer.StyleClass = style;
+            aDocument.Footer.Text = newFooterText;
+            UserBusinessLogic logic = new UserBusinessLogic();
+            logic.ModifyDocumentFooter(aDocument, admin);
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            FooterBusinessLogic fLogic = new FooterBusinessLogic();
+            Assert.IsTrue(fLogic.GetById(aDocument.Footer.Id).Text.HasSameText(newFooterText));
+            Assert.IsTrue(fLogic.GetById(aDocument.Footer.Id).Text.StyleClass.Equals(newFooterText.StyleClass));
+            Assert.IsTrue(fLogic.GetById(aDocument.Footer.Id).StyleClass.Equals(style));
+            TearDown();
         }
     }
 }

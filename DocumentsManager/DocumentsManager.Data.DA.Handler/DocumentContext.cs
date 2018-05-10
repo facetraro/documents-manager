@@ -85,6 +85,12 @@ namespace DocumentsManager.Data.DA.Handler
             AddDocumentParragraphs(aDocument.Parragraphs, aDocument);
         }
 
+        public void ModifyHeader(Document aDocument)
+        {
+            HeaderContext headerCtx = new HeaderContext();
+            headerCtx.Modify(aDocument.Header);
+        }
+
         private void DeleteDocumentParts(Document aDocument)
         {
             FooterContext fContext = new FooterContext();
@@ -92,6 +98,13 @@ namespace DocumentsManager.Data.DA.Handler
             fContext.Remove(aDocument.Footer);
             hContext.Remove(aDocument.Header);
         }
+
+        public void ModifyFooter(Document aDocument)
+        {
+            FooterContext footerCtx = new FooterContext();
+            footerCtx.Modify(aDocument.Footer);
+        }
+
         private void RemoveDocumentParagraphs(Document aDocument)
         {
             Document document = GetById(aDocument.Id);
@@ -103,7 +116,7 @@ namespace DocumentsManager.Data.DA.Handler
             }
         }
 
-        public void ModifyTitle(Document aDocument)
+        public void ModifyProperties(Document aDocument)
         {
             using (var db = new ContextDataAccess())
             {
