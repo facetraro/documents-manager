@@ -26,13 +26,15 @@ namespace DocumentsManager.Data.DA.Handler
                 return unitOfWork.DocumentRepository.Get().ToList();
             }
         }
-        private void AddDocumentParts(Document aDocument) {
+        private void AddDocumentParts(Document aDocument)
+        {
             FooterContext fContext = new FooterContext();
             HeaderContext hContext = new HeaderContext();
             fContext.Add(aDocument.Footer);
             hContext.Add(aDocument.Header);
         }
-        private void AddDocumentParragraphs(List<Parragraph> theParragraphs,Document modifiedDocument) {
+        private void AddDocumentParragraphs(List<Parragraph> theParragraphs, Document modifiedDocument)
+        {
             ParragraphContext pContext = new ParragraphContext();
             for (int i = 0; i < theParragraphs.Count; i++)
             {
@@ -45,7 +47,8 @@ namespace DocumentsManager.Data.DA.Handler
                         db.Parragraphs.Attach(parragraphi);
                     }
                 }
-                else {
+                else
+                {
                     parragraphi.Document = modifiedDocument;
                     pContext.Add(parragraphi);
                 }
@@ -65,7 +68,7 @@ namespace DocumentsManager.Data.DA.Handler
                 aDocument.Header = db.Headers.Find(aDocument.Header.Id);
                 unitOfWork.DocumentRepository.Insert(aDocument);
             }
-            AddDocumentParragraphs(theParragraphs,aDocument);
+            AddDocumentParragraphs(theParragraphs, aDocument);
         }
         private void DeleteDocumentParts(Document aDocument)
         {
@@ -74,7 +77,8 @@ namespace DocumentsManager.Data.DA.Handler
             fContext.Remove(aDocument.Footer);
             hContext.Remove(aDocument.Header);
         }
-        private void RemoveDocumentParagraphs(Document aDocument) {
+        private void RemoveDocumentParagraphs(Document aDocument)
+        {
             Document document = GetById(aDocument.Id);
             int lenghtParragraphs = document.Parragraphs.Count;
             ParragraphContext pContext = new ParragraphContext();
@@ -135,32 +139,33 @@ namespace DocumentsManager.Data.DA.Handler
                 Remove(toDelete);
             }
         }
-        private void transferParragraphInformation(Document modifiedDocument, Document oldDocument) {
+        private void transferParragraphInformation(Document modifiedDocument, Document oldDocument)
+        {
             ParragraphContext contextP = new ParragraphContext();
             for (int i = 0; i < modifiedDocument.Parragraphs.Count; i++)
             {
                 if (contextP.Exists(modifiedDocument.Parragraphs.ElementAt(i)))
                 {
                     modifiedDocument.Parragraphs.ElementAt(i).StyleClass = contextP.GetById(modifiedDocument.Parragraphs.ElementAt(i).Id).StyleClass;
-                    
+
                 }
             }
             for (int i = 0; i < oldDocument.Parragraphs.Count; i++)
             {
                 contextP.Remove(oldDocument.Parragraphs.ElementAt(i));
             }
-          }
+        }
         public void Modify(Document modifiedDocument, Document oldDocument)
         {
             modifiedDocument.StyleClass.Attributes = new List<StyleAttribute>();
-            transferParragraphInformation(modifiedDocument,oldDocument);
+            transferParragraphInformation(modifiedDocument, oldDocument);
             AddDocumentParts(modifiedDocument);
 
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 Document documenthEntity = db.Documents.Find(modifiedDocument.Id);
-                documenthEntity.Parragraphs =new List<Parragraph>();
+                documenthEntity.Parragraphs = new List<Parragraph>();
                 documenthEntity.StyleClass = modifiedDocument.StyleClass;
                 db.Styles.Attach(documenthEntity.StyleClass);
                 documenthEntity.Format = db.Formats.Find(modifiedDocument.Format.Id);
@@ -170,7 +175,17 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.Save();
             }
             DeleteDocumentParts(oldDocument);
-            AddDocumentParragraphs(modifiedDocument.Parragraphs,modifiedDocument);
+            AddDocumentParragraphs(modifiedDocument.Parragraphs, modifiedDocument);
+        }
+        public List<Document> GetDocuments()
+        {
+            List<Document> documents = new List<Document>();
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                documents = unitOfWork.DocumentRepository.Get().ToList();
+            }
+            return documents;
         }
     }
 }

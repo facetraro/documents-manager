@@ -57,5 +57,21 @@ namespace DocumentsManager.BusinessLogic
             }
             return registered;
         }
+        public void ModifyParragraph(Parragraph aParragraph) {
+            ParragraphContext pContext = new ParragraphContext();
+            pContext.Modify(aParragraph,pContext.GetById(aParragraph.Id));
+        }
+        public void AddParragraph(Parragraph aParragraph) {
+            ParragraphContext pContext = new ParragraphContext();
+            pContext.Add(aParragraph);
+        }
+        public void RemoveParragraph(Parragraph aParragraph) {
+            ParragraphContext pContext = new ParragraphContext();
+            pContext.Remove(aParragraph);
+        }
+        public void AddDocument(Document aDocument) {
+            DocumentContext documentContext = new DocumentContext();
+            documentContext.Add(aDocument);
+        }
     }
 }
