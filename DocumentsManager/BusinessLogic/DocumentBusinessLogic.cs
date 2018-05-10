@@ -87,5 +87,33 @@ namespace DocumentsManager.BusinessLogic
             context.Add(document);
             return newId;
         }
+        public string PrintDocument(Document aDocument)
+        {
+            List<IPrintableObject> objectsToPrint = new List<IPrintableObject>();
+            PrintableHeader headerToPrint = new PrintableHeader(aDocument.Header);
+            objectsToPrint.Add(headerToPrint);
+            PrintableFooter footerToPrint = new PrintableFooter(aDocument.Footer);
+            foreach (Parragraph parragraphi in aDocument.Parragraphs)
+            {
+                PrintableParragraph parragraphToPrint = new PrintableParragraph(parragraphi);
+                objectsToPrint.Add(parragraphToPrint);
+            }
+            objectsToPrint.Add(footerToPrint);
+            return PrintDocumentsObjects(aDocument, objectsToPrint);
+        }
+        public string PrintDocumentsObjects(Document aDocument, List<IPrintableObject> printableObjects)
+        {
+            string htmlDocument = string.Empty;
+            foreach (IPrintableObject printableObject in printableObjects)
+            {
+                htmlDocument += printableObject.Print(aDocument);
+            }
+            return htmlDocument;
+        }
+        public IEnumerable<Document> GetAllDocuments()
+        {
+            DocumentContext context = new DocumentContext();
+            return context.GetDocuments();
+        }
     }
 }

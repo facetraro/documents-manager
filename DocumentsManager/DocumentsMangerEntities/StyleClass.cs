@@ -43,11 +43,8 @@ namespace DocumentsMangerEntities
             }
             return attribute;
         }
-        public StyleClass GetBasedOnStyleClass()
+        public void LoadAttributes(StyleClass basedStyleClass)
         {
-            StyleClass basedStyleClass = new StyleClass();
-            basedStyleClass.Id = this.Id;
-            basedStyleClass.Attributes = Based.Attributes;
             foreach (StyleAttribute item in this.Attributes)
             {
                 if (!basedStyleClass.IsAttributeSpecified(item))
@@ -55,6 +52,16 @@ namespace DocumentsMangerEntities
                     basedStyleClass.Attributes.Add(item);
                 }
             }
+        }
+        public StyleClass GetBasedOnStyleClass()
+        {
+            StyleClass basedStyleClass = new StyleClass();
+            basedStyleClass.Id = this.Id;
+            if (IsBasedOnOtherStyle())
+            {
+                basedStyleClass.Attributes = Based.GetBasedOnStyleClass().Attributes;
+            }
+            LoadAttributes(basedStyleClass);
             return basedStyleClass;
         }
         public bool IsAttributeSpecified(StyleAttribute attribute)

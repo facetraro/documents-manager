@@ -61,8 +61,22 @@ namespace DocumentsManager.Data.DA.Handler
                 Remove(item);
             }
         }
-
-        public void Modify(Format modifiedFormat)
+        public void UpdateFormat(Format modifiedFormat)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                Format old = db.Formats.Find(modifiedFormat.Id);
+                old.StyleClasses = new List<StyleClass>();
+                foreach (var item in modifiedFormat.StyleClasses)
+                {
+                    old.StyleClasses.Add(db.Styles.Find(item.Id));
+                }
+                old.Name = modifiedFormat.Name;
+                var unitOfWork = new UnitOfWork(db);
+                unitOfWork.FormatRepository.Update(old);
+            }
+        }
+        public void DeleteOldStyles(Format modifiedFormat)
         {
             Format oldFormat = GetById(modifiedFormat.Id);
             using (var db = new ContextDataAccess())
@@ -80,6 +94,12 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
                 return unitOfWork.FormatRepository.Exists(formatGuid);
             }
+        }
+
+        public void Modify(Format modifiedFormat)
+        {
+            UpdateFormat(modifiedFormat);
+            DeleteOldStyles(modifiedFormat);
         }
     }
 }

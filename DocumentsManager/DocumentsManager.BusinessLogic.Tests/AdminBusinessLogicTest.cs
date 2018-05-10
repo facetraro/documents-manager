@@ -258,7 +258,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             userLogic.ModifyDocument(newUser, anotherDocumentInBD, ModifyState.Added);
             return newUser;
         }
-        public void AddAdminBLTBLest()
+        
+        public void AddAdminBLTest()
         {
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();

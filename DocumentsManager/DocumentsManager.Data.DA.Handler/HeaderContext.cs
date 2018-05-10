@@ -43,6 +43,13 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.HeaderRepository.Delete(headerToDelete);
             }
+            Header header = GetById(headerToDelete.Id);
+            if (header!=null)
+            {
+                TextContext tContext = new TextContext();
+                tContext.Remove(header.Text);
+            }
+            
         }
         public void Remove(Guid id)
         {
@@ -50,6 +57,12 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.HeaderRepository.Delete(id);
+            }
+            Header header = GetById(id);
+            if (header != null)
+            {
+                TextContext tContext = new TextContext();
+                tContext.Remove(header.Text);
             }
         }
         public Header GetById(Guid id)

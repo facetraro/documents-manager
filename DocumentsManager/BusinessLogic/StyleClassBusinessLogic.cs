@@ -57,8 +57,16 @@ namespace DocumentsManager.BusinessLogic
             }
             return htmlResult;
         }
+        public string GetHtmlTextStyleFromDB(StyleClass style, string text)
+        {
+            string htmlResult = String.Empty;
+            StyleClass styleFromDataBase = GetById(style.Id);
+            htmlResult = GetInitialTag(style) + GetAllIncialAttributesTags(style) + text + GetAllEndAttributesTags(style) + LastTag;
+            return htmlResult;
+        }
         public string GetHtmlText(StyleClass style, string text)
         {
+            style.Attributes.Sort();
             string htmlResult = String.Empty;
             htmlResult = GetInitialTag(style) + GetAllIncialAttributesTags(style) + text + GetAllEndAttributesTags(style) + LastTag;
             return htmlResult;
