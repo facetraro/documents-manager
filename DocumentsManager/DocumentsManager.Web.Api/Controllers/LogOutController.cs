@@ -16,34 +16,36 @@ namespace DocumentsManager.Web.Api.Controllers
             logic = new UserBusinessLogic();
         }
         // GET: api/LogOut
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return NotFound();
         }
 
         // GET: api/LogOut/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            return NotFound();
         }
 
         // POST: api/LogOut
-        public void Post()
+        public IHttpActionResult Post()
         {
             Guid token = LoggedToken.GetToken();
             LoggedToken.DeleteToken();
             logic.LogOut(token);
-
+            return Ok(200);
         }
 
         // PUT: api/LogOut/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(int id, [FromBody]string value)
         {
+            return NotFound();
         }
 
         // DELETE: api/LogOut/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            return NotFound();
         }
     }
 }

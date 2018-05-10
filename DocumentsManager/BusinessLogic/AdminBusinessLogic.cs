@@ -13,11 +13,13 @@ namespace DocumentsManager.BusinessLogic
     {
         public ChartIntDate GetChartModificationsByUser(User user, DateTime since, DateTime until)
         {
+            Guid Token = LoggedToken.GetToken();
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             return GetChartFromDates(GetDatesFromModifyDocument(user, null), since, until);
         }
         public ChartIntDate GetChartCreationByUser(User user, DateTime since, DateTime until)
         {
+            Guid Token = LoggedToken.GetToken();
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             return GetChartFromDates(GetDatesFromModifyDocument(user, ModifyState.Added), since, until);
         }
@@ -60,6 +62,7 @@ namespace DocumentsManager.BusinessLogic
         }
         public Guid Add(AdminUser newAdmin)
         {
+            Guid Token = LoggedToken.GetToken();
             newAdmin.Id = Guid.NewGuid();
             UserContext userContext = new UserContext();
             if (IdRegistered(newAdmin)) 
@@ -80,6 +83,11 @@ namespace DocumentsManager.BusinessLogic
 
         public bool Delete(Guid id)
         {
+            Guid Token = LoggedToken.GetToken();
+            if (id.Equals(GetUserByToken(Token).Id))
+            {
+                throw new CantDeleteLoggedUserException();
+            }
             UserContext uContext = new UserContext();
             AdminUser idUser = new AdminUser();
             idUser.Id = id;
@@ -92,12 +100,14 @@ namespace DocumentsManager.BusinessLogic
 
         public IEnumerable<AdminUser> GetAllAdmins()
         {
+            Guid Token = LoggedToken.GetToken();
             UserContext uContext = new UserContext();
             return uContext.GetAdmins();
         }
 
         public AdminUser GetByID(Guid id)
         {
+            Guid Token = LoggedToken.GetToken();
             AdminUser userToReturn = new AdminUser();
             UserContext uContext = new UserContext();
             User userToVerify = uContext.GetById(id);
@@ -115,6 +125,7 @@ namespace DocumentsManager.BusinessLogic
 
         public bool Update(Guid id, AdminUser newAdmin)
         {
+            Guid Token = LoggedToken.GetToken();
             UserContext uContext = new UserContext();
             bool updated = false;
             if (!uContext.Exists(newAdmin))
@@ -132,15 +143,15 @@ namespace DocumentsManager.BusinessLogic
 
         public Guid Add(EditorUser user)
         {
+            Guid Token = LoggedToken.GetToken();
             EditorBusinessLogic logic = new EditorBusinessLogic();
             return logic.Add(user);
         }
 
         public bool Delete(User user)
         {
-          return Delete(user.Id);
+            Guid Token = LoggedToken.GetToken();
+            return Delete(user.Id);
         }
-
-      
     }
 }

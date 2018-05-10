@@ -22,6 +22,13 @@ namespace DocumentsManager.BusinessLogic.Tests
         public void SetUp()
         {
             TearDown();
+            UserContext context = new UserContext();
+            User newuser = EntitiesExampleInstances.TestAdminUser();
+            newuser.Username = "rareusername";
+            newuser.Email = "rareemail";
+            context.Add(newuser);
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            adminBL.LogIn(newuser.Username, newuser.Password);
         }
         [TestMethod]
         public void GetAdminsBLTest()
@@ -59,7 +66,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             bool expectedResult = true;
-            bool result = adminBL.GetAllAdmins().Count() == 0;
+            bool result = adminBL.GetAllAdmins().Count() == 1;
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -258,7 +265,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             userLogic.ModifyDocument(newUser, anotherDocumentInBD, ModifyState.Added);
             return newUser;
         }
-        
+
         public void AddAdminBLTest()
         {
             SetUp();
@@ -278,7 +285,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
             adminBL.Add(anAdmin);
             bool expectedResult = true;
-            bool result = adminBL.GetAllAdmins().Count() == 1;
+            bool result = adminBL.GetAllAdmins().Count() == 2;
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -313,12 +320,15 @@ namespace DocumentsManager.BusinessLogic.Tests
         public void DeleteAdminBLTest()
         {
             SetUp();
+            UserContext context = new UserContext();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            anAdmin.Email = "newemail";
+            anAdmin.Username = "newusername";
             Guid idUserToDelete = adminBL.Add(anAdmin);
             adminBL.Delete(idUserToDelete);
             bool expectedResult = true;
-            bool result = adminBL.GetAllAdmins().Count() == 0;
+            bool result = adminBL.GetAllAdmins().Count() == 1;
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
