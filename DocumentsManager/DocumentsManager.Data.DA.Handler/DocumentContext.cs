@@ -87,6 +87,25 @@ namespace DocumentsManager.Data.DA.Handler
                 pContext.Remove(document.Parragraphs.ElementAt(i));
             }
         }
+
+        public void ModifyTitle(Document aDocument)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                Document documenthEntity = db.Documents.Find(aDocument.Id);
+                documenthEntity.Parragraphs = new List<Parragraph>();
+                documenthEntity.StyleClass = aDocument.StyleClass;
+                db.Styles.Attach(documenthEntity.StyleClass);
+                documenthEntity.Format = db.Formats.Find(aDocument.Format.Id);
+                documenthEntity.Footer = db.Footers.Find(aDocument.Footer.Id);
+                documenthEntity.Header = db.Headers.Find(aDocument.Header.Id);
+                documenthEntity.Title = aDocument.Title;
+                unitOfWork.DocumentRepository.Update(documenthEntity);
+                unitOfWork.Save();
+            }
+        }
+
         public void Remove(Document documentToDelete)
         {
             Document document = new Document();
