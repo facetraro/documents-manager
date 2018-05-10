@@ -1,4 +1,6 @@
 ﻿using DocumentsManager.BusinessLogic;
+using DocumentsManager.Exceptions;
+using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -16,16 +18,31 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             this.editorsBuisnessLogic = logic;
         }
+        public FormatController()
+        {
+            this.editorsBuisnessLogic = new FormatBusinessLogic(); ;
+        }
 
         // GET: api/Format
         public IHttpActionResult Get()
         {
-            IEnumerable<Format> editors = editorsBuisnessLogic.GetAllFormats();
-            if (editors == null)
+            try
             {
-                return NotFound();
+                IEnumerable<Format> editors = editorsBuisnessLogic.GetAllFormats();
+                if (editors == null)
+                {
+                    return NotFound();
+                }
+                return Ok(editors);
             }
-            return Ok(editors);
+            catch (NoUserLoggedException ex) {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // GET: api/Format/5
@@ -40,6 +57,14 @@ namespace DocumentsManager.Web.Api.Controllers
                 }
                 return Ok(editor);
             }
+            catch (NoUserLoggedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ObjectDoesNotExists doesNotExistsException)
+            {
+                return BadRequest(doesNotExistsException.Message);
+            }
             catch (ArgumentNullException ex)
             {
                 return BadRequest();
@@ -47,12 +72,21 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/Format
-        public IHttpActionResult Post([FromBody]Format editor)
+        public IHttpActionResult Post([FromBody]FormatModel model)
         {
             try
             {
-                Guid id = editorsBuisnessLogic.Add(editor);
-                return CreatedAtRoute("DefaultApi", new { id = id }, editor);
+                Format formatToAdd = GetEntityFormat(model);
+                Guid id = editorsBuisnessLogic.Add(formatToAdd);
+                return CreatedAtRoute("DefaultApi", new { id = formatToAdd.Id }, formatToAdd);
+            }
+            catch (NoUserLoggedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ObjectAlreadyExistsException alreadyExistsException)
+            {
+                return BadRequest(alreadyExistsException.Message);
             }
             catch (ArgumentNullException ex)
             {
@@ -61,12 +95,21 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/Format/5
-        public IHttpActionResult Put(Guid id, [FromBody]Format editor)
+        public IHttpActionResult Put(Guid id, [FromBody]FormatModel format)
         {
             try
             {
-                bool updateResult = editorsBuisnessLogic.Update(id, editor);
-                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, editor);
+                Format formatToAdd = GetEntityFormat(format);
+                bool updateResult = editorsBuisnessLogic.Update(id, formatToAdd);
+                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, formatToAdd);
+            }
+            catch (NoUserLoggedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ObjectDoesNotExists doesNotExistsException)
+            {
+                return BadRequest(doesNotExistsException.Message);
             }
             catch (ArgumentNullException ex)
             {
@@ -82,10 +125,23 @@ namespace DocumentsManager.Web.Api.Controllers
                 bool updateResult = editorsBuisnessLogic.Delete(id);
                 return Request.CreateResponse(HttpStatusCode.NoContent, updateResult);
             }
+            catch (NoUserLoggedException ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (ObjectDoesNotExists ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
             catch (ArgumentNullException ex)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+        private Format GetEntityFormat(FormatModel model)
+        {
+            return model.GetEntityModel();
+        }
+
     }
 }

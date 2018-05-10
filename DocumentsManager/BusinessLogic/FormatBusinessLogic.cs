@@ -1,14 +1,17 @@
 ﻿using DocumentsManager.Data.DA.Handler;
+using DocumentsManager.Exceptions;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
 
 namespace DocumentsManager.BusinessLogic
 {
-    public class FormatBusinessLogic
+    public class FormatBusinessLogic : IFormatsBusinessLogic
     {
-        public Format GetById(Guid id)
+        public Format GetByID(Guid id)
         {
+            LoggedToken.GetToken();
+
             FormatContext context = new FormatContext();
             StyleClassBusinessLogic styleLogic = new StyleClassBusinessLogic();
             Format format = context.GetById(id);
@@ -23,14 +26,61 @@ namespace DocumentsManager.BusinessLogic
 
         public bool Exists(Guid id)
         {
+            LoggedToken.GetToken();
+
             FormatContext context = new FormatContext();
             return context.Exists(id);
         }
 
-        public void Add(Format format)
+        public Guid Add(Format format)
         {
+            LoggedToken.GetToken();
             FormatContext context = new FormatContext();
+            if ((context.Exists(format.Id)))
+            {
+                throw new ObjectAlreadyExistsException("username");
+            }
             context.Add(format);
+            return format.Id;
+        }
+
+        public IEnumerable<Format> GetAllFormats()
+        {
+            LoggedToken.GetToken();
+
+            FormatContext context = new FormatContext();
+            return context.GetFormats();
+        }
+
+
+        public bool Delete(Guid id)
+        {
+            LoggedToken.GetToken();
+
+            FormatContext context = new FormatContext();
+            if ((!context.Exists(id)))
+            {
+                return false;
+                throw new ObjectDoesNotExists("username");
+            }
+            Format formatToDelete = GetByID(id);
+            context.Remove(formatToDelete);
+            return true;
+        }
+
+        public bool Update(Guid id, Format newFormat)
+        {
+            LoggedToken.GetToken();
+
+            FormatContext context = new FormatContext();
+            if ((!context.Exists(id)))
+            {
+                return false;
+                throw new ObjectDoesNotExists("username");
+            }
+            newFormat.Id = id;
+            context.Modify(GetByID(newFormat.Id));
+            return true;
         }
     }
 }

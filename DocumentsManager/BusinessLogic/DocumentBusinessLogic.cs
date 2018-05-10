@@ -19,7 +19,7 @@ namespace DocumentsManager.BusinessLogic
         private void LoadFormat(Document document)
         {
             FormatBusinessLogic formatLogic = new FormatBusinessLogic();
-            document.Format = formatLogic.GetById(document.Format.Id);
+            document.Format = formatLogic.GetByID(document.Format.Id);
         }
         private void LoadHeader(Document document)
         {

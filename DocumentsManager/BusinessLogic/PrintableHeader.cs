@@ -35,7 +35,7 @@ namespace DocumentsManager.BusinessLogic
         {
             TextBusinessLogic textBL = new TextBusinessLogic();
             FormatBusinessLogic formatBL = new FormatBusinessLogic();
-            Format documentFormat = formatBL.GetById(containerDocument.Format.Id);
+            Format documentFormat = formatBL.GetByID(containerDocument.Format.Id);
             Header theHeader = hContext.GetById(HeaderToPrint.Id);
             Text text = textBL.GetById(theHeader.Text.Id);
             StyleClass suitableStyleClass = new StyleClass();

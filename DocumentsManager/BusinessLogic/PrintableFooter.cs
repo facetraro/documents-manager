@@ -34,7 +34,7 @@ namespace DocumentsManager.BusinessLogic
         {
             TextBusinessLogic textBl = new TextBusinessLogic();
             FormatBusinessLogic formatBL = new FormatBusinessLogic();
-            Format documentFormat = formatBL.GetById(containerDocument.Format.Id);
+            Format documentFormat = formatBL.GetByID(containerDocument.Format.Id);
             Footer theFooter = footerBL.GetById(FooterToPrint.Id);
             StyleClass suitableStyleClass = new StyleClass();
             Text text = textBl.GetById(theFooter.Text.Id);

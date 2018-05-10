@@ -92,9 +92,9 @@ namespace DocumentsManager.Web.Api.Controllers
                 {
                     throw new ArgumentNullException();
                 }
-                EditorUser adminToUpdate = GetEntityEditor(editor);
-                bool updateResult = editorsBuisnessLogic.Update(id, adminToUpdate);
-                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, adminToUpdate);
+                EditorUser editorToUpdate = GetEntityEditor(editor);
+                bool updateResult = editorsBuisnessLogic.Update(id, editorToUpdate);
+                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, editorToUpdate);
             }
             catch (ObjectDoesNotExists doesNotExists)
             {
