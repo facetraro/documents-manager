@@ -98,6 +98,13 @@ namespace DocumentsManager.Data.DA.Handler
             fContext.Remove(aDocument.Footer);
             hContext.Remove(aDocument.Header);
         }
+
+        public void ModifyFooter(Document aDocument)
+        {
+            FooterContext footerCtx = new FooterContext();
+            footerCtx.Modify(aDocument.Footer);
+        }
+
         private void RemoveDocumentParagraphs(Document aDocument)
         {
             Document document = GetById(aDocument.Id);
