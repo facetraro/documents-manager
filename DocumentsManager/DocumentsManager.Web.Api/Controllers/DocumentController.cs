@@ -74,7 +74,8 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             try
             {
-                bool updateResult = true/*usersBuisnessLogic.DeleteDocument()*/;
+                Document documentToDelete=documentBusinessLogic.GetById(id);
+                bool updateResult = true /*usersBuisnessLogic.DeleteDocument(documentToDelete)*/;
                 return Request.CreateResponse(HttpStatusCode.Accepted, updateResult);
             }
             catch (ObjectDoesNotExists doesNotExists)

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Results;
 using System.Net.Http;
+using DocumentsManager.Web.Api.Models;
 
 namespace DocumentsManager.Web.Api.Tests
 {
@@ -115,9 +116,9 @@ namespace DocumentsManager.Web.Api.Tests
                 .Returns(fakeFormat.Id);
 
             var controller = new FormatController(mockFormatBusinessLogic.Object);
-
+            FormatModel fakeModel = new FormatModel(fakeFormat);
             //Act
-            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Post(fakeFormat);
+            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Post(fakeModel);
             var createdResult = obtainedResult as CreatedAtRouteNegotiatedContentResult<Format>;
 
             //Assert
@@ -128,26 +129,7 @@ namespace DocumentsManager.Web.Api.Tests
             Assert.AreEqual(fakeFormat, createdResult.Content);
         }
 
-        [TestMethod]
-        public void CreateNullFormatErrorTest()
-        {
-            //Arrange
-            Format fakeFormat = null;
-
-            var mockFormatBusinessLogic = new Mock<IFormatsBusinessLogic>();
-            mockFormatBusinessLogic
-                .Setup(bl => bl.Add(fakeFormat))
-                .Throws(new ArgumentNullException());
-
-            var controller = new FormatController(mockFormatBusinessLogic.Object);
-
-            //Act
-            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Post(fakeFormat);
-
-            //Assert
-            mockFormatBusinessLogic.VerifyAll();
-            Assert.IsInstanceOfType(obtainedResult, typeof(BadRequestErrorMessageResult));
-        }
+       
 
         [TestMethod]
         public void UpdateExistingFormatOkTest()
@@ -162,9 +144,9 @@ namespace DocumentsManager.Web.Api.Tests
                 .Returns(true);
 
             var controller = new FormatController(mockFormatBusinessLogic.Object);
-
-            //Act
-            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(new Guid(), fakeFormat);
+            FormatModel fakeModel = new FormatModel(fakeFormat);
+           //Act
+           IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(new Guid(), fakeModel);
             var createdResult = obtainedResult as CreatedAtRouteNegotiatedContentResult<Format>;
 
             //Assert
@@ -175,26 +157,7 @@ namespace DocumentsManager.Web.Api.Tests
             Assert.AreEqual(fakeFormat, createdResult.Content);
         }
 
-        [TestMethod]
-        public void UpdateFormatWithNullIdErrorTest()
-        {
-            //Arrange
-            Format fakeFormat = null;
-
-            var mockFormatBusinessLogic = new Mock<IFormatsBusinessLogic>();
-            mockFormatBusinessLogic
-                .Setup(bl => bl.Update(new Guid(), It.IsAny<Format>()))
-                .Throws(new ArgumentNullException());
-
-            var controller = new FormatController(mockFormatBusinessLogic.Object);
-
-            //Act
-            IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(new Guid(), fakeFormat);
-
-            //Assert
-            mockFormatBusinessLogic.VerifyAll();
-            Assert.IsInstanceOfType(obtainedResult, typeof(BadRequestErrorMessageResult));
-        }
+        
         [TestMethod]
         public void DeleteFormatOkTest()
         {

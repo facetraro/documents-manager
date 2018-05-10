@@ -101,5 +101,15 @@ namespace DocumentsManager.Data.DA.Handler
             UpdateFormat(modifiedFormat);
             DeleteOldStyles(modifiedFormat);
         }
+        public List<Format> GetFormats()
+        {
+            List<Format> formats = new List<Format>();
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                formats = unitOfWork.FormatRepository.Get().ToList();
+            }
+            return formats;
+        }
     }
 }
