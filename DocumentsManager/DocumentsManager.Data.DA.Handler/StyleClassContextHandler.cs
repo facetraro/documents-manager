@@ -160,5 +160,13 @@ namespace DocumentsManager.Data.DA.Handler
             UpdateAttributes(modifiedStyle);
             UpdateData(modifiedStyle);
         }
+        public bool Exists(Guid styleId)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                return unitOfWork.StyleClassRepository.Exists(styleId);
+            }
+        }
     }
 }

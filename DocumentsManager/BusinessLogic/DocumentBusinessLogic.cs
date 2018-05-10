@@ -1,4 +1,5 @@
 ﻿using DocumentsManager.Data.DA.Handler;
+using DocumentsManager.Exceptions;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,24 @@ namespace DocumentsManager.BusinessLogic
             Document documentFromBD = context.GetById(id);
             LoadRelatinships(documentFromBD);
             return documentFromBD;
+        }
+        public Guid Add(Document document)
+        {
+            Guid newId = Guid.NewGuid();
+            document.Id = newId;
+            StyleClassBusinessLogic styleLogic = new StyleClassBusinessLogic();
+            if (!styleLogic.Exists(document.StyleClass.Id))
+            {
+                throw new ObjectDoesNotExists(document.StyleClass);
+            }
+            FormatBusinessLogic formatBusinessLogic = new FormatBusinessLogic();
+            if (!formatBusinessLogic.Exists(document.Format.Id))
+            {
+                throw new ObjectDoesNotExists(document.Format);
+            }
+            DocumentContext context = new DocumentContext();
+            context.Add(document);
+            return newId;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DocumentsManager.Data.DA.Handler;
+using DocumentsManager.Exceptions;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,18 @@ namespace DocumentsManager.BusinessLogic
         {
             StyleClassContextHandler context = new StyleClassContextHandler();
             return context.GetById(id);
+        }
+        public Guid Add(StyleClass newStyle)
+        {
+            newStyle.Id = Guid.NewGuid();
+            StyleClassContextHandler context = new StyleClassContextHandler();
+            context.Add(newStyle);
+            return newStyle.Id;
+        }
+        public bool Exists(Guid id)
+        {
+            StyleClassContextHandler context = new StyleClassContextHandler();
+            return context.Exists(id);
         }
     }
 }

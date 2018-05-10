@@ -73,5 +73,13 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.FormatRepository.Update(modifiedFormat);
             }
         }
+        public bool Exists(Guid formatGuid)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                return unitOfWork.FormatRepository.Exists(formatGuid);
+            }
+        }
     }
 }
