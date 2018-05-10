@@ -85,22 +85,11 @@ namespace DocumentsManager.Data.DA.Handler
             AddDocumentParragraphs(aDocument.Parragraphs, aDocument);
         }
 
-        //public void ModifyStyleClass(Document aDocument)
-        //{
-        //    using (var db = new ContextDataAccess())
-        //    {
-        //        var unitOfWork = new UnitOfWork(db);
-        //        Document documenthEntity = db.Documents.Find(aDocument.Id);
-        //        documenthEntity.Parragraphs = new List<Parragraph>();
-        //        documenthEntity.StyleClass = aDocument.StyleClass;
-        //        db.Styles.Attach(documenthEntity.StyleClass);
-        //        documenthEntity.Format = db.Formats.Find(aDocument.Format.Id);
-        //        documenthEntity.Footer = db.Footers.Find(aDocument.Footer.Id);
-        //        documenthEntity.Header = db.Headers.Find(aDocument.Header.Id);
-        //        unitOfWork.DocumentRepository.Update(documenthEntity);
-        //        unitOfWork.Save();
-        //    }
-        //}
+        public void ModifyHeader(Document aDocument)
+        {
+            HeaderContext headerCtx = new HeaderContext();
+            headerCtx.Modify(aDocument.Header);
+        }
 
         private void DeleteDocumentParts(Document aDocument)
         {

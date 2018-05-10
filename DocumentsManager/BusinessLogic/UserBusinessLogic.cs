@@ -74,10 +74,11 @@ namespace DocumentsManager.BusinessLogic
             documentContext.ModifyProperties(aDocument);
             AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
         }
-        //public void ModifyDocumentStyleClass(Document aDocument, User responsibleUser) {
-        //    AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
-        //    DocumentContext documentContext = new DocumentContext();
-        //    documentContext.ModifyStyleClass(aDocument);
-        //}
+        public void ModifyDocumentHeader(Document aDocument, User responsibleUser) {
+            DocumentContext documentContext = new DocumentContext();
+            documentContext.ModifyHeader(aDocument);
+            AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
+        }
+       
     }
 }
