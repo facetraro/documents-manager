@@ -1,5 +1,6 @@
 ﻿using DocumentsManager.BusinessLogic;
 using DocumentsManager.Exceptions;
+using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -59,12 +60,17 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/Editor
-        public IHttpActionResult Post([FromBody]EditorUser editor)
+        public IHttpActionResult Post([FromBody]EditorModel editor)
         {
             try
             {
-                Guid id = editorsBuisnessLogic.Add(editor);
-                return CreatedAtRoute("DefaultApi", new { id = id }, editor);
+                if (editor == null)
+                {
+                    throw new ArgumentNullException();
+                }
+                EditorUser editorToAdd = GetEntityEditor(editor);
+                Guid id = editorsBuisnessLogic.Add(editorToAdd);
+                return CreatedAtRoute("DefaultApi", new { id = editorToAdd.Id }, editorToAdd);
             }
             catch (ObjectAlreadyExistsException alreadyExistsException)
             {
@@ -76,13 +82,19 @@ namespace DocumentsManager.Web.Api.Controllers
             }
         }
 
+
         // PUT: api/Editor/5
-        public IHttpActionResult Put(Guid id, [FromBody]EditorUser editor)
+        public IHttpActionResult Put(Guid id, [FromBody]EditorModel editor)
         {
             try
             {
-                bool updateResult = editorsBuisnessLogic.Update(id, editor);
-                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, editor);
+                if (editor == null)
+                {
+                    throw new ArgumentNullException();
+                }
+                EditorUser adminToUpdate = GetEntityEditor(editor);
+                bool updateResult = editorsBuisnessLogic.Update(id, adminToUpdate);
+                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, adminToUpdate);
             }
             catch (ObjectDoesNotExists doesNotExists)
             {
@@ -110,6 +122,11 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
+        }
+
+        private EditorUser GetEntityEditor(EditorModel editor)
+        {
+            return editor.GetEntityModel();
         }
     }
 }

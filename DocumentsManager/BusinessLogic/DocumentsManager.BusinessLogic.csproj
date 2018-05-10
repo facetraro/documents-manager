@@ -53,6 +53,7 @@
     <Compile Include="IStyleClassBusinessLogic.cs" />
     <Compile Include="IEditorBusinessLogic.cs" />
     <Compile Include="IUsersBusinessLogic.cs" />
+    <Compile Include="LoggedToken.cs" />
     <Compile Include="ParragraphBusinessLogic.cs" />
     <Compile Include="PrintableFooter.cs" />
     <Compile Include="PrintableHeader.cs" />

@@ -83,12 +83,17 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/Admin/5
-        public IHttpActionResult Put(Guid id, [FromBody]AdminUser admin)
+        public IHttpActionResult Put(Guid id, [FromBody]AdminModel admin)
         {
             try
             {
-                bool updateResult = adminsBuisnessLogic.Update(id, admin);
-                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, admin);
+                if (admin == null)
+                {
+                    throw new ArgumentNullException();
+                }
+                AdminUser adminToUpdate = GetEntityAdmin(admin);
+                bool updateResult = adminsBuisnessLogic.Update(id, adminToUpdate);
+                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, adminToUpdate);
             }
             catch (ObjectDoesNotExists doesNotExists)
             {

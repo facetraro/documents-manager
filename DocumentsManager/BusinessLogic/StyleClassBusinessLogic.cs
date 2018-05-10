@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DocumentsManager.BusinessLogic
 {
-    public class StyleClassBusinessLogic
+    public class StyleClassBusinessLogic : IStyleClassBusinessLogic
     {
         private static string LastTag ="</p>";
         private string GetAttributesInitialTag(StyleClass style)
@@ -87,6 +87,35 @@ namespace DocumentsManager.BusinessLogic
         {
             StyleClassContextHandler context = new StyleClassContextHandler();
             return context.Exists(id);
+        }
+
+        public IEnumerable<StyleClass> GetAllStyleClasses()
+        {
+            StyleClassContextHandler context = new StyleClassContextHandler();
+            //context.GetAll();
+            throw new NotImplementedException();
+        }
+
+      
+
+        public bool Delete(Guid id)
+        {
+            if (true)
+            {
+                StyleClassContextHandler context = new StyleClassContextHandler();
+                StyleClass toDelete = GetById(id);
+                context.Remove(toDelete);
+                return true;
+            }
+            else {
+                return false;
+            }
+           
+        }
+
+        public bool Update(Guid id, StyleClass newStyle)
+        {
+            throw new NotImplementedException();
         }
     }
 }

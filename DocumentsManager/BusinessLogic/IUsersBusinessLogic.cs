@@ -9,7 +9,7 @@ namespace DocumentsManager.BusinessLogic
 {
     public interface IUsersBusinessLogic
     {
-        Guid AddDocument(User user, Document doc);
+        Guid AddDocument(Document doc);
         void ModifyParragraphs(Document aDocument, User responsibleUser);
         void ModifyDocumentProperties(Document aDocument, User responsibleUser);
         void ModifyDocumentHeader(Document aDocument, User responsibleUser);

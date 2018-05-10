@@ -128,11 +128,17 @@
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\FormatController.cs" />
     <Compile Include="Controllers\EditorController.cs" />
+    <Compile Include="Controllers\LogInController.cs" />
+    <Compile Include="Controllers\LogOutController.cs" />
+    <Compile Include="Controllers\PrintDocumentController.cs" />
     <Compile Include="Controllers\StyleClassController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\LogInModel.cs" />
+    <Compile Include="Models\EditorModel.cs" />
+    <Compile Include="Models\StyleClassModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

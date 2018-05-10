@@ -121,7 +121,7 @@ namespace DocumentsManager.BusinessLogic
             DocumentContext context = new DocumentContext();
             Document document = new Document();
             document.Id = id;
-            if (context.Equals(document))
+            if (document.Equals(document))
             {
                 document=context.GetById(id);
             }

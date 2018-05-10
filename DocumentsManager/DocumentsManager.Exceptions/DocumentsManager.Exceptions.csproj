@@ -44,6 +44,7 @@
     <Compile Include="InvalidChartDatesException.cs" />
     <Compile Include="InvalidCredentialException.cs" />
     <Compile Include="LostConnectionWithDataBase.cs" />
+    <Compile Include="NoUserLoggedException.cs" />
     <Compile Include="ObjectAlreadyExistsException.cs" />
     <Compile Include="ObjectDoesNotExists.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
