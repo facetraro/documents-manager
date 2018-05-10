@@ -27,7 +27,6 @@ namespace DocumentsManager.BusinessLogic
                 PrintableText printableText = new PrintableText(textToPrint, ParragraphToPrint);
                 parragraphText += printableText.Print(containerDocument);
             }
-            parragraphText += "</br>";
             return parragraphText;
         }
     }

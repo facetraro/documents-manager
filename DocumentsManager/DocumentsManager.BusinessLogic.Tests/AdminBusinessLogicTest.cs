@@ -64,7 +64,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
         }
         [TestMethod]
-        public void AddAdminBLTBLest()
+        public void AddAdminBLTest()
         {
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();

@@ -25,7 +25,9 @@ namespace DocumentsManager.BusinessLogic
         public string Print(Document containerDocument)
         {
             Text theText = tContext.GetById(TextToPrint.Id);
-            return StyleClassBL.GetHtmlText(DefineStyleClass(containerDocument), theText.WrittenText);
+            StyleClass definedStyleClass = StyleClassBL.GetById(DefineStyleClass(containerDocument).Id);
+            if (definedStyleClass == null) definedStyleClass = new StyleClass();
+            return StyleClassBL.GetHtmlText(definedStyleClass, theText.WrittenText);
         }
 
         public StyleClass DefineStyleClass(Document containerDocument)

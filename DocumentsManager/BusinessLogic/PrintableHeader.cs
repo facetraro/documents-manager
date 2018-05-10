@@ -23,7 +23,9 @@ namespace DocumentsManager.BusinessLogic
         {
             string documentTitle = "<title>" + containerDocument.Title + "</title>";
             Header header = hContext.GetById(HeaderToPrint.Id);
-            string textToPrint = "<head>" + StyleClassBL.GetHtmlText(DefineStyleClass(containerDocument), header.Text.WrittenText) + "</head>";
+            StyleClass definedStyleClass = StyleClassBL.GetById(DefineStyleClass(containerDocument).Id);
+            if (definedStyleClass == null) definedStyleClass = new StyleClass();
+            string textToPrint = "<head>" + StyleClassBL.GetHtmlText(definedStyleClass, header.Text.WrittenText) + "</head>";
             string openHtml = "<html>";
             string openBody = "<body>";
             return openHtml + openBody + documentTitle + textToPrint;
@@ -31,26 +33,22 @@ namespace DocumentsManager.BusinessLogic
 
         public StyleClass DefineStyleClass(Document containerDocument)
         {
-
-            TextContext tContext = new TextContext();
-            StyleClassContextHandler scContext = new StyleClassContextHandler();
-            FormatContext formatContext = new FormatContext();
-            Format documentFormat = formatContext.GetById(containerDocument.Format.Id);
+            TextBusinessLogic textBL = new TextBusinessLogic();
+            FormatBusinessLogic formatBL = new FormatBusinessLogic();
+            Format documentFormat = formatBL.GetById(containerDocument.Format.Id);
             Header theHeader = hContext.GetById(HeaderToPrint.Id);
-            Text text = tContext.GetById(theHeader.Text.Id);
+            Text text = textBL.GetById(theHeader.Text.Id);
             StyleClass suitableStyleClass = new StyleClass();
-            StyleClass headerStyle = scContext.GetById(theHeader.StyleClass.Id);
-            StyleClass textStyle = scContext.GetById(text.StyleClass.Id);
 
-            if (documentFormat.StyleClasses.Contains(textStyle))
+            if (documentFormat.StyleClasses.Contains(text.StyleClass))
             {
-                suitableStyleClass = textStyle;
+                suitableStyleClass = text.StyleClass;
             }
             else
             {
-                if (documentFormat.StyleClasses.Contains(headerStyle))
+                if (documentFormat.StyleClasses.Contains(theHeader.StyleClass))
                 {
-                    suitableStyleClass = headerStyle;
+                    suitableStyleClass = theHeader.StyleClass;
                 }
                 else
                 {
