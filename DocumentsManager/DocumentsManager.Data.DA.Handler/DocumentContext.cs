@@ -226,13 +226,18 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public List<Document> GetDocuments()
         {
+            List<Document> CompleteDocuments = new List<Document>();
             List<Document> documents = new List<Document>();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 documents = unitOfWork.DocumentRepository.Get().ToList();
             }
-            return documents;
+            foreach (var item in documents)
+            {
+                CompleteDocuments.Add(GetById(item.Id));
+            }
+            return CompleteDocuments;
         }
         public bool Exists(Document aDocument)
         {

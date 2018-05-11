@@ -1,5 +1,6 @@
 ﻿using DocumentsManager.BusinessLogic;
 using DocumentsManager.Exceptions;
+using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,16 @@ namespace DocumentsManager.Web.Api.Controllers
             this.documentBusinessLogic = new DocumentBusinessLogic();
         }
         // GET: api/Document
+        [HttpGet]
+        [Route("Documents")]
         public IHttpActionResult Get()
         {
-            IEnumerable<Document> documents = documentBusinessLogic.GetAllDocuments();
+            IEnumerable<Document> documentsComplete = documentBusinessLogic.GetAllDocuments();
+            List<DocumentDto> documents = new List<DocumentDto>();
+            foreach (var item in documentsComplete)
+            {
+                documents.Add(new DocumentDto(item));
+            }
             if (documents == null)
             {
                 return NotFound();
@@ -40,7 +48,8 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             try
             {
-                Document document = documentBusinessLogic.GetById(id);
+                Document documentComplete = documentBusinessLogic.GetById(id);
+                DocumentDto document = new DocumentDto(documentComplete);
                 if (document == null)
                 {
                     return NotFound();

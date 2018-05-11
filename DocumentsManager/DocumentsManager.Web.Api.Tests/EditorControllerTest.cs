@@ -149,52 +149,6 @@ namespace DocumentsManager.Web.Api.Tests
             Assert.IsInstanceOfType(obtainedResult, typeof(BadRequestErrorMessageResult));
         }
 
-        //[TestMethod]
-        //public void UpdateExistingEditorOkTest()
-        //{
-        //    //Arrange
-        //    var fakeEditor = GetAFakeEditor();
-        //    var expectedResult = true;
-
-        //    var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
-        //    mockEditorBusinessLogic
-        //        .Setup(bl => bl.Update(It.IsAny<Guid>(), It.IsAny<EditorUser>()))
-        //        .Returns(true);
-
-        //    var controller = new EditorController(mockEditorBusinessLogic.Object);
-
-        //    //Act
-        //    IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(new Guid(), fakeEditor);
-        //    var createdResult = obtainedResult as CreatedAtRouteNegotiatedContentResult<EditorUser>;
-
-        //    //Assert
-        //    mockEditorBusinessLogic.VerifyAll();
-        //    Assert.IsNotNull(createdResult);
-        //    Assert.AreEqual("DefaultApi", createdResult.RouteName);
-        //    Assert.AreEqual(expectedResult, createdResult.RouteValues["updated"]);
-        //    Assert.AreEqual(fakeEditor, createdResult.Content);
-        //}
-
-        //[TestMethod]
-        //public void UpdateEditorWithNullIdErrorTest()
-        //{
-        //    //Arrange
-        //    EditorUser fakeEditor = null;
-
-        //    var mockEditorBusinessLogic = new Mock<IEditorsBusinessLogic>();
-        //    mockEditorBusinessLogic
-        //        .Setup(bl => bl.Update(new Guid(), It.IsAny<EditorUser>()))
-        //        .Throws(new ArgumentNullException());
-
-        //    var controller = new EditorController(mockEditorBusinessLogic.Object);
-        //    EditorModel fakeModel = new EditorModel(fakeEditor);
-
-        //    //Act
-        //    IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(new Guid(), fakeModel);
-
-        //    //Assert
-        //    Assert.IsInstanceOfType(obtainedResult, typeof(BadRequestErrorMessageResult));
-        //}
         [TestMethod]
         public void DeleteEditorOkTest()
         {

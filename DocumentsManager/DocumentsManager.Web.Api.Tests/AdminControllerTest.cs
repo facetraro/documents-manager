@@ -175,27 +175,7 @@ namespace DocumentsManager.Web.Api.Tests
             Assert.AreEqual(fakeAdmin, createdResult.Content);
         }
 
-        //[TestMethod]
-        //public void UpdateAdminWithNullIdErrorTest()
-        //{
-        //    //Arrange
-        //    AdminUser fakeAdmin = null;
-
-        //    var mockAdminBusinessLogic = new Mock<IAdminsBusinessLogic>();
-        //    mockAdminBusinessLogic
-        //        .Setup(bl => bl.Update(new Guid(), It.IsAny<AdminUser>()))
-        //        .Throws(new ArgumentNullException());
-
-        //    var controller = new AdminController(mockAdminBusinessLogic.Object);
-        //    AdminModel fakeModel = new AdminModel(fakeAdmin);
-
-        //    //Act
-        //    IHttpActionResult obtainedResult = (IHttpActionResult)controller.Put(new Guid(), fakeModel);
-
-        //    //Assert
-        //    mockAdminBusinessLogic.VerifyAll();
-        //    Assert.IsInstanceOfType(obtainedResult, typeof(BadRequestErrorMessageResult));
-        //}
+        
         [TestMethod]
         public void DeleteAdminOkTest()
         {
