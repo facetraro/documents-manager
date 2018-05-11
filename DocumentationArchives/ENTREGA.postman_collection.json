@@ -1,0 +1,572 @@
+{
+	"id": "8f06a4e9-f5cd-447f-80dc-37925d2ad688",
+	"name": "ENTREGA",
+	"description": "",
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [
+		"8155dfdc-087a-464f-a331-3975d79998b2",
+		"25732366-0cfa-4d4d-9733-d1a2148b1951",
+		"2e6340a6-9cb4-411b-9050-fadd69bdf85b",
+		"6a6d87e7-cb0f-46bb-95b6-1abf88ea1e96",
+		"3ccf2b2c-6a11-4a61-9107-50f7cece980a",
+		"d8d36688-091e-4fb0-a772-06c64bd2c316",
+		"48d2c395-20fd-41a4-bb33-88b3653c7581",
+		"e77a814f-281e-4e95-9f33-821f3a7c2ff6",
+		"2eed2819-9ffc-4680-9333-e6e3ccc491f6",
+		"d094a148-9434-4a96-ab52-5e46bc9fc340",
+		"238760af-00e0-497a-b5dd-601cbcf4683c",
+		"1cf5d50b-6ef8-462e-97bd-3469bb1ebaea",
+		"34783145-5b47-4c04-9231-ff6d18ea659b",
+		"b7cdce0d-d5f3-49f3-b8a2-d9340819b6a3",
+		"6e2bbd5d-7697-49dd-882d-851fa02d1ed3"
+	],
+	"folders_order": [],
+	"folders": [],
+	"requests": [
+		{
+			"id": "1cf5d50b-6ef8-462e-97bd-3469bb1ebaea",
+			"name": "http://localhost:20981//api/LogIn/?Username=DefaultUsername. ",
+			"url": "http://localhost:20981/api/LogIn?username=DefaultUsername",
+			"description": "LogIn con Administrador El usuario DefaultUsername debe estar registrado con DefaultPassword como password.",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "username",
+					"value": "DefaultUsername",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"password\":\"DefaultPassword\"\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "238760af-00e0-497a-b5dd-601cbcf4683c",
+			"name": "http://localhost:20981/api/StyleClass/",
+			"url": "http://localhost:20981/api/StyleClass/",
+			"description": "Trae todos los estilosTrae el estilo seleccionado. Indicar Id en Header",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"key": "Id",
+					"value": "",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"Id\": \"aeade963-3b97-49a3-9eec-56498ee491ad\",\n        \"Username\": \"NEWDefaultUsername\",\n        \"Password\": \"DefaultPassword\",\n        \"Name\": \"DefaultName\",\n        \"Surname\": \"DefaultSurname\",\n        \"Email\": \"NEWDefaultEmail@DefaultEmail.com\"\n    }",
+			"headers": "Content-Type: application/json\nId: \n",
+			"pathVariables": {}
+		},
+		{
+			"id": "25732366-0cfa-4d4d-9733-d1a2148b1951",
+			"name": "http://localhost:20981//api/Format/",
+			"url": "http://localhost:20981//api/Format/",
+			"description": "Traer formatos",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"password\":\"DefaultPassword\"\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "2e6340a6-9cb4-411b-9050-fadd69bdf85b",
+			"name": "http://localhost:20981//api/LogOut",
+			"url": "http://localhost:20981//api/LogOut",
+			"description": "LogOut",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"password\":\"DefaultPassword\"\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "2eed2819-9ffc-4680-9333-e6e3ccc491f6",
+			"name": "http://localhost:20981//api/Admin/",
+			"url": "http://localhost:20981//api/Admin/",
+			"description": "Delete Admin",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"key": "Id",
+					"value": "2B244529-E06A-4982-9552-C9F95907AF25",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"Id\": \"aeade963-3b97-49a3-9eec-56498ee491ad\",\n        \"Username\": \"NEWDefaultUsername\",\n        \"Password\": \"DefaultPassword\",\n        \"Name\": \"DefaultName\",\n        \"Surname\": \"DefaultSurname\",\n        \"Email\": \"NEWDefaultEmail@DefaultEmail.com\"\n    }",
+			"headers": "Content-Type: application/json\nId: 2B244529-E06A-4982-9552-C9F95907AF25\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "34783145-5b47-4c04-9231-ff6d18ea659b",
+			"name": "http://localhost:20981/ModifiersChart/?Id=&dateOne&dateTwo",
+			"url": "http://localhost:20981/ModifiersChart/?Id=&dateOne&dateTwo",
+			"description": "Consulta grafica documentos modificados por usuario entre 2 fechas.\nDar id usuario y fechaDesde fechaHasta",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "Id",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "dateOne",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "dateTwo",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"Id\": \"aeade963-3b97-49a3-9eec-56498ee491ad\",\n        \"Username\": \"NEWDefaultUsername\",\n        \"Password\": \"DefaultPassword\",\n        \"Name\": \"DefaultName\",\n        \"Surname\": \"DefaultSurname\",\n        \"Email\": \"NEWDefaultEmail@DefaultEmail.com\"\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "3ccf2b2c-6a11-4a61-9107-50f7cece980a",
+			"name": "http://localhost:20981//api/Admin/",
+			"url": "http://localhost:20981//api/Admin/",
+			"description": "Traer UsuariosADmin",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"Id\": \"aeade963-3b97-49a3-9eec-56498ee491ad\",\n        \"Username\": \"NEWDefaultUsername\",\n        \"Password\": \"DefaultPassword\",\n        \"Name\": \"DefaultName\",\n        \"Surname\": \"DefaultSurname\",\n        \"Email\": \"NEWDefaultEmail@DefaultEmail.com\"\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "48d2c395-20fd-41a4-bb33-88b3653c7581",
+			"name": "http://localhost:20981/api/Editor",
+			"url": "http://localhost:20981/api/Editor",
+			"description": "Agrego editor2",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": " {\n        \"Id\": \"aeade963-3b97-49a3-9eec-56498ee491ad\",\n        \"Username\": \"Editor2\",\n        \"Password\": \"DefaultPassword\",\n        \"Name\": \"DefaultName\",\n        \"Surname\": \"DefaultSurname\",\n        \"Email\": \"Editor2@DefaultEmail.com\"\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "6a6d87e7-cb0f-46bb-95b6-1abf88ea1e96",
+			"name": "http://localhost:20981//api/Admin/",
+			"url": "http://localhost:20981//api/Admin/",
+			"description": "NuevoUser",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"Id\": \"aeade963-3b97-49a3-9eec-56498ee491ad\",\n        \"Username\": \"NEWDefaultUsername\",\n        \"Password\": \"DefaultPassword\",\n        \"Name\": \"DefaultName\",\n        \"Surname\": \"DefaultSurname\",\n        \"Email\": \"NEWDefaultEmail@DefaultEmail.com\"\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "6e2bbd5d-7697-49dd-882d-851fa02d1ed3",
+			"name": "http://localhost:20981/Documents",
+			"url": "http://localhost:20981/Documents",
+			"description": "Trae todos los documentos",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"key": "Id",
+					"value": "",
+					"description": "",
+					"enabled": false
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"Id\": \"aeade963-3b97-49a3-9eec-56498ee491ad\",\n        \"Username\": \"NEWDefaultUsername\",\n        \"Password\": \"DefaultPassword\",\n        \"Name\": \"DefaultName\",\n        \"Surname\": \"DefaultSurname\",\n        \"Email\": \"NEWDefaultEmail@DefaultEmail.com\"\n    }",
+			"headers": "Content-Type: application/json\n//Id: \n",
+			"pathVariables": {}
+		},
+		{
+			"id": "8155dfdc-087a-464f-a331-3975d79998b2",
+			"name": "http://localhost:20981//api/LogIn/?Username=DefaultUsername",
+			"url": "http://localhost:20981//api/LogIn/?Username=DefaultUsername",
+			"description": "LogIn con Administrador",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "Username",
+					"value": "DefaultUsername",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"password\":\"DefaultPassword\"\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "b7cdce0d-d5f3-49f3-b8a2-d9340819b6a3",
+			"name": "http://localhost:20981/CreatorsChart?Id&dateOne&dateTwo",
+			"url": "http://localhost:20981/CreatorsChart?Id&dateOne&dateTwo",
+			"description": "Consulta grafica documentos creados por usuario entre 2 fechas.\nDar id usuario y fechaDesde fechaHasta",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "Id",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "dateOne",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "dateTwo",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"Id\": \"aeade963-3b97-49a3-9eec-56498ee491ad\",\n        \"Username\": \"NEWDefaultUsername\",\n        \"Password\": \"DefaultPassword\",\n        \"Name\": \"DefaultName\",\n        \"Surname\": \"DefaultSurname\",\n        \"Email\": \"NEWDefaultEmail@DefaultEmail.com\"\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "d094a148-9434-4a96-ab52-5e46bc9fc340",
+			"name": "http://localhost:20981/api/StyleClass/",
+			"url": "http://localhost:20981/api/StyleClass/",
+			"description": "Trae todos los estilos",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"key": "Id",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "dateOne",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "dateTwo",
+					"value": "",
+					"description": "",
+					"enabled": false
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n        \"Id\": \"aeade963-3b97-49a3-9eec-56498ee491ad\",\n        \"Username\": \"NEWDefaultUsername\",\n        \"Password\": \"DefaultPassword\",\n        \"Name\": \"DefaultName\",\n        \"Surname\": \"DefaultSurname\",\n        \"Email\": \"NEWDefaultEmail@DefaultEmail.com\"\n    }",
+			"headers": "Content-Type: application/json\n//Id: \n//dateOne: \n//dateTwo: \n",
+			"pathVariables": {}
+		},
+		{
+			"id": "d8d36688-091e-4fb0-a772-06c64bd2c316",
+			"name": "http://localhost:20981/api/Editor",
+			"url": "http://localhost:20981/api/Editor",
+			"description": "Agrego editor",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": " {\n        \"Id\": \"aeade963-3b97-49a3-9eec-56498ee491ad\",\n        \"Username\": \"Editor1\",\n        \"Password\": \"DefaultPassword\",\n        \"Name\": \"DefaultName\",\n        \"Surname\": \"DefaultSurname\",\n        \"Email\": \"Editor1@DefaultEmail.com\"\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "e77a814f-281e-4e95-9f33-821f3a7c2ff6",
+			"name": "http://localhost:20981/api/Editor",
+			"url": "http://localhost:20981/api/Editor",
+			"description": "Traer Editors",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "",
+					"value": "",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": " {\n        \"Id\": \"aeade963-3b97-49a3-9eec-56498ee491ad\",\n        \"Username\": \"Editor1\",\n        \"Password\": \"DefaultPassword\",\n        \"Name\": \"DefaultName\",\n        \"Surname\": \"DefaultSurname\",\n        \"Email\": \"Editor1@DefaultEmail.com\"\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		}
+	]
+}
