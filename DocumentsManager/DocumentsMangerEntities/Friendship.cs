@@ -24,12 +24,12 @@ namespace DocumentsMangerEntities
 
         public bool IsFriendship()
         {
-            return true;
+            return State.Equals(FriendshipState.Friend);
         }
 
         public bool IsRequest()
         {
-            return true;
+            return State.Equals(FriendshipState.Request);
         }
     }
 }
