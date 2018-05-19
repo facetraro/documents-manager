@@ -64,5 +64,16 @@ namespace DocumentsManager.Data.DA.Handler
                 return friendship;
             }
         }
+        public bool Modify(Friendship modifiedFriendship)
+        {
+            bool modified = false;
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                unitOfWork.FriendshipRepository.Update(modifiedFriendship);
+                modified = true;
+            }
+            return modified;
+        }
     }
 }
