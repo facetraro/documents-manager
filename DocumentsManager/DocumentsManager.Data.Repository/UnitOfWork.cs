@@ -23,6 +23,7 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<Document> documentRepository;
         private GenericRepository<ModifyDocumentHistory> historyRepository;
         private GenericRepository<Session> sessionRepository;
+        private GenericRepository<Friendship> friendshipRepository;
 
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
@@ -153,6 +154,17 @@ namespace DocumentsManager.Data.Repository
                     this.sessionRepository = new GenericRepository<Session>(context);
                 }
                 return sessionRepository;
+            }
+        }
+        public IRepository<Friendship> FriendshipRepository
+        {
+            get
+            {
+                if (this.friendshipRepository == null)
+                {
+                    this.friendshipRepository = new GenericRepository<Friendship>(context);
+                }
+                return friendshipRepository;
             }
         }
 

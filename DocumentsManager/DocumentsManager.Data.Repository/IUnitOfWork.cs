@@ -19,6 +19,7 @@ namespace DocumentsManager.Data.Repository
         IRepository<Parragraph> ParragraphRepository { get; }
         IRepository<ModifyDocumentHistory> HistoryRepository { get; }
         IRepository<Document> DocumentRepository { get; }
+        IRepository<Friendship> FriendshipRepository { get; }
         void Save();
     }
 }
