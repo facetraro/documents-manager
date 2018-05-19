@@ -36,11 +36,25 @@ namespace DocumentsManagerTesting
             Assert.IsTrue(testFriendship.IsFriendship());
         }
         [TestMethod]
+        public void IsNotFriendshipTest()
+        {
+            Friendship testFriendship = new Friendship();
+            testFriendship.State = FriendshipState.Request;
+            Assert.IsFalse(testFriendship.IsFriendship());
+        }
+        [TestMethod]
         public void IsRequestTest()
         {
             Friendship testFriendship = new Friendship();
             testFriendship.State = FriendshipState.Request;
             Assert.IsTrue(testFriendship.IsRequest());
+        }
+        [TestMethod]
+        public void IsNotRequestTest()
+        {
+            Friendship testFriendship = new Friendship();
+            testFriendship.State = FriendshipState.Friend;
+            Assert.IsFalse(testFriendship.IsRequest());
         }
         [TestMethod]
         public void IsRequestedTest()
@@ -67,7 +81,7 @@ namespace DocumentsManagerTesting
             Assert.IsFalse(testFriendship.Request.Equals(EntitiesExampleInstances.TestAdminUser()));
         }
         [TestMethod]
-        public void IsNotRequestTest()
+        public void IsNotRequestUserTest()
         {
             Friendship testFriendship = new Friendship();
             User anUser = EntitiesExampleInstances.TestAdminUser();
