@@ -77,5 +77,26 @@ namespace DocumentsManagerDATesting
             Assert.AreEqual(allFriendships.ElementAt(0).Id, newFriendship.Id);
             TearDown();
         }
+        [TestMethod]
+        public void ModifyStateFriendshipTest()
+        {
+            Friendship newFriendship = EntitiesExampleInstances.TestFriendship();
+            UserContext contextUser = new UserContext();
+            contextUser.Add(newFriendship.Request);
+            contextUser.Add(newFriendship.Requested);
+            newFriendship.State = FriendshipState.Request;
+            FriendshipContext context = new FriendshipContext();
+            context.Add(newFriendship);
+            newFriendship.State = FriendshipState.Friend;
+            context.Modify(newFriendship);
+            Friendship result = context.GetById(newFriendship.Id);
+            List<Friendship> allFriendships = context.GetAllFriendships();
+            Assert.IsTrue(allFriendships.Contains(newFriendship));
+            Assert.AreEqual(allFriendships.ElementAt(0).Requested, newFriendship.Requested);
+            Assert.AreEqual(allFriendships.ElementAt(0).Request, newFriendship.Request);
+            Assert.AreEqual(allFriendships.ElementAt(0).State, newFriendship.State);
+            Assert.AreEqual(allFriendships.ElementAt(0).Id, newFriendship.Id);
+            TearDown();
+        }
     }
 }
