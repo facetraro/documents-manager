@@ -59,6 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="FriendshipContextTest.cs" />
     <Compile Include="ModifyDocumentHistoryContextTest.cs" />
     <Compile Include="DocumentContextTest.cs" />
     <Compile Include="FooterContextTest.cs" />
