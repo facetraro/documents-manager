@@ -22,6 +22,19 @@ namespace DocumentsManagerExampleInstances
             };
             return user;
         }
+
+        public static Friendship TestFriendship()
+        {
+            Friendship friendship = new Friendship
+            {
+                Id = Guid.NewGuid(),
+                Request = TestEditorUser(),
+                Requested = TestAdminUser(),
+                State = FriendshipState.Friend
+            };
+            return friendship;
+        }
+
         public static EditorUser TestEditorUser()
         {
             EditorUser user = new EditorUser

@@ -23,6 +23,7 @@ namespace DocumentsManagerDataAccess
         public DbSet<Parragraph> Parragraphs { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<ModifyDocumentHistory> Histories { get; set; }
+        public DbSet<Friendship> Friendships { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -38,6 +39,7 @@ namespace DocumentsManagerDataAccess
             modelBuilder.Entity<Document>().HasKey(D => D.Id);
             modelBuilder.Entity<ModifyDocumentHistory>().HasKey(MDH => MDH.Id);
             modelBuilder.Entity<Session>().HasKey(S => S.token);
+            modelBuilder.Entity<Friendship>().HasKey(S => S.Id);
         }
     }
 }
