@@ -138,15 +138,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminModel.cs" />
-    <Compile Include="Models\DocumentDto.cs" />
-    <Compile Include="Models\FooterDto.cs" />
-    <Compile Include="Models\FormatDto.cs" />
+    <Compile Include="Dtos\DocumentDto.cs" />
+    <Compile Include="Dtos\FooterDto.cs" />
+    <Compile Include="Dtos\FormatDto.cs" />
     <Compile Include="Models\FormatModel.cs" />
-    <Compile Include="Models\HeaderDto.cs" />
+    <Compile Include="Dtos\HeaderDto.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\EditorModel.cs" />
-    <Compile Include="Models\ParragraphDto.cs" />
-    <Compile Include="Models\StyleClassDto.cs" />
+    <Compile Include="Dtos\ParragraphDto.cs" />
+    <Compile Include="Dtos\StyleClassDto.cs" />
     <Compile Include="Models\StyleClassModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

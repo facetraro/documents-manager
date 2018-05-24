@@ -13,5 +13,7 @@ namespace DocumentsManager.BusinessLogic
         string PrintDocument(Document aDocument);
         IEnumerable<Document> GetAllDocuments();
         Document GetById(Guid id);
+        Document GetFullDocument(Guid id);
+
     }
 }

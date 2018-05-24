@@ -143,5 +143,37 @@ namespace DocumentsManager.BusinessLogic
             }
             return false;
         }
+
+        private Header GetDocumentHeader(Guid id)
+        {
+            HeaderBusinessLogic bl = new HeaderBusinessLogic();
+            return bl.GetById(GetById(id).Header.Id);
+        }
+
+        private Footer GetDocumentFooter(Guid id)
+        {
+            FooterBusinessLogic bl = new FooterBusinessLogic();
+            return bl.GetById(GetById(id).Footer.Id);
+        }
+
+        private List<Parragraph> GetDocumentParragraphs(Guid id)
+        {
+            ParragraphBusinessLogic bl = new ParragraphBusinessLogic();
+            List<Parragraph> completeParratgraphs = new List<Parragraph>();
+            foreach (Parragraph pi in GetById(id).Parragraphs)
+            {
+                completeParratgraphs.Add(bl.GetById(pi.Id));
+            }
+            return completeParratgraphs;
+        }
+
+        public Document GetFullDocument(Guid id)
+        {
+            Document document = GetById(id);
+            document.Footer = GetDocumentFooter(id);
+            document.Header = GetDocumentHeader(id);
+            document.Parragraphs = GetDocumentParragraphs(id);
+            return document;
+        }
     }
 }

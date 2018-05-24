@@ -11,6 +11,12 @@ namespace DocumentsManager.Web.Api.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public virtual List<StyleClass> StyleClasses { get; set; }
+        public FormatModel()
+        {
+            Id = Guid.NewGuid();
+            Name = "";
+            StyleClasses = new List<StyleClass>();
+        }
         public FormatModel(Format aFormat)
         {
             Id = aFormat.Id;

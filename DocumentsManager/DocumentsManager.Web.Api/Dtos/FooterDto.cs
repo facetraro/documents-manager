@@ -9,9 +9,11 @@ namespace DocumentsManager.Web.Api.Models
     public class FooterDto
     {
         public Guid Id { get; set; }
+        public string text { get; set; }
         public FooterDto(Footer aFooter)
         {
             this.Id = aFooter.Id;
+            this.text = aFooter.Text.WrittenText;
         }
     }
 }

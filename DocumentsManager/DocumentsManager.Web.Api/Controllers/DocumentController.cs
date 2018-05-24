@@ -34,7 +34,8 @@ namespace DocumentsManager.Web.Api.Controllers
             List<DocumentDto> documents = new List<DocumentDto>();
             foreach (var item in documentsComplete)
             {
-                documents.Add(new DocumentDto(item));
+                Document doc = documentBusinessLogic.GetFullDocument(item.Id);
+                documents.Add(new DocumentDto(doc));
             }
             if (documents == null)
             {
@@ -48,8 +49,8 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             try
             {
-                Document documentComplete = documentBusinessLogic.GetById(id);
-                DocumentDto document = new DocumentDto(documentComplete);
+                
+                DocumentDto document = new DocumentDto(documentBusinessLogic.GetFullDocument(id));
                 if (document == null)
                 {
                     return NotFound();
