@@ -19,7 +19,7 @@ namespace DocumentsManager.Web.Api.Models
         }
         public FormatModel(Format aFormat)
         {
-            Id = aFormat.Id;
+            Id = Guid.NewGuid();
             Name = aFormat.Name;
             StyleClasses = aFormat.StyleClasses;
         }

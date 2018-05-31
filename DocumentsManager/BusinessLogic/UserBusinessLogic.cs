@@ -225,5 +225,15 @@ namespace DocumentsManager.BusinessLogic
         {
             AddModifyHistory(responsibleUser, aDocument, ModifyState.Removed);
         }
+
+        public void UpdateDocument(Guid id,Document aDocument)
+        {
+            DocumentBusinessLogic documentBL = new DocumentBusinessLogic();
+            //if (!documentBL.Exists(id))
+            //{
+            //    throw new ObjectDoesNotExists(aDocument);
+            //}
+            throw new NotImplementedException();
+        }
     }
 }

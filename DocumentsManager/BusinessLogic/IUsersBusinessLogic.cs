@@ -14,6 +14,7 @@ namespace DocumentsManager.BusinessLogic
         void ModifyDocumentProperties(Document aDocument, User responsibleUser);
         void ModifyDocumentHeader(Document aDocument, User responsibleUser);
         void ModifyDocumentFooter(Document aDocument, User responsibleUser);
+        void UpdateDocument(Document aDocument);
         bool DeleteDocument(Document aDocument);
     }
 }

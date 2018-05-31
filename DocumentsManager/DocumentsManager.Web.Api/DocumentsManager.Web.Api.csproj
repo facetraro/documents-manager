@@ -141,13 +141,18 @@
     <Compile Include="Dtos\DocumentDto.cs" />
     <Compile Include="Dtos\FooterDto.cs" />
     <Compile Include="Dtos\FormatDto.cs" />
+    <Compile Include="Models\DocumentModel.cs" />
+    <Compile Include="Models\FooterModel.cs" />
     <Compile Include="Models\FormatModel.cs" />
     <Compile Include="Dtos\HeaderDto.cs" />
+    <Compile Include="Models\HeaderModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\EditorModel.cs" />
     <Compile Include="Dtos\ParragraphDto.cs" />
     <Compile Include="Dtos\StyleClassDto.cs" />
+    <Compile Include="Models\ParragraphModel.cs" />
     <Compile Include="Models\StyleClassModel.cs" />
+    <Compile Include="Models\TextModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

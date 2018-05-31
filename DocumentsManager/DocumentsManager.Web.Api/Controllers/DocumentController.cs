@@ -69,14 +69,49 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/Document
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]DocumentModel model)
         {
-
+            try
+            {
+                Document documentToAdd = GetEntityDocument(model);
+                Guid id = usersBuisnessLogic.AddDocument(documentToAdd);
+                return CreatedAtRoute("DefaultApi", new { id = documentToAdd.Id }, documentToAdd);
+            }
+            catch (NoUserLoggedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ObjectAlreadyExistsException alreadyExistsException)
+            {
+                return BadRequest(alreadyExistsException.Message);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/Document/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(Guid id, [FromBody]DocumentModel model)
         {
+            try
+            {
+                Document documentToModify = GetEntityDocument(model);
+                bool updateResult = usersBuisnessLogic.UpdateDocument(id, documentToModify);
+                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, documentToModify);
+            }
+            catch (NoUserLoggedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ObjectDoesNotExists doesNotExistsException)
+            {
+                return BadRequest(doesNotExistsException.Message);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/Document/5
@@ -101,5 +136,10 @@ namespace DocumentsManager.Web.Api.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+        private Document GetEntityDocument(DocumentModel model)
+        {
+            return model.GetEntityModel();
+        }
+
     }
 }
