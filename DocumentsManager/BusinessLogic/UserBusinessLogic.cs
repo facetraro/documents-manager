@@ -226,7 +226,7 @@ namespace DocumentsManager.BusinessLogic
             AddModifyHistory(responsibleUser, aDocument, ModifyState.Removed);
         }
 
-        public void UpdateDocument(Guid id,Document aDocument)
+        public bool UpdateDocument(Guid id,Document aDocument)
         {
             DocumentBusinessLogic documentBL = new DocumentBusinessLogic();
             //if (!documentBL.Exists(id))

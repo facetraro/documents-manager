@@ -9,7 +9,7 @@ using DocumentsManager.Exceptions;
 
 namespace DocumentsManager.BusinessLogic
 {
-    public class AdminBusinessLogic :UserBusinessLogic, IAdminsBusinessLogic
+    public class AdminBusinessLogic : UserBusinessLogic, IAdminsBusinessLogic
     {
         private void ValidateAuthorizations()
         {
@@ -73,15 +73,15 @@ namespace DocumentsManager.BusinessLogic
             ValidateAuthorizations();
             newAdmin.Id = Guid.NewGuid();
             UserContext userContext = new UserContext();
-            if (IdRegistered(newAdmin)) 
+            if (IdRegistered(newAdmin))
             {
                 throw new ObjectAlreadyExistsException("Id");
             }
-            if (EmailRegistered(newAdmin)) 
+            if (EmailRegistered(newAdmin))
             {
                 throw new ObjectAlreadyExistsException("email");
             }
-            if (UserNameRegistered(newAdmin)) 
+            if (UserNameRegistered(newAdmin))
             {
                 throw new ObjectAlreadyExistsException("username");
             }
