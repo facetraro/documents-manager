@@ -13,5 +13,14 @@ namespace DocumentsMangerEntities
         public int Rating { get; set; }
         public string FeedBack { get; set; }
         public Guid Id { get; set; }
+        public override bool Equals(object obj)
+        {
+            Review anotherReview = obj as Review;
+            if ((System.Object)anotherReview == null)
+            {
+                return false;
+            }
+            return Id.Equals(anotherReview.Id);
+        }
     }
 }

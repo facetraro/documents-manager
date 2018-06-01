@@ -52,6 +52,7 @@
     <Compile Include="DocumentContext.cs" />
     <Compile Include="FormatContext.cs" />
     <Compile Include="FooterContext.cs" />
+    <Compile Include="ReviewContext.cs" />
     <Compile Include="HeaderContext.cs" />
     <Compile Include="FriendshipContext.cs" />
     <Compile Include="ModifyDocumentHistoryContext.cs" />

@@ -41,7 +41,7 @@ namespace DocumentsManagerTesting
         [TestMethod]
         public void AnotherObjectReviewTest()
         {
-            Friendship testReview = new Friendship();
+            Review testReview = new Review();
             Assert.IsFalse(testReview.Equals("Not a Review"));
         }
         [TestMethod]

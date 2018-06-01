@@ -20,6 +20,7 @@ namespace DocumentsManager.Data.Repository
         IRepository<ModifyDocumentHistory> HistoryRepository { get; }
         IRepository<Document> DocumentRepository { get; }
         IRepository<Friendship> FriendshipRepository { get; }
+        IRepository<Review> ReviewRepository { get; }
         void Save();
     }
 }
