@@ -12,6 +12,7 @@ namespace DocumentsManagerDATesting
     {
         public static void ClearAll()
         {
+            ClearAllReview();
             ClearAllFriendship();
             ClearAllHistories();
             ClearAllParragraph();
@@ -74,6 +75,11 @@ namespace DocumentsManagerDATesting
         private static void ClearAllFriendship()
         {
             FriendshipContext context = new FriendshipContext();
+            context.ClearAll();
+        }
+        private static void ClearAllReview()
+        {
+            ReviewContext context = new ReviewContext();
             context.ClearAll();
         }
     }
