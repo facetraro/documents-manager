@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentsManager.BusinessLogic;
 
 namespace DocumentsManager.WinApp
 {
@@ -22,7 +23,19 @@ namespace DocumentsManager.WinApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            AdminBusinessLogic logic = new AdminBusinessLogic();
+            try
+            {
+                if (logic.LogInWithoutToken(textBoxUsername.Text, textBoxPassword.Text))
+                {
+                    MessageBox.Show("OK");
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
+           
         }
     }
 }
