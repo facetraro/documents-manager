@@ -20,22 +20,22 @@ namespace DocumentsManager.WinApp
             InitializeComponent();
             textBoxPassword.PasswordChar = '*';
         }
-
+        private void InitializeSystem()
+        {
+            MessageBox.Show("OK");
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             AdminBusinessLogic logic = new AdminBusinessLogic();
             try
             {
-                if (logic.LogInWithoutToken(textBoxUsername.Text, textBoxPassword.Text))
-                {
-                    MessageBox.Show("OK");
-                }
+                logic.LogInWinApp(textBoxUsername.Text, textBoxPassword.Text);
+                InitializeSystem();
             }
             catch (Exception error)
             {
                 MessageBox.Show(error.Message);
             }
-           
         }
     }
 }
