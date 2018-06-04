@@ -11,6 +11,27 @@ namespace DocumentsManager.BusinessLogic
 {
     public class AdminBusinessLogic : UserBusinessLogic, IAdminsBusinessLogic
     {
+        public User LogInWithoutToken(string username, string password)
+        {
+            User user = AuthenticateUser(username, password);
+            if (user != null)
+            {
+                return user;
+            }
+            return null;
+        }
+        public void LogInWinApp(string username, string password)
+        {
+            User user = LogInWithoutToken(username, password);
+            if (user != null)
+            {
+                if (user is AdminUser)
+                {
+                    return;
+                }
+                throw new UserNotAuthorizedException();
+            }
+        }
         private void ValidateAuthorizations()
         {
             Guid Token = LoggedToken.GetToken();
