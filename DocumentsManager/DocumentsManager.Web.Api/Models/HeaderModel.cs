@@ -12,9 +12,15 @@ namespace DocumentsManager.Web.Api.Models
         public Guid Id { get; set; }
         public TextModel Text { get; set; }
         public Guid StyleClassId { get; set; }
+        public HeaderModel()
+        {
+            Id = Guid.NewGuid();
+            Text = new TextModel();
+            StyleClassId = Guid.NewGuid();
+        }
         public HeaderModel(Header aHeader)
         {
-            Id = aHeader.Id;
+            Id = Guid.NewGuid();
             Text = new TextModel (aHeader.Text);
             StyleClassId = aHeader.StyleClass.Id;
         }

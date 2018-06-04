@@ -16,16 +16,16 @@ namespace DocumentsManager.Web.Api.Models
         public FooterModel Footer { get; set; }
         public string Title { get; set; }
         public virtual List<ParragraphModel> Parragraphs { get; set; }
-        //public DocumentModel()
-        //{
-        //    Id = Guid.NewGuid();
-        //    FormatId = Guid.NewGuid();
-        //    StyleClassId = Guid.NewGuid();
-        //    Header = new HeaderModel();
-        //    Footer = new FooterModel();
-        //    Title = "";
-        //    Parragraphs = new List<ParragraphModel>();
-        //}
+        public DocumentModel()
+        {
+            Id = Guid.NewGuid();
+            FormatId = Guid.NewGuid();
+            StyleClassId = Guid.NewGuid();
+            Header = new HeaderModel();
+            Footer = new FooterModel();
+            Title = "";
+            Parragraphs = new List<ParragraphModel>();
+        }
         public DocumentModel(Document aDocument)
         {
             Id = Guid.NewGuid();
@@ -45,7 +45,16 @@ namespace DocumentsManager.Web.Api.Models
         {
             StyleClassBusinessLogic styleBL = new StyleClassBusinessLogic();
             FormatBusinessLogic formatBL = new FormatBusinessLogic();
-            Document document = new Document();
+            Document document = new Document {
+                Id = Guid.NewGuid(),
+                Footer = new Footer(),
+                Header = new Header(),
+                Parragraphs = new List<Parragraph>(),
+                Format = new Format(),
+                StyleClass = new StyleClass(),
+                Title = ""
+            };
+            
             if (!Id.Equals(Guid.Empty))
             {
                 document.Id = Id;

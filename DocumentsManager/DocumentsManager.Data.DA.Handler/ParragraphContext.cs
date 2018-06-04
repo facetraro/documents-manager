@@ -36,6 +36,14 @@ namespace DocumentsManager.Data.DA.Handler
                 {
                     aParragraph.Document = db.Documents.Find(aParragraph.Document.Id);
                 }
+                foreach (Text texti in aParragraph.Texts)
+                {
+                    if (texti.StyleClass!=null)
+                    {
+                        texti.StyleClass = db.Styles.Find(texti.StyleClass.Id);
+                    }
+                   
+                }
                 unitOfWork.ParragraphRepository.Insert(aParragraph);
             }
         }

@@ -12,8 +12,14 @@ namespace DocumentsManager.Web.Api.Models
         public Guid Id { get; set; }
         public List<TextModel> Texts { get; set; }
         public Guid StyleClassId { get; set; }
+        public ParragraphModel()
+        {
+            Id = Guid.NewGuid();
+            StyleClassId = Guid.NewGuid();
+            Texts = new List<TextModel>();
+        }
         public ParragraphModel(Parragraph aParragraph) {
-            Id = aParragraph.Id;
+            Id = Guid.NewGuid();
             StyleClassId = aParragraph.StyleClass.Id;
             Texts = new List<TextModel>();
             foreach (Text ti in aParragraph.Texts)
@@ -24,7 +30,11 @@ namespace DocumentsManager.Web.Api.Models
         public Parragraph GetEntityModel()
         {
             StyleClassBusinessLogic styleBL = new StyleClassBusinessLogic();
-            Parragraph parragraph = new Parragraph();
+            Parragraph parragraph = new Parragraph {
+                StyleClass = new StyleClass(),
+                Texts = new List<Text>(),
+                Id = Guid.NewGuid() 
+            };
             if (!Id.Equals(Guid.Empty))
             {
                 parragraph.Id = Id;

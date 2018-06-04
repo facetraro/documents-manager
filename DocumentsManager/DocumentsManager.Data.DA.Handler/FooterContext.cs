@@ -33,6 +33,7 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(newFooter.StyleClass);
+                newFooter.Text.StyleClass = db.Styles.Find(newFooter.Text.StyleClass.Id);
                 unitOfWork.FooterRepository.Insert(newFooter);
             }
         }
