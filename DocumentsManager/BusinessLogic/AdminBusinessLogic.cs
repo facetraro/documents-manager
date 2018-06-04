@@ -11,13 +11,26 @@ namespace DocumentsManager.BusinessLogic
 {
     public class AdminBusinessLogic : UserBusinessLogic, IAdminsBusinessLogic
     {
-        public bool LogInWithoutToken(string username, string password)
+        public User LogInWithoutToken(string username, string password)
         {
-            if (AuthenticateUser(username, password) != null)
+            User user = AuthenticateUser(username, password);
+            if (user != null)
             {
-                return true;
+                return user;
             }
-            return false;
+            return null;
+        }
+        public void LogInWinApp(string username, string password)
+        {
+            User user = LogInWithoutToken(username, password);
+            if (user != null)
+            {
+                if (user is AdminUser)
+                {
+                    return;
+                }
+                throw new UserNotAuthorizedException();
+            }
         }
         private void ValidateAuthorizations()
         {
