@@ -13,17 +13,11 @@ namespace DocumentsManager.BusinessLogic
     {
         public bool LogInWithoutToken(string username, string password)
         {
-            User anUser = new AdminUser();
-            anUser.Username = username;
-            if (UserNameRegistered(anUser))
+            if (AuthenticateUser(username, password) != null)
             {
-                User userFromDB = GetUserByUsername(username);
-                if (userFromDB.Authenticate(password))
-                {
-                    return true;
-                }
+                return true;
             }
-            throw new InvalidCredentialException();
+            return false;
         }
         private void ValidateAuthorizations()
         {

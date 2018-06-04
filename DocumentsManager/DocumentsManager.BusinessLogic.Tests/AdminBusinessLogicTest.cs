@@ -38,9 +38,6 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
-            UserContext uContext = new UserContext();
-            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            uContext.Add(anAdmin);
             bool expectedResult = true;
             bool result = adminBL.LogInWithoutToken(username,password);
             Assert.AreEqual(expectedResult, result);

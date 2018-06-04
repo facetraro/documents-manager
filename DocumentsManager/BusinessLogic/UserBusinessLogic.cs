@@ -167,7 +167,7 @@ namespace DocumentsManager.BusinessLogic
             UserContext uContext = new UserContext();
             return uContext.GetById(id);
         }
-        public Guid LogIn(string username, string password)
+        protected User AuthenticateUser(string username, string password)
         {
             User anUser = new AdminUser();
             anUser.Username = username;
@@ -176,13 +176,22 @@ namespace DocumentsManager.BusinessLogic
                 User userFromDB = GetUserByUsername(username);
                 if (userFromDB.Authenticate(password))
                 {
-                    SessionAccess sessionAccess = new SessionAccess();
-                    Guid newToken = sessionAccess.Add(userFromDB.Id);
-                    LoggedToken.SetToken(newToken);
-                    return newToken;
+                    return userFromDB;
                 }
             }
             throw new InvalidCredentialException();
+        }
+        public Guid LogIn(string username, string password)
+        {
+            User userFromDB = AuthenticateUser(username, password);
+            if (userFromDB != null)
+            {
+                SessionAccess sessionAccess = new SessionAccess();
+                Guid newToken = sessionAccess.Add(userFromDB.Id);
+                LoggedToken.SetToken(newToken);
+                return newToken;
+            }
+            return new Guid();
         }
         private Guid GetIdByToken(Guid token)
         {
