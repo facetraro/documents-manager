@@ -38,9 +38,8 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
-            bool expectedResult = true;
-            bool result = adminBL.LogInWithoutToken(username,password);
-            Assert.AreEqual(expectedResult, result);
+            User result = adminBL.LogInWithoutToken(username,password);
+            Assert.AreEqual(adminBL.GetUserByUsername(username), result);
             TearDown();
         }
         [ExpectedException(typeof(InvalidCredentialException))]
@@ -52,8 +51,27 @@ namespace DocumentsManager.BusinessLogic.Tests
             UserContext uContext = new UserContext();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
             uContext.Add(anAdmin);
-            bool expectedResult = true;
-            bool result = adminBL.LogInWithoutToken(username, password + "differentPassword");
+            User result = adminBL.LogInWithoutToken(username, password + "differentPassword");
+            TearDown();
+        }
+        [ExpectedException(typeof(UserNotAuthorizedException))]
+        [TestMethod]
+        public void LogInWinAppNotAuthorized()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            UserContext uContext = new UserContext();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            uContext.Add(anEditor);
+            adminBL.LogInWinApp(anEditor.Username, anEditor.Password);
+            TearDown();
+        }
+        [TestMethod]
+        public void LogInWinAppOk()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            adminBL.LogInWinApp(username, password);
             TearDown();
         }
         [TestMethod]
