@@ -15,6 +15,8 @@ namespace DocumentsManager.BusinessLogic.Tests
     [TestClass]
     public class AdminBusinessLogicTest
     {
+        private static string username = "testUsername";
+        private static string password = "testPassword";
         public void TearDown()
         {
             ClearDataBase.ClearAll();
@@ -24,11 +26,38 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
             UserContext context = new UserContext();
             User newuser = EntitiesExampleInstances.TestAdminUser();
-            newuser.Username = "rareusername";
+            newuser.Username = username;
+            newuser.Password = password;
             newuser.Email = "rareemail";
             context.Add(newuser);
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             adminBL.LogIn(newuser.Username, newuser.Password);
+        }
+        [TestMethod]
+        public void LogInWithoutTokenOk()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            UserContext uContext = new UserContext();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            uContext.Add(anAdmin);
+            bool expectedResult = true;
+            bool result = adminBL.LogInWithoutToken(username,password);
+            Assert.AreEqual(expectedResult, result);
+            TearDown();
+        }
+        [ExpectedException(typeof(InvalidCredentialException))]
+        [TestMethod]
+        public void LogInWithoutTokenInvalidCredentials()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            UserContext uContext = new UserContext();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            uContext.Add(anAdmin);
+            bool expectedResult = true;
+            bool result = adminBL.LogInWithoutToken(username, password + "differentPassword");
+            TearDown();
         }
         [TestMethod]
         public void GetAdminsBLTest()
@@ -104,7 +133,7 @@ namespace DocumentsManager.BusinessLogic.Tests
                 date1 = date1.AddDays(1);
             }
             Assert.IsTrue(expected.Equals(result));
-        }
+        }    
         [ExpectedException(typeof(InvalidChartDatesException))]
         [TestMethod]
         public void GetChartFromDatesException()
@@ -494,10 +523,10 @@ namespace DocumentsManager.BusinessLogic.Tests
             ChartIntDate chartResult = logic.GetChartModificationsByUser(SetUpChart(ModifyState.Modified), date1, date2);
             string result = chartResult.ToString();
             string expected = "[Documentos:3- Fecha:10/05/2018][Documentos:0- Fecha:11/05/2018][Documentos:0- Fecha:12/05/2018]"
-                +"[Documentos:0- Fecha:13/05/2018][Documentos:0- Fecha:14/05/2018][Documentos:0- Fecha:15/05/2018]"+
-                "[Documentos:0- Fecha:16/05/2018][Documentos:0- Fecha:17/05/2018][Documentos:0- Fecha:18/05/2018]"+
+                + "[Documentos:0- Fecha:13/05/2018][Documentos:0- Fecha:14/05/2018][Documentos:0- Fecha:15/05/2018]" +
+                "[Documentos:0- Fecha:16/05/2018][Documentos:0- Fecha:17/05/2018][Documentos:0- Fecha:18/05/2018]" +
                 "[Documentos:0- Fecha:19/05/2018]";
-            
+
             expected = chartResult.ToString();
             Assert.IsTrue(expected.Equals(result));
             TearDown();
