@@ -25,9 +25,8 @@ namespace DocumentsManagerDATesting
             context.Add(newUser);
             LoggerType log = new LoggerType();
             log.Action = ActionType.LogIn;
-            log.Id = Guid.NewGuid();
             log.UserBy = newUser.Username;
-            ILoggerMethod loggerOperations = new LoggerMethodTxt();
+            ILoggerMethod loggerOperations = new LoggerMethod();
             loggerOperations.AddLogger(log);
             return loggerOperations;
         }
@@ -50,7 +49,7 @@ namespace DocumentsManagerDATesting
         [TestMethod]
         public void NoMoreLogTest()
         {
-            ILoggerMethod loggerOperations = new LoggerMethodTxt();
+            ILoggerMethod loggerOperations = new LoggerMethod();
             Assert.IsTrue(loggerOperations.GetLoggers().Count == 0);
             TearDown();
         }

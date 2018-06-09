@@ -55,7 +55,7 @@
     <Compile Include="IUsersBusinessLogic.cs" />
     <Compile Include="LoggedToken.cs" />
     <Compile Include="ILoggerMethod.cs" />
-    <Compile Include="LoggerMethodTxt.cs" />
+    <Compile Include="LoggerMethod.cs" />
     <Compile Include="ParragraphBusinessLogic.cs" />
     <Compile Include="PrintableFooter.cs" />
     <Compile Include="PrintableHeader.cs" />

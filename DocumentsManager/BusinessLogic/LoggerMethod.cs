@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace DocumentsManager.BusinessLogic
 {
-    public class LoggerMethodTxt : ILoggerMethod
+    public class LoggerMethod : ILoggerMethod
     {
         public void AddLogger(LoggerType log)
         {
+            log.Id = Guid.NewGuid();
             LoggerContext context = new LoggerContext();
             context.Add(log);
         }
