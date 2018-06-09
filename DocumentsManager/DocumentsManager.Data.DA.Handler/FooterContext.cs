@@ -33,6 +33,7 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(newFooter.StyleClass);
+                newFooter.Text.StyleClass = db.Styles.Find(newFooter.Text.StyleClass.Id);
                 unitOfWork.FooterRepository.Insert(newFooter);
             }
         }
@@ -80,18 +81,18 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Modify(Footer modifiedFooter)
         {
+            TextContext tContext = new TextContext();
             Text oldText = new Text();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 Footer footerEntity = db.Footers.Find(modifiedFooter.Id);
-                oldText.WrittenText = modifiedFooter.Text.WrittenText;
-                oldText.Id = footerEntity.Text.Id;
-                oldText.StyleClass = modifiedFooter.Text.StyleClass;
+                oldText = tContext.GetById(footerEntity.Text.Id);
                 footerEntity.StyleClass = db.Styles.Find(modifiedFooter.StyleClass.Id); 
                 unitOfWork.FooterRepository.Update(footerEntity);
+                oldText.WrittenText = modifiedFooter.Text.WrittenText;
+                oldText.StyleClass = modifiedFooter.Text.StyleClass;
             }
-            TextContext tContext = new TextContext();
             tContext.Modify(oldText);
         }
     }

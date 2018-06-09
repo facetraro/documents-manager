@@ -85,10 +85,7 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 return BadRequest(alreadyExistsException.Message);
             }
-            catch (ArgumentNullException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+           
         }
 
         // PUT: api/Document/5

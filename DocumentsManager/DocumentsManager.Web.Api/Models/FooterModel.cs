@@ -13,9 +13,16 @@ namespace DocumentsManager.Web.Api.Models
         public Guid Id { get; set; }
         public TextModel Text { get; set; }
         public Guid StyleClassId { get; set; }
+
+        public FooterModel()
+        {
+            Id = Guid.NewGuid();
+            Text = new TextModel();
+            StyleClassId = Guid.NewGuid();
+        }
         public FooterModel(Footer aFooter)
         {
-            Id = aFooter.Id;
+            Id = Guid.NewGuid();
             Text = new TextModel(aFooter.Text);
             StyleClassId = aFooter.StyleClass.Id;
         }

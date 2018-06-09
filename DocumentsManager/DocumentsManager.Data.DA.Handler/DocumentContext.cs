@@ -123,8 +123,9 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
                 Document documenthEntity = db.Documents.Find(aDocument.Id);
                 documenthEntity.Parragraphs = new List<Parragraph>();
-                documenthEntity.StyleClass = aDocument.StyleClass;
-                db.Styles.Attach(documenthEntity.StyleClass);
+                //documenthEntity.StyleClass = aDocument.StyleClass;
+                //db.Styles.Attach(aDocument.StyleClass);
+                documenthEntity.StyleClass = db.Styles.Find(aDocument.StyleClass.Id);
                 documenthEntity.Format = db.Formats.Find(aDocument.Format.Id);
                 documenthEntity.Footer = db.Footers.Find(aDocument.Footer.Id);
                 documenthEntity.Header = db.Headers.Find(aDocument.Header.Id);

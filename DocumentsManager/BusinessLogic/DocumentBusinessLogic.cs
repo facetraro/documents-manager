@@ -120,8 +120,7 @@ namespace DocumentsManager.BusinessLogic
         {
             DocumentContext context = new DocumentContext();
             Document document = new Document();
-            document.Id = id;
-            if (document.Equals(document))
+            if (Exists(id))
             {
                 document=context.GetById(id);
             }
@@ -174,6 +173,14 @@ namespace DocumentsManager.BusinessLogic
             document.Header = GetDocumentHeader(id);
             document.Parragraphs = GetDocumentParragraphs(id);
             return document;
+        }
+
+        public bool Exists(Guid id)
+        {
+            DocumentContext context = new DocumentContext();
+            Document aDoc = new Document();
+            aDoc.Id = id;
+            return context.Exists(aDoc);
         }
     }
 }

@@ -13,9 +13,14 @@ namespace DocumentsManager.Web.Api.Models
         public Guid Id { get; set; }
         public Guid StyleClassId { get; set; }
         public string Text { get; set; }
+        public TextModel() {
+            Id = Guid.NewGuid();
+            Text = "";
+            StyleClassId = Guid.NewGuid();
+        }
         public TextModel(Text aText)
         {
-            Id = aText.Id;
+            Id = Guid.NewGuid();
             Text = aText.WrittenText;
             StyleClassId = aText.StyleClass.Id;
         }

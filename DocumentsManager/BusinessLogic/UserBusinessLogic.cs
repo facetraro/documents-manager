@@ -83,7 +83,6 @@ namespace DocumentsManager.BusinessLogic
         }
         public void ModifyParragraphs(Document aDocument, User responsibleUser)
         {
-            AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
             DocumentContext documentContext = new DocumentContext();
             documentContext.ModifyParragraphs(aDocument);
         }
@@ -141,13 +140,11 @@ namespace DocumentsManager.BusinessLogic
         {
             DocumentContext documentContext = new DocumentContext();
             documentContext.ModifyHeader(aDocument);
-            AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
         }
         public void ModifyDocumentFooter(Document aDocument, User responsibleUser)
         {
             DocumentContext documentContext = new DocumentContext();
             documentContext.ModifyFooter(aDocument);
-            AddModifyHistory(responsibleUser, aDocument, ModifyState.Modified);
         }
         public User GetUserByUsername(string username)
         {
@@ -238,11 +235,16 @@ namespace DocumentsManager.BusinessLogic
         public bool UpdateDocument(Guid id,Document aDocument)
         {
             DocumentBusinessLogic documentBL = new DocumentBusinessLogic();
-            //if (!documentBL.Exists(id))
-            //{
-            //    throw new ObjectDoesNotExists(aDocument);
-            //}
-            throw new NotImplementedException();
+            if (!documentBL.Exists(id))
+            {
+                throw new ObjectDoesNotExists(aDocument);
+                return false;
+            }
+            this.ModifyDocumentProperties(aDocument);
+            this.ModifyDocumentFooter(aDocument);
+            this.ModifyDocumentHeader(aDocument);
+            this.ModifyParragraphs(aDocument);
+            return true;
         }
     }
 }
