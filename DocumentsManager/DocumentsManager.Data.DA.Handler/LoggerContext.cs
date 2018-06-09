@@ -28,7 +28,6 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Remove(LoggerType logToDelete)
         {
-
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -37,10 +36,10 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Remove(Guid id)
         {
-            LoggerType toDelete = GetById(id);
-            if (toDelete != null)
+            LoggerType logToDelete = GetById(id);
+            if (logToDelete != null)
             {
-                Remove(toDelete);
+                Remove(logToDelete);
             }
         }
         public LoggerType GetById(Guid id)
