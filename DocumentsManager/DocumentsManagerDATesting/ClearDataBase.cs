@@ -21,8 +21,9 @@ namespace DocumentsManagerDATesting
             ClearAllFooters();
             ClearAllHeaders();
             ClearAllTexts();
+            ClearAllALogs();
             ClearAllUsers();
-            ClearAllStyleClasses(); 
+            ClearAllStyleClasses();
         }
 
         private static void ClearAllStyleClasses()
@@ -80,6 +81,11 @@ namespace DocumentsManagerDATesting
         private static void ClearAllReview()
         {
             ReviewContext context = new ReviewContext();
+            context.ClearAll();
+        }
+        private static void ClearAllALogs()
+        {
+            LoggerContext context = new LoggerContext();
             context.ClearAll();
         }
     }

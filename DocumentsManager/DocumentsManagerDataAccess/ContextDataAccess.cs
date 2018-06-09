@@ -1,4 +1,5 @@
 ﻿using DocumentsManager.AuthenticationToken;
+using DocumentsManager.Data.Logger;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace DocumentsManagerDataAccess
         public DbSet<ModifyDocumentHistory> Histories { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<LoggerType> Logs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -42,6 +44,7 @@ namespace DocumentsManagerDataAccess
             modelBuilder.Entity<Session>().HasKey(S => S.token);
             modelBuilder.Entity<Friendship>().HasKey(F => F.Id);
             modelBuilder.Entity<Review>().HasKey(R => R.Id);
+            modelBuilder.Entity<LoggerType>().HasKey(L => L.Id);
         }
     }
 }

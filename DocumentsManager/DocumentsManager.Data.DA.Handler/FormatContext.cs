@@ -69,7 +69,11 @@ namespace DocumentsManager.Data.DA.Handler
                 old.StyleClasses = new List<StyleClass>();
                 foreach (var item in modifiedFormat.StyleClasses)
                 {
+                    if (item != null)
+                    {
                     old.StyleClasses.Add(db.Styles.Find(item.Id));
+
+                    }
                 }
                 old.Name = modifiedFormat.Name;
                 var unitOfWork = new UnitOfWork(db);

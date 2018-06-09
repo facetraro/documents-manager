@@ -31,11 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Authentica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.WinApp", "DocumentsManager.WinApp\DocumentsManager.WinApp.csproj", "{5A4CBBA4-91CD-4886-A1C3-28530E91489C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.FormatImportation", "DocumentsManager.FormatImportation\DocumentsManager.FormatImportation.csproj", "{2150776E-D2F1-4CD4-81F4-2B05D18D4C14}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLFormatImport", "XMLFormatImport\XMLFormatImport.csproj", "{0289B175-B444-45E4-B373-8B142A488FDC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.FormatImportationTest", "DocumentsManager.FormatImportationTest\DocumentsManager.FormatImportationTest.csproj", "{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.Logger", "DocumentsManager.Data.Logger\DocumentsManager.Data.Logger.csproj", "{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,18 +95,10 @@ Global
 		{5A4CBBA4-91CD-4886-A1C3-28530E91489C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A4CBBA4-91CD-4886-A1C3-28530E91489C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A4CBBA4-91CD-4886-A1C3-28530E91489C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2150776E-D2F1-4CD4-81F4-2B05D18D4C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2150776E-D2F1-4CD4-81F4-2B05D18D4C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2150776E-D2F1-4CD4-81F4-2B05D18D4C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2150776E-D2F1-4CD4-81F4-2B05D18D4C14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0289B175-B444-45E4-B373-8B142A488FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0289B175-B444-45E4-B373-8B142A488FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0289B175-B444-45E4-B373-8B142A488FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0289B175-B444-45E4-B373-8B142A488FDC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

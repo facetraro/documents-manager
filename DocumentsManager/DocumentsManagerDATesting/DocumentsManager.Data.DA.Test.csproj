@@ -59,6 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="LoggerContextTest.cs" />
     <Compile Include="ReviewContextTest.cs" />
     <Compile Include="FriendshipContextTest.cs" />
     <Compile Include="ModifyDocumentHistoryContextTest.cs" />
@@ -75,9 +76,17 @@
     <Compile Include="TextContextTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\DocumentsManager.BusinessLogic.csproj">
+      <Project>{8B29DE6D-2EE3-4C95-8DF7-F890263F52CD}</Project>
+      <Name>DocumentsManager.BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Data.DA.Handler\DocumentsManager.Data.DA.Handler.csproj">
       <Project>{08679660-B159-4575-9066-71059A3C33AF}</Project>
       <Name>DocumentsManager.Data.DA.Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.Data.Logger\DocumentsManager.Data.Logger.csproj">
+      <Project>{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}</Project>
+      <Name>DocumentsManager.Data.Logger</Name>
     </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Data.Repository\DocumentsManager.Data.Repository.csproj">
       <Project>{A0A4683D-CDE9-41C7-BE95-040B11E302E7}</Project>
