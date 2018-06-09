@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DocumentsMangerEntities;
 using DocumentsManagerDataAccess;
 using DocumentsManager.AuthenticationToken;
+using DocumentsManager.Data.Logger;
 
 namespace DocumentsManager.Data.Repository
 {
@@ -25,13 +26,24 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<Session> sessionRepository;
         private GenericRepository<Friendship> friendshipRepository;
         private GenericRepository<Review> reviewRepository;
+        private GenericRepository<LoggerType> loggerRepository;
 
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
         {
             context = documentsManagerContext;
         }
-
+        public IRepository<LoggerType> LoggerRepository
+        {
+            get
+            {
+                if (this.loggerRepository == null)
+                {
+                    this.loggerRepository = new GenericRepository<LoggerType>(context);
+                }
+                return loggerRepository;
+            }
+        }
         public IRepository<User> UserRepository
         {
             get

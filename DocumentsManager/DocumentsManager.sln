@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Authentica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.WinApp", "DocumentsManager.WinApp\DocumentsManager.WinApp.csproj", "{5A4CBBA4-91CD-4886-A1C3-28530E91489C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.Data.Logger", "DocumentsManager.Data.Logger\DocumentsManager.Data.Logger.csproj", "{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{5A4CBBA4-91CD-4886-A1C3-28530E91489C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A4CBBA4-91CD-4886-A1C3-28530E91489C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A4CBBA4-91CD-4886-A1C3-28530E91489C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
