@@ -16,8 +16,9 @@ namespace DocumentsManager.Data.DA.Handler
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                db.Documents.Attach(newHistory.Document);
+                //db.Documents.Attach(newHistory.Document);
                 db.Users.Attach(newHistory.User);
+                newHistory.Document = db.Documents.Find(newHistory.Document.Id);
                 unitOfWork.HistoryRepository.Insert(newHistory);
             }
         }
