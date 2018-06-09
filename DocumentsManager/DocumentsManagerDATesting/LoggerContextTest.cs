@@ -53,5 +53,47 @@ namespace DocumentsManagerDATesting
             Assert.IsTrue(loggerOperations.GetLoggers().Count == 0);
             TearDown();
         }
+        [TestMethod]
+        public void RemoveLogTest()
+        {
+            LoggerContext context = new LoggerContext();
+            ILoggerMethod loggerOperations = SetUp();
+            List<LoggerType> allLogs = loggerOperations.GetLoggers();
+            context.Remove(allLogs.ElementAt(0));
+            Assert.IsTrue(loggerOperations.GetLoggers().Count == 0);
+            TearDown();
+        }
+        [TestMethod]
+        public void RemoveIdLogTest()
+        {
+            LoggerContext context = new LoggerContext();
+            ILoggerMethod loggerOperations = SetUp();
+            List<LoggerType> allLogs = loggerOperations.GetLoggers();
+            context.Remove(allLogs.ElementAt(0).Id);
+            Assert.IsTrue(loggerOperations.GetLoggers().Count == 0);
+            TearDown();
+        }
+        [TestMethod]
+        public void NotRemoveIdAllLogTest()
+        {
+            LoggerContext context = new LoggerContext();
+            ILoggerMethod loggerOperations = SetUp();
+            SetUp();
+            List<LoggerType> allLogs = loggerOperations.GetLoggers();
+            context.Remove(allLogs.ElementAt(0).Id);
+            Assert.IsTrue(loggerOperations.GetLoggers().Count == 1);
+            TearDown();
+        }
+        [TestMethod]
+        public void EmptyRemoveAllLogTest()
+        {
+            LoggerContext context = new LoggerContext();
+            ILoggerMethod loggerOperations = new LoggerMethod();
+            List<LoggerType> allLogs = loggerOperations.GetLoggers();
+            context.Remove(Guid.NewGuid());
+            Assert.IsTrue(loggerOperations.GetLoggers().Count == 0);
+            TearDown();
+        }
+
     }
 }
