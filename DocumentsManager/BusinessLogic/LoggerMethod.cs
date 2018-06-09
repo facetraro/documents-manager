@@ -10,16 +10,15 @@ namespace DocumentsManager.BusinessLogic
 {
     public class LoggerMethod : ILoggerMethod
     {
+        private LoggerContext context = new LoggerContext();
         public void AddLogger(LoggerType log)
         {
             log.Id = Guid.NewGuid();
-            LoggerContext context = new LoggerContext();
             context.Add(log);
         }
 
         public List<LoggerType> GetLoggers()
         {
-            LoggerContext context = new LoggerContext();
             return context.GetLazy();
         }
     }
