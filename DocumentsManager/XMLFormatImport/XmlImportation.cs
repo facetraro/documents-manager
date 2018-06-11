@@ -11,7 +11,7 @@ namespace XMLFormatImport
 {
     public class XmlImportation : IFormatImportation
     {
-        public List<string> RequiredParameters { get; set; }
+        public List<Tuple<string, ParameterType>> RequiredParameters { get; set; }
         private static string TipoLetra = "TipoLetra";
         private static string Alineado = "Alineado";
         private static string Negrita = "Negrita";
@@ -19,11 +19,12 @@ namespace XMLFormatImport
 
         public XmlImportation()
         {
-            RequiredParameters = new List<string>();
-            RequiredParameters.Add("path");
+            RequiredParameters = new List<Tuple<string, ParameterType>>();
+            Tuple<string, ParameterType> path = new Tuple<string, ParameterType>("Path", ParameterType.Path);
+            RequiredParameters.Add(path);
         }
 
-        public List<string> GetParameters()
+        public List<Tuple<string, ParameterType>> GetParameters()
         {
             return RequiredParameters;
         }
@@ -52,7 +53,7 @@ namespace XMLFormatImport
 
             foreach (Tuple<string, string> tuple in parameters)
             {
-                if (tuple.Item1.Equals("path"))
+                if (tuple.Item1.Equals("Path"))
                 {
                     path = tuple.Item2;
                 }

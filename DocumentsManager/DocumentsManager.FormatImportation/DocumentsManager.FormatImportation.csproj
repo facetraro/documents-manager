@@ -45,6 +45,7 @@
     <Compile Include="IFormatImportationService.cs" />
     <Compile Include="ImportedFormat.cs" />
     <Compile Include="ImportedStyleClass.cs" />
+    <Compile Include="ParameterType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

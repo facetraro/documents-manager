@@ -46,7 +46,7 @@ namespace DocumentsManager.FormatImportation
             return importationSelected.ImportFormats(parametersValues);
         }
 
-        public List<string> GetParameters(IFormatImportation importationSelected)
+        public List<Tuple<string, ParameterType>> GetParameters(IFormatImportation importationSelected)
         {
             return importationSelected.GetParameters();
         }

@@ -9,6 +9,6 @@ namespace DocumentsManager.FormatImportation
 
         List<ImportedFormat> ImportFormats(IFormatImportation importationSelected, List<Tuple<string, string>> parametersValues);
 
-        List<string> GetParameters(IFormatImportation importationSelected);
+        List<Tuple<string, ParameterType>> GetParameters(IFormatImportation importationSelected);
     }
 }
