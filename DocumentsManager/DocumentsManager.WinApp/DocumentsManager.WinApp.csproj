@@ -55,11 +55,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ImportMethods.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ImportMethods.Designer.cs">
+      <DependentUpon>ImportMethods.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Login.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectImportMode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SelectImportMode.Designer.cs">
+      <DependentUpon>SelectImportMode.cs</DependentUpon>
     </Compile>
     <Compile Include="PrincipalWindows.cs">
       <SubType>Form</SubType>
@@ -69,8 +81,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\ImportMethods.resx">
+      <DependentUpon>ImportMethods.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SelectImportMode.resx">
+      <DependentUpon>SelectImportMode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrincipalWindows.resx">
       <DependentUpon>PrincipalWindows.cs</DependentUpon>
@@ -102,6 +120,10 @@
     <ProjectReference Include="..\BusinessLogic\DocumentsManager.BusinessLogic.csproj">
       <Project>{8B29DE6D-2EE3-4C95-8DF7-F890263F52CD}</Project>
       <Name>DocumentsManager.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.FormatImportation\DocumentsManager.FormatImportation.csproj">
+      <Project>{2150776E-D2F1-4CD4-81F4-2B05D18D4C14}</Project>
+      <Name>DocumentsManager.FormatImportation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

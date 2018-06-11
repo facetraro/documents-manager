@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentsManager.WinApp.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,8 +17,8 @@ namespace DocumentsManager.WinApp
         {
             InitializeComponent();
             mainPanel.Controls.Clear();
-            LoginControl theSchoolVanMenu = new LoginControl(mainPanel);
-            mainPanel.Controls.Add(theSchoolVanMenu);
+            UserControl imports  = new ImportMethods(mainPanel);
+            mainPanel.Controls.Add(imports);
         }
     }
 }
