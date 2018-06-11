@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ImportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ImportControl.Designer.cs">
+      <DependentUpon>ImportControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImportMethods.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -81,6 +87,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\ImportControl.resx">
+      <DependentUpon>ImportControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ImportMethods.resx">
       <DependentUpon>ImportMethods.cs</DependentUpon>
     </EmbeddedResource>

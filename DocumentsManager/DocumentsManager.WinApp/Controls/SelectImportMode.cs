@@ -38,6 +38,9 @@ namespace DocumentsManager.WinApp.Controls
                 MessageBox.Show("No se selecciono ningun tipo de importacion.");
                 return;
             }
+            mainPanel.Controls.Clear();
+            UserControl importControl = new ImportControl(mainPanel, importation);
+            mainPanel.Controls.Add(importControl);
         }
     }
 }
