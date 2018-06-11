@@ -84,14 +84,51 @@ namespace DocumentsManager.WinApp.Controls
             }
             return null;
         }
-        private void buttonImport_Click(object sender, EventArgs e)
+        private string AreAllParametersOk()
         {
+            string errors = String.Empty;
             if (parametersObtained.Count != importer.GetParameters().Count)
             {
-                MessageBox.Show("Para poder Imporatr los formatos debes brindarnos todos los datos solicitados en pantalla. Gracias");
+                foreach (var item in importer.GetParameters())
+                {
+                    if (!IsInTheList(item))
+                    {
+                        errors = errors + "-" + item.Item1 + "\n";
+                    }
+                }
+                return errors;
+            }
+            return String.Empty;
+        }
+
+        private bool IsInTheList(Tuple<string, ParameterType> particularTuple)
+        {
+            foreach (var item in parametersObtained)
+            {
+                if (particularTuple.Item1 == item.Item1)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void buttonImport_Click(object sender, EventArgs e)
+        {
+            string errors = AreAllParametersOk();
+            if (errors.Length != 0)
+            {
+                MessageBox.Show("Falta ingresar los siguientes parametros: \n" + errors);
                 return;
             }
-            List<ImportedFormat> formats = importer.ImportFormats(parametersObtained);
+            try
+            {
+                List<ImportedFormat> formats = importer.ImportFormats(parametersObtained);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
