@@ -15,6 +15,7 @@ namespace DocumentsManagerDATesting
             ClearAllReview();
             ClearAllFriendship();
             ClearAllHistories();
+            ClearParragraphTexts();
             ClearAllParragraph();
             ClearAllDocuments();
             ClearAllFormats();
@@ -24,6 +25,12 @@ namespace DocumentsManagerDATesting
             ClearAllALogs();
             ClearAllUsers();
             ClearAllStyleClasses();
+        }
+
+        private static void ClearParragraphTexts()
+        {
+            ParragraphContext context = new ParragraphContext();
+            context.ClearParragraphTexts();
         }
 
         private static void ClearAllStyleClasses()
