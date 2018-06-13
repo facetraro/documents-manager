@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../User';
-import { LoginService } from '../login.service';
+import { Token } from '../Token';
+import { Subscription } from 'rxjs';
+import { LoginService } from 'src/app/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +14,7 @@ export class LoginComponent implements OnInit {
     username: '',
     password: ''
   };
+  token: Token ;
  
   constructor(
     private loginService: LoginService
@@ -22,8 +25,8 @@ export class LoginComponent implements OnInit {
   }
   
   userLogin(user: User ){
-      console.log("tu vieja rica");
-      this.loginService.logIn(user).subscribe();
+      this.loginService.logIn(user).subscribe(r=>this.token);
+      console.log(this.token);
   }
 
 }

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { LoginService } from './login.service';
+import { LoginService } from 'src/app/login/login.service';
 
 @NgModule({
   declarations: [
