@@ -21,15 +21,11 @@ export class LoginService {
     }
     specificError:MessageError;
 
-    saveInLocalStorage(data : string ){
-      localStorage.setItem("currentSessionDocumentsManager", data);
-    }
-
-  logIn(newSessionUser:User) : Observable<Token> {
+  logIn(newSessionUser:User) : Observable<string> {
     let url = "http://localhost:20981/api/Login/?Username="+newSessionUser.username;
     return this.httpService.post(url,newSessionUser)
-    .map((response : Response) => <Token> response.json())
-    .do(data =>this.saveInLocalStorage(JSON.stringify(data)))
+    .map((response: Response) => <string> response.json() )
+    //.map((response : Response) => <Token> response.json())
     .catch(this.handleError);
   };
   

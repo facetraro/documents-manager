@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from 'src/app/login/login.service';
+import { ManageToken } from './ManageToken';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,10 @@ import { LoginService } from 'src/app/login/login.service';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [LoginService],
+  providers: [
+    LoginService, 
+    ManageToken
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

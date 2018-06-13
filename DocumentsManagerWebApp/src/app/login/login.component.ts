@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../User';
 import { Token } from '../Token';
 import { LoginService } from 'src/app/login/login.service';
+import { ManageToken } from '../ManageToken';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +17,10 @@ export class LoginComponent implements OnInit {
   token: Token = {
     token: ''
   };
-  errorMessage: string;
+ 
   constructor(
-    private loginService: LoginService
+    private loginService: LoginService,
+    private  localStorageSession : ManageToken
   ) {}
  
   ngOnInit() {
@@ -29,9 +31,12 @@ export class LoginComponent implements OnInit {
       alert(error);
   }
 
-  userLogin(user: User ){
-      this.loginService.logIn(user).subscribe(response => this.token=response, 
-        error => this.showErrorMessage(error));
+  login(response:string){
+    this.localStorageSession.saveToken(response);
   }
 
+  userLogin(user: User ){
+      this.loginService.logIn(user).subscribe(response => this.login(response), 
+        error => this.showErrorMessage(error));
+  }
 }
