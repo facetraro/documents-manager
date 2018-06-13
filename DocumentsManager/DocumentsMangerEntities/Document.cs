@@ -23,7 +23,7 @@ namespace DocumentsMangerEntities
             StyleClass = aDocument.StyleClass;
             Title = aDocument.Title;
             Parragraphs = new List<Parragraph>();
-            foreach (var item in aDocument.Parragraphs)
+            foreach (Parragraph item in aDocument.Parragraphs)
             {
                 Parragraphs.Add(item);
             }
