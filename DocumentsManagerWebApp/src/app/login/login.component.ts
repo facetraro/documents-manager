@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../User';
 import { Token } from '../Token';
-import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/login/login.service';
 
 @Component({
@@ -25,10 +24,14 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
   }
-  
+
+  showErrorMessage(error:any){
+      alert(error);
+  }
+
   userLogin(user: User ){
       this.loginService.logIn(user).subscribe(response => this.token=response, 
-        error => this.errorMessage = <any>error);
+        error => this.showErrorMessage(error));
   }
 
 }

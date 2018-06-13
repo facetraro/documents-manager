@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Token } from 'src/app/token';
+import { MessageError } from 'src/app/message-error';
 import { User } from 'src/app/User';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
@@ -18,16 +19,23 @@ export class LoginService {
   constructor(
     private httpService: Http) { 
     }
+    specificError:MessageError;
+
+    saveInLocalStorage(data : string ){
+      localStorage.setItem("currentSessionDocumentsManager", data);
+    }
 
   logIn(newSessionUser:User) : Observable<Token> {
     let url = "http://localhost:20981/api/Login/?Username="+newSessionUser.username;
     return this.httpService.post(url,newSessionUser)
     .map((response : Response) => <Token> response.json())
-    .do(data => console.log('Los datos que obtuvimos fueron: ' + JSON.stringify(data)))
+    .do(data =>this.saveInLocalStorage(JSON.stringify(data)))
     .catch(this.handleError);
-}
+  };
+  
 private handleError(error: Response) {
     console.error(error);
-    return Observable.throw(error.json().error|| 'Server error');
+    this.specificError=error.json();
+    return Observable.throw(this.specificError.message);
   }
 }
