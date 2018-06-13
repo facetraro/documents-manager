@@ -14,8 +14,10 @@ export class LoginComponent implements OnInit {
     username: '',
     password: ''
   };
-  token: Token ;
- 
+  token: Token = {
+    token: ''
+  };
+  errorMessage: string;
   constructor(
     private loginService: LoginService
   ) {}
@@ -25,8 +27,8 @@ export class LoginComponent implements OnInit {
   }
   
   userLogin(user: User ){
-      this.loginService.logIn(user).subscribe(r=>this.token);
-      console.log(this.token);
+      this.loginService.logIn(user).subscribe(response => this.token=response, 
+        error => this.errorMessage = <any>error);
   }
 
 }
