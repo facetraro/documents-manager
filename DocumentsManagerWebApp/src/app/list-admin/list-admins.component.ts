@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FullUserData } from './FullUserData';
-import { GetAllUsersService } from 'src/app/list-users/get-all-users.service';
+
 import { ManageToken } from '../manage-token';
+import { AdminService } from './admin.service';
 
 @Component({
-  selector: 'app-list-users',
-  templateUrl: './list-users.component.html',
-  styleUrls: ['./list-users.component.css']
+  selector: 'app-list-admins',
+  templateUrl: './list-admins.component.html',
+  styleUrls: ['./list-admins.component.css']
 })
-export class ListUsersComponent {
+export class ListAdminsComponent {
   addFriendImgPath: string;
   pageTitle: string = "User List";
   listFilter: string = "";
@@ -17,7 +18,7 @@ export class ListUsersComponent {
   activeToken:string;
   tokenManagment:ManageToken;
 
-  constructor( private service : GetAllUsersService, private router: Router) {
+  constructor(private adminService : AdminService) {
     this.tokenManagment=new ManageToken;
     this.addFriendImgPath = '/media/add.png';
     this.activeToken=this.tokenManagment.getToken();
@@ -27,7 +28,7 @@ export class ListUsersComponent {
     alert(error);
   }
   loadUsers(token: string ){
-    this.service.getAllUsers(token).subscribe(response => this.users=response), 
+    this.adminService.getAllAdmins(token).subscribe(response => this.users=response), 
       error => this.showErrorMessage(error);
   }
   addFriendUser(id:string){
@@ -37,7 +38,8 @@ export class ListUsersComponent {
     console.log(id);
   }
   deleteUser(id:string){
-    console.log(id);
+    this.adminService.deleteAdmin(this.activeToken,id).subscribe(response => window.location.reload()), 
+    error => this.showErrorMessage(error);
   }
 }
 

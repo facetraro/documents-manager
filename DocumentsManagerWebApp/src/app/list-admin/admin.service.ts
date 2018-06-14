@@ -9,17 +9,25 @@ import '../rxjs-operators';
 @Injectable({
   providedIn: 'root'
 })
-export class GetAllUsersService {
+export class AdminService {
   constructor(
     private httpService: Http) { 
     }
     specificError:MessageError;
 
-  getAllUsers(token : string) : Observable<FullUserData[]> {
+  getAllAdmins(token : string) : Observable<FullUserData[]> {
     let apiUrl= new Url;
     let url = apiUrl.globalUrl+"/Admins/?token="+token;
     return this.httpService.get(url)
     .map((response: Response) => <FullUserData[]> response.json())
+    .catch(this.handleError);
+  };
+
+  deleteAdmin(token : string, id : string) : Observable<string> {
+    let apiUrl= new Url;
+    let url = apiUrl.globalUrl+"/api/Admin/?id="+id+"&token="+token;
+    return this.httpService.delete(url)
+    .map((response: Response) => <string> response.json())
     .catch(this.handleError);
   };
   

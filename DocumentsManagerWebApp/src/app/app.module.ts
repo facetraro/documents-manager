@@ -11,8 +11,8 @@ import { ManageToken } from './manage-token';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { LogoutComponent } from './logout/logout.component';
 import { LogoutService } from './logout/logout.service';
-import { ListUsersComponent } from './list-users/list-users.component';
-import { GetAllUsersService } from './list-users/get-all-users.service';
+import { AdminService } from './list-admin/admin.service';
+import { ListAdminsComponent } from './list-admin/list-admins.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { GetAllUsersService } from './list-users/get-all-users.service';
     LoginComponent,
     MainMenuComponent,
     LogoutComponent,
-    ListUsersComponent
+    ListAdminsComponent
   ],
   imports: [
     HttpModule,
@@ -31,7 +31,7 @@ import { GetAllUsersService } from './list-users/get-all-users.service';
   providers: [
     LoginService, 
     LogoutService,
-    GetAllUsersService, 
+    AdminService, 
     ManageToken
   ],
   bootstrap: [AppComponent]
