@@ -16,6 +16,9 @@ private activeToken:string;
     this.activeToken=this.tokenManagment.getToken();
     }
 
+  goListAdmins(){
+    this.router.navigate((['/admins']));
+  }
   ngOnInit() {
   }
 

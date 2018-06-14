@@ -1,6 +1,5 @@
 p {
     font-family: "Verdana", Sans-serif;
-    text-align: center;
 }
 
 form {
@@ -27,14 +26,14 @@ button {
     border: none;
     cursor: pointer;
     font-family: "Verdana", Sans-serif;
-    width: 100%;
+    width: 20%;
     box-align: center;
     align-self: center;
     align-content: center;
 }
 
 table {
-    width: 48%;
+    width: 20%;
     font-family: "Verdana", Sans-serif;
 }
 

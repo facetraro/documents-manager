@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { ManageToken } from '../manage-token';
 import { LogoutService } from './logout.service';
 import { Token } from '../Token';
-import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-logout',
