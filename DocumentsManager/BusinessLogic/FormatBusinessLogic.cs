@@ -10,7 +10,7 @@ namespace DocumentsManager.BusinessLogic
     {
         public Format GetByID(Guid id)
         {
-            LoggedToken.GetToken();
+           // LoggedToken.GetToken();
 
             FormatContext context = new FormatContext();
             StyleClassBusinessLogic styleLogic = new StyleClassBusinessLogic();

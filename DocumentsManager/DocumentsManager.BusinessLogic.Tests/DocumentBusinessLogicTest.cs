@@ -34,6 +34,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             contextsc.Add(style);
             contextsc.Add(newDocument.Footer.StyleClass);
             contextsc.Add(newDocument.Header.StyleClass);
+            contextsc.Add(newDocument.Footer.Text.StyleClass);
+            contextsc.Add(newDocument.Header.Text.StyleClass);
             foreach (var item in newDocument.Format.StyleClasses)
             {
                 contextsc.Add(item);

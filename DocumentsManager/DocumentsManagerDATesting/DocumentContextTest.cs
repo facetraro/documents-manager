@@ -37,10 +37,16 @@ namespace DocumentsManagerDATesting
             foreach (var item in newDocument.Parragraphs)
             {
                 contextsc.Add(item.StyleClass);
+                foreach (var ti in item.Texts)
+                {
+                    contextsc.Add(ti.StyleClass);
+                }
             }
             newText.StyleClass = style;
             newDocument.StyleClass = style;
             newDocument.Parragraphs.ElementAt(0).Document = newDocument;
+            newDocument.Footer.Text.StyleClass = newText.StyleClass;
+            newDocument.Header.Text.StyleClass = newText.StyleClass;
             context.Add(newDocument);
             return context.GetById(newDocument.Id); 
         }

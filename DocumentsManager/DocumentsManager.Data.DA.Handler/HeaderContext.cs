@@ -68,6 +68,7 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public Header GetById(Guid id)
         {
+            TextContext tContext = new TextContext();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -75,6 +76,10 @@ namespace DocumentsManager.Data.DA.Handler
                 Header theHeader = unitOfWork.HeaderRepository.GetByID(id);
                 db.Headers.Include("StyleClass").ToList().FirstOrDefault();
                 db.Headers.Include("Text").ToList().FirstOrDefault();
+                if (theHeader!=null)
+                {
+                    theHeader.Text = tContext.GetById(theHeader.Text.Id);
+                }
                 return theHeader;
             }
         }

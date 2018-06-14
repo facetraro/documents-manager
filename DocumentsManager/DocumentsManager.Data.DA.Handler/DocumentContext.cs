@@ -33,7 +33,8 @@ namespace DocumentsManager.Data.DA.Handler
             fContext.Add(aDocument.Footer);
             hContext.Add(aDocument.Header);
         }
-        private void DeleteDocumentParragraphs(Document aDocument) {
+        private void DeleteDocumentParragraphs(Document aDocument)
+        {
             ParragraphContext pContext = new ParragraphContext();
             foreach (Parragraph parragraphi in aDocument.Parragraphs)
             {
@@ -76,6 +77,7 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.DocumentRepository.Insert(aDocument);
             }
             AddDocumentParragraphs(theParragraphs, aDocument);
+            aDocument.Parragraphs = theParragraphs;
         }
 
         public void ModifyParragraphs(Document aDocument)
@@ -123,8 +125,6 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
                 Document documenthEntity = db.Documents.Find(aDocument.Id);
                 documenthEntity.Parragraphs = new List<Parragraph>();
-                //documenthEntity.StyleClass = aDocument.StyleClass;
-                //db.Styles.Attach(aDocument.StyleClass);
                 documenthEntity.StyleClass = db.Styles.Find(aDocument.StyleClass.Id);
                 documenthEntity.Format = db.Formats.Find(aDocument.Format.Id);
                 documenthEntity.Footer = db.Footers.Find(aDocument.Footer.Id);
@@ -167,6 +167,7 @@ namespace DocumentsManager.Data.DA.Handler
 
         public Document GetById(Guid id)
         {
+            ParragraphContext pContext = new ParragraphContext();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -176,6 +177,16 @@ namespace DocumentsManager.Data.DA.Handler
                 db.Documents.Include("Header").ToList().FirstOrDefault();
                 db.Documents.Include("Format").ToList().FirstOrDefault();
                 db.Documents.Include("Parragraphs").ToList();
+                if (theDocument != null)
+                {
+                    List<Parragraph> eagerParragraphs = new List<Parragraph>();
+                    foreach (Parragraph pi in theDocument.Parragraphs)
+                    {
+                        eagerParragraphs.Add(pContext.GetById(pi.Id));
+                    }
+                    theDocument.Parragraphs = eagerParragraphs;
+                }
+
                 return theDocument;
             }
         }

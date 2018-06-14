@@ -71,8 +71,7 @@ namespace DocumentsManager.Data.DA.Handler
                 {
                     if (item != null)
                     {
-                    old.StyleClasses.Add(db.Styles.Find(item.Id));
-
+                        old.StyleClasses.Add(db.Styles.Find(item.Id));
                     }
                 }
                 old.Name = modifiedFormat.Name;
@@ -123,7 +122,7 @@ namespace DocumentsManager.Data.DA.Handler
                 formats.Add(GetById(item.Id));
             }
             return formats;
-           
+
         }
     }
 }
