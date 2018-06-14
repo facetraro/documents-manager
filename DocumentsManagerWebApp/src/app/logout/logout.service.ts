@@ -30,6 +30,6 @@ export class LogoutService {
 private handleError(error: Response) {
     console.error(error);
     this.specificError=error.json();
-    return Observable.throw(this.specificError.message);
+    return Observable.throw(this.specificError.message || 'Se perdio la conexion con la Api.' );
   }
 }
