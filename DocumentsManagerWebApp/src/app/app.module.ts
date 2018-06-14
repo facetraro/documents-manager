@@ -9,12 +9,15 @@ import { FormsModule } from '@angular/forms';
 import { LoginService } from 'src/app/login/login.service';
 import { ManageToken } from './manage-token';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { LogoutComponent } from './logout/logout.component';
+import { LogoutService } from './logout/logout.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    LogoutComponent
   ],
   imports: [
     HttpModule,
@@ -24,6 +27,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
   ],
   providers: [
     LoginService, 
+    LogoutService, 
     ManageToken
   ],
   bootstrap: [AppComponent]

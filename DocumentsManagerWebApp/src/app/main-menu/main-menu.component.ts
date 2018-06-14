@@ -12,7 +12,7 @@ private tokenManagment:ManageToken;
 private activeToken:string;
   constructor() {
     this.tokenManagment=new ManageToken;
-    this.activeToken=this.tokenManagment.getToken();//localStorage.getItem("DocumentsManagerSession");
+    this.activeToken=this.tokenManagment.getToken();
     }
 
   ngOnInit() {
