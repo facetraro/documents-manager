@@ -18,27 +18,43 @@
 
     <!--Tabla de mascotas -->
     <div class='table-responsive'>
-        <table class='table' *ngIf='users && users.length'>
-            <!--Cabezal de la tabla -->
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Usuario</th>
-                    <th>Correo</th>
-                </tr>
-            </thead>
-            <!--Cuerpo de la tabla-->
-            <tbody>
-                <tr *ngFor='let aFullUserData of users'  >
-                    <td>{{aFullUserData.id }}</td>
-                    <td>{{aFullUserData.name | uppercase}}</td>
-                    <td>{{aFullUserData.surname }}</td>
-                    <td>{{aFullUserData.username | lowercase }}</td>
-                    <td>{{aFullUserData.email | lowercase}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div style="overflow-x:auto;">
+            <table class='table' *ngIf='users && users.length'>
+                <!--Cabezal de la tabla -->
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Usuario</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <!--Cuerpo de la tabla-->
+                <tbody>
+                    <tr *ngFor='let aFullUserData of users'  >
+                        <td>{{aFullUserData.id }}</td>
+                        <td>{{aFullUserData.name | uppercase}}</td>
+                        <td>{{aFullUserData.surname }}</td>
+                        <td>{{aFullUserData.username | lowercase }}</td>
+                        <td>{{aFullUserData.email | lowercase}}</td>
+                        <td>
+                            <button (click)="addFriendUser(aFullUserData.id)">
+                                Añadir Amigo
+                        </button>
+                        &nbsp;
+                        <button (click)="modifyUser(aFullUserData.id)">
+                                Modificar
+                        </button>
+                        &nbsp;
+                        <button (click)="deleteUser(aFullUserData.id)">
+                                Eliminar
+                        </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
