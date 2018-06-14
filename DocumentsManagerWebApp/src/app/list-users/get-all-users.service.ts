@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
 import { MessageError } from 'src/app/message-error';
-import { User } from 'src/app/User';
 import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
-// Add the RxJS Observable operators we need in this app.
-import '../rxjs-operators';
 import { Url } from 'src/app/url';
-
+import { FullUserData } from './FullUserData';
+import { Observable } from 'rxjs';
+import '../rxjs-operators';
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class LoginService {
-
+export class GetAllUsersService {
   constructor(
     private httpService: Http) { 
     }
     specificError:MessageError;
 
-  logIn(newSessionUser:User) : Observable<string> {
+  getAllUsers(token : string) : Observable<FullUserData[]> {
     let apiUrl= new Url;
-    let url = apiUrl.globalUrl+"/api/Login/?Username="+newSessionUser.username;
-    return this.httpService.post(url,newSessionUser)
-    .map((response: Response) => <string> response.json())
+    let url = apiUrl.globalUrl+"/Admins/?token="+token;
+    return this.httpService.get(url)
+    .map((response: Response) => <FullUserData[]> response.json())
     .catch(this.handleError);
   };
   

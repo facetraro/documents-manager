@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageToken } from 'src/app/manage-token';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-menu',
@@ -10,7 +11,7 @@ export class MainMenuComponent implements OnInit {
  
 private tokenManagment:ManageToken;
 private activeToken:string;
-  constructor() {
+  constructor(private router: Router) {
     this.tokenManagment=new ManageToken;
     this.activeToken=this.tokenManagment.getToken();
     }

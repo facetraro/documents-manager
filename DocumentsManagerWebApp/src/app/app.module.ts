@@ -11,13 +11,16 @@ import { ManageToken } from './manage-token';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { LogoutComponent } from './logout/logout.component';
 import { LogoutService } from './logout/logout.service';
+import { ListUsersComponent } from './list-users/list-users.component';
+import { GetAllUsersService } from './list-users/get-all-users.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainMenuComponent,
-    LogoutComponent
+    LogoutComponent,
+    ListUsersComponent
   ],
   imports: [
     HttpModule,
@@ -27,7 +30,8 @@ import { LogoutService } from './logout/logout.service';
   ],
   providers: [
     LoginService, 
-    LogoutService, 
+    LogoutService,
+    GetAllUsersService, 
     ManageToken
   ],
   bootstrap: [AppComponent]
