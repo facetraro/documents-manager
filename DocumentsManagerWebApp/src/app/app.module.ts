@@ -7,12 +7,14 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from 'src/app/login/login.service';
-import { ManageToken } from './ManageToken';
+import { ManageToken } from './manage-token';
+import { MainMenuComponent } from './main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    MainMenuComponent
   ],
   imports: [
     HttpModule,

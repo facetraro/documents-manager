@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../User';
 import { Token } from '../Token';
 import { LoginService } from 'src/app/login/login.service';
-import { ManageToken } from '../ManageToken';
+import { ManageToken } from '../manage-token';
+import { AppRoutingModule } from '../app-routing.module';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -20,6 +23,7 @@ export class LoginComponent implements OnInit {
  
   constructor(
     private loginService: LoginService,
+    private router: Router,
     private  localStorageSession : ManageToken
   ) {}
  
@@ -33,7 +37,8 @@ export class LoginComponent implements OnInit {
 
   login(response:string){
     this.localStorageSession.saveToken(response);
-  }
+    this.router.navigate((['/home']));
+   }
 
   userLogin(user: User ){
       this.loginService.logIn(user).subscribe(response => this.login(response), 
