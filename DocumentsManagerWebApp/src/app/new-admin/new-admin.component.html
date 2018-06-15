@@ -1,0 +1,24 @@
+<h2>Añadir Nuevo Administrador</h2>
+<div>
+    <label>Nombre:
+      <input [(ngModel)]="user.name" placeholder="name">
+    </label>
+    <label>Apellido:
+        <input [(ngModel)]="user.surname" placeholder="surname">
+    </label>
+    <label>Correo:
+      <input [(ngModel)]="user.email" placeholder="email">
+    </label>
+    <label>Usuario:
+       <input [(ngModel)]="user.username" placeholder="username">
+    </label>
+    <label>Contraseña:
+      <input [(ngModel)]="user.password" placeholder="password">
+    </label>
+    <div align="center">
+        <button (click)="addNewUser()">
+                Añadir Nuevo Usuario
+        </button>
+    </div>
+    <app-go-home></app-go-home>
+</div>

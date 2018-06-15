@@ -18,7 +18,10 @@ export class ListAdminsComponent {
   activeToken:string;
   tokenManagment:ManageToken;
 
-  constructor(private adminService : AdminService) {
+  constructor(
+    private adminService : AdminService, 
+    private router: Router
+  ) {
     this.tokenManagment=new ManageToken;
     this.addFriendImgPath = '/media/add.png';
     this.activeToken=this.tokenManagment.getToken();
@@ -40,6 +43,9 @@ export class ListAdminsComponent {
   deleteUser(id:string){
     this.adminService.deleteAdmin(this.activeToken,id).subscribe(response => window.location.reload()), 
     error => this.showErrorMessage(error);
+  }
+  addUser(){
+    this.router.navigate((['/newAdmin']));
   }
 }
 

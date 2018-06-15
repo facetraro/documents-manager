@@ -1,61 +1,68 @@
-<div class='panel-body'>
-    <!-- Aca filtramos las mascotas  -->
-    <!-- Selector de filtro:  -->
-    <div class='row'>
-        <div class='col-md-2'>Filter by:</div>
-        <div class='col-md-4'>
-            <input type='text' [(ngModel)]='listFilter' />
-        </div>
+<div>
+    <div align="center">
+        <button (click)="addUser()">
+                Añadir Nuevo Usuario
+        </button>
     </div>
-    <div class='row' *ngIf='listFilter'>
-        <div class='col-md-6'>
-            <h3>Filtered by: {{listFilter}} </h3>
+    <div class='panel-body'>
+        <!-- Aca filtramos las mascotas  -->
+        <!-- Selector de filtro:  -->
+        <div class='row'>
+            <div class='col-md-2'>Filter by:</div>
+            <div class='col-md-4'>
+                <input type='text' [(ngModel)]='listFilter' />
+            </div>
         </div>
-    </div>
+        <div class='row' *ngIf='listFilter'>
+            <div class='col-md-6'>
+                <h3>Filtered by: {{listFilter}} </h3>
+            </div>
+        </div>
 
-    <!-- Mensaje de error -->
-    <div class='has-error'> </div>
+        <!-- Mensaje de error -->
+        <div class='has-error'> </div>
 
-    <!--Tabla de mascotas -->
-    <div class='table-responsive'>
-        <div style="overflow-x:auto;">
-            <table class='table' *ngIf='users && users.length'>
-                <!--Cabezal de la tabla -->
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Usuario</th>
-                        <th>Correo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <!--Cuerpo de la tabla-->
-                <tbody>
-                    <tr *ngFor='let aFullUserData of users'  >
-                        <td>{{aFullUserData.id }}</td>
-                        <td>{{aFullUserData.name | uppercase}}</td>
-                        <td>{{aFullUserData.surname }}</td>
-                        <td>{{aFullUserData.username | lowercase }}</td>
-                        <td>{{aFullUserData.email | lowercase}}</td>
-                        <td>
-                            <button (click)="addFriendUser(aFullUserData.id)">
-                                Añadir Amigo
-                        </button>
-                        &nbsp;
-                        <button (click)="modifyUser(aFullUserData.id)">
-                                Modificar
-                        </button>
-                        &nbsp;
-                        <button (click)="deleteUser(aFullUserData.id)">
-                                Eliminar
-                        </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <!--Tabla de mascotas -->
+        <div class='table-responsive'>
+            <div style="overflow-x:auto;">
+                <table class='table' *ngIf='users && users.length'>
+                    <!--Cabezal de la tabla -->
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Usuario</th>
+                            <th>Correo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <!--Cuerpo de la tabla-->
+                    <tbody>
+                        <tr *ngFor='let aFullUserData of users'  >
+                            <td>{{aFullUserData.id }}</td>
+                            <td>{{aFullUserData.name | uppercase}}</td>
+                            <td>{{aFullUserData.surname }}</td>
+                            <td>{{aFullUserData.username | lowercase }}</td>
+                            <td>{{aFullUserData.email | lowercase}}</td>
+                            <td>
+                                <button (click)="addFriendUser(aFullUserData.id)">
+                                    Añadir Amigo
+                            </button>
+                            &nbsp;
+                            <button (click)="modifyUser(aFullUserData.id)">
+                                    Modificar
+                            </button>
+                            &nbsp;
+                            <button (click)="deleteUser(aFullUserData.id)">
+                                    Eliminar
+                            </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <app-go-home></app-go-home>
     </div>
-    <app-go-home></app-go-home>
 </div>

@@ -23,6 +23,14 @@ export class AdminService {
     .catch(this.handleError);
   };
 
+  newAdmin(token : string, newUser:FullUserData) : Observable<string> {
+    let apiUrl= new Url;
+    let url = apiUrl.globalUrl+"/api/Admin/?token="+token;
+    return this.httpService.post(url,newUser)
+    .map((response: Response) => <string> response.json())
+    .catch(this.handleError);
+  };
+
   deleteAdmin(token : string, id : string) : Observable<string> {
     let apiUrl= new Url;
     let url = apiUrl.globalUrl+"/api/Admin/?id="+id+"&token="+token;
