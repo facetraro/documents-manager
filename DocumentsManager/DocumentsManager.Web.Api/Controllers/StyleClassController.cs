@@ -1,4 +1,4 @@
-﻿using DocumentsManager.BusinessLogic;
+﻿using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
 using System;
@@ -12,23 +12,23 @@ namespace DocumentsManager.Web.Api.Controllers
 {
     public class StyleClassController : ApiController
     {
-        private IStyleClassBusinessLogic styleClassBusinessLogic { get; set; }
+        private Proxy proxyAccess { get; set; }
 
-        public StyleClassController(IStyleClassBusinessLogic logic)
+        public StyleClassController(Proxy proxy)
         {
-            styleClassBusinessLogic = logic;
+            proxyAccess = proxy;
         }
         public StyleClassController()
         {
-            styleClassBusinessLogic = new StyleClassBusinessLogic();
+            proxyAccess = new Proxy();
         }
 
         // GET: api/StyleClass
         [HttpGet]
         [Route("viewStyles")]
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(Guid tokenId)
         {
-            IEnumerable<StyleClass> realStyles = styleClassBusinessLogic.GetAllStyleClasses();
+            IEnumerable<StyleClass> realStyles = proxyAccess.GetAllStyleClasses(tokenId);
             List<StyleClassDto> styles = new List<StyleClassDto>();
             foreach (var item in realStyles)
             {
@@ -42,11 +42,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/StyleClass/5
-        public IHttpActionResult Get(Guid id)
+        public IHttpActionResult Get(Guid id, Guid tokenId)
         {
             try
             {
-                StyleClass styleComplete = styleClassBusinessLogic.GetById(id);
+                StyleClass styleComplete = proxyAccess.GetStyleById(id, tokenId);
                 StyleClassDto style = new StyleClassDto(styleComplete);
                 if (style == null)
                 {
@@ -61,12 +61,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/StyleClass
-        public IHttpActionResult Post([FromBody] StyleClassModel style)
+        public IHttpActionResult Post([FromBody] StyleClassModel style, Guid tokenId)
         {
             try
             {
                 StyleClass styleToAdd = GetEntityStyleClass(style);
-                Guid id = styleClassBusinessLogic.Add(styleToAdd);
+                Guid id = proxyAccess.AddStyle(styleToAdd, tokenId);
                 return CreatedAtRoute("DefaultApi", new { id = styleToAdd.Id }, styleToAdd);
             }
             catch (ArgumentNullException ex)
@@ -76,12 +76,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/StyleClass/5
-        public IHttpActionResult Put(Guid id, [FromBody]StyleClassModel style)
+        public IHttpActionResult Put(Guid id, [FromBody]StyleClassModel style, Guid tokenId)
         {
             try
             {
                 StyleClass styleToAdd = GetEntityStyleClass(style);
-                bool updateResult = styleClassBusinessLogic.Update(id, styleToAdd);
+                bool updateResult = proxyAccess.UpdateStyle(id, styleToAdd, tokenId);
                 return CreatedAtRoute("DefaultApi", new { updated = updateResult }, styleToAdd);
             }
             catch (ArgumentNullException ex)
@@ -91,11 +91,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         //  DELETE: api/StyleClass/5
-        public HttpResponseMessage Delete(Guid id)
+        public HttpResponseMessage Delete(Guid id, Guid tokenId)
         {
             try
             {
-                bool updateResult = styleClassBusinessLogic.Delete(id);
+                bool updateResult = proxyAccess.DeleteStyle(id, tokenId);
                 return Request.CreateResponse(HttpStatusCode.NoContent, updateResult);
             }
             catch (ArgumentNullException ex)

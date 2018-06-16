@@ -1,8 +1,11 @@
 ﻿using DocumentsManager.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DocumentsManager.BusinessLogic
+namespace DocumentsManager.BusinessLogic.Charts
 {
     public class ChartIntDate
     {

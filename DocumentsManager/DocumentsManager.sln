@@ -39,6 +39,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.FormatImpo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.FormatImportationTest", "DocumentsManager.FormatImportationTest\DocumentsManager.FormatImportationTest.csproj", "{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.ProxyAcces", "DocumentsManager.ProxyAcces\DocumentsManager.ProxyAcces.csproj", "{0969114A-0EB7-4D6E-A398-300FB0766FB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.ProxyInterfaces", "DocumentsManager.ProxyInterfaces\DocumentsManager.ProxyInterfaces.csproj", "{27DC7037-7ED5-45D8-852A-1C29C0CDB4AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.BusinessLogic.Charts", "DocumentsManager.BusinessLogic.Charts\DocumentsManager.BusinessLogic.Charts.csproj", "{80E332CD-14BF-42AC-B302-A36A4806ABF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +123,18 @@ Global
 		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0969114A-0EB7-4D6E-A398-300FB0766FB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0969114A-0EB7-4D6E-A398-300FB0766FB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0969114A-0EB7-4D6E-A398-300FB0766FB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0969114A-0EB7-4D6E-A398-300FB0766FB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27DC7037-7ED5-45D8-852A-1C29C0CDB4AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27DC7037-7ED5-45D8-852A-1C29C0CDB4AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27DC7037-7ED5-45D8-852A-1C29C0CDB4AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27DC7037-7ED5-45D8-852A-1C29C0CDB4AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80E332CD-14BF-42AC-B302-A36A4806ABF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80E332CD-14BF-42AC-B302-A36A4806ABF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80E332CD-14BF-42AC-B302-A36A4806ABF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80E332CD-14BF-42AC-B302-A36A4806ABF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

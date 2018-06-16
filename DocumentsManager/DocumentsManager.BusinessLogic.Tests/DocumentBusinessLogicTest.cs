@@ -65,7 +65,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             DocumentContextTest testDocument = new DocumentContextTest();
             Document document = testDocument.setUp(contextDocument);
             DocumentBusinessLogic logic = new DocumentBusinessLogic();
-            Document fullDocument = logic.GetDocumentById(document.Id);
+            Document fullDocument = logic.GetDocumentById(document.Id, Guid.NewGuid());
             Assert.IsFalse(fullDocument.Footer.Text == null);
             Assert.IsFalse(fullDocument.Footer.StyleClass == null);
             Assert.IsFalse(fullDocument.Header.Text == null);
@@ -92,7 +92,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Footer footer = fContext.GetById(testDocument.Footer.Id);
             string parragraphText = "DefaultText";
             string parragraph = "<br>" + styleClassBL.GetHtmlText(new StyleClass(), parragraphText);
-            string printedDocument = documentBL.PrintDocument(testDocument);
+            string printedDocument = documentBL.PrintDocument(testDocument, Guid.NewGuid());
             string openHtml = "<html>";
             string openBody = "<body>";
             string documentTitle = "<title>" + testDocument.Title + "</title>";
@@ -120,7 +120,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Footer footer = fContext.GetById(testDocument.Footer.Id);
             string parragraphText = "DefaultText";
             string parragraph = "<br>" + styleClassBL.GetHtmlText(new StyleClass(), parragraphText) ;
-            string printedDocument = documentBL.PrintDocument(testDocument);
+            string printedDocument = documentBL.PrintDocument(testDocument, Guid.NewGuid());
             string expectedResult = "<html><body><title>PrintableDocument</title><head><p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>HEADER</em></strong></p></head><br><p>DefaultText</p><footer><p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>FOOTER</em></strong></p></footer></body></html>";
             Assert.AreEqual(printedDocument.Trim(), expectedResult.Trim());
             TearDown();

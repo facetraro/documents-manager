@@ -39,7 +39,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             uContext.Add(anEditor);
             bool expectedResult = true;
-            bool result = editorBL.GetAllEditors().Contains(anEditor);
+            bool result = editorBL.GetAllEditors(Guid.NewGuid()).Contains(anEditor);
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -54,7 +54,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             uContext.Add(anEditor);
             uContext.Add(anotherEditor);
             bool expectedResult = true;
-            IEnumerable<EditorUser> allEditors = editorBL.GetAllEditors();
+            IEnumerable<EditorUser> allEditors = editorBL.GetAllEditors(Guid.NewGuid());
             bool resultOne = allEditors.Contains(anEditor);
             bool resultTwo = allEditors.Contains(anotherEditor);
             Assert.AreEqual(expectedResult, resultOne && resultTwo);
@@ -66,7 +66,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             bool expectedResult = true;
-            bool result = editorBL.GetAllEditors().Count() == 0;
+            bool result = editorBL.GetAllEditors(Guid.NewGuid()).Count() == 0;
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -77,7 +77,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             UserContext uContext = new UserContext();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            Guid expectedResult = editorBL.Add(anEditor);
+            Guid expectedResult = editorBL.AddEditor(anEditor, Guid.NewGuid());
             Guid result = uContext.GetById(expectedResult).Id;
             Assert.AreEqual(expectedResult, result);
             TearDown();
@@ -88,9 +88,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            editorBL.Add(anEditor);
+            editorBL.AddEditor(anEditor, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = editorBL.GetAllEditors().Count() == 1;
+            bool result = editorBL.GetAllEditors(Guid.NewGuid()).Count() == 1;
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -104,8 +104,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             EditorUser anotherEditor = EntitiesExampleInstances.TestEditorUser();
             anotherEditor.Email = "differentEmail";
-            editorBL.Add(anEditor);
-            editorBL.Add(anotherEditor);
+            editorBL.AddEditor(anEditor, Guid.NewGuid());
+            editorBL.AddEditor(anotherEditor, Guid.NewGuid());
             TearDown();
         }
         [ExpectedException(typeof(ObjectAlreadyExistsException))]
@@ -117,8 +117,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
             EditorUser anotherEditor = EntitiesExampleInstances.TestEditorUser();
             anotherEditor.Username = "differentUserName";
-            editorBL.Add(anEditor);
-            editorBL.Add(anotherEditor);
+            editorBL.AddEditor(anEditor, Guid.NewGuid());
+            editorBL.AddEditor(anotherEditor, Guid.NewGuid());
             TearDown();
         }
         [TestMethod]
@@ -127,10 +127,10 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            Guid idUserToDelete = editorBL.Add(anEditor);
-            editorBL.Delete(idUserToDelete);
+            Guid idUserToDelete = editorBL.AddEditor(anEditor, Guid.NewGuid());
+            editorBL.DeleteEditor(idUserToDelete, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = editorBL.GetAllEditors().Count() == 0;
+            bool result = editorBL.GetAllEditors(Guid.NewGuid()).Count() == 0;
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -140,10 +140,10 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            Guid idUserToDelete = editorBL.Add(anEditor);
-            editorBL.Delete(idUserToDelete);
+            Guid idUserToDelete = editorBL.AddEditor(anEditor, Guid.NewGuid());
+            editorBL.DeleteEditor(idUserToDelete, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = !editorBL.GetAllEditors().Contains(anEditor);
+            bool result = !editorBL.GetAllEditors(Guid.NewGuid()).Contains(anEditor);
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -153,9 +153,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            Guid idUserToDelete = editorBL.Add(anEditor);
+            Guid idUserToDelete = editorBL.AddEditor(anEditor, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = editorBL.Delete(idUserToDelete);
+            bool result = editorBL.DeleteEditor(idUserToDelete, Guid.NewGuid());
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -165,7 +165,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
-            editorBL.Delete(Guid.NewGuid());
+            editorBL.DeleteEditor(Guid.NewGuid(), Guid.NewGuid());
             TearDown();
         }
         [TestMethod]
@@ -174,9 +174,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            Guid IdUserAdded = editorBL.Add(anEditor);
+            Guid IdUserAdded = editorBL.AddEditor(anEditor, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = editorBL.GetByID(IdUserAdded).Equals(anEditor);
+            bool result = editorBL.GetEditorByID(IdUserAdded, Guid.NewGuid()).Equals(anEditor);
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -186,7 +186,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
-            editorBL.GetByID(Guid.NewGuid());
+            editorBL.GetEditorByID(Guid.NewGuid(), Guid.NewGuid());
             TearDown();
         }
         [TestMethod]
@@ -195,13 +195,13 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            Guid IdUserAdded = editorBL.Add(anEditor);
+            Guid IdUserAdded = editorBL.AddEditor(anEditor, Guid.NewGuid());
             EditorUser anotherEditor = EntitiesExampleInstances.TestEditorUser();
             anotherEditor.Username = "UserName2";
             anotherEditor.Email = "Email2";
-            editorBL.Add(anotherEditor);
+            editorBL.AddEditor(anotherEditor, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = editorBL.GetByID(IdUserAdded).Equals(anEditor);
+            bool result = editorBL.GetEditorByID(IdUserAdded, Guid.NewGuid()).Equals(anEditor);
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -211,10 +211,10 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            Guid IdUserAdded = editorBL.Add(anEditor);
+            Guid IdUserAdded = editorBL.AddEditor(anEditor, Guid.NewGuid());
             anEditor.Email = "modified@gmail.com";
             bool expectedResult = true;
-            bool result = editorBL.Update(IdUserAdded, anEditor);
+            bool result = editorBL.UpdateEditor(IdUserAdded, anEditor, Guid.NewGuid());
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -224,10 +224,10 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            Guid IdUserAdded = editorBL.Add(anEditor);
+            Guid IdUserAdded = editorBL.AddEditor(anEditor, Guid.NewGuid());
             anEditor.Email = "modified@gmail.com";
-            editorBL.Update(IdUserAdded, anEditor);
-            Assert.AreEqual(editorBL.GetByID(IdUserAdded).Email, "modified@gmail.com");
+            editorBL.UpdateEditor(IdUserAdded, anEditor, Guid.NewGuid());
+            Assert.AreEqual(editorBL.GetEditorByID(IdUserAdded, Guid.NewGuid()).Email, "modified@gmail.com");
             TearDown();
         }
         [TestMethod]
@@ -236,13 +236,13 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            Guid IdUserAdded = editorBL.Add(anEditor);
+            Guid IdUserAdded = editorBL.AddEditor(anEditor, Guid.NewGuid());
             anEditor.Name = "George";
             anEditor.Password = "newPassword";
             anEditor.Surname = "Gomez";
             anEditor.Username = "modifiedUsername";
-            editorBL.Update(IdUserAdded, anEditor);
-            EditorUser modifiedUser = editorBL.GetByID(IdUserAdded);
+            editorBL.UpdateEditor(IdUserAdded, anEditor, Guid.NewGuid());
+            EditorUser modifiedUser = editorBL.GetEditorByID(IdUserAdded, Guid.NewGuid());
             Assert.AreEqual(modifiedUser.Name, "George");
             Assert.AreEqual(modifiedUser.Password, "newPassword");
             Assert.AreEqual(modifiedUser.Surname, "Gomez");
@@ -258,8 +258,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            Guid IdUserAdded = adminBL.Add(anAdmin);
-            editorBL.GetByID(anAdmin.Id);
+            Guid IdUserAdded = adminBL.AddAdmin(anAdmin, Guid.NewGuid());
+            editorBL.GetEditorByID(anAdmin.Id, Guid.NewGuid());
             TearDown();
         }
 

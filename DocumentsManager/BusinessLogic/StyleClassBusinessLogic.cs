@@ -1,5 +1,6 @@
 ﻿using DocumentsManager.Data.DA.Handler;
 using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyInterfaces;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,7 @@ namespace DocumentsManager.BusinessLogic
         public string GetHtmlTextStyleFromDB(StyleClass style, string text)
         {
             string htmlResult = String.Empty;
-            StyleClass styleFromDataBase = GetById(style.Id);
+            StyleClass styleFromDataBase = GetStyleById(style.Id, Guid.NewGuid());
             htmlResult = GetInitialTag(style) + GetAllIncialAttributesTags(style) + text + GetAllEndAttributesTags(style) + LastTag;
             return htmlResult;
         }
@@ -71,12 +72,12 @@ namespace DocumentsManager.BusinessLogic
             htmlResult = GetInitialTag(style) + GetAllIncialAttributesTags(style) + text + GetAllEndAttributesTags(style) + LastTag;
             return htmlResult;
         }
-        public StyleClass GetById(Guid id)
+        public StyleClass GetStyleById(Guid id, Guid tokenId)
         {
             StyleClassContextHandler context = new StyleClassContextHandler();
             return context.GetById(id);
         }
-        public Guid Add(StyleClass newStyle)
+        public Guid AddStyle(StyleClass newStyle, Guid tokenId)
         {
             newStyle.Id = Guid.NewGuid();
             StyleClassContextHandler context = new StyleClassContextHandler();
@@ -89,7 +90,7 @@ namespace DocumentsManager.BusinessLogic
             return context.Exists(id);
         }
 
-        public IEnumerable<StyleClass> GetAllStyleClasses()
+        public IEnumerable<StyleClass> GetAllStyleClasses(Guid tokenId)
         {
             StyleClassContextHandler context = new StyleClassContextHandler();
             return context.GetLazy();
@@ -97,12 +98,12 @@ namespace DocumentsManager.BusinessLogic
 
       
 
-        public bool Delete(Guid id)
+        public bool DeleteStyle(Guid id, Guid tokenId)
         {
             if (true)
             {
                 StyleClassContextHandler context = new StyleClassContextHandler();
-                StyleClass toDelete = GetById(id);
+                StyleClass toDelete = GetStyleById(id,tokenId);
                 context.Remove(toDelete);
                 return true;
             }
@@ -112,7 +113,7 @@ namespace DocumentsManager.BusinessLogic
            
         }
 
-        public bool Update(Guid id, StyleClass newStyle)
+        public bool UpdateStyle(Guid id, StyleClass newStyle, Guid tokenId)
         {
             throw new NotImplementedException();
         }

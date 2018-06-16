@@ -1,5 +1,6 @@
 ﻿using DocumentsManager.Data.DA.Handler;
 using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyInterfaces;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -8,17 +9,15 @@ namespace DocumentsManager.BusinessLogic
 {
     public class FormatBusinessLogic : IFormatsBusinessLogic
     {
-        public Format GetByID(Guid id)
+        public Format GetFormatByID(Guid id, Guid tokenId)
         {
-           // LoggedToken.GetToken();
-
             FormatContext context = new FormatContext();
             StyleClassBusinessLogic styleLogic = new StyleClassBusinessLogic();
             Format format = context.GetById(id);
             List<StyleClass> styles = new List<StyleClass>();
             foreach (var item in format.StyleClasses)
             {
-                styles.Add(styleLogic.GetById(item.Id));
+                styles.Add(styleLogic.GetStyleById(item.Id, tokenId));
             }
             format.StyleClasses = styles;
             return format;
@@ -26,15 +25,12 @@ namespace DocumentsManager.BusinessLogic
 
         public bool Exists(Guid id)
         {
-            LoggedToken.GetToken();
-
             FormatContext context = new FormatContext();
             return context.Exists(id);
         }
 
-        public Guid Add(Format format)
+        public Guid AddFormat(Format format, Guid tokenId)
         {
-            LoggedToken.GetToken();
             FormatContext context = new FormatContext();
             if ((context.Exists(format.Id)))
             {
@@ -44,20 +40,18 @@ namespace DocumentsManager.BusinessLogic
             return format.Id;
         }
 
-        public IEnumerable<Format> GetAllFormats()
+        public IEnumerable<Format> GetAllFormats(Guid tokenId)
         {
-            LoggedToken.GetToken();
-
             FormatContext context = new FormatContext();
             List<Format> allFormatEager = context.GetEagerFormats();
             foreach (var item in allFormatEager)
             {
-                List<StyleClass> allStylesFromFormat = new List<StyleClass> ();
+                List<StyleClass> allStylesFromFormat = new List<StyleClass>();
                 foreach (var style in item.StyleClasses)
                 {
                     StyleClassBusinessLogic styleLogic = new StyleClassBusinessLogic();
-                    allStylesFromFormat.Add(styleLogic.GetById(style.Id));
-                    
+                    allStylesFromFormat.Add(styleLogic.GetStyleById(style.Id, tokenId));
+
                 }
                 item.StyleClasses = allStylesFromFormat;
             }
@@ -65,25 +59,21 @@ namespace DocumentsManager.BusinessLogic
         }
 
 
-        public bool Delete(Guid id)
+        public bool DeleteFormat(Guid id, Guid tokenId)
         {
-            LoggedToken.GetToken();
-
             FormatContext context = new FormatContext();
             if ((!context.Exists(id)))
             {
                 return false;
                 throw new ObjectDoesNotExists("username");
             }
-            Format formatToDelete = GetByID(id);
+            Format formatToDelete = GetFormatByID(id, tokenId);
             context.Remove(formatToDelete);
             return true;
         }
 
-        public bool Update(Guid id, Format newFormat)
+        public bool UpdateFormat(Guid id, Format newFormat, Guid tokenId)
         {
-            LoggedToken.GetToken();
-
             FormatContext context = new FormatContext();
             if ((!context.Exists(id)))
             {
@@ -91,7 +81,7 @@ namespace DocumentsManager.BusinessLogic
                 throw new ObjectDoesNotExists("username");
             }
             newFormat.Id = id;
-            context.Modify(GetByID(newFormat.Id));
+            context.Modify(GetFormatByID(newFormat.Id, tokenId));
             return true;
         }
     }

@@ -69,8 +69,8 @@ namespace DocumentsManager.Web.Api.Models
             }
             document.Header = Header.GetEntityModel();
             document.Footer = Footer.GetEntityModel();
-            document.StyleClass = styleBL.GetById(StyleClassId);
-            document.Format = formatBL.GetByID(FormatId);        
+            document.StyleClass = styleBL.GetStyleById(StyleClassId, Guid.NewGuid());
+            document.Format = formatBL.GetFormatByID(FormatId, Guid.NewGuid());        
             return document;
         }
     }

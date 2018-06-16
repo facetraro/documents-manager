@@ -1,6 +1,7 @@
 ﻿using DocumentsManager.AuthenticationToken;
 using DocumentsManager.Data.DA.Handler;
 using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyInterfaces;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,34 @@ using System.Threading.Tasks;
 
 namespace DocumentsManager.BusinessLogic
 {
-    public class UserBusinessLogic : IUsersBusinessLogic
+    public class UserBusinessLogic : IUserBusinessLogic
     {
-        private User GetLoggedUser()
+
+        public Guid CreateADocument(Document doc, Guid tokenId)
         {
-            return GetUserByToken(LoggedToken.GetToken());
+            User responsibleUser = GetUserByToken(tokenId);
+            return AddDocument(doc, responsibleUser);
+        }
+
+        public bool UpdateADocument(Guid id, Document aDocument, Guid tokenId)
+        {
+            User responsibleUser = GetUserByToken(tokenId);
+            return UpdateDocument(id, aDocument, responsibleUser);
+        }
+
+        public bool DeleteADocument(Document aDocument, Guid tokenId)
+        {
+            DocumentBusinessLogic documentBl = new DocumentBusinessLogic();
+            if (documentBl.AlreadyDeleted(aDocument))
+            {
+                throw new DocumentAlreadyDeleted();
+            }
+            User responsibleUser = GetUserByToken(tokenId);
+            return DeleteDocument(aDocument, responsibleUser);
+        }
+        private User GetLoggedUser(Guid tokenId)
+        {
+            return GetUserByToken(tokenId);
         }
         private void AddModifyHistory(User user, Document doc, ModifyState state)
         {
@@ -27,109 +51,52 @@ namespace DocumentsManager.BusinessLogic
             ModifyDocumentHistoryContext modifyContext = new ModifyDocumentHistoryContext();
             modifyContext.Add(history);
         }
-        public Guid AddDocument(Document doc)
+        public Guid AddDocument(Document doc, User responsibleUser)
         {
-            if (IsTokenActive(LoggedToken.GetToken()))
-            {
-                User user = GetUserByToken(LoggedToken.GetToken());
-                if (!IdRegistered(user))
+               
+                if (!IdRegistered(responsibleUser))
                 {
-                    throw new ObjectDoesNotExists(user);
+                    throw new ObjectDoesNotExists(responsibleUser);
                 }
                 DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
                 Guid id = documentLogic.Add(doc);
-                AddModifyHistory(user, doc, ModifyState.Added);
+                AddModifyHistory(responsibleUser, doc, ModifyState.Added);
                 return id;
-            }
-            return doc.Id;
-            
+                        
         }
+        public bool DeleteDocument(Document aDocument, User responsibleUser)
+        {
+            AddModifyHistory(responsibleUser, aDocument, ModifyState.Removed);
+            return true;
+        }
+
+
+        public bool UpdateDocument(Guid id, Document aDocument, User responsibleUser)
+        {
+            DocumentBusinessLogic documentBL = new DocumentBusinessLogic();
+            if (!documentBL.Exists(id))
+            {
+                throw new ObjectDoesNotExists(aDocument);
+            }
+            this.ModifyDocumentProperties(aDocument, responsibleUser);
+            this.ModifyDocumentFooter(aDocument, responsibleUser);
+            this.ModifyDocumentHeader(aDocument, responsibleUser);
+            this.ModifyParragraphs(aDocument, responsibleUser);
+            return true;
+        }
+
         public void ModifyDocument(User user, Document doc, ModifyState state)
         {
             AddModifyHistory(user, doc, state);
         }
-        public bool IdRegistered(User anUser)
-        {
-            UserContext uContext = new UserContext();
-            return uContext.Exists(anUser);
-        }
-        public bool UserNameRegistered(User anUser)
-        {
-            UserContext uContext = new UserContext();
-            List<User> allUsers = uContext.GetLazy();
-            bool registered = false;
-            foreach (User useri in allUsers)
-            {
-                if (useri.Username.Equals(anUser.Username))
-                {
-                    registered = true;
-                }
-            }
-            return registered;
-        }
-        public bool EmailRegistered(User anUser)
-        {
-            UserContext uContext = new UserContext();
-            List<User> allUsers = uContext.GetLazy();
-            bool registered = false;
-            foreach (User useri in allUsers)
-            {
-                if (useri.Email.Equals(anUser.Email))
-                {
-                    registered = true;
-                }
-            }
-            return registered;
-        }
+       
         public void ModifyParragraphs(Document aDocument, User responsibleUser)
         {
             DocumentContext documentContext = new DocumentContext();
             documentContext.ModifyParragraphs(aDocument);
         }
-        public void ModifyParragraphs(Document aDocument)
-        {
-            if (IsTokenActive(LoggedToken.GetToken()))
-            {
-                User responsibleUser = GetUserByToken(LoggedToken.GetToken());
-                ModifyParragraphs(aDocument, responsibleUser);
-            }
-            
-        }
-        public void AddDocument(Document aDocument, User responsibleUser)
-        {
-            DocumentContext documentContext = new DocumentContext();
-            documentContext.Add(aDocument);
-            AddModifyHistory(responsibleUser, aDocument, ModifyState.Added);
-        }
-        public void ModifyDocumentProperties(Document aDocument)
-        {
-            if (IsTokenActive(LoggedToken.GetToken()))
-            {
-                User responsibleUser = GetUserByToken(LoggedToken.GetToken());
-                ModifyDocumentProperties(aDocument, responsibleUser);
-            }
-           
-        }
 
-        public void ModifyDocumentHeader(Document aDocument)
-        {
-            if (IsTokenActive(LoggedToken.GetToken()))
-            {
-                User responsibleUser = GetUserByToken(LoggedToken.GetToken());
-                ModifyDocumentHeader(aDocument, responsibleUser);
-            }
-            
-        }
-
-        public void ModifyDocumentFooter(Document aDocument)
-        {
-            if (IsTokenActive(LoggedToken.GetToken()))
-            {
-                User responsibleUser = GetUserByToken(LoggedToken.GetToken());
-                ModifyDocumentFooter(aDocument, responsibleUser);
-            }
-            
-        }
+       
         public void ModifyDocumentProperties(Document aDocument, User responsibleUser)
         {
             DocumentContext documentContext = new DocumentContext();
@@ -185,7 +152,6 @@ namespace DocumentsManager.BusinessLogic
             {
                 SessionAccess sessionAccess = new SessionAccess();
                 Guid newToken = sessionAccess.Add(userFromDB.Id);
-                LoggedToken.SetToken(newToken);
                 return newToken;
             }
             return new Guid();
@@ -216,35 +182,40 @@ namespace DocumentsManager.BusinessLogic
             SessionAccess sessionAccess = new SessionAccess();
             sessionAccess.ClearAll();
         }
-        public bool DeleteDocument(Document aDocument)
+        
+        
+        public bool IdRegistered(User anUser)
         {
-            DocumentBusinessLogic documentBl = new DocumentBusinessLogic();
-            if (documentBl.AlreadyDeleted(aDocument))
-            {
-                return false;
-                throw new DocumentAlreadyDeleted();
-            }
-            AddModifyHistory(GetLoggedUser(), aDocument, ModifyState.Removed);
-            return true;
+            UserContext uContext = new UserContext();
+            return uContext.Exists(anUser);
         }
-        public void DeleteDocument(Document aDocument, User responsibleUser)
+        public bool UserNameRegistered(User anUser)
         {
-            AddModifyHistory(responsibleUser, aDocument, ModifyState.Removed);
-        }
-
-        public bool UpdateDocument(Guid id,Document aDocument)
-        {
-            DocumentBusinessLogic documentBL = new DocumentBusinessLogic();
-            if (!documentBL.Exists(id))
+            UserContext uContext = new UserContext();
+            List<User> allUsers = uContext.GetLazy();
+            bool registered = false;
+            foreach (User useri in allUsers)
             {
-                throw new ObjectDoesNotExists(aDocument);
-                return false;
+                if (useri.Username.Equals(anUser.Username))
+                {
+                    registered = true;
+                }
             }
-            this.ModifyDocumentProperties(aDocument);
-            this.ModifyDocumentFooter(aDocument);
-            this.ModifyDocumentHeader(aDocument);
-            this.ModifyParragraphs(aDocument);
-            return true;
+            return registered;
+        }
+        public bool EmailRegistered(User anUser)
+        {
+            UserContext uContext = new UserContext();
+            List<User> allUsers = uContext.GetLazy();
+            bool registered = false;
+            foreach (User useri in allUsers)
+            {
+                if (useri.Email.Equals(anUser.Email))
+                {
+                    registered = true;
+                }
+            }
+            return registered;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace DocumentsManager.Web.Api.Models
                 header.Id = Id;
             }
             header.Text = Text.GetEntityModel();
-            header.StyleClass = styleBL.GetById(StyleClassId);
+            header.StyleClass = styleBL.GetStyleById(StyleClassId, Guid.NewGuid());
             return header;
         }
     }

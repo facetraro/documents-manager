@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using DocumentsMangerEntities;
 using DocumentsManager.Data.DA.Handler;
 using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyInterfaces;
 
 namespace DocumentsManager.BusinessLogic
 {
     public class EditorBusinessLogic : UserBusinessLogic, IEditorsBusinessLogic
     {
-        public Guid Add(EditorUser editor)
+        public Guid AddEditor(EditorUser editor, Guid tokenId)
         {
             editor.Id = Guid.NewGuid();
             UserContext uContext = new UserContext();
@@ -31,7 +32,7 @@ namespace DocumentsManager.BusinessLogic
             return editor.Id;
         }
 
-        public bool Delete(Guid id)
+        public bool DeleteEditor(Guid id, Guid tokenId)
         {
             UserContext uContext = new UserContext();
             EditorUser idUser = new EditorUser();
@@ -43,13 +44,13 @@ namespace DocumentsManager.BusinessLogic
             throw new ObjectDoesNotExists(idUser);
         }
 
-        public IEnumerable<EditorUser> GetAllEditors()
+        public IEnumerable<EditorUser> GetAllEditors(Guid tokenId)
         {
             UserContext uContext = new UserContext();
             return uContext.GetEditors();
         }
 
-        public EditorUser GetByID(Guid id)
+        public EditorUser GetEditorByID(Guid id, Guid tokenId)
         {
             EditorUser userToReturn = new EditorUser();
             UserContext uContext = new UserContext();
@@ -66,12 +67,12 @@ namespace DocumentsManager.BusinessLogic
             return userToReturn;
         }
 
-        public bool Update(Guid id, EditorUser newEditor)
+        public bool UpdateEditor(Guid id, EditorUser newEditor, Guid tokenId)
         {
             UserContext uContext = new UserContext();
             bool updated = false;
             updated = uContext.Modify(newEditor);
-            User dbUser = GetByID(id);
+            User dbUser = GetEditorByID(id, tokenId);
             if (!dbUser.hasSameInformation(newEditor))
             {
                 updated = false;

@@ -1,5 +1,5 @@
-﻿using DocumentsManager.BusinessLogic;
-using DocumentsManager.Exceptions;
+﻿using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyAcces;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -12,14 +12,10 @@ namespace DocumentsManager.Web.Api.Controllers
 {
     public class CreatorsChartController : ApiController
     {
-        private AdminBusinessLogic adminsBuisnessLogic { get; set; }
-        private EditorBusinessLogic editorBuisnessLogic { get; set; }
-        private UserBusinessLogic usersBuisnessLogic { get; set; }
+        private Proxy proxyAccess;
         public CreatorsChartController()
         {
-            this.adminsBuisnessLogic = new AdminBusinessLogic();
-            this.usersBuisnessLogic = new UserBusinessLogic();
-            this.editorBuisnessLogic = new EditorBusinessLogic();
+            this.proxyAccess = new Proxy();
         }
         // GET: api/CreatorsChart
         public IHttpActionResult Get()
@@ -30,26 +26,26 @@ namespace DocumentsManager.Web.Api.Controllers
         [HttpGet]
         [Route("CreatorsChart")]
         // GET: api/CreatorsChart/5
-        public string Get(Guid Id, string dateOne, string dateTwo)
+        public string Get(Guid Id, string dateOne, string dateTwo, Guid tokenId)
         {
             DateTime dateFrom = DateTime.Parse(dateOne);
             DateTime dateTo = DateTime.Parse(dateTwo);
             User user = new AdminUser();
             try
             {
-                user = adminsBuisnessLogic.GetByID(Id);
+                user = proxyAccess.GetAdminByID(Id,tokenId);
             }
             catch (WrongUserType)
             {
 
-                user = editorBuisnessLogic.GetByID(Id);
+                user = proxyAccess.GetEditorByID(Id, tokenId);
             }
             catch (ObjectDoesNotExists ex)
             {
                 return ex.Message;
             }
 
-            return adminsBuisnessLogic.GetChartCreationByUser(user, dateFrom, dateTo).ToString();
+            return proxyAccess.GetChartCreationByUser(user, dateFrom, dateTo, tokenId).ToString();
         }
 
         // POST: api/CreatorsChart
