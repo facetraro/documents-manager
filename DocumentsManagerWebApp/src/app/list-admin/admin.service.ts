@@ -39,11 +39,10 @@ export class AdminService {
     .catch(this.handleError);
   };
 
-  modifyAdmin(token : string, newUser:FullUserData) : Observable<string> {
+  modifyAdmin(token : string, modifiedUser:FullUserData) : Observable<string> {
     let apiUrl= new Url;
-    let url = apiUrl.globalUrl+"/api/Admin/?id="+newUser.id+"?token="+token;
-    console.log(newUser);
-    return this.httpService.put(url,newUser)
+    let url = apiUrl.globalUrl+"/api/Admin/?id="+modifiedUser.id+"&token="+token;
+    return this.httpService.put(url,modifiedUser)
     .map((response: Response) => <string> response.json())
     .catch(this.handleError);
   };

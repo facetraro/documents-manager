@@ -19,13 +19,13 @@ export class ModifyAdminComponent implements OnInit {
   token:string;
   constructor(
     private activatedRoute: ActivatedRoute,
+    router: Router,
     adminService : AdminService
   ) { 
     this.tokenManagment=new ManageToken;
-  
+    this.router=router;
     this.adminService=adminService;
     this.user = new FullUserData("","","","","","");
-   
   }
 
   ngOnInit() {
