@@ -4,6 +4,7 @@ import { FullUserData } from './FullUserData';
 
 import { ManageToken } from '../manage-token';
 import { AdminService } from './admin.service';
+import { ModifyAdminComponent } from '../modify-admin/modify-admin.component';
 
 @Component({
   selector: 'app-list-admins',
@@ -38,7 +39,8 @@ export class ListAdminsComponent {
     console.log(id);
   }
   modifyUser(id:string){
-    console.log(id);
+    
+    this.router.navigate((['/modifyAdmin']), { queryParams: { userToModify: id} });
   }
   deleteUser(id:string){
     this.adminService.deleteAdmin(this.activeToken,id).subscribe(response => window.location.reload()), 

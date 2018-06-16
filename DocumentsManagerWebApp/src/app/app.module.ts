@@ -15,6 +15,7 @@ import { AdminService } from './list-admin/admin.service';
 import { ListAdminsComponent } from './list-admin/list-admins.component';
 import { GoHomeComponent } from './go-home/go-home.component';
 import { NewAdminComponent } from './new-admin/new-admin.component';
+import { ModifyAdminComponent } from './modify-admin/modify-admin.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NewAdminComponent } from './new-admin/new-admin.component';
     LogoutComponent,
     ListAdminsComponent,
     GoHomeComponent,
-    NewAdminComponent
+    NewAdminComponent,
+    ModifyAdminComponent
   ],
   imports: [
     HttpModule,

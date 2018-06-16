@@ -34,7 +34,6 @@ namespace DocumentsManager.Web.Api.Controllers
             }
             return Ok(admins);
         }
-
         // GET: api/Admin/5
         public IHttpActionResult Get(Guid id)
         {
