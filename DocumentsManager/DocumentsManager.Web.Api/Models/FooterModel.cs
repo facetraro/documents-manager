@@ -35,7 +35,7 @@ namespace DocumentsManager.Web.Api.Models
                 footer.Id = Id;
             }
             footer.Text = Text.GetEntityModel();
-            footer.StyleClass = styleBL.GetById(StyleClassId);
+            footer.StyleClass = styleBL.GetStyleById(StyleClassId, Guid.NewGuid());
             return footer;
         }
     }

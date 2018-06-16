@@ -17,7 +17,7 @@ namespace DocumentsManager.BusinessLogic
             Footer footer = context.GetById(id);
             TextBusinessLogic textLogic = new TextBusinessLogic();
             footer.Text = textLogic.GetById(footer.Text.Id);
-            footer.StyleClass = styleLogic.GetById(footer.StyleClass.Id);
+            footer.StyleClass = styleLogic.GetStyleById(footer.StyleClass.Id, Guid.NewGuid());
             return footer;
         }
     }

@@ -106,7 +106,7 @@ namespace DocumentsManager.BusinessLogic.Tests
                 Username = "testUsername"
             };
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
-            adminLogic.Add(admin);
+            adminLogic.AddAdmin(admin, Guid.NewGuid());
             logic.AddDocument(aDocument, admin);
             return aDocument;
         }
@@ -128,7 +128,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             FormatContext formatCtx = new FormatContext();
             Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            IEnumerable<Document> allDocuments = documentLogic.GetAllDocuments();
+            IEnumerable<Document> allDocuments = documentLogic.GetAllDocuments(Guid.NewGuid());
             Assert.IsTrue(allDocuments.Contains(aDocument));
             Assert.IsTrue(allDocuments.Count() == 1);
             TearDown();
@@ -154,7 +154,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             };
             uContext.Add(admin);
             logic.ModifyDocumentProperties(aDocument, admin);
-            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Title.Equals("new Title"));
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id, Guid.NewGuid()).Title.Equals("new Title"));
             TearDown();
         }
         [TestMethod]
@@ -196,8 +196,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             logic.ModifyParragraphs(aDocument, admin);
 
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.Count == 1);
-            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.ElementAt(0).Equals(parragraph));
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id, Guid.NewGuid()).Parragraphs.Count == 1);
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id, Guid.NewGuid()).Parragraphs.ElementAt(0).Equals(parragraph));
             TearDown();
         }
         [TestMethod]
@@ -241,7 +241,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             logic.ModifyParragraphs(aDocument, admin);
 
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Parragraphs.Count == 0);
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id, Guid.NewGuid()).Parragraphs.Count == 0);
             TearDown();
         }
         [TestMethod]
@@ -281,7 +281,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             UserBusinessLogic logic = new UserBusinessLogic();
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
             AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
-            adminLogic.Add(newAdmin);
+            adminLogic.AddAdmin(newAdmin, Guid.NewGuid());
             Guid token = logic.LogIn(newAdmin.Username, newAdmin.Password);
             Guid anotherToken = logic.LogIn(newAdmin.Username, newAdmin.Password);
             TearDown();
@@ -293,7 +293,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             UserBusinessLogic logic = new UserBusinessLogic();
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
             AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
-            adminLogic.Add(newAdmin);
+            adminLogic.AddAdmin(newAdmin, Guid.NewGuid());
             Guid token = logic.LogIn(newAdmin.Username, newAdmin.Password);
             Assert.AreEqual(newAdmin, logic.GetUserByToken(token));
             TearDown();
@@ -305,7 +305,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             UserBusinessLogic logic = new UserBusinessLogic();
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
             AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
-            adminLogic.Add(newAdmin);
+            adminLogic.AddAdmin(newAdmin, Guid.NewGuid());
             Guid token = logic.LogIn(newAdmin.Username, newAdmin.Password);
             logic.LogOut(token);
             Guid anotherToken = logic.LogIn(newAdmin.Username, newAdmin.Password);
@@ -320,7 +320,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             UserBusinessLogic logic = new UserBusinessLogic();
             AdminBusinessLogic adminLogic = new AdminBusinessLogic();
             AdminUser newAdmin = EntitiesExampleInstances.TestAdminUser();
-            adminLogic.Add(newAdmin);
+            adminLogic.AddAdmin(newAdmin, Guid.NewGuid());
             Guid token = logic.LogIn(newAdmin.Username, "notThePassword");
             TearDown();
         }
@@ -396,7 +396,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             UserBusinessLogic logic = new UserBusinessLogic();
             logic.ModifyDocumentProperties(aDocument, admin);
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).StyleClass.Name.Equals("ModifiedStyle"));
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id, Guid.NewGuid()).StyleClass.Name.Equals("ModifiedStyle"));
             TearDown();
         }
         [TestMethod]
@@ -428,7 +428,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             UserBusinessLogic logic = new UserBusinessLogic();
             logic.ModifyDocumentProperties(aDocument, admin);
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id).Format.Name.Equals("ModifiedFormat"));
+            Assert.IsTrue(documentLogic.GetDocumentById(aDocument.Id, Guid.NewGuid()).Format.Name.Equals("ModifiedFormat"));
             TearDown();
         }
         [TestMethod]

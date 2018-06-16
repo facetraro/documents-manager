@@ -1,5 +1,5 @@
-﻿using DocumentsManager.BusinessLogic;
-using DocumentsManager.Exceptions;
+﻿using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
 using System;
 using System.Collections.Generic;
@@ -12,9 +12,9 @@ namespace DocumentsManager.Web.Api.Controllers
 {
     public class LogInController : ApiController
     {
-        private UserBusinessLogic logic;
+        private Proxy proxyAccess;
         public LogInController() {
-            logic = new UserBusinessLogic();
+            proxyAccess = new Proxy();
         }
         // GET: api/LogIn
         public IHttpActionResult Get()
@@ -33,8 +33,7 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             try
             {
-                Guid token = logic.LogIn(username, model.Password);
-                LoggedToken.SetToken(token);
+                Guid token = proxyAccess.LogIn(username, model.Password);
                 return Ok(token);
             }
             catch (LostConnectionWithDataBase exception)

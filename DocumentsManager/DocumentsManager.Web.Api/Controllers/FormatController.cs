@@ -1,5 +1,5 @@
-﻿using DocumentsManager.BusinessLogic;
-using DocumentsManager.Exceptions;
+﻿using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
 using System;
@@ -12,23 +12,23 @@ namespace DocumentsManager.Web.Api.Controllers
 {
     public class FormatController : ApiController
     {
-        private IFormatsBusinessLogic editorsBuisnessLogic { get; set; }
+        private Proxy proxyAccess { get; set; }
 
-        public FormatController(IFormatsBusinessLogic logic)
+        public FormatController(Proxy proxy)
         {
-            this.editorsBuisnessLogic = logic;
+            this.proxyAccess = proxy;
         }
         public FormatController()
         {
-            this.editorsBuisnessLogic = new FormatBusinessLogic(); ;
+            this.proxyAccess = new Proxy(); ;
         }
 
         // GET: api/Format
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(Guid tokenId)
         {
             try
             {
-                IEnumerable<Format> formatsComplete = editorsBuisnessLogic.GetAllFormats();
+                IEnumerable<Format> formatsComplete = proxyAccess.GetAllFormats(tokenId);
                 List<FormatDto> formats = new List<FormatDto>();
                 for (int i = 0; i < formatsComplete.Count(); i++)
                 {
@@ -39,7 +39,7 @@ namespace DocumentsManager.Web.Api.Controllers
                         StyleClass sj = fi.StyleClasses.ElementAt(j);
                         formats.ElementAt(i).StyleClasses.Add(new StyleClassDto(sj));
                     }
-                    
+
                 }
                 if (formats == null)
                 {
@@ -47,7 +47,8 @@ namespace DocumentsManager.Web.Api.Controllers
                 }
                 return Ok(formats);
             }
-            catch (NoUserLoggedException ex) {
+            catch (NoUserLoggedException ex)
+            {
                 return BadRequest(ex.Message);
             }
             catch (ArgumentNullException ex)
@@ -58,11 +59,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/Format/5
-        public IHttpActionResult Get(Guid id)
+        public IHttpActionResult Get(Guid id, Guid tokenId)
         {
             try
             {
-                Format editor = editorsBuisnessLogic.GetByID(id);
+                Format editor = proxyAccess.GetFormatByID(id, tokenId);
                 FormatDto format = new FormatDto(editor);
                 foreach (var item in editor.StyleClasses)
                 {
@@ -89,12 +90,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/Format
-        public IHttpActionResult Post([FromBody]FormatModel model)
+        public IHttpActionResult Post([FromBody]FormatModel model, Guid tokenId)
         {
             try
             {
                 Format formatToAdd = GetEntityFormat(model);
-                Guid id = editorsBuisnessLogic.Add(formatToAdd);
+                Guid id = proxyAccess.AddFormat(formatToAdd, tokenId);
                 return CreatedAtRoute("DefaultApi", new { id = formatToAdd.Id }, formatToAdd);
             }
             catch (NoUserLoggedException ex)
@@ -112,12 +113,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/Format/5
-        public IHttpActionResult Put(Guid id, [FromBody]FormatModel format)
+        public IHttpActionResult Put(Guid id, [FromBody]FormatModel format, Guid tokenId)
         {
             try
             {
                 Format formatToAdd = GetEntityFormat(format);
-                bool updateResult = editorsBuisnessLogic.Update(id, formatToAdd);
+                bool updateResult = proxyAccess.UpdateFormat(id, formatToAdd, tokenId);
                 return CreatedAtRoute("DefaultApi", new { updated = updateResult }, formatToAdd);
             }
             catch (NoUserLoggedException ex)
@@ -135,11 +136,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // DELETE: api/Format/5
-        public HttpResponseMessage Delete(Guid id)
+        public HttpResponseMessage Delete(Guid id, Guid tokenId)
         {
             try
             {
-                bool updateResult = editorsBuisnessLogic.Delete(id);
+                bool updateResult = proxyAccess.DeleteFormat(id, tokenId);
                 return Request.CreateResponse(HttpStatusCode.NoContent, updateResult);
             }
             catch (NoUserLoggedException ex)

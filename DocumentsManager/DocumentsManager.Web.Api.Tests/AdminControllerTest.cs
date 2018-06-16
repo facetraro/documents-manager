@@ -176,60 +176,8 @@ namespace DocumentsManager.Web.Api.Tests
             Assert.AreEqual(fakeAdmin, createdResult.Content);
         }
           */
-        
-        [TestMethod]
-        public void DeleteAdminOkTest()
-        {
-            //Arrange
-            Guid fakeGuid = Guid.NewGuid();
-
-            var mockAdminBusinessLogic = new Mock<IAdminsBusinessLogic>();
-            mockAdminBusinessLogic
-                .Setup(bl => bl.Delete(It.IsAny<Guid>()))
-                .Returns(It.IsAny<bool>());
-
-            var controller = new AdminController(mockAdminBusinessLogic.Object);
-            ConfigureHttpRequest(controller);
-
-            //Act
-            HttpResponseMessage obtainedResult = controller.Delete(fakeGuid);
-
-            //Assert
-            mockAdminBusinessLogic.VerifyAll();
-            Assert.IsNotNull(obtainedResult);
-        }
-
-        private void ConfigureHttpRequest(AdminController controller)
-        {
-            controller.Request = new HttpRequestMessage();
-            controller.Configuration = new HttpConfiguration();
-            controller.Configuration.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional });
-        }
-
-        private AdminModel GetAFakeAdmin()
-        {
-            List<AdminUser> editors = GetFakeAdmins().ToList();
-            AdminModel model = new AdminModel(editors.FirstOrDefault());
-            return model;
-        }
-        private Guid GetARandomFakeGuid()
-        {
-            return GetAFakeAdmin().Id;
-        }
-        private IEnumerable<AdminUser> GetFakeAdmins()
-        {
-            List<AdminUser> fakeAdmins = new List<AdminUser>();
-            fakeAdmins.Add(EntitiesExampleInstances.TestAdminUser());
-            AdminUser anotherAdmin = EntitiesExampleInstances.TestAdminUser();
-            anotherAdmin.Email = "another@email";
-            anotherAdmin.Id = Guid.NewGuid();
-            anotherAdmin.Name = "anotherName";
-            fakeAdmins.Add(anotherAdmin);
-            return fakeAdmins;
-        }
     }
+
+
 }
 

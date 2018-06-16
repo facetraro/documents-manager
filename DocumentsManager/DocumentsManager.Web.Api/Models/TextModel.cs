@@ -33,7 +33,7 @@ namespace DocumentsManager.Web.Api.Models
                 text.Id = Id;
             }
             text.WrittenText = Text;
-            text.StyleClass = styleBL.GetById(StyleClassId);
+            text.StyleClass = styleBL.GetStyleById(StyleClassId, Guid.NewGuid());
             return text;
         }
     }

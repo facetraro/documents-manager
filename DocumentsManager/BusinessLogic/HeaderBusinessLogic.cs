@@ -17,7 +17,7 @@ namespace DocumentsManager.BusinessLogic
             Header header = context.GetById(id);
             TextBusinessLogic textLogic = new TextBusinessLogic();
             header.Text = textLogic.GetById(header.Text.Id);
-            header.StyleClass = styleLogic.GetById(header.StyleClass.Id);
+            header.StyleClass = styleLogic.GetStyleById(header.StyleClass.Id, Guid.NewGuid());
             return header;
         }
     }

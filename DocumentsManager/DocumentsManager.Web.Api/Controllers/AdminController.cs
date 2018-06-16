@@ -1,5 +1,5 @@
-﻿using DocumentsManager.BusinessLogic;
-using DocumentsManager.Exceptions;
+﻿using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
 using System;
@@ -12,22 +12,22 @@ namespace DocumentsManager.Web.Api.Controllers
 {
     public class AdminController : ApiController
     {
-        private IAdminsBusinessLogic adminsBuisnessLogic { get; set; }
+        private Proxy proxyAccess { get; set; }
 
-        public AdminController(IAdminsBusinessLogic logic)
+        public AdminController(Proxy proxy)
         {
-            this.adminsBuisnessLogic = logic;
+            this.proxyAccess = proxy;
         }
         public AdminController()
         {
-            this.adminsBuisnessLogic = new AdminBusinessLogic();
+            this.proxyAccess = new Proxy();
         }
         [HttpGet]
         [Route("Admins")]
         // GET: api/Admin
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(Guid tokenId)
         {
-            IEnumerable<AdminUser> admins = adminsBuisnessLogic.GetAllAdmins();
+            IEnumerable<AdminUser> admins = proxyAccess.GetAllAdmins(tokenId);
             if (admins == null)
             {
                 return NotFound();
@@ -35,11 +35,11 @@ namespace DocumentsManager.Web.Api.Controllers
             return Ok(admins);
         }
         // GET: api/Admin/5
-        public IHttpActionResult Get(Guid id)
+        public IHttpActionResult Get(Guid id, Guid tokenId)
         {
             try
             {
-                AdminUser admin = adminsBuisnessLogic.GetByID(id);
+                AdminUser admin = proxyAccess.GetAdminByID(id, tokenId);
                 if (admin == null)
                 {
                     return NotFound();
@@ -62,7 +62,7 @@ namespace DocumentsManager.Web.Api.Controllers
 
         // POST: api/Admins
         
-        public IHttpActionResult Post([FromBody]AdminModel admin)
+        public IHttpActionResult Post([FromBody]AdminModel admin,Guid tokenId)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace DocumentsManager.Web.Api.Controllers
                     throw new ArgumentNullException();
                 }
                 AdminUser adminToAdd = GetEntityAdmin(admin);
-                Guid id = adminsBuisnessLogic.Add(adminToAdd);
+                Guid id = proxyAccess.AddAdmin(adminToAdd, tokenId);
                 return CreatedAtRoute("DefaultApi", new { id = adminToAdd.Id }, adminToAdd);
             }
             catch (ObjectAlreadyExistsException alreadyExistsException)
@@ -85,7 +85,7 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/Admin/5
-        public IHttpActionResult Put(Guid id, [FromBody]AdminModel admin)
+        public IHttpActionResult Put(Guid id, [FromBody]AdminModel admin, Guid tokenId)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace DocumentsManager.Web.Api.Controllers
                     throw new ArgumentNullException();
                 }
                 AdminUser adminToUpdate = GetEntityAdmin(admin);
-                bool updateResult = adminsBuisnessLogic.Update(id, adminToUpdate);
+                bool updateResult = proxyAccess.UpdateAdmin(id, adminToUpdate, tokenId);
                 return CreatedAtRoute("DefaultApi", new { updated = updateResult }, adminToUpdate);
             }
             catch (ObjectDoesNotExists doesNotExists)
@@ -108,11 +108,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // DELETE: api/Admin/5
-        public HttpResponseMessage Delete(Guid id)
+        public HttpResponseMessage Delete(Guid id, Guid tokenId)
         {
             try
             {
-                bool updateResult = adminsBuisnessLogic.Delete(id);
+                bool updateResult = proxyAccess.DeleteAdmin(id, tokenId);
                 return Request.CreateResponse(HttpStatusCode.Accepted, updateResult);
             }
             catch (ObjectDoesNotExists doesNotExists)

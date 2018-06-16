@@ -43,7 +43,7 @@ namespace DocumentsManager.Web.Api.Models
             {
                 parragraph.Texts.Add(tmi.GetEntityModel());
             }
-            parragraph.StyleClass = styleBL.GetById(StyleClassId);
+            parragraph.StyleClass = styleBL.GetStyleById(StyleClassId, Guid.NewGuid());
             return parragraph;
         }
     }

@@ -149,7 +149,7 @@ namespace DocumentsManager.Web.Api.Tests
             //Assert
             Assert.IsInstanceOfType(obtainedResult, typeof(BadRequestErrorMessageResult));
         }
-            */
+            
         [TestMethod]
         public void DeleteEditorOkTest()
         {
@@ -203,6 +203,7 @@ namespace DocumentsManager.Web.Api.Tests
             fakeEditors.Add(anotherEditor);
             return fakeEditors;
         }
-      
+      */
     }
 }
+﻿
