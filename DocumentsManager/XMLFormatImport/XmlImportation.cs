@@ -13,10 +13,32 @@ namespace XMLFormatImport
     {
         public List<Tuple<string, ParameterType>> RequiredParameters { get; set; }
         private static string TipoLetra = "TipoLetra";
-        private static string Alineado = "Alineado";
+        private static string TamanioLetra = "TamanioLetra";
+        private static string Cursiva = "Cursiva";
+        private static string Alineado = "Alineacion";
+        private static string Color = "Color";
+        private static string Borde = "Borde";
         private static string Negrita = "Negrita";
         private static string Subrayado = "Subrayado";
 
+        private List<string> GetDoubleHeaderAttributes()
+        {
+            List<string> doubleHeaderAttributes = new List<string>();
+            doubleHeaderAttributes.Add(TipoLetra);
+            doubleHeaderAttributes.Add(TamanioLetra);
+            doubleHeaderAttributes.Add(Alineado);
+            doubleHeaderAttributes.Add(Color);
+            return doubleHeaderAttributes;
+        }
+        private List<string> GetSingleHeaderAttributes()
+        {
+            List<string> singleHeaderAttributes = new List<string>();
+            singleHeaderAttributes.Add(Cursiva);
+            singleHeaderAttributes.Add(Borde);
+            singleHeaderAttributes.Add(Negrita);
+            singleHeaderAttributes.Add(Subrayado);
+            return singleHeaderAttributes;
+        }
         public XmlImportation()
         {
             RequiredParameters = new List<Tuple<string, ParameterType>>();
@@ -74,6 +96,7 @@ namespace XMLFormatImport
                     {
                         ImportedStyleClass newStyleClass = new ImportedStyleClass();
                         newStyleClass.Name = GetStyleName(actualStyle.ToString());
+                        LoadAllAttributes(newStyleClass, actualStyle);
                         actualStyle = actualStyle.NextNode;
                         newStyles.Add(newStyleClass);
                     }
@@ -91,6 +114,58 @@ namespace XMLFormatImport
             catch (FormatException ex2)
             {
                 throw new Exception("Error en el formato. El archivo es incorrecto!", ex2);
+            }
+        }
+        private string GetValueByNode(string nodeName, string allTheXMLElement)
+        {
+            string firstHeader = "<" + nodeName + ">";
+            string lastHeader = "</" + nodeName + ">";
+            string[] firstCut = allTheXMLElement.Split(new[] { firstHeader }, StringSplitOptions.None);
+            if (firstCut.Length == 2)
+            {
+                string[] secondCut = firstCut[1].Split(new[] { lastHeader }, StringSplitOptions.None);
+                if (secondCut.Length == 2)
+                {
+                    return nodeName + "###" + secondCut[0];
+                }
+                if (secondCut.Length > 2)
+                {
+                    throw new Exception("XML Mal Formado - Atributo de Estilo repetido [" + nodeName + "]");
+                }
+            }
+            return string.Empty;
+        }
+        private void LoadValueDoubleHeader(ImportedStyleClass newStyleClass, string value, XNode actualStyle)
+        {
+            string valueFromNode = GetValueByNode(value, actualStyle.ToString());
+            if (valueFromNode.Length != 0)
+            {
+                newStyleClass.StyleAttributes.Add(valueFromNode);
+            }
+        }
+        private void LoadValueSingleHeader(ImportedStyleClass newStyleClass, string value, XNode actualStyle)
+        {
+            string allTheXMLElement = actualStyle.ToString();
+            string header = "<" + value + " />";
+            string[] cut = allTheXMLElement.Split(new[] { header }, StringSplitOptions.None);
+            if (cut.Length == 2)
+            {
+                newStyleClass.StyleAttributes.Add(value);
+            }
+            if (cut.Length > 2)
+            {
+                throw new Exception("XML Mal Formado - Atributo de Estilo repetido [" + value + "]");
+            }
+        }
+        private void LoadAllAttributes(ImportedStyleClass newStyleClass, XNode actualStyle)
+        {
+            foreach (var item in this.GetDoubleHeaderAttributes())
+            {
+                LoadValueDoubleHeader(newStyleClass, item, actualStyle);
+            }
+            foreach (var item in this.GetSingleHeaderAttributes())
+            {
+                LoadValueSingleHeader(newStyleClass, item, actualStyle);
             }
         }
 

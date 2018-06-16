@@ -9,6 +9,12 @@ namespace DocumentsManager.FormatImportation
     public class ImportedStyleClass
     {
         public string Name { get; set; }
-        public List<Tuple<string, string>> StyleAttributes { get; set; }
+        public List<string> StyleAttributes { get; set; }
+
+        public ImportedStyleClass()
+        {
+            this.Name = "";
+            this.StyleAttributes = new List<string>();
+        }
     }
 }

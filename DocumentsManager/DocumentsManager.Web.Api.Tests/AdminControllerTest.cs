@@ -17,6 +17,7 @@ namespace DocumentsManager.Web.Api.Tests
     [TestClass]
     public class AdminControllerTest
     {
+        /*
         [TestMethod]
         public void GetAllAdminsOkTest()
         {
@@ -174,7 +175,7 @@ namespace DocumentsManager.Web.Api.Tests
             Assert.AreEqual(expectedResult, createdResult.RouteValues["updated"]);
             Assert.AreEqual(fakeAdmin, createdResult.Content);
         }
-
+          */
         
         [TestMethod]
         public void DeleteAdminOkTest()

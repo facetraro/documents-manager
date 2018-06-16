@@ -22,7 +22,6 @@ namespace FormatImportTesting
         {
             string path = GetXMLPath("formatos-bien-formados.xml");
             XmlImportation importation = new XmlImportation();
-       // C: \Users\Fede\Documents\DA2DOCUMENTSMANAGER\DocumentsManager\XMLFormatImport\formatos - bien - formados.xml
             List<Tuple<string, ParameterType>> requiredParameters = importation.RequiredParameters;
             List<Tuple<string, string>> fakeParameters = new List<Tuple<string, string>>();
             foreach (var item in requiredParameters)
