@@ -18,6 +18,7 @@ export class AdminService {
   getAllAdmins(token : string) : Observable<FullUserData[]> {
     let apiUrl= new Url;
     let url = apiUrl.globalUrl+"/Admins/?token="+token;
+    console.log(url);
     return this.httpService.get(url)
     .map((response: Response) => <FullUserData[]> response.json())
     .catch(this.handleError);

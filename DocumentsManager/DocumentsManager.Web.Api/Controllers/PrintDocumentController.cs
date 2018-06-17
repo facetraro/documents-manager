@@ -27,10 +27,10 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/PrintDocument/5
-        public string Get(Guid id, Guid tokenId)
+        public string Get(Guid id, Guid token)
         {
-            Document toPrint = proxyAccess.GetDocumentById(id,tokenId);
-            return proxyAccess.PrintDocument(toPrint,tokenId);
+            Document toPrint = proxyAccess.GetDocumentById(id,token);
+            return proxyAccess.PrintDocument(toPrint,token);
         }
 
         // POST: api/PrintDocument

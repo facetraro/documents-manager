@@ -25,9 +25,9 @@ namespace DocumentsManager.Web.Api.Controllers
         [HttpGet]
         [Route("Admins")]
         // GET: api/Admin
-        public IHttpActionResult Get(Guid tokenId)
+        public IHttpActionResult Get(Guid token)
         {
-            IEnumerable<AdminUser> admins = proxyAccess.GetAllAdmins(tokenId);
+            IEnumerable<AdminUser> admins = proxyAccess.GetAllAdmins(token);
             if (admins == null)
             {
                 return NotFound();
@@ -35,11 +35,11 @@ namespace DocumentsManager.Web.Api.Controllers
             return Ok(admins);
         }
         // GET: api/Admin/5
-        public IHttpActionResult Get(Guid id, Guid tokenId)
+        public IHttpActionResult Get(Guid id, Guid token)
         {
             try
             {
-                AdminUser admin = proxyAccess.GetAdminByID(id, tokenId);
+                AdminUser admin = proxyAccess.GetAdminByID(id, token);
                 if (admin == null)
                 {
                     return NotFound();
@@ -62,7 +62,7 @@ namespace DocumentsManager.Web.Api.Controllers
 
         // POST: api/Admins
         
-        public IHttpActionResult Post([FromBody]AdminModel admin,Guid tokenId)
+        public IHttpActionResult Post([FromBody]AdminModel admin,Guid token)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace DocumentsManager.Web.Api.Controllers
                     throw new ArgumentNullException();
                 }
                 AdminUser adminToAdd = GetEntityAdmin(admin);
-                Guid id = proxyAccess.AddAdmin(adminToAdd, tokenId);
+                Guid id = proxyAccess.AddAdmin(adminToAdd, token);
                 return CreatedAtRoute("DefaultApi", new { id = adminToAdd.Id }, adminToAdd);
             }
             catch (ObjectAlreadyExistsException alreadyExistsException)
@@ -85,7 +85,7 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/Admin/5
-        public IHttpActionResult Put(Guid id, [FromBody]AdminModel admin, Guid tokenId)
+        public IHttpActionResult Put(Guid id, [FromBody]AdminModel admin, Guid token)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace DocumentsManager.Web.Api.Controllers
                     throw new ArgumentNullException();
                 }
                 AdminUser adminToUpdate = GetEntityAdmin(admin);
-                bool updateResult = proxyAccess.UpdateAdmin(id, adminToUpdate, tokenId);
+                bool updateResult = proxyAccess.UpdateAdmin(id, adminToUpdate, token);
                 return CreatedAtRoute("DefaultApi", new { updated = updateResult }, adminToUpdate);
             }
             catch (ObjectDoesNotExists doesNotExists)
@@ -108,11 +108,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // DELETE: api/Admin/5
-        public HttpResponseMessage Delete(Guid id, Guid tokenId)
+        public HttpResponseMessage Delete(Guid id, Guid token)
         {
             try
             {
-                bool updateResult = proxyAccess.DeleteAdmin(id, tokenId);
+                bool updateResult = proxyAccess.DeleteAdmin(id, token);
                 return Request.CreateResponse(HttpStatusCode.Accepted, updateResult);
             }
             catch (ObjectDoesNotExists doesNotExists)

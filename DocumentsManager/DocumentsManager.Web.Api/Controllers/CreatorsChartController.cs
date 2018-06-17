@@ -26,26 +26,26 @@ namespace DocumentsManager.Web.Api.Controllers
         [HttpGet]
         [Route("CreatorsChart")]
         // GET: api/CreatorsChart/5
-        public string Get(Guid Id, string dateOne, string dateTwo, Guid tokenId)
+        public string Get(Guid Id, string dateOne, string dateTwo, Guid token)
         {
             DateTime dateFrom = DateTime.Parse(dateOne);
             DateTime dateTo = DateTime.Parse(dateTwo);
             User user = new AdminUser();
             try
             {
-                user = proxyAccess.GetAdminByID(Id,tokenId);
+                user = proxyAccess.GetAdminByID(Id,token);
             }
             catch (WrongUserType)
             {
 
-                user = proxyAccess.GetEditorByID(Id, tokenId);
+                user = proxyAccess.GetEditorByID(Id, token);
             }
             catch (ObjectDoesNotExists ex)
             {
                 return ex.Message;
             }
 
-            return proxyAccess.GetChartCreationByUser(user, dateFrom, dateTo, tokenId).ToString();
+            return proxyAccess.GetChartCreationByUser(user, dateFrom, dateTo, token).ToString();
         }
 
         // POST: api/CreatorsChart

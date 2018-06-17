@@ -24,11 +24,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/Format
-        public IHttpActionResult Get(Guid tokenId)
+        public IHttpActionResult Get(Guid token)
         {
             try
             {
-                IEnumerable<Format> formatsComplete = proxyAccess.GetAllFormats(tokenId);
+                IEnumerable<Format> formatsComplete = proxyAccess.GetAllFormats(token);
                 List<FormatDto> formats = new List<FormatDto>();
                 for (int i = 0; i < formatsComplete.Count(); i++)
                 {
@@ -59,11 +59,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/Format/5
-        public IHttpActionResult Get(Guid id, Guid tokenId)
+        public IHttpActionResult Get(Guid id, Guid token)
         {
             try
             {
-                Format editor = proxyAccess.GetFormatByID(id, tokenId);
+                Format editor = proxyAccess.GetFormatByID(id, token);
                 FormatDto format = new FormatDto(editor);
                 foreach (var item in editor.StyleClasses)
                 {
@@ -90,12 +90,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/Format
-        public IHttpActionResult Post([FromBody]FormatModel model, Guid tokenId)
+        public IHttpActionResult Post([FromBody]FormatModel model, Guid token)
         {
             try
             {
                 Format formatToAdd = GetEntityFormat(model);
-                Guid id = proxyAccess.AddFormat(formatToAdd, tokenId);
+                Guid id = proxyAccess.AddFormat(formatToAdd, token);
                 return CreatedAtRoute("DefaultApi", new { id = formatToAdd.Id }, formatToAdd);
             }
             catch (NoUserLoggedException ex)
@@ -113,12 +113,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/Format/5
-        public IHttpActionResult Put(Guid id, [FromBody]FormatModel format, Guid tokenId)
+        public IHttpActionResult Put(Guid id, [FromBody]FormatModel format, Guid token)
         {
             try
             {
                 Format formatToAdd = GetEntityFormat(format);
-                bool updateResult = proxyAccess.UpdateFormat(id, formatToAdd, tokenId);
+                bool updateResult = proxyAccess.UpdateFormat(id, formatToAdd, token);
                 return CreatedAtRoute("DefaultApi", new { updated = updateResult }, formatToAdd);
             }
             catch (NoUserLoggedException ex)
@@ -136,11 +136,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // DELETE: api/Format/5
-        public HttpResponseMessage Delete(Guid id, Guid tokenId)
+        public HttpResponseMessage Delete(Guid id, Guid token)
         {
             try
             {
-                bool updateResult = proxyAccess.DeleteFormat(id, tokenId);
+                bool updateResult = proxyAccess.DeleteFormat(id, token);
                 return Request.CreateResponse(HttpStatusCode.NoContent, updateResult);
             }
             catch (NoUserLoggedException ex)

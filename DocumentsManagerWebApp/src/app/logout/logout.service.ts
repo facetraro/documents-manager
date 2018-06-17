@@ -20,7 +20,7 @@ export class LogoutService {
 
   logOut(token : Token) : Observable<string> {
     let apiUrl= new Url;
-    let url = apiUrl.globalUrl+"/api/LogOut";
+    let url = apiUrl.globalUrl+"/api/LogOut/?token="+token.token;
     return this.httpService.post(url,token)
     .map((response: Response) => <string> response.json() )
     .catch(this.handleError);

@@ -26,9 +26,9 @@ namespace DocumentsManager.Web.Api.Controllers
         // GET: api/StyleClass
         [HttpGet]
         [Route("viewStyles")]
-        public IHttpActionResult Get(Guid tokenId)
+        public IHttpActionResult Get(Guid token)
         {
-            IEnumerable<StyleClass> realStyles = proxyAccess.GetAllStyleClasses(tokenId);
+            IEnumerable<StyleClass> realStyles = proxyAccess.GetAllStyleClasses(token);
             List<StyleClassDto> styles = new List<StyleClassDto>();
             foreach (var item in realStyles)
             {
@@ -42,11 +42,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/StyleClass/5
-        public IHttpActionResult Get(Guid id, Guid tokenId)
+        public IHttpActionResult Get(Guid id, Guid token)
         {
             try
             {
-                StyleClass styleComplete = proxyAccess.GetStyleById(id, tokenId);
+                StyleClass styleComplete = proxyAccess.GetStyleById(id, token);
                 StyleClassDto style = new StyleClassDto(styleComplete);
                 if (style == null)
                 {
@@ -61,12 +61,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/StyleClass
-        public IHttpActionResult Post([FromBody] StyleClassModel style, Guid tokenId)
+        public IHttpActionResult Post([FromBody] StyleClassModel style, Guid token)
         {
             try
             {
                 StyleClass styleToAdd = GetEntityStyleClass(style);
-                Guid id = proxyAccess.AddStyle(styleToAdd, tokenId);
+                Guid id = proxyAccess.AddStyle(styleToAdd, token);
                 return CreatedAtRoute("DefaultApi", new { id = styleToAdd.Id }, styleToAdd);
             }
             catch (ArgumentNullException ex)
@@ -76,12 +76,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/StyleClass/5
-        public IHttpActionResult Put(Guid id, [FromBody]StyleClassModel style, Guid tokenId)
+        public IHttpActionResult Put(Guid id, [FromBody]StyleClassModel style, Guid token)
         {
             try
             {
                 StyleClass styleToAdd = GetEntityStyleClass(style);
-                bool updateResult = proxyAccess.UpdateStyle(id, styleToAdd, tokenId);
+                bool updateResult = proxyAccess.UpdateStyle(id, styleToAdd, token);
                 return CreatedAtRoute("DefaultApi", new { updated = updateResult }, styleToAdd);
             }
             catch (ArgumentNullException ex)
@@ -91,11 +91,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         //  DELETE: api/StyleClass/5
-        public HttpResponseMessage Delete(Guid id, Guid tokenId)
+        public HttpResponseMessage Delete(Guid id, Guid token)
         {
             try
             {
-                bool updateResult = proxyAccess.DeleteStyle(id, tokenId);
+                bool updateResult = proxyAccess.DeleteStyle(id, token);
                 return Request.CreateResponse(HttpStatusCode.NoContent, updateResult);
             }
             catch (ArgumentNullException ex)

@@ -23,9 +23,9 @@ namespace DocumentsManager.Web.Api.Controllers
             this.proxyAccess = new Proxy();
         }
         // GET: api/Editor
-        public IHttpActionResult Get(Guid tokenId)
+        public IHttpActionResult Get(Guid token)
         {
-            IEnumerable<EditorUser> editors = proxyAccess.GetAllEditors(tokenId);
+            IEnumerable<EditorUser> editors = proxyAccess.GetAllEditors(token);
             if (editors == null)
             {
                 return NotFound();
@@ -34,11 +34,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/Editor/5
-        public IHttpActionResult Get(Guid id, Guid tokenId)
+        public IHttpActionResult Get(Guid id, Guid token)
         {
             try
             {
-                EditorUser editor = proxyAccess.GetEditorByID(id, tokenId);
+                EditorUser editor = proxyAccess.GetEditorByID(id, token);
                 if (editor == null)
                 {
                     return NotFound();
@@ -60,7 +60,7 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/Editor
-        public IHttpActionResult Post([FromBody]EditorModel editor, Guid tokenId)
+        public IHttpActionResult Post([FromBody]EditorModel editor, Guid token)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace DocumentsManager.Web.Api.Controllers
                     throw new ArgumentNullException();
                 }
                 EditorUser editorToAdd = GetEntityEditor(editor);
-                Guid id = proxyAccess.AddEditor(editorToAdd, tokenId);
+                Guid id = proxyAccess.AddEditor(editorToAdd, token);
                 return CreatedAtRoute("DefaultApi", new { id = editorToAdd.Id }, editorToAdd);
             }
             catch (ObjectAlreadyExistsException alreadyExistsException)
@@ -84,7 +84,7 @@ namespace DocumentsManager.Web.Api.Controllers
 
 
         // PUT: api/Editor/5
-        public IHttpActionResult Put(Guid id, [FromBody]EditorModel editor, Guid tokenId)
+        public IHttpActionResult Put(Guid id, [FromBody]EditorModel editor, Guid token)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace DocumentsManager.Web.Api.Controllers
                     throw new ArgumentNullException();
                 }
                 EditorUser editorToUpdate = GetEntityEditor(editor);
-                bool updateResult = proxyAccess.UpdateEditor(id, editorToUpdate, tokenId);
+                bool updateResult = proxyAccess.UpdateEditor(id, editorToUpdate, token);
                 return CreatedAtRoute("DefaultApi", new { updated = updateResult }, editorToUpdate);
             }
             catch (ObjectDoesNotExists doesNotExists)
@@ -107,11 +107,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // DELETE: api/Editor/5
-        public HttpResponseMessage Delete(Guid id, Guid tokenId)
+        public HttpResponseMessage Delete(Guid id, Guid token)
         {
             try
             {
-                bool updateResult = proxyAccess.DeleteEditor(id, tokenId);
+                bool updateResult = proxyAccess.DeleteEditor(id, token);
                 return Request.CreateResponse(HttpStatusCode.NoContent, updateResult);
             }
             catch (ObjectDoesNotExists doesNotExists)

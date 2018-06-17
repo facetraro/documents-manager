@@ -26,13 +26,13 @@ namespace DocumentsManager.Web.Api.Controllers
         // GET: api/Document
         [HttpGet]
         [Route("Documents")]
-        public IHttpActionResult Get(Guid tokenId)
+        public IHttpActionResult Get(Guid token)
         {
-            IEnumerable<Document> documentsComplete = proxyAccess.GetAllDocuments(tokenId);
+            IEnumerable<Document> documentsComplete = proxyAccess.GetAllDocuments(token);
             List<DocumentDto> documents = new List<DocumentDto>();
             foreach (var item in documentsComplete)
             {
-                Document doc = proxyAccess.GetFullDocument(item.Id, tokenId);
+                Document doc = proxyAccess.GetFullDocument(item.Id, token);
                 documents.Add(new DocumentDto(doc));
             }
             if (documents == null)
@@ -43,12 +43,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/Document/5
-        public IHttpActionResult Get(Guid id, Guid tokenId)
+        public IHttpActionResult Get(Guid id, Guid token)
         {
             try
             {
 
-                DocumentDto document = new DocumentDto(proxyAccess.GetFullDocument(id, tokenId));
+                DocumentDto document = new DocumentDto(proxyAccess.GetFullDocument(id, token));
                 if (document == null)
                 {
                     return NotFound();
@@ -67,12 +67,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/Document
-        public IHttpActionResult Post([FromBody]DocumentModel model, Guid tokenId)
+        public IHttpActionResult Post([FromBody]DocumentModel model, Guid token)
         {
             try
             {
                 Document documentToAdd = GetEntityDocument(model);
-                Guid id = proxyAccess.CreateADocument(documentToAdd, tokenId);
+                Guid id = proxyAccess.CreateADocument(documentToAdd, token);
                 return CreatedAtRoute("DefaultApi", new { id = documentToAdd.Id }, documentToAdd);
             }
             catch (NoUserLoggedException ex)
@@ -87,12 +87,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/Document/5
-        public IHttpActionResult Put(Guid id, [FromBody]DocumentModel model, Guid tokenId)
+        public IHttpActionResult Put(Guid id, [FromBody]DocumentModel model, Guid token)
         {
             try
             {
                 Document documentToModify = GetEntityDocument(model);
-                bool updateResult = proxyAccess.UpdateADocument(id, documentToModify, tokenId);
+                bool updateResult = proxyAccess.UpdateADocument(id, documentToModify, token);
                 return CreatedAtRoute("DefaultApi", new { updated = updateResult }, documentToModify);
             }
             catch (NoUserLoggedException ex)
@@ -110,12 +110,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // DELETE: api/Document/5
-        public HttpResponseMessage Delete(Guid id, Guid tokenId)
+        public HttpResponseMessage Delete(Guid id, Guid token)
         {
             try
             {
-                Document documentToDelete = proxyAccess.GetDocumentById(id,tokenId);
-                bool updateResult = proxyAccess.DeleteADocument(documentToDelete, tokenId);
+                Document documentToDelete = proxyAccess.GetDocumentById(id,token);
+                bool updateResult = proxyAccess.DeleteADocument(documentToDelete, token);
                 return Request.CreateResponse(HttpStatusCode.Accepted, updateResult);
             }
             catch (ObjectDoesNotExists doesNotExists)
