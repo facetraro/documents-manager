@@ -50,6 +50,14 @@ namespace DocumentsManager.ImportedItemsParser
             Assert.AreEqual(format.Name, importedFormat.Name);
             Assert.AreEqual(format.StyleClasses.Count, 2);
         }
+        [TestMethod]
+        public void ReverseParseFormatTest()
+        {
+            Format format = EntitiesExampleInstances.TestFormat();
+            Format reverseFormat = FormatParser.Parse(FormatParser.Parse(format));
+            Assert.AreEqual(format.Name, reverseFormat.Name);
+            Assert.AreEqual(format.StyleClasses.Count, reverseFormat.StyleClasses.Count);
+        }
 
     }
 }
