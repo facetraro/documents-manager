@@ -19,11 +19,11 @@ namespace DocumentsManager.BusinessLogic
 
         public List<LoggerType> GetLoggers(DateTime dateSince, DateTime dateUntil)
         {
-           List<LoggerType> allLogs = context.GetLazy();
            List<LoggerType> filteredLogs = new List<LoggerType>();
-            foreach (LoggerType logi in allLogs)
+            foreach (LoggerType logi in context.GetLazy())
             {
-                if (logi.Date <= dateUntil && logi.Date >= dateSince)
+                bool isInDate = logi.Date <= dateUntil && logi.Date >= dateSince;
+                if (isInDate)
                 {
                     filteredLogs.Add(logi);
                 }
