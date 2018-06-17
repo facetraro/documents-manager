@@ -21,5 +21,16 @@ namespace DocumentsManager.ImportedItemsParser
             }
             return newFormat;
         }
+        public static ImportedFormat Parse(Format format)
+        {
+            ImportedFormat newFormat = new ImportedFormat();
+            newFormat.Name = format.Name;
+            newFormat.Styles = new List<ImportedStyleClass>();
+            foreach (var item in format.StyleClasses)
+            {
+                newFormat.Styles.Add(StyleClassParser.Parse(item));
+            }
+            return newFormat;
+        }
     }
 }
