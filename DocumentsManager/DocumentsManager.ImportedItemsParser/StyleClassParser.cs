@@ -175,11 +175,27 @@ namespace DocumentsManager.ImportedItemsParser
                 ParseItalics(newStyleClass, item);
             }
         }
+
         public static StyleClass Parse(ImportedStyleClass importedStyleClass)
         {
             StyleClass newStyleClass = new StyleClass();
             newStyleClass.Name = importedStyleClass.Name;
             ParseAttributes(newStyleClass, importedStyleClass);
+            return newStyleClass;
+        }
+        private static void ParseAttributes(ImportedStyleClass newStyleClass, StyleClass styleClass)
+        {
+            foreach (StyleAttribute item in styleClass.Attributes)
+            {
+                string newAttribute = item.ToString();
+                newStyleClass.StyleAttributes.Add(newAttribute);
+            }
+        }
+        public static ImportedStyleClass Parse(StyleClass styleClass)
+        {
+            ImportedStyleClass newStyleClass = new ImportedStyleClass();
+            newStyleClass.Name = styleClass.Name;
+            ParseAttributes(newStyleClass, styleClass);
             return newStyleClass;
         }
     }

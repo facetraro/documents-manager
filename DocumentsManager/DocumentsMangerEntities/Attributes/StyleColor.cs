@@ -43,5 +43,9 @@ namespace DocumentsMangerEntities
         {
             return String.Empty;
         }
+        public override string ToString()
+        {
+            return base.ToString()+"###"+this.TextColor.GetStringParser();
+        }
     }
 }

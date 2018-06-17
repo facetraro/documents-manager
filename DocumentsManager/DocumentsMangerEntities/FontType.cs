@@ -16,5 +16,18 @@
             }
             return null;
         }
+        public static string GetStringParser(this FontType fontType)
+        {
+            switch (fontType)
+            {
+                case FontType.Arial:
+                    return "arial";
+                case FontType.CourierNew:
+                    return "courier-new";
+                case FontType.TimesNewRoman:
+                    return "times-new-roman";
+            }
+            return null;
+        }
     }
 }

@@ -25,13 +25,13 @@ namespace DocumentsManagerTesting
         public void StyleAttributeConstructor()
         {
             StyleAttribute testAttribute = new Alignment();
-            Assert.IsTrue(testAttribute.Name.Equals("Alineación"));
+            Assert.IsTrue(testAttribute.Name.Equals("Alineacion"));
         }
         [TestMethod]
         public void StyleAttributeFontSizeConstructor()
         {
             StyleAttribute testAttribute = new FontSize();
-            Assert.IsTrue(testAttribute.Name.Equals("Tamaño"));
+            Assert.IsTrue(testAttribute.Name.Equals("TamanioLetra"));
         }
         [TestMethod]
         public void StyleAttributeItalicsConstructor()
@@ -55,7 +55,7 @@ namespace DocumentsManagerTesting
         public void StyleAttributeFontConstructor()
         {
             StyleAttribute testAttribute = new Font();
-            Assert.IsTrue(testAttribute.Name.Equals("Tipo de Letra"));
+            Assert.IsTrue(testAttribute.Name.Equals("TipoLetra"));
         }
         [TestMethod]
         public void StyleAttributeColorConstructor()

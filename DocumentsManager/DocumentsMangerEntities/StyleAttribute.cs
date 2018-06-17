@@ -36,7 +36,10 @@ namespace DocumentsMangerEntities
         public abstract string GetStyle();
         public abstract string GetInitialTag();
         public abstract string GetEndTag();
-
+        public override string ToString()
+        {
+            return this.Name; 
+        }
         public int CompareTo(StyleAttribute other)
         {
             if (other == null)

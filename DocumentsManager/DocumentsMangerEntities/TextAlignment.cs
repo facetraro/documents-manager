@@ -18,5 +18,20 @@
             }
             return null;
         }
+        public static string GetStringParser(this TextAlignment fontType)
+        {
+            switch (fontType)
+            {
+                case TextAlignment.Left:
+                    return "izquierda";
+                case TextAlignment.Right:
+                    return "derecha";
+                case TextAlignment.Center:
+                    return "centrado";
+                case TextAlignment.Justify:
+                    return "justificado";
+            }
+            return null;
+        }
     }
 }

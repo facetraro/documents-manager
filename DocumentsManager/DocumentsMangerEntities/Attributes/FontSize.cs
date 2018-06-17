@@ -10,7 +10,7 @@ namespace DocumentsMangerEntities
     {
         public FontSize()
         {
-            Name = "Tamaño";
+            Name = "TamanioLetra";
             Size = 10;
         }
 
@@ -47,6 +47,10 @@ namespace DocumentsMangerEntities
         public override string GetEndTag()
         {
             return String.Empty;
+        }
+        public override string ToString()
+        {
+            return base.ToString()+"###"+this.Size; 
         }
     }
 }

@@ -8,7 +8,7 @@ namespace DocumentsMangerEntities
         public FontType FontType { get; set; }
         public Font()
         {
-            Name = "Tipo de Letra";
+            Name = "TipoLetra";
         }
         public override bool Equals(object obj)
         {
@@ -50,6 +50,10 @@ namespace DocumentsMangerEntities
         public override string GetEndTag()
         {
             return String.Empty;
+        }
+        public override string ToString()
+        {
+            return base.ToString()+"###"+this.FontType.GetStringParser(); 
         }
     }
 }
