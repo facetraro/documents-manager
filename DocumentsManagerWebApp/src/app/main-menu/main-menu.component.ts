@@ -19,6 +19,9 @@ private activeToken:string;
   goListAdmins(){
     this.router.navigate((['/admins']));
   }
+  goListStyles(){
+    this.router.navigate((['/styles']));
+  }
   ngOnInit() {
   }
 

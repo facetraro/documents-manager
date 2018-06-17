@@ -44,8 +44,8 @@ export class ListStylesComponent {
     this.styleService.deleteStyle(this.activeToken,id).subscribe(response => window.location.reload()), 
     error => this.showErrorMessage(error);
   }
-  addUser(){
-    //this.router.navigate((['/newAdmin']));
+  addStyle(){
+    this.router.navigate((['/newStyle']));
   }
 }
 
