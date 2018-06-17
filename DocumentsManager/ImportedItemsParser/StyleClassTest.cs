@@ -4,6 +4,7 @@ using DocumentsManager.FormatImportation;
 using DocumentsMangerEntities;
 using DocumentsManager.ImportedItemsParser;
 using DocumentsManager.Exceptions;
+using DocumentsManagerExampleInstances;
 
 namespace ImportedItemsParser
 {
@@ -105,6 +106,77 @@ namespace ImportedItemsParser
             importedStyleClass.Name = "ExampleName";
             importedStyleClass.StyleAttributes.Add(Color + "###120,134,3");
             StyleClass style = StyleClassParser.Parse(importedStyleClass);
+        }
+        [TestMethod]
+        public void ReverseStyleClassParseTest()
+        {
+            StyleClass newStyleClass = EntitiesExampleInstances.TestStyleClass();
+            StyleClass reverseStyleClass = StyleClassParser.Parse(StyleClassParser.Parse(newStyleClass));
+            Assert.AreEqual(newStyleClass.Name, reverseStyleClass.Name);
+            for (int i = 0; i < newStyleClass.Attributes.Count; i++)
+            {
+                Assert.AreEqual(newStyleClass.Attributes[i].ToString(),reverseStyleClass.Attributes[i].ToString());
+            }
+        }
+        [TestMethod]
+        public void ReverseStyleClassParseSecondTest()
+        {
+            StyleClass newStyleClass = new StyleClass();
+            Font newFont = new Font();
+            newFont.FontType = FontType.CourierNew;
+            newStyleClass.Attributes.Add(newFont);
+            StyleColor newColor = new StyleColor();
+            newColor.TextColor = TextColor.Black;
+            newStyleClass.Attributes.Add(newColor);
+            Alignment newAlignment = new Alignment();
+            newAlignment.TextAlignment = TextAlignment.Justify;
+            newStyleClass.Attributes.Add(newAlignment);
+            StyleClass reverseStyleClass = StyleClassParser.Parse(StyleClassParser.Parse(newStyleClass));
+            Assert.AreEqual(newStyleClass.Name, reverseStyleClass.Name);
+            for (int i = 0; i < newStyleClass.Attributes.Count; i++)
+            {
+                Assert.AreEqual(newStyleClass.Attributes[i].ToString(), reverseStyleClass.Attributes[i].ToString());
+            }
+        }
+        [TestMethod]
+        public void ReverseStyleClassParseThirdTest()
+        {
+            StyleClass newStyleClass = new StyleClass();
+            Font newFont = new Font();
+            newFont.FontType = FontType.TimesNewRoman;
+            newStyleClass.Attributes.Add(newFont);
+            StyleColor newColor = new StyleColor();
+            newColor.TextColor = TextColor.Blue;
+            newStyleClass.Attributes.Add(newColor);
+            Alignment newAlignment = new Alignment();
+            newAlignment.TextAlignment = TextAlignment.Left;
+            newStyleClass.Attributes.Add(newAlignment);
+            StyleClass reverseStyleClass = StyleClassParser.Parse(StyleClassParser.Parse(newStyleClass));
+            Assert.AreEqual(newStyleClass.Name, reverseStyleClass.Name);
+            for (int i = 0; i < newStyleClass.Attributes.Count; i++)
+            {
+                Assert.AreEqual(newStyleClass.Attributes[i].ToString(), reverseStyleClass.Attributes[i].ToString());
+            }
+        }
+        [TestMethod]
+        public void ReverseStyleClassParseLastTest()
+        {
+            StyleClass newStyleClass = new StyleClass();
+            Font newFont = new Font();
+            newFont.FontType = FontType.TimesNewRoman;
+            newStyleClass.Attributes.Add(newFont);
+            StyleColor newColor = new StyleColor();
+            newColor.TextColor = TextColor.Blue;
+            newStyleClass.Attributes.Add(newColor);
+            Alignment newAlignment = new Alignment();
+            newAlignment.TextAlignment = TextAlignment.Left;
+            newStyleClass.Attributes.Add(newAlignment);
+            StyleClass reverseStyleClass = StyleClassParser.Parse(StyleClassParser.Parse(newStyleClass));
+            Assert.AreEqual(newStyleClass.Name, reverseStyleClass.Name);
+            for (int i = 0; i < newStyleClass.Attributes.Count; i++)
+            {
+                Assert.AreEqual(newStyleClass.Attributes[i].ToString(), reverseStyleClass.Attributes[i].ToString());
+            }
         }
     }
 }
