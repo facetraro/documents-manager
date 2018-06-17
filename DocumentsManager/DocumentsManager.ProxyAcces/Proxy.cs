@@ -85,15 +85,15 @@ namespace DocumentsManager.ProxyAcces
 
         public Guid AddAdmin(AdminUser admin, Guid tokenId)
         {
-            UserValid(admin);
             AccessControl(tokenId);
+            UserValid(admin);
             return aBL.AddAdmin(admin, tokenId);
         }
 
         public Guid AddEditor(EditorUser editor, Guid tokenId)
         {
-            UserValid(editor);
             AccessControl(tokenId);
+            UserValid(editor);
             return aBL.AddEditor(editor, tokenId);
         }
 
@@ -112,6 +112,7 @@ namespace DocumentsManager.ProxyAcces
         public bool UpdateAdmin(Guid id, AdminUser newAdmin, Guid tokenId)
         {
             AccessControl(tokenId);
+            UserValid(newAdmin);
             return aBL.UpdateAdmin(id, newAdmin, tokenId);
         }
         #endregion
@@ -131,6 +132,7 @@ namespace DocumentsManager.ProxyAcces
         public bool UpdateEditor(Guid id, EditorUser newEditor, Guid tokenId)
         {
             AccessControl(tokenId);
+            UserValid(newEditor);
             return eBL.UpdateEditor(id, newEditor, tokenId);
         }
         public bool DeleteEditor(Guid id, Guid tokenId)
@@ -225,9 +227,28 @@ namespace DocumentsManager.ProxyAcces
             }
         }
         public void UserValid(User potentialUser) {
-            if (!potentialUser.IsUserValid()) {
-                throw new InvalidUserAttrException();
+
+            if (!potentialUser.IsCommonAttrValid(potentialUser.Name))
+            {
+                throw new InvalidUserAttrException("nombre");
             }
+            if (!potentialUser.IsCommonAttrValid(potentialUser.Surname))
+            {
+                throw new InvalidUserAttrException("apellido");
+            }
+            if (!potentialUser.IsEmailValid())
+            {
+                throw new InvalidUserEmailException();
+            }
+            if (!potentialUser.IsCommonAttrValid(potentialUser.Username))
+            {
+                throw new InvalidUserAttrException("nombre de usuario");
+            }
+            if (!potentialUser.IsPasswordValid())
+            {
+                throw new InvalidUserPasswordException();
+            }
+           
         }
         #endregion
         public Guid LogIn(string username, string password) {

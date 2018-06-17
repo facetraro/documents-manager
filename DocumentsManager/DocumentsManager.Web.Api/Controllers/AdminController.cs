@@ -82,6 +82,30 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
+            catch (InvalidUserAttrException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidUserPasswordException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidUserEmailException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (SessionExpiredException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (NoUserLoggedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (UserNotAuthorizedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/Admin/5
@@ -102,6 +126,30 @@ namespace DocumentsManager.Web.Api.Controllers
                 return BadRequest(doesNotExists.Message);
             }
             catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidUserAttrException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidUserPasswordException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidUserEmailException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (SessionExpiredException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (NoUserLoggedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (UserNotAuthorizedException ex)
             {
                 return BadRequest(ex.Message);
             }

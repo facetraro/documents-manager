@@ -44,24 +44,26 @@ namespace DocumentsMangerEntities
         }
         public bool IsUserValid()
         {
-            return IsEmailValid(this.Email) && IsUsernameValid(this.Username) && IsPasswordValid(this.Password) && IsUsernameValid(this.Name);
+            return IsEmailValid() && IsCommonAttrValid(this.Username) && IsPasswordValid() && IsCommonAttrValid(this.Name) && IsCommonAttrValid(this.Surname);
         }
-        private bool IsEmailValid(string potentiaEmail)
+        public bool IsEmailValid()
         {
-            bool containsAt = potentiaEmail.Contains("@");
-            string[] splitedEmail = potentiaEmail.Split('@');
+            if (Email==null)return false;
+            bool containsAt = Email.Contains("@");
+            string[] splitedEmail = Email.Split('@');
             bool oneAt = splitedEmail.Length == 2;
+            if (!oneAt )return false;
             bool notEmptySides = !splitedEmail[0].Equals("") && !splitedEmail[1].Equals("");
             bool lengthSides = splitedEmail[0].Length > 3 && splitedEmail[1].Length > 3;
             return containsAt && oneAt && notEmptySides && lengthSides;
         }
-        private bool IsUsernameValid(string username)
+        public bool IsCommonAttrValid(string attr)
         {
-            return username.Length > 3 && !username.Contains(" ");
+            return attr!=null && attr.Length > 3 && !attr.Contains(" ");
         }
-        private bool IsPasswordValid(string password)
+        public bool IsPasswordValid()
         {
-            return password.Length > 3;
+            return Password != null && Password.Length > 3;
         }
     }
 }
