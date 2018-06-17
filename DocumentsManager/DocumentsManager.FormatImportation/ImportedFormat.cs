@@ -6,5 +6,10 @@ namespace DocumentsManager.FormatImportation
     {
         public string Name { get; set; }
         public List<ImportedStyleClass>  Styles { get; set; }
+        public ImportedFormat()
+        {
+            Name = "";
+            Styles = new List<ImportedStyleClass>();
+        }
     }
 }

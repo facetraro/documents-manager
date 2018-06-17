@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.FormatImpo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.FormatImportationTest", "DocumentsManager.FormatImportationTest\DocumentsManager.FormatImportationTest.csproj", "{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.ImportedItemsParser", "DocumentsManager.ImportedItemsParser\DocumentsManager.ImportedItemsParser.csproj", "{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.ImportedItemsParserTest", "ImportedItemsParser\DocumentsManager.ImportedItemsParserTest.csproj", "{23B6915B-6823-4014-BB41-C340C5DA2E17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +115,14 @@ Global
 		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23B6915B-6823-4014-BB41-C340C5DA2E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23B6915B-6823-4014-BB41-C340C5DA2E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23B6915B-6823-4014-BB41-C340C5DA2E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23B6915B-6823-4014-BB41-C340C5DA2E17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
