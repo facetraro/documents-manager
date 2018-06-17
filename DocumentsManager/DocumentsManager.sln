@@ -44,6 +44,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.ProxyInterfaces", "DocumentsManager.ProxyInterfaces\DocumentsManager.ProxyInterfaces.csproj", "{27DC7037-7ED5-45D8-852A-1C29C0CDB4AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.BusinessLogic.Charts", "DocumentsManager.BusinessLogic.Charts\DocumentsManager.BusinessLogic.Charts.csproj", "{80E332CD-14BF-42AC-B302-A36A4806ABF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.ImportedItemsParser", "DocumentsManager.ImportedItemsParser\DocumentsManager.ImportedItemsParser.csproj", "{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.ImportedItemsParserTest", "ImportedItemsParser\DocumentsManager.ImportedItemsParserTest.csproj", "{23B6915B-6823-4014-BB41-C340C5DA2E17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +126,7 @@ Global
 		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{260A0BFF-0C33-495A-9DF3-8BEB2A5B0DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{0969114A-0EB7-4D6E-A398-300FB0766FB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0969114A-0EB7-4D6E-A398-300FB0766FB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0969114A-0EB7-4D6E-A398-300FB0766FB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -135,6 +139,16 @@ Global
 		{80E332CD-14BF-42AC-B302-A36A4806ABF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80E332CD-14BF-42AC-B302-A36A4806ABF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80E332CD-14BF-42AC-B302-A36A4806ABF4}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23B6915B-6823-4014-BB41-C340C5DA2E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23B6915B-6823-4014-BB41-C340C5DA2E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23B6915B-6823-4014-BB41-C340C5DA2E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23B6915B-6823-4014-BB41-C340C5DA2E17}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> feature/ImportedItemsParser
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

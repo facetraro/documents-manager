@@ -124,6 +124,7 @@ namespace DocumentsManager.WinApp.Controls
             try
             {
                 List<ImportedFormat> formats = importer.ImportFormats(parametersObtained);
+
             }
             catch (Exception ex)
             {

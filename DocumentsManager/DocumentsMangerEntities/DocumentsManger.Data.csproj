@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminUser.cs" />
+    <Compile Include="Attributes\Border.cs" />
     <Compile Include="Friendship.cs" />
     <Compile Include="FriendshipState.cs" />
     <Compile Include="ModifyState.cs" />

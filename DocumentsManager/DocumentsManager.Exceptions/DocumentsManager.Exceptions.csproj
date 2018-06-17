@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CantDeleteLoggedUserException.cs" />
+    <Compile Include="StyleAttributeNotRecognized.cs" />
     <Compile Include="UserNotAuthorizedException.cs" />
     <Compile Include="DocumentAlreadyDeleted.cs" />
     <Compile Include="InvalidTokenException.cs" />
