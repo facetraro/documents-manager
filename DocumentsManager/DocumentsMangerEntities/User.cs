@@ -42,7 +42,7 @@ namespace DocumentsMangerEntities
         {
             return Password.Equals(possiblePassword);
         }
-        public bool isUserValid()
+        public bool IsUserValid()
         {
             return IsEmailValid(this.Email) && IsUsernameValid(this.Username) && IsPasswordValid(this.Password) && IsUsernameValid(this.Name);
         }

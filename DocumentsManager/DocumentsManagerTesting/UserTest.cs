@@ -82,7 +82,7 @@ namespace DocumentsManagerTesting
                 Password = "",
                 Email = ""
             };
-            Assert.IsFalse(user.isUserValid());
+            Assert.IsFalse(user.IsUserValid());
         }
         [TestMethod]
         public void TestUserValidWrongEmail()
@@ -94,7 +94,7 @@ namespace DocumentsManagerTesting
                 Password = "AAAAAA",
                 Email = "@@@@"
             };
-            Assert.IsFalse(user.isUserValid());
+            Assert.IsFalse(user.IsUserValid());
         }
         [TestMethod]
         public void TestUserValidWrongName()
@@ -106,7 +106,7 @@ namespace DocumentsManagerTesting
                 Password = "AAAAAA",
                 Email = "AAAA@AAAA"
             };
-            Assert.IsFalse(user.isUserValid());
+            Assert.IsFalse(user.IsUserValid());
         }
         [TestMethod]
         public void TestUserValidWrongUserName()
@@ -118,7 +118,7 @@ namespace DocumentsManagerTesting
                 Password = "AAAAAA",
                 Email = "AAAA@AAAA"
             };
-            Assert.IsFalse(user.isUserValid());
+            Assert.IsFalse(user.IsUserValid());
         }
         [TestMethod]
         public void TestUserValidWrongPassword()
@@ -130,7 +130,7 @@ namespace DocumentsManagerTesting
                 Password = "",
                 Email = "AAAA@AAAA"
             };
-            Assert.IsFalse(user.isUserValid());
+            Assert.IsFalse(user.IsUserValid());
         }
         [TestMethod]
         public void TestUserValidWrongShortEmail()
@@ -142,7 +142,7 @@ namespace DocumentsManagerTesting
                 Password = "",
                 Email = "A@A"
             };
-            Assert.IsFalse(user.isUserValid());
+            Assert.IsFalse(user.IsUserValid());
         }
         [TestMethod]
         public void TestUserValid()
@@ -154,7 +154,7 @@ namespace DocumentsManagerTesting
                 Password = "AAAA",
                 Email = "AAAA@AAAA"
             };
-            Assert.IsTrue(user.isUserValid());
+            Assert.IsTrue(user.IsUserValid());
         }
     }
 }

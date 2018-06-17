@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DocumentsMangerEntities;
 using DocumentsManager.BusinessLogic.Charts;
+using DocumentsManager.Exceptions;
 
 namespace DocumentsManager.ProxyAcces
 {
@@ -84,12 +85,14 @@ namespace DocumentsManager.ProxyAcces
 
         public Guid AddAdmin(AdminUser admin, Guid tokenId)
         {
+            UserValid(admin);
             AccessControl(tokenId);
             return aBL.AddAdmin(admin, tokenId);
         }
 
         public Guid AddEditor(EditorUser editor, Guid tokenId)
         {
+            UserValid(editor);
             AccessControl(tokenId);
             return aBL.AddEditor(editor, tokenId);
         }
@@ -207,12 +210,32 @@ namespace DocumentsManager.ProxyAcces
             return aBL.GetChartCreationByUser(user, since, until, tokenId);
         }
         #endregion
+        #region Excpetions
         public void AccessControl(Guid tokenId)
         {
-            User responsibleUser = uBL.GetUserByToken(tokenId);
             //throw exceptions here
+            User responsibleUser = uBL.GetUserByToken(tokenId);
+            if (!uBL.IdRegistered(responsibleUser))
+            {
+                throw new ObjectDoesNotExists(responsibleUser);
+            }
+            if (!uBL.IsTokenActive(tokenId))
+            {
+                throw new SessionExpiredException();
+            }
         }
+        public void UserValid(User potentialUser) {
+            if (!potentialUser.IsUserValid()) {
+                throw new InvalidUserAttrException();
+            }
+        }
+        #endregion
         public Guid LogIn(string username, string password) {
+            User user = uBL.GetUserByUsername(username);
+            if (!uBL.IdRegistered(user))
+            {
+                throw new ObjectDoesNotExists(user);
+            }
             return uBL.LogIn(username, password);
         }
         public void LogOut(Guid token) {
