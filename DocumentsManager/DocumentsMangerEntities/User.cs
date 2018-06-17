@@ -23,21 +23,45 @@ namespace DocumentsMangerEntities
             }
             return Id.Equals(anotherUser.Id);
         }
-        public bool IsSameUserByEmail(User anUser) {
+        public bool IsSameUserByEmail(User anUser)
+        {
             return Email.Equals(anUser.Email);
         }
         public bool IsSameUserByUsername(User anUser)
         {
             return Username.Equals(anUser.Username);
         }
-        public bool hasSameInformation(User anUser) {
+        public bool hasSameInformation(User anUser)
+        {
             bool password = Password.Equals(anUser.Password);
             bool name = Name.Equals(anUser.Name);
             bool surname = Surname.Equals(anUser.Surname);
             return IsSameUserByUsername(anUser) && IsSameUserByEmail(anUser) && password && name && surname && Equals(anUser);
         }
-        public bool Authenticate(string possiblePassword) {
+        public bool Authenticate(string possiblePassword)
+        {
             return Password.Equals(possiblePassword);
+        }
+        public bool IsUserValid()
+        {
+            return IsEmailValid(this.Email) && IsUsernameValid(this.Username) && IsPasswordValid(this.Password) && IsUsernameValid(this.Name);
+        }
+        private bool IsEmailValid(string potentiaEmail)
+        {
+            bool containsAt = potentiaEmail.Contains("@");
+            string[] splitedEmail = potentiaEmail.Split('@');
+            bool oneAt = splitedEmail.Length == 2;
+            bool notEmptySides = !splitedEmail[0].Equals("") && !splitedEmail[1].Equals("");
+            bool lengthSides = splitedEmail[0].Length > 3 && splitedEmail[1].Length > 3;
+            return containsAt && oneAt && notEmptySides && lengthSides;
+        }
+        private bool IsUsernameValid(string username)
+        {
+            return username.Length > 3 && !username.Contains(" ");
+        }
+        private bool IsPasswordValid(string password)
+        {
+            return password.Length > 3;
         }
     }
 }

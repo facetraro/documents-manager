@@ -52,6 +52,10 @@
       <Project>{80E332CD-14BF-42AC-B302-A36A4806ABF4}</Project>
       <Name>DocumentsManager.BusinessLogic.Charts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj">
+      <Project>{34E362D2-1A27-48BB-8FE5-91A89124B556}</Project>
+      <Name>DocumentsManager.Exceptions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.ProxyInterfaces\DocumentsManager.ProxyInterfaces.csproj">
       <Project>{27dc7037-7ed5-45d8-852a-1c29c0cdb4ac}</Project>
       <Name>DocumentsManager.ProxyInterfaces</Name>
