@@ -69,7 +69,7 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 StyleClass styleToAdd = StyleClassParser.Parse(style);
                 Guid id = proxyAccess.AddStyle(styleToAdd, token);
-                return CreatedAtRoute("DefaultApi", new { id = styleToAdd.Id }, styleToAdd);
+                return Ok(id);
             }
             catch (ArgumentNullException ex)
             {

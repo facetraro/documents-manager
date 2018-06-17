@@ -1,10 +1,10 @@
 export class StyleModel {
     id:string;
-    attributes: Array<string>;
+    styleAttributes: Array<string>;
     
     constructor(){
         this.id="";
-        this.attributes=[];
+        this.styleAttributes=[];
     }
   }
  
