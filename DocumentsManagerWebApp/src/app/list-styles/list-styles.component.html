@@ -1,0 +1,57 @@
+<div>
+  <div align="center">
+      <button (click)="addStyle()">
+              Añadir nuevo Estilo
+      </button>
+  </div>
+  <div class='panel-body'>
+      <!-- Selector de filtro:  -->
+      <div class='row'>
+          <div class='col-md-2'>Filter by:</div>
+          <div class='col-md-4'>
+              <input type='text' [(ngModel)]='listFilter' />
+          </div>
+      </div>
+      <div class='row' *ngIf='listFilter'>
+          <div class='col-md-6'>
+              <h3>Filtered by: {{listFilter}} </h3>
+          </div>
+      </div>
+
+      <!-- Mensaje de error -->
+      <div class='has-error'> </div>
+
+      <!--Tabla de mascotas -->
+      <div class='table-responsive'>
+          <div style="overflow-x:auto;">
+              <table class='table' *ngIf='styles && styles.length'>
+                  <!--Cabezal de la tabla -->
+                  <thead>
+                      <tr>
+                          <th>Id</th>
+                          <th>Nombre</th>
+                          <th>Acciones</th>
+                      </tr>
+                  </thead>
+                  <!--Cuerpo de la tabla-->
+                  <tbody>
+                      <tr *ngFor='let aFullStyleData of styles'  >
+                          <td>{{aFullStyleData.id }}</td>
+                          <td>{{aFullStyleData.name | uppercase}}</td>
+                          <td>
+                          <button (click)="modifyStyle(aFullStyleData.id)">
+                                  Modificar
+                          </button>
+                          &nbsp;
+                          <button (click)="deleteStyle(aFullStyleData.id)">
+                                  Eliminar
+                          </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <app-go-home></app-go-home>
+  </div>
+</div>

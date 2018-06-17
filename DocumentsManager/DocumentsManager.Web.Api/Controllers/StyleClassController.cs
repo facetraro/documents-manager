@@ -1,4 +1,6 @@
-﻿using DocumentsManager.ProxyAcces;
+﻿using DocumentsManager.FormatImportation;
+using DocumentsManager.ImportedItemsParser;
+using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
 using System;
@@ -29,10 +31,10 @@ namespace DocumentsManager.Web.Api.Controllers
         public IHttpActionResult Get(Guid token)
         {
             IEnumerable<StyleClass> realStyles = proxyAccess.GetAllStyleClasses(token);
-            List<StyleClassDto> styles = new List<StyleClassDto>();
+            List<ImportedStyleClass> styles = new List<ImportedStyleClass>();
             foreach (var item in realStyles)
             {
-                styles.Add(new StyleClassDto(item));
+                styles.Add(StyleClassParser.Parse(item));
             }
             if (styles == null)
             {
@@ -47,7 +49,7 @@ namespace DocumentsManager.Web.Api.Controllers
             try
             {
                 StyleClass styleComplete = proxyAccess.GetStyleById(id, token);
-                StyleClassDto style = new StyleClassDto(styleComplete);
+                ImportedStyleClass style = StyleClassParser.Parse(styleComplete);
                 if (style == null)
                 {
                     return NotFound();
@@ -61,11 +63,11 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/StyleClass
-        public IHttpActionResult Post([FromBody] StyleClassModel style, Guid token)
+        public IHttpActionResult Post([FromBody] ImportedStyleClass style, Guid token)
         {
             try
             {
-                StyleClass styleToAdd = GetEntityStyleClass(style);
+                StyleClass styleToAdd = StyleClassParser.Parse(style);
                 Guid id = proxyAccess.AddStyle(styleToAdd, token);
                 return CreatedAtRoute("DefaultApi", new { id = styleToAdd.Id }, styleToAdd);
             }
@@ -76,11 +78,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // PUT: api/StyleClass/5
-        public IHttpActionResult Put(Guid id, [FromBody]StyleClassModel style, Guid token)
+        public IHttpActionResult Put(Guid id, [FromBody]ImportedStyleClass style, Guid token)
         {
             try
             {
-                StyleClass styleToAdd = GetEntityStyleClass(style);
+                StyleClass styleToAdd = StyleClassParser.Parse(style);
+                styleToAdd.Id = id;
                 bool updateResult = proxyAccess.UpdateStyle(id, styleToAdd, token);
                 return CreatedAtRoute("DefaultApi", new { updated = updateResult }, styleToAdd);
             }

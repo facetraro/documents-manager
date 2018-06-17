@@ -93,7 +93,12 @@ namespace DocumentsManager.BusinessLogic
         public IEnumerable<StyleClass> GetAllStyleClasses(Guid tokenId)
         {
             StyleClassContextHandler context = new StyleClassContextHandler();
-            return context.GetLazy();
+            List<StyleClass> styles = new List<StyleClass>();
+            foreach (var item in context.GetLazy())
+            {
+                styles.Add(context.GetById(item.Id));
+            }
+            return styles;
         }
 
       

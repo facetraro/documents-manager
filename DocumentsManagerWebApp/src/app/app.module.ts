@@ -16,6 +16,8 @@ import { ListAdminsComponent } from './list-admin/list-admins.component';
 import { GoHomeComponent } from './go-home/go-home.component';
 import { NewAdminComponent } from './new-admin/new-admin.component';
 import { ModifyAdminComponent } from './modify-admin/modify-admin.component';
+import { ListStylesComponent } from './list-styles/list-styles.component';
+import { StyleService } from './list-styles/style.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ModifyAdminComponent } from './modify-admin/modify-admin.component';
     ListAdminsComponent,
     GoHomeComponent,
     NewAdminComponent,
-    ModifyAdminComponent
+    ModifyAdminComponent,
+    ListStylesComponent
   ],
   imports: [
     HttpModule,
@@ -37,6 +40,7 @@ import { ModifyAdminComponent } from './modify-admin/modify-admin.component';
   providers: [
     LoginService, 
     LogoutService,
+    StyleService,
     AdminService, 
     ManageToken
   ],

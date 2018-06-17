@@ -8,6 +8,7 @@ namespace DocumentsManager.FormatImportation
 {
     public class ImportedStyleClass
     {
+        public Guid Id = new Guid();
         public string Name { get; set; }
         public List<string> StyleAttributes { get; set; }
 
