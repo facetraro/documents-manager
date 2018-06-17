@@ -17,9 +17,18 @@ namespace DocumentsManager.BusinessLogic
             context.Add(log);
         }
 
-        public List<LoggerType> GetLoggers()
+        public List<LoggerType> GetLoggers(DateTime dateSince, DateTime dateUntil)
         {
-            return context.GetLazy();
+           List<LoggerType> allLogs = context.GetLazy();
+           List<LoggerType> filteredLogs = new List<LoggerType>();
+            foreach (LoggerType logi in allLogs)
+            {
+                if (logi.Date <= dateUntil && logi.Date >= dateSince)
+                {
+                    filteredLogs.Add(logi);
+                }
+            }
+           return filteredLogs;
         }
     }
 }

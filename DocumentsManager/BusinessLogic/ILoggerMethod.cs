@@ -10,6 +10,6 @@ namespace DocumentsManager.BusinessLogic
     public interface ILoggerMethod
     {
         void AddLogger(LoggerType log);
-        List<LoggerType> GetLoggers();
+        List<LoggerType> GetLoggers(DateTime dateSince, DateTime dateUntil);
     }
 }
