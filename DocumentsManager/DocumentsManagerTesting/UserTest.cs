@@ -73,5 +73,88 @@ namespace DocumentsManagerTesting
             User user = EntitiesExampleInstances.TestUser();
             Assert.IsFalse(user.Authenticate("NotThePassword"));
         }
+        [TestMethod]
+        public void TestUserValidWrong()
+        {
+            User user = new AdminUser {
+                Name = "",
+                Username = "",
+                Password = "",
+                Email = ""
+            };
+            Assert.IsFalse(user.isUserValid());
+        }
+        [TestMethod]
+        public void TestUserValidWrongEmail()
+        {
+            User user = new AdminUser
+            {
+                Name = "AAA",
+                Username = "AAA",
+                Password = "AAAAAA",
+                Email = "@@@@"
+            };
+            Assert.IsFalse(user.isUserValid());
+        }
+        [TestMethod]
+        public void TestUserValidWrongName()
+        {
+            User user = new AdminUser
+            {
+                Name = "",
+                Username = "AAA",
+                Password = "AAAAAA",
+                Email = "AAAA@AAAA"
+            };
+            Assert.IsFalse(user.isUserValid());
+        }
+        [TestMethod]
+        public void TestUserValidWrongUserName()
+        {
+            User user = new AdminUser
+            {
+                Name = "AAA",
+                Username = "",
+                Password = "AAAAAA",
+                Email = "AAAA@AAAA"
+            };
+            Assert.IsFalse(user.isUserValid());
+        }
+        [TestMethod]
+        public void TestUserValidWrongPassword()
+        {
+            User user = new AdminUser
+            {
+                Name = "AAA",
+                Username = "AAAAAA",
+                Password = "",
+                Email = "AAAA@AAAA"
+            };
+            Assert.IsFalse(user.isUserValid());
+        }
+        [TestMethod]
+        public void TestUserValidWrongShortEmail()
+        {
+            User user = new AdminUser
+            {
+                Name = "AAA",
+                Username = "AAAAAA",
+                Password = "",
+                Email = "A@A"
+            };
+            Assert.IsFalse(user.isUserValid());
+        }
+        [TestMethod]
+        public void TestUserValid()
+        {
+            User user = new AdminUser
+            {
+                Name = "AAAA",
+                Username = "AAAAAA",
+                Password = "AAAA",
+                Email = "AAAA@AAAA"
+            };
+            Assert.IsTrue(user.isUserValid());
+        }
     }
 }
