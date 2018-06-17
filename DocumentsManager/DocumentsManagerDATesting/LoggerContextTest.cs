@@ -34,7 +34,7 @@ namespace DocumentsManagerDATesting
         public void AddLogTest()
         {
             ILoggerMethod loggerOperations = SetUp();
-            Assert.IsTrue(loggerOperations.GetLoggers().Count==1);
+            Assert.IsTrue(loggerOperations.GetLoggers(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day - 1), DateTime.Today.AddDays(1)).Count==1);
             TearDown();
         }
         [TestMethod]
@@ -43,14 +43,14 @@ namespace DocumentsManagerDATesting
             ILoggerMethod loggerOperations = SetUp();
             SetUp();
             SetUp();
-            Assert.IsTrue(loggerOperations.GetLoggers().Count == 3);
+            Assert.IsTrue(loggerOperations.GetLoggers(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day - 1), DateTime.Today.AddDays(1)).Count == 3);
             TearDown();
         }
         [TestMethod]
         public void NoMoreLogTest()
         {
             ILoggerMethod loggerOperations = new LoggerMethod();
-            Assert.IsTrue(loggerOperations.GetLoggers().Count == 0);
+            Assert.IsTrue(loggerOperations.GetLoggers(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day - 1), DateTime.Today.AddDays(1)).Count == 0);
             TearDown();
         }
         [TestMethod]
@@ -58,9 +58,9 @@ namespace DocumentsManagerDATesting
         {
             LoggerContext context = new LoggerContext();
             ILoggerMethod loggerOperations = SetUp();
-            List<LoggerType> allLogs = loggerOperations.GetLoggers();
+            List<LoggerType> allLogs = loggerOperations.GetLoggers(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day - 1), DateTime.Today.AddDays(1));
             context.Remove(allLogs.ElementAt(0));
-            Assert.IsTrue(loggerOperations.GetLoggers().Count == 0);
+            Assert.IsTrue(loggerOperations.GetLoggers(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day - 1), DateTime.Today.AddDays(1)).Count == 0);
             TearDown();
         }
         [TestMethod]
@@ -68,9 +68,9 @@ namespace DocumentsManagerDATesting
         {
             LoggerContext context = new LoggerContext();
             ILoggerMethod loggerOperations = SetUp();
-            List<LoggerType> allLogs = loggerOperations.GetLoggers();
+            List<LoggerType> allLogs = loggerOperations.GetLoggers(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day - 1), DateTime.Today.AddDays(1));
             context.Remove(allLogs.ElementAt(0).Id);
-            Assert.IsTrue(loggerOperations.GetLoggers().Count == 0);
+            Assert.IsTrue(loggerOperations.GetLoggers(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day - 1), DateTime.Today.AddDays(1)).Count == 0);
             TearDown();
         }
         [TestMethod]
@@ -79,9 +79,9 @@ namespace DocumentsManagerDATesting
             LoggerContext context = new LoggerContext();
             ILoggerMethod loggerOperations = SetUp();
             SetUp();
-            List<LoggerType> allLogs = loggerOperations.GetLoggers();
+            List<LoggerType> allLogs = loggerOperations.GetLoggers(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day - 1), DateTime.Today.AddDays(1));
             context.Remove(allLogs.ElementAt(0).Id);
-            Assert.IsTrue(loggerOperations.GetLoggers().Count == 1);
+            Assert.IsTrue(loggerOperations.GetLoggers(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day - 1), DateTime.Today.AddDays(1)).Count == 1);
             TearDown();
         }
         [TestMethod]
@@ -89,9 +89,9 @@ namespace DocumentsManagerDATesting
         {
             LoggerContext context = new LoggerContext();
             ILoggerMethod loggerOperations = new LoggerMethod();
-            List<LoggerType> allLogs = loggerOperations.GetLoggers();
+            List<LoggerType> allLogs = loggerOperations.GetLoggers(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day - 1), DateTime.Today.AddDays(1));
             context.Remove(Guid.NewGuid());
-            Assert.IsTrue(loggerOperations.GetLoggers().Count == 0);
+            Assert.IsTrue(loggerOperations.GetLoggers(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day - 1), DateTime.Today.AddDays(1)).Count == 0);
             TearDown();
         }
 
