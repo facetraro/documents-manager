@@ -39,5 +39,32 @@ namespace DocumentsMangerEntities
         public bool Authenticate(string possiblePassword) {
             return Password.Equals(possiblePassword);
         }
+        public bool isUserValid() {
+            return IsEmailValid(this.Email) && IsUsernameValid(this.Username) && IsPasswordValid(this.Password) && IsUsernameValid(this.Name);
+        }
+        private bool IsEmailValid(string potentiaEmail) {
+            bool emailValid = false;
+            if (potentiaEmail.Contains("@"))
+            {
+                string [] splitedEmail = potentiaEmail.Split('@');
+                if (splitedEmail.Length == 2)
+                {
+                    if (!splitedEmail[0].Equals("")&& !splitedEmail[1].Equals(""))
+                    {
+                        if (splitedEmail[0].Length >3 && splitedEmail[1].Length > 3)
+                        {
+                        emailValid = true;
+                        }
+                    }
+                }
+            }
+            return emailValid;
+        }
+        private bool IsUsernameValid(string username) {
+            return username.Length > 3 && !username.Contains(" ");
+        }
+        private bool IsPasswordValid(string password) {
+            return password.Length > 3;
+        }
     }
 }
