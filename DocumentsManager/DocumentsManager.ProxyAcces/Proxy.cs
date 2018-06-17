@@ -85,15 +85,15 @@ namespace DocumentsManager.ProxyAcces
 
         public Guid AddAdmin(AdminUser admin, Guid tokenId)
         {
-            UserValid(admin);
             AccessControl(tokenId);
+            UserValid(admin);
             return aBL.AddAdmin(admin, tokenId);
         }
 
         public Guid AddEditor(EditorUser editor, Guid tokenId)
         {
-            UserValid(editor);
             AccessControl(tokenId);
+            UserValid(editor);
             return aBL.AddEditor(editor, tokenId);
         }
 
@@ -112,6 +112,7 @@ namespace DocumentsManager.ProxyAcces
         public bool UpdateAdmin(Guid id, AdminUser newAdmin, Guid tokenId)
         {
             AccessControl(tokenId);
+            UserValid(newAdmin);
             return aBL.UpdateAdmin(id, newAdmin, tokenId);
         }
         #endregion
@@ -131,6 +132,7 @@ namespace DocumentsManager.ProxyAcces
         public bool UpdateEditor(Guid id, EditorUser newEditor, Guid tokenId)
         {
             AccessControl(tokenId);
+            UserValid(newEditor);
             return eBL.UpdateEditor(id, newEditor, tokenId);
         }
         public bool DeleteEditor(Guid id, Guid tokenId)

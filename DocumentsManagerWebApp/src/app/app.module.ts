@@ -19,6 +19,7 @@ import { ModifyAdminComponent } from './modify-admin/modify-admin.component';
 import { ListEditorsComponent } from './list-editor/list-editor.component';
 import { EditorService } from './list-editor/editor.service';
 import { NewEditorComponent } from './new-editor/new-editor.component';
+import { ModifyEditorComponent } from './modify-editor/modify-editor.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NewEditorComponent } from './new-editor/new-editor.component';
     NewAdminComponent,
     ModifyAdminComponent,
     ListEditorsComponent,
-    NewEditorComponent
+    NewEditorComponent,
+    ModifyEditorComponent
   ],
   imports: [
     HttpModule,

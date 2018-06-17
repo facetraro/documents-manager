@@ -7,6 +7,7 @@ import { NewAdminComponent } from 'src/app/new-admin/new-admin.component';
 import { ModifyAdminComponent } from 'src/app/modify-admin/modify-admin.component';
 import { ListEditorsComponent } from './list-editor/list-editor.component';
 import { NewEditorComponent } from './new-editor/new-editor.component';
+import { ModifyEditorComponent } from './modify-editor/modify-editor.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'modifyAdmin', component: ModifyAdminComponent },
   { path: 'editors', component: ListEditorsComponent },
   { path: 'newEditor', component: NewEditorComponent },
+  { path: 'modifyEditor', component: ModifyEditorComponent },
 ];
 
 @NgModule({
