@@ -80,6 +80,17 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
+            catch (InvalidUserAttrException ex) {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidUserPasswordException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidUserEmailException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 

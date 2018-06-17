@@ -225,9 +225,28 @@ namespace DocumentsManager.ProxyAcces
             }
         }
         public void UserValid(User potentialUser) {
-            if (!potentialUser.IsUserValid()) {
-                throw new InvalidUserAttrException();
+
+            if (!potentialUser.IsCommonAttrValid(potentialUser.Name))
+            {
+                throw new InvalidUserAttrException("nombre");
             }
+            if (!potentialUser.IsCommonAttrValid(potentialUser.Surname))
+            {
+                throw new InvalidUserAttrException("apellido");
+            }
+            if (!potentialUser.IsEmailValid())
+            {
+                throw new InvalidUserEmailException();
+            }
+            if (!potentialUser.IsCommonAttrValid(potentialUser.Username))
+            {
+                throw new InvalidUserAttrException("nombre de usuario");
+            }
+            if (!potentialUser.IsPasswordValid())
+            {
+                throw new InvalidUserPasswordException();
+            }
+           
         }
         #endregion
         public Guid LogIn(string username, string password) {

@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="CantDeleteLoggedUserException.cs" />
     <Compile Include="InvalidUserAttrException.cs" />
+    <Compile Include="InvalidUserEmailException.cs" />
+    <Compile Include="InvalidUserPasswordException.cs" />
     <Compile Include="SessionExpiredException.cs" />
     <Compile Include="StyleAttributeNotRecognized.cs" />
     <Compile Include="UserNotAuthorizedException.cs" />
