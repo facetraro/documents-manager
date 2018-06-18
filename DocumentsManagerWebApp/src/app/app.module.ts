@@ -19,6 +19,7 @@ import { ModifyAdminComponent } from './modify-admin/modify-admin.component';
 import { ListStylesComponent } from './list-styles/list-styles.component';
 import { StyleService } from './list-styles/style.service';
 import { NewStyleComponent } from './new-style/new-style.component';
+import { ModifyStyleComponent } from './modify-style/modify-style.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NewStyleComponent } from './new-style/new-style.component';
     NewAdminComponent,
     ModifyAdminComponent,
     ListStylesComponent,
-    NewStyleComponent
+    NewStyleComponent,
+    ModifyStyleComponent
   ],
   imports: [
     HttpModule,

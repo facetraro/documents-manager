@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FullUserData } from 'src/app/list-admin/FullUserData';
 import { ManageToken } from 'src/app/manage-token';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { StyleService } from '../list-styles/style.service';
 import { StyleModel } from '../list-styles/styleModel';
 import { StyleAttributes } from '../list-styles/StyleAttributes';
 
 @Component({
-  selector: 'app-new-style',
-  templateUrl: './new-style.component.html',
-  styleUrls: ['./new-style.component.css']
+  selector: 'app-modify-style',
+  templateUrl: './modify-style.component.html',
+  styleUrls: ['./modify-style.component.css']
 })
-export class NewStyleComponent implements OnInit {
+export class ModifyStyleComponent implements OnInit {
   style:StyleModel;
   attribute:StyleAttributes;
   tokenManagment:ManageToken;
+  styleId:string;
   private attributes:StyleAttributes[];
   constructor(
+    private activatedRoute: ActivatedRoute,
     private styleService : StyleService,
     private router: Router
   ) { 
@@ -26,12 +28,36 @@ export class NewStyleComponent implements OnInit {
     this.attributes=[];
   }
 
-  ngOnInit() {
+  loadStyleClass(response:StyleModel){
+    this.style=response;
+    this.style.styleAttributes.forEach(element => {
+      let array=element.split("###");
+      if(array.length==1){
+        this.attribute.type=array[0];
+        this.attribute.value="";
+        this.addAttribute();
+      } else {
+        this.attribute.type=array[0];
+        this.attribute.value=array[1];
+        this.addAttribute();
+      }
+    });
   }
+
+  ngOnInit() {
+    this.activatedRoute.queryParams
+    .filter(params => params.styleToModify)
+    .subscribe(params => {
+      this.styleId = params.styleToModify;
+    });  
+    let token=this.tokenManagment.getToken();
+    this.styleService.getStyle(token,this.styleId).subscribe(response => this.loadStyleClass(response)), 
+    error => this.showErrorMessage(error);
+  }
+
 
   deleteAttribute(type:string){
     let indexToDelete=-1;
-    console.log(type);
     for (let index = 0; index < this.attributes.length; index++) {
        if(this.attributes[index].type==type){
           indexToDelete=index;
@@ -41,7 +67,6 @@ export class NewStyleComponent implements OnInit {
   }
   showErrorMessage(error:any){
     alert(error);
-    this.style.styleAttributes=[];
   }
 
   isAlreadyAdded(newAttribute:StyleAttributes):boolean{
@@ -75,17 +100,18 @@ export class NewStyleComponent implements OnInit {
     }
   }
 
-  styleAddedOk(){
-    alert("Estilo añadido correctamente");
+  styleUpdatedOk(){
+    alert("Estilo modificado correctamente");
     this.router.navigate((['/styles']));
   }
 
-  addNewStyle(){
+  updateStyle(){
     let token=this.tokenManagment.getToken();
+    this.style.styleAttributes=[];
     this.attributes.forEach(element => {
       this.style.styleAttributes.push(element.toString());
     });
-    this.styleService.newStyle(token, this.style).subscribe(response => this.styleAddedOk(), 
+    this.styleService.modifyStyle(token, this.style).subscribe(response => this.styleUpdatedOk(), 
     error => this.showErrorMessage(error));
   }
 }

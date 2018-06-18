@@ -38,7 +38,7 @@ export class ListStylesComponent {
     console.log(this.styles);
   }
   modifyStyle(id:string){
-    //this.router.navigate((['/modifyAdmin']), { queryParams: { userToModify: id} });
+    this.router.navigate((['/modifyStyle']), { queryParams: { styleToModify: id} });
   }
   deleteStyle(id:string){
     this.styleService.deleteStyle(this.activeToken,id).subscribe(response => window.location.reload()), 

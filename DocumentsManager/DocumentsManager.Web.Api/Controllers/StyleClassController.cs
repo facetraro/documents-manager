@@ -75,6 +75,10 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/StyleClass/5
@@ -85,9 +89,13 @@ namespace DocumentsManager.Web.Api.Controllers
                 StyleClass styleToAdd = StyleClassParser.Parse(style);
                 styleToAdd.Id = id;
                 bool updateResult = proxyAccess.UpdateStyle(id, styleToAdd, token);
-                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, styleToAdd);
+                return Ok(200);
             }
             catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

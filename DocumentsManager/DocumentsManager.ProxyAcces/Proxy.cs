@@ -194,7 +194,7 @@ namespace DocumentsManager.ProxyAcces
         public bool UpdateStyle(Guid id, StyleClass newStyle, Guid tokenId)
         {
             AccessControl(tokenId);
-            throw new NotImplementedException();
+            return sBL.UpdateStyle(id, newStyle, tokenId);
         }
         #endregion
         #region Charts

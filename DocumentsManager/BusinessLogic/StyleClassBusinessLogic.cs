@@ -12,7 +12,7 @@ namespace DocumentsManager.BusinessLogic
 {
     public class StyleClassBusinessLogic : IStyleClassBusinessLogic
     {
-        private static string LastTag ="</p>";
+        private static string LastTag = "</p>";
         private string GetAttributesInitialTag(StyleClass style)
         {
             string allHTMLStyles = String.Empty;
@@ -101,26 +101,25 @@ namespace DocumentsManager.BusinessLogic
             return styles;
         }
 
-      
+
 
         public bool DeleteStyle(Guid id, Guid tokenId)
         {
-            if (true)
-            {
-                StyleClassContextHandler context = new StyleClassContextHandler();
-                StyleClass toDelete = GetStyleById(id,tokenId);
-                context.Remove(toDelete);
-                return true;
-            }
-            else {
-                return false;
-            }
-           
+            StyleClassContextHandler context = new StyleClassContextHandler();
+            StyleClass toDelete = GetStyleById(id, tokenId);
+            context.Remove(toDelete);
+            return true;
         }
 
         public bool UpdateStyle(Guid id, StyleClass newStyle, Guid tokenId)
         {
-            throw new NotImplementedException();
+            StyleClassContextHandler context = new StyleClassContextHandler();
+            foreach (var item in newStyle.Attributes)
+            {
+                item.Style = newStyle;
+            }
+            context.Modify(newStyle);
+            return true;
         }
     }
 }
