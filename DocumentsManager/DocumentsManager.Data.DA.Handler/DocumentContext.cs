@@ -139,15 +139,20 @@ namespace DocumentsManager.Data.DA.Handler
         {
             Document document = new Document();
             RemoveDocumentParagraphs(documentToDelete);
+            Document documentFromDB = GetById(documentToDelete.Id);
             documentToDelete.Parragraphs = new List<Parragraph>();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 document = GetById(documentToDelete.Id);
                 document.StyleClass = null;
-                unitOfWork.DocumentRepository.Delete(documentToDelete);
+                document.Footer.StyleClass = null;
+                document.Header.StyleClass = null;
+                document.Footer.Text.StyleClass = null;
+                document.Header.Text.StyleClass = null;
+                unitOfWork.DocumentRepository.Delete(document);
             }
-            DeleteDocumentParts(document);
+            DeleteDocumentParts(documentFromDB);
         }
 
         public List<Parragraph> GetParragraphOfDocument(Document aDocument)
@@ -168,6 +173,9 @@ namespace DocumentsManager.Data.DA.Handler
         public Document GetById(Guid id)
         {
             ParragraphContext pContext = new ParragraphContext();
+            FooterContext fContext = new FooterContext();
+            HeaderContext hContext = new HeaderContext();
+            StyleClassContextHandler sContext = new StyleClassContextHandler();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -185,6 +193,10 @@ namespace DocumentsManager.Data.DA.Handler
                         eagerParragraphs.Add(pContext.GetById(pi.Id));
                     }
                     theDocument.Parragraphs = eagerParragraphs;
+                    theDocument.Footer = fContext.GetById(theDocument.Footer.Id);
+                    theDocument.Header = hContext.GetById(theDocument.Header.Id);
+                    theDocument.StyleClass = sContext.GetById(theDocument.StyleClass.Id);
+
                 }
 
                 return theDocument;
