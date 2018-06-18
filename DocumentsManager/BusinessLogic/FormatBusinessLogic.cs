@@ -81,7 +81,7 @@ namespace DocumentsManager.BusinessLogic
                 throw new ObjectDoesNotExists("username");
             }
             newFormat.Id = id;
-            context.Modify(GetFormatByID(newFormat.Id, tokenId));
+            context.Modify(newFormat);
             return true;
         }
     }

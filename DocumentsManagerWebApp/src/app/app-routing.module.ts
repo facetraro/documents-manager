@@ -13,6 +13,7 @@ import { NewStyleComponent } from './new-style/new-style.component';
 import { ModifyStyleComponent } from './modify-style/modify-style.component';
 import { ListFormatComponent } from './list-format/list-format.component';
 import { NewFormatComponent } from './new-format/new-format.component';
+import { ModifyFormatComponent } from './modify-format/modify-format.component';
 
 
 
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'modifyStyle', component: ModifyStyleComponent },
   { path: 'formats', component: ListFormatComponent },
   { path: 'newFormat', component: NewFormatComponent },
+  { path: 'modifyFormat', component: ModifyFormatComponent },
 ];
 
 @NgModule({

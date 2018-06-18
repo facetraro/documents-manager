@@ -119,7 +119,7 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 Format formatToAdd = GetEntityFormat(format);
                 bool updateResult = proxyAccess.UpdateFormat(id, formatToAdd, token);
-                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, formatToAdd);
+                return Ok(200);
             }
             catch (NoUserLoggedException ex)
             {

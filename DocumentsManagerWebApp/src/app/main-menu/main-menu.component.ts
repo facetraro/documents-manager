@@ -25,6 +25,9 @@ private activeToken:string;
   goListStyles(){
     this.router.navigate((['/styles']));
   }
+  goListFormats(){
+    this.router.navigate((['/formats']));
+  }
   ngOnInit() {
   }
 
