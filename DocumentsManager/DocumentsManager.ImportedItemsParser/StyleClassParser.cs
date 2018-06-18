@@ -180,6 +180,7 @@ namespace DocumentsManager.ImportedItemsParser
         {
             StyleClass newStyleClass = new StyleClass();
             newStyleClass.Name = importedStyleClass.Name;
+            newStyleClass.Id = importedStyleClass.Id;
             ParseAttributes(newStyleClass, importedStyleClass);
             return newStyleClass;
         }
@@ -195,6 +196,7 @@ namespace DocumentsManager.ImportedItemsParser
         {
             ImportedStyleClass newStyleClass = new ImportedStyleClass();
             newStyleClass.Name = styleClass.Name;
+            newStyleClass.Id = styleClass.Id;
             ParseAttributes(newStyleClass, styleClass);
             return newStyleClass;
         }

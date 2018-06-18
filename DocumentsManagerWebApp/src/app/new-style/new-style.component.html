@@ -1,0 +1,72 @@
+<div align="center">
+  <hr>
+    <h2>Añadir Nuevo Estilo</h2>
+    <label>Nombre:
+      <input [(ngModel)]="style.name" placeholder="name">
+    </label>
+    <br>
+    <br>
+    <label>Atributos:</label>
+    <br>
+    <br>
+    <div class='table-responsive'>
+        <div style="overflow-x:auto;">
+            <table class='table' *ngIf='attributes && attributes.length'>
+                <!--Cabezal de la tabla -->
+                <thead>
+                    <tr>
+                        <th><div align="center">Nombre</div></th>
+                        <th><div align="center">Valor</div></th>
+                        <th><div align="center">Eliminar</div></th>
+                    </tr>
+                </thead>
+                <!--Cuerpo de la tabla-->
+                <tbody>
+                    <tr *ngFor='let aAttribute of attributes'  >
+                        <td> <div align="center">{{aAttribute.type | uppercase}}</div></td>
+                        <td> <div align="center">{{aAttribute.value | uppercase}}</div></td>
+                        <td> 
+                          <div align="center">
+                            <button (click)="deleteAttribute(aAttribute.type)">
+                              X
+                            </button>
+                           </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <label>Añadir Estilo:
+        <select [(ngModel)]="attribute.type" placeholder="type"> 
+          <option value="TipoLetra">Tipo Letra</option>
+          <option value="TamanioLetra">Tamaño Letra</option>
+          <option value="Cursiva">Cursiva</option>
+          <option value="Alineacion">Alineacion</option>
+          <option value="Color">Color</option>
+          <option value="Border">Border</option>
+          <option value="Negrita">Negrita</option>
+          <option value="Subrayado">Subrayado</option>
+        </select>
+      </label>
+      <br>
+      <br>
+      <label>Valor:
+        <input [(ngModel)]="attribute.value" placeholder="value">
+      </label>
+      <br>
+      <br>
+    <button (click)="addAttribute()">
+        Añadir Atributo
+    </button>
+    <!--Tabla de mascotas -->
+    
+    <div align="center">
+        <button (click)="addNewStyle()">
+                Añadir Nuevo Estilo
+        </button>
+    </div>
+    
+    <app-go-home></app-go-home>
+</div>

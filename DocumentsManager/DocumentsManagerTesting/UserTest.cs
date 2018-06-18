@@ -152,7 +152,8 @@ namespace DocumentsManagerTesting
                 Name = "AAAA",
                 Username = "AAAAAA",
                 Password = "AAAA",
-                Email = "AAAA@AAAA"
+                Email = "AAAA@AAAA",
+                Surname = "AAAAAA"
             };
             Assert.IsTrue(user.IsUserValid());
         }

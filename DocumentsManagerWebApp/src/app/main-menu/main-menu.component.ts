@@ -22,6 +22,9 @@ private activeToken:string;
   goListEditors(){
     this.router.navigate((['/editors']));
   }
+  goListStyles(){
+    this.router.navigate((['/styles']));
+  }
   ngOnInit() {
   }
 

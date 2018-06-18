@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.ProxyInter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.BusinessLogic.Charts", "DocumentsManager.BusinessLogic.Charts\DocumentsManager.BusinessLogic.Charts.csproj", "{80E332CD-14BF-42AC-B302-A36A4806ABF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.ImportedItemsParser", "DocumentsManager.ImportedItemsParser\DocumentsManager.ImportedItemsParser.csproj", "{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{80E332CD-14BF-42AC-B302-A36A4806ABF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80E332CD-14BF-42AC-B302-A36A4806ABF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80E332CD-14BF-42AC-B302-A36A4806ABF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

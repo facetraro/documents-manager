@@ -20,6 +20,10 @@ import { ListEditorsComponent } from './list-editor/list-editor.component';
 import { EditorService } from './list-editor/editor.service';
 import { NewEditorComponent } from './new-editor/new-editor.component';
 import { ModifyEditorComponent } from './modify-editor/modify-editor.component';
+import { ListStylesComponent } from './list-styles/list-styles.component';
+import { StyleService } from './list-styles/style.service';
+import { NewStyleComponent } from './new-style/new-style.component';
+import { ModifyStyleComponent } from './modify-style/modify-style.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,10 @@ import { ModifyEditorComponent } from './modify-editor/modify-editor.component';
     ModifyAdminComponent,
     ListEditorsComponent,
     NewEditorComponent,
-    ModifyEditorComponent
+    ModifyEditorComponent,
+    ListStylesComponent,
+    NewStyleComponent,
+    ModifyStyleComponent
   ],
   imports: [
     HttpModule,
@@ -44,6 +51,7 @@ import { ModifyEditorComponent } from './modify-editor/modify-editor.component';
   providers: [
     LoginService, 
     LogoutService,
+    StyleService,
     AdminService, 
     EditorService, 
     ManageToken

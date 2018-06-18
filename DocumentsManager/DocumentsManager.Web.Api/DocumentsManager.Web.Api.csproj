@@ -166,7 +166,9 @@
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -228,6 +230,14 @@
     <ProjectReference Include="..\DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj">
       <Project>{34E362D2-1A27-48BB-8FE5-91A89124B556}</Project>
       <Name>DocumentsManager.Exceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.FormatImportation\DocumentsManager.FormatImportation.csproj">
+      <Project>{2150776E-D2F1-4CD4-81F4-2B05D18D4C14}</Project>
+      <Name>DocumentsManager.FormatImportation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.ImportedItemsParser\DocumentsManager.ImportedItemsParser.csproj">
+      <Project>{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}</Project>
+      <Name>DocumentsManager.ImportedItemsParser</Name>
     </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.ProxyAcces\DocumentsManager.ProxyAcces.csproj">
       <Project>{0969114a-0eb7-4d6e-a398-300fb0766fb3}</Project>

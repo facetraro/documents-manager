@@ -8,6 +8,10 @@ import { ModifyAdminComponent } from 'src/app/modify-admin/modify-admin.componen
 import { ListEditorsComponent } from './list-editor/list-editor.component';
 import { NewEditorComponent } from './new-editor/new-editor.component';
 import { ModifyEditorComponent } from './modify-editor/modify-editor.component';
+import { ListStylesComponent } from './list-styles/list-styles.component';
+import { NewStyleComponent } from './new-style/new-style.component';
+import { ModifyStyleComponent } from './modify-style/modify-style.component';
+
 
 
 const routes: Routes = [
@@ -20,6 +24,9 @@ const routes: Routes = [
   { path: 'editors', component: ListEditorsComponent },
   { path: 'newEditor', component: NewEditorComponent },
   { path: 'modifyEditor', component: ModifyEditorComponent },
+  { path: 'styles', component: ListStylesComponent },
+  { path: 'newStyle', component: NewStyleComponent },
+  { path: 'modifyStyle', component: ModifyStyleComponent },
 ];
 
 @NgModule({
