@@ -11,6 +11,7 @@ import { ModifyEditorComponent } from './modify-editor/modify-editor.component';
 import { ListStylesComponent } from './list-styles/list-styles.component';
 import { NewStyleComponent } from './new-style/new-style.component';
 import { ModifyStyleComponent } from './modify-style/modify-style.component';
+import { ListFormatComponent } from './list-format/list-format.component';
 
 
 
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'styles', component: ListStylesComponent },
   { path: 'newStyle', component: NewStyleComponent },
   { path: 'modifyStyle', component: ModifyStyleComponent },
+  { path: 'formats', component: ListFormatComponent },
 ];
 
 @NgModule({
