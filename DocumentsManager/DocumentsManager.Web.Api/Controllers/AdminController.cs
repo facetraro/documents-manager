@@ -27,12 +27,27 @@ namespace DocumentsManager.Web.Api.Controllers
         // GET: api/Admin
         public IHttpActionResult Get(Guid token)
         {
-            IEnumerable<AdminUser> admins = proxyAccess.GetAllAdmins(token);
-            if (admins == null)
+            try
             {
-                return NotFound();
+                IEnumerable<AdminUser> admins = proxyAccess.GetAllAdmins(token);
+                if (admins == null)
+                {
+                    return NotFound();
+                }
+                return Ok(admins);
             }
-            return Ok(admins);
+            catch (SessionExpiredException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (NoUserLoggedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (UserNotAuthorizedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         // GET: api/Admin/5
         public IHttpActionResult Get(Guid id, Guid token)
@@ -55,6 +70,18 @@ namespace DocumentsManager.Web.Api.Controllers
                 return BadRequest(doesNotExistsException.Message);
             }
             catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (SessionExpiredException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (NoUserLoggedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (UserNotAuthorizedException ex)
             {
                 return BadRequest(ex.Message);
             }
