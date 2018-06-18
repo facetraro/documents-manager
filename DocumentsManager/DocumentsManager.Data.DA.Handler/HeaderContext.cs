@@ -39,12 +39,17 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Remove(Header headerToDelete)
         {
+            Header header = GetById(headerToDelete.Id);
             using (var db = new ContextDataAccess())
             {
+                Header headerFromDB = GetById(headerToDelete.Id);
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.HeaderRepository.Delete(headerToDelete);
+                if (headerFromDB != null)
+                {
+                    headerFromDB.Text.StyleClass = null;
+                    unitOfWork.HeaderRepository.Delete(headerFromDB.Id);
+                }
             }
-            Header header = GetById(headerToDelete.Id);
             if (header!=null)
             {
                 TextContext tContext = new TextContext();
@@ -54,12 +59,17 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Remove(Guid id)
         {
+            Header header = GetById(id);
             using (var db = new ContextDataAccess())
             {
+                Header headerFromDB = GetById(id);
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.HeaderRepository.Delete(id);
+                if (headerFromDB != null)
+                {
+                    headerFromDB.Text.StyleClass = null;
+                    unitOfWork.HeaderRepository.Delete(headerFromDB.Id);
+                }
             }
-            Header header = GetById(id);
             if (header != null)
             {
                 TextContext tContext = new TextContext();
@@ -68,6 +78,7 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public Header GetById(Guid id)
         {
+            StyleClassContextHandler sContext = new StyleClassContextHandler();
             TextContext tContext = new TextContext();
             using (var db = new ContextDataAccess())
             {
@@ -79,6 +90,7 @@ namespace DocumentsManager.Data.DA.Handler
                 if (theHeader!=null)
                 {
                     theHeader.Text = tContext.GetById(theHeader.Text.Id);
+                    theHeader.StyleClass = sContext.GetById(theHeader.StyleClass.Id);
                 }
                 return theHeader;
             }

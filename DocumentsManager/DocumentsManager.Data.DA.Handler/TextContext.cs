@@ -70,12 +70,17 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public Text GetById(Guid id)
         {
+            StyleClassContextHandler sContext = new StyleClassContextHandler();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
 
                 Text theText = unitOfWork.TextRepository.GetByID(id);
                 db.Texts.Include("StyleClass").ToList().FirstOrDefault();
+                if (theText != null && theText.StyleClass != null)
+                {
+                    theText.StyleClass = sContext.GetById(theText.StyleClass.Id);
+                }
                 return theText;
             }
         }

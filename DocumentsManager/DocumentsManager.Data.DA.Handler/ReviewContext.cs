@@ -13,12 +13,15 @@ namespace DocumentsManager.Data.DA.Handler
     {
         public void Add(Review newReview)
         {
+            Review reviewToDB = newReview;
+            reviewToDB.Commented.Header.Text.StyleClass = null;
+            reviewToDB.Commented.Footer.Text.StyleClass = null;
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                db.Users.Attach(newReview.Commentator);
-                db.Documents.Attach(newReview.Commented);
-                unitOfWork.ReviewRepository.Insert(newReview);
+                db.Users.Attach(reviewToDB.Commentator);
+                db.Documents.Attach(reviewToDB.Commented);
+                unitOfWork.ReviewRepository.Insert(reviewToDB);
             }
         }
         public List<Review> GetLazy()

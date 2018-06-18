@@ -16,7 +16,6 @@ namespace DocumentsManager.Data.DA.Handler
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                //db.Documents.Attach(newHistory.Document);
                 db.Users.Attach(newHistory.User);
                 newHistory.Document = db.Documents.Find(newHistory.Document.Id);
                 unitOfWork.HistoryRepository.Insert(newHistory);
@@ -64,6 +63,19 @@ namespace DocumentsManager.Data.DA.Handler
                 db.Histories.Include("Document").ToList();
                 return history;
             }
+        }
+        public List<Document> GetDocumentsFromUser(User user)
+        {
+            DocumentContext dContext = new DocumentContext();
+            List<Document> documentsFromUser = new List<Document>();
+            foreach (ModifyDocumentHistory historyi in GetAllHistories())
+            {
+                if (historyi.User.Equals(user) && historyi.State == ModifyState.Added)
+                {
+                    documentsFromUser.Add(dContext.GetById(historyi.Document.Id));
+                }
+            }
+            return documentsFromUser;
         }
     }
 }

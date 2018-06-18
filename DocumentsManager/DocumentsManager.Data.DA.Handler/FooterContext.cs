@@ -39,13 +39,17 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Remove(Footer footerToDelete)
         {
-            
+            Footer footer = GetById(footerToDelete.Id);
             using (var db = new ContextDataAccess())
             {
+                Footer footerFromDB = GetById(footerToDelete.Id);
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.FooterRepository.Delete(footerToDelete);
+                if (footerFromDB != null)
+                {
+                    footerFromDB.Text.StyleClass = null;
+                    unitOfWork.FooterRepository.Delete(footerFromDB.Id);
+                }
             }
-            Footer footer = GetById(footerToDelete.Id);
             if (footer != null)
             {
                 TextContext tContext = new TextContext();
@@ -54,21 +58,29 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Remove(Guid id)
         {
+            Footer footer = GetById(id);
             using (var db = new ContextDataAccess())
             {
+
+                Footer footerFromDB = GetById(id);
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.FooterRepository.Delete(id);
+                if (footerFromDB != null)
+                {
+                    footerFromDB.Text.StyleClass = null;
+                    unitOfWork.FooterRepository.Delete(footerFromDB.Id);
+                }
             }
-            Footer footer = GetById(id);
-            if (footer!=null)
+            if (footer != null)
             {
                 TextContext tContext = new TextContext();
                 tContext.Remove(footer.Text);
             }
-            
+
         }
         public Footer GetById(Guid id)
         {
+            TextContext tContext = new TextContext();
+            StyleClassContextHandler sContext = new StyleClassContextHandler();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -76,6 +88,11 @@ namespace DocumentsManager.Data.DA.Handler
                 Footer theFooter = unitOfWork.FooterRepository.GetByID(id);
                 db.Footers.Include("StyleClass").ToList().FirstOrDefault();
                 db.Footers.Include("Text").ToList().FirstOrDefault();
+                if (theFooter != null)
+                {
+                    theFooter.Text = tContext.GetById(theFooter.Text.Id);
+                    theFooter.StyleClass = sContext.GetById(theFooter.StyleClass.Id);
+                }
                 return theFooter;
             }
         }
