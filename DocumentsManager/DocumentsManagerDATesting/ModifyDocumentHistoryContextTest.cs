@@ -44,7 +44,7 @@ namespace DocumentsManagerDATesting
             context.Add(newHistory);
             context.Remove(newHistory);
             List<ModifyDocumentHistory> allHistories = context.GetAllHistories();
-            Assert.IsTrue(allHistories.Count==0);
+            Assert.IsTrue(allHistories.Count == 0);
             TearDown();
         }
         [TestMethod]
@@ -80,6 +80,71 @@ namespace DocumentsManagerDATesting
             Assert.AreEqual(allHistories.ElementAt(0).User, newHistory.User);
             Assert.AreEqual(allHistories.ElementAt(0).Document, newHistory.Document);
             Assert.AreEqual(allHistories.ElementAt(0).Id, newHistory.Id);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetDocumentsFromUser()
+        {
+            ModifyDocumentHistory newHistory = EntitiesExampleInstances.TestModifyDocumentHistory();
+            UserContext contextUser = new UserContext();
+            contextUser.Add(newHistory.User);
+            DocumentContext dContext = new DocumentContext();
+            DocumentContextTest documentTest = new DocumentContextTest();
+            newHistory.Document = documentTest.setUp(dContext);
+            ModifyDocumentHistoryContext context = new ModifyDocumentHistoryContext();
+            context.Add(newHistory);
+            List<Document> documentsFromUser = context.GetDocumentsFromUser(newHistory.User);
+            Assert.AreEqual(documentsFromUser.Count, 1);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetDocumentsFromDifferentUser()
+        {
+            ModifyDocumentHistory newHistory = EntitiesExampleInstances.TestModifyDocumentHistory();
+            UserContext contextUser = new UserContext();
+            contextUser.Add(newHistory.User);
+            DocumentContext dContext = new DocumentContext();
+            DocumentContextTest documentTest = new DocumentContextTest();
+            newHistory.Document = documentTest.setUp(dContext);
+            ModifyDocumentHistoryContext context = new ModifyDocumentHistoryContext();
+            context.Add(newHistory);
+            List<Document> documentsFromUser = context.GetDocumentsFromUser(EntitiesExampleInstances.TestUser());
+            Assert.AreEqual(documentsFromUser.Count, 0);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetDocumentsFromUserModified()
+        {
+            ModifyDocumentHistory newHistory = EntitiesExampleInstances.TestModifyDocumentHistory();
+            newHistory.State = ModifyState.Modified;
+            UserContext contextUser = new UserContext();
+            contextUser.Add(newHistory.User);
+            DocumentContext dContext = new DocumentContext();
+            DocumentContextTest documentTest = new DocumentContextTest();
+            newHistory.Document = documentTest.setUp(dContext);
+            ModifyDocumentHistoryContext context = new ModifyDocumentHistoryContext();
+            context.Add(newHistory);
+            List<Document> documentsFromUser = context.GetDocumentsFromUser(newHistory.User);
+            Assert.AreEqual(documentsFromUser.Count, 0);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetDocumentsFromUserTwo()
+        {
+            ModifyDocumentHistory newHistory = EntitiesExampleInstances.TestModifyDocumentHistory();
+            ModifyDocumentHistory anotherHistory = EntitiesExampleInstances.TestModifyDocumentHistory();
+            anotherHistory.User = newHistory.User;
+            UserContext contextUser = new UserContext();
+            contextUser.Add(newHistory.User);
+            DocumentContext dContext = new DocumentContext();
+            DocumentContextTest documentTest = new DocumentContextTest();
+            newHistory.Document = documentTest.setUp(dContext);
+            anotherHistory.Document = documentTest.setUp(dContext);
+            ModifyDocumentHistoryContext context = new ModifyDocumentHistoryContext();
+            context.Add(newHistory);
+            context.Add(anotherHistory);
+            List<Document> documentsFromUser = context.GetDocumentsFromUser(newHistory.User);
+            Assert.AreEqual(documentsFromUser.Count, 2);
             TearDown();
         }
     }
