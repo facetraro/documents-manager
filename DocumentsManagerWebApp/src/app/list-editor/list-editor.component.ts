@@ -38,7 +38,6 @@ import { EditorService } from './editor.service';
       console.log(id);
     }
     modifyUser(id:string){
-      
       this.router.navigate((['/modifyEditor']), { queryParams: { userToModify: id} });
     }
     deleteUser(id:string){

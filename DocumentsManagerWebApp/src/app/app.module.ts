@@ -28,6 +28,8 @@ import { ListFormatComponent } from './list-format/list-format.component';
 import { FormatService } from './list-format/format.service';
 import { NewFormatComponent } from './new-format/new-format.component';
 import { ModifyFormatComponent } from './modify-format/modify-format.component';
+import { ListDocumentComponent } from './list-document/list-document.component';
+import { DocumentService } from './list-document/document.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { ModifyFormatComponent } from './modify-format/modify-format.component';
     ModifyStyleComponent,
     ListFormatComponent,
     NewFormatComponent,
-    ModifyFormatComponent
+    ModifyFormatComponent,
+    ListDocumentComponent
   ],
   imports: [
     HttpModule,
@@ -60,6 +63,7 @@ import { ModifyFormatComponent } from './modify-format/modify-format.component';
     LogoutService,
     StyleService,
     AdminService, 
+    DocumentService,
     FormatService, 
     EditorService, 
     ManageToken

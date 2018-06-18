@@ -73,7 +73,6 @@ namespace DocumentsManager.Data.DA.Handler
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-
                 Text theText = unitOfWork.TextRepository.GetByID(id);
                 db.Texts.Include("StyleClass").ToList().FirstOrDefault();
                 return theText;
