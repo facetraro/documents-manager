@@ -26,7 +26,7 @@ export class FormatService {
 
   getFormat(token : string, id : string) : Observable<Format> {
     let apiUrl= new Url;
-    let url = apiUrl.globalUrl+"/api/Admin/?id="+id+"&token="+token;
+    let url = apiUrl.globalUrl+"/api/Format/?id="+id+"&token="+token;
     return this.httpService.get(url)
     .map((response: Response) => <Format> response.json())
     .catch(this.handleError);
@@ -34,7 +34,7 @@ export class FormatService {
 
   newFormat(token : string, newFormat:Format) : Observable<string> {
     let apiUrl= new Url;
-    let url = apiUrl.globalUrl+"/api/Admin/?token="+token;
+    let url = apiUrl.globalUrl+"/api/Format/?token="+token;
     return this.httpService.post(url,newFormat)
     .map((response: Response) => <string> response.json())
     .catch(this.handleError);
@@ -42,7 +42,7 @@ export class FormatService {
 
   modifyFormat(token : string, modifiedUser:Format) : Observable<string> {
     let apiUrl= new Url;
-    let url = apiUrl.globalUrl+"/api/Admin/?id="+modifiedUser.id+"&token="+token;
+    let url = apiUrl.globalUrl+"/api/Format/?id="+modifiedUser.id+"&token="+token;
     return this.httpService.put(url,modifiedUser)
     .map((response: Response) => <string> response.json())
     .catch(this.handleError);
@@ -50,7 +50,7 @@ export class FormatService {
   
   deleteFormat(token : string, id : string) : Observable<string> {
     let apiUrl= new Url;
-    let url = apiUrl.globalUrl+"/api/Admin/?id="+id+"&token="+token;
+    let url = apiUrl.globalUrl+"/api/Format/?id="+id+"&token="+token;
     return this.httpService.delete(url)
     .map((response: Response) => <string> response.json())
     .catch(this.handleError);

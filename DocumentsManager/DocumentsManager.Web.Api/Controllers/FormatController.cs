@@ -96,7 +96,7 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 Format formatToAdd = GetEntityFormat(model);
                 Guid id = proxyAccess.AddFormat(formatToAdd, token);
-                return CreatedAtRoute("DefaultApi", new { id = formatToAdd.Id }, formatToAdd);
+                return Ok(id);
             }
             catch (NoUserLoggedException ex)
             {

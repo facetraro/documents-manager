@@ -26,6 +26,7 @@ import { NewStyleComponent } from './new-style/new-style.component';
 import { ModifyStyleComponent } from './modify-style/modify-style.component';
 import { ListFormatComponent } from './list-format/list-format.component';
 import { FormatService } from './list-format/format.service';
+import { NewFormatComponent } from './new-format/new-format.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { FormatService } from './list-format/format.service';
     ListStylesComponent,
     NewStyleComponent,
     ModifyStyleComponent,
-    ListFormatComponent
+    ListFormatComponent,
+    NewFormatComponent
   ],
   imports: [
     HttpModule,

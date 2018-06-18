@@ -34,7 +34,7 @@ namespace DocumentsManager.BusinessLogic
             FormatContext context = new FormatContext();
             if ((context.Exists(format.Id)))
             {
-                throw new ObjectAlreadyExistsException("username");
+                throw new ObjectAlreadyExistsException("format name");
             }
             context.Add(format);
             return format.Id;
