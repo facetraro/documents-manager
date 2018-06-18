@@ -34,7 +34,7 @@ namespace DocumentsManager.BusinessLogic
             FormatContext context = new FormatContext();
             if ((context.Exists(format.Id)))
             {
-                throw new ObjectAlreadyExistsException("username");
+                throw new ObjectAlreadyExistsException("format name");
             }
             context.Add(format);
             return format.Id;
@@ -81,7 +81,7 @@ namespace DocumentsManager.BusinessLogic
                 throw new ObjectDoesNotExists("username");
             }
             newFormat.Id = id;
-            context.Modify(GetFormatByID(newFormat.Id, tokenId));
+            context.Modify(newFormat);
             return true;
         }
     }

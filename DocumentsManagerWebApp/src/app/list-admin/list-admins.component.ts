@@ -39,7 +39,6 @@ export class ListAdminsComponent {
     console.log(id);
   }
   modifyUser(id:string){
-    
     this.router.navigate((['/modifyAdmin']), { queryParams: { userToModify: id} });
   }
   deleteUser(id:string){

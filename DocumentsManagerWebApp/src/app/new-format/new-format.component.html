@@ -1,0 +1,58 @@
+<div align="center">
+    <hr>
+      <h2>Añadir Nuevo Formato</h2>
+      <label>Nombre:
+        <input [(ngModel)]="format.name" placeholder="name">
+      </label>
+      <br>
+      <br>
+      <label>Estilos:</label>
+      <div class='table-responsive'>
+          <div style="overflow-x:auto;">
+              <table class='table' *ngIf='styles && styles.length'>
+                  <!--Cabezal de la tabla -->
+                  <thead>
+                      <tr>
+                          <th><div align="center">Id</div></th>
+                          <th><div align="center">Nombre</div></th>
+                          <th><div align="center">Eliminar</div></th>
+                      </tr>
+                  </thead>
+                  <!--Cuerpo de la tabla-->
+                  <tbody>
+                      <tr *ngFor='let aStyle of styles'  >
+                          <td> <div align="center">{{aStyle.id | uppercase}}</div></td>
+                          <td> <div align="center">{{aStyle.name | uppercase}}</div></td>
+                          <td> 
+                            <div align="center">
+                              <button (click)="deleteStyle(aStyle.id)">
+                                X
+                              </button>
+                             </div>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <br>
+      <label>Añadir Estilo:
+          <select [(ngModel)]="style.id" placeholder="id"> 
+            <option *ngFor="let c of allStyles" [ngValue]="c.id+'###'+c.name">{{c.name}}</option>
+          </select>
+        </label>
+        <br>
+        <br>
+        <button (click)="addStyle()">
+          Añadir Estilo
+      </button>
+      <!--Tabla de mascotas -->
+      
+      <div align="center">
+          <button (click)="addNewFormat()">
+                  Añadir Nuevo Format
+          </button>
+      </div>
+      
+      <app-go-home></app-go-home>
+  </div>

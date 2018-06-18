@@ -37,5 +37,4 @@ export class LogoutComponent implements OnInit {
       this.logoutService.logOut(this.token).subscribe(response => this.logout(response), 
         error => this.showErrorMessage(error));
   }
-
 }

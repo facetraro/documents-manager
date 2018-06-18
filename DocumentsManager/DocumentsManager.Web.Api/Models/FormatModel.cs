@@ -10,18 +10,23 @@ namespace DocumentsManager.Web.Api.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public virtual List<StyleClass> StyleClasses { get; set; }
+        public virtual List<StyleClassDto> StyleClasses { get; set; }
         public FormatModel()
         {
             Id = Guid.NewGuid();
             Name = "";
-            StyleClasses = new List<StyleClass>();
+            StyleClasses = new List<StyleClassDto>();
         }
         public FormatModel(Format aFormat)
         {
             Id = Guid.NewGuid();
             Name = aFormat.Name;
-            StyleClasses = aFormat.StyleClasses;
+            foreach (var item in aFormat.StyleClasses)
+            {
+                StyleClassDto newDto = new StyleClassDto();
+                newDto.Id = item.Id;
+                newDto.Name = item.Name;
+            }
         }
         public Format GetEntityModel()
         {
@@ -34,7 +39,13 @@ namespace DocumentsManager.Web.Api.Models
             {
                 aFormat.Name = Name;
             }
-            aFormat.StyleClasses = StyleClasses;
+            foreach (var item in StyleClasses)
+            {
+                StyleClass newStyleClass = new StyleClass();
+                newStyleClass.Id = item.Id;
+                newStyleClass.Name = item.Name;
+                aFormat.StyleClasses.Add(newStyleClass);
+            }
             return aFormat;
         }
     }

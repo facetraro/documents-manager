@@ -35,7 +35,6 @@ export class ListStylesComponent {
   }
   loadLocalStyles(stylesResponse: Array<StyleModel> ){
     this.styles=stylesResponse;
-    console.log(this.styles);
   }
   modifyStyle(id:string){
     this.router.navigate((['/modifyStyle']), { queryParams: { styleToModify: id} });
