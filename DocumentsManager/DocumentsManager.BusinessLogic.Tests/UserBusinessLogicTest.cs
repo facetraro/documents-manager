@@ -269,7 +269,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Guid newGuidUser = Guid.NewGuid();
             Guid token = sessionAccess.Add(newGuidUser);
             Guid idUser = sessionAccess.GetIdByToken(token);
-            Assert.IsTrue(newGuidUser==idUser);
+            Assert.IsTrue(newGuidUser == idUser);
             sessionAccess.Remove(token);
             TearDown();
         }
@@ -514,6 +514,82 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(fLogic.GetById(aDocument.Footer.Id).Text.StyleClass.Equals(newFooterText.StyleClass));
             Assert.IsTrue(fLogic.GetById(aDocument.Footer.Id).StyleClass.Equals(style));
             TearDown();
+        }
+        [TestMethod]
+        public void AreFriendsTestTrue()
+        {
+            SetUp();
+            FriendshipContext fContext = new FriendshipContext();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userRequester = EntitiesExampleInstances.TestAdminUser();
+            userRequester.Username = "requester";
+            userRequester.Email = "requester@requester";
+            AdminUser userRequested = EntitiesExampleInstances.TestAdminUser();
+            userRequested.Username = "requested";
+            userRequested.Email = "requested@requested";
+            aBL.AddAdmin(userRequester,Guid.NewGuid());
+            aBL.AddAdmin(userRequested, Guid.NewGuid());
+            Friendship friendship = new Friendship {
+                Id = Guid.NewGuid(),
+                State = FriendshipState.Friend,
+                Request = userRequester,
+                Requested = userRequested
+            };
+            fContext.Add(friendship);
+            Assert.IsTrue(uBL.AreFriends(userRequester,userRequested));
+        }
+        [TestMethod]
+        public void AreFriendsTestTrueReverse()
+        {
+            SetUp();
+            FriendshipContext fContext = new FriendshipContext();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userRequester = EntitiesExampleInstances.TestAdminUser();
+            userRequester.Username = "requester";
+            userRequester.Email = "requester@requester";
+            AdminUser userRequested = EntitiesExampleInstances.TestAdminUser();
+            userRequested.Username = "requested";
+            userRequested.Email = "requested@requested";
+            aBL.AddAdmin(userRequester, Guid.NewGuid());
+            aBL.AddAdmin(userRequested, Guid.NewGuid());
+            Friendship friendship = new Friendship
+            {
+                Id = Guid.NewGuid(),
+                State = FriendshipState.Friend,
+                Request = userRequester,
+                Requested = userRequested
+            };
+            fContext.Add(friendship);
+            Assert.IsTrue(uBL.AreFriends(userRequested, userRequester));
+        }
+        [TestMethod]
+        public void AreFriendsTestFalse()
+        {
+            SetUp();
+            FriendshipContext fContext = new FriendshipContext();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userRequester = EntitiesExampleInstances.TestAdminUser();
+            userRequester.Username = "requester";
+            userRequester.Email = "requester@requester";
+            AdminUser userRequested = EntitiesExampleInstances.TestAdminUser();
+            userRequested.Username = "requested";
+            userRequested.Email = "requested@requested";
+            AdminUser AnotherUser = EntitiesExampleInstances.TestAdminUser();
+            aBL.AddAdmin(userRequester, Guid.NewGuid());
+            aBL.AddAdmin(userRequested, Guid.NewGuid());
+            aBL.AddAdmin(AnotherUser, Guid.NewGuid());
+            Friendship friendship = new Friendship
+            {
+                Id = Guid.NewGuid(),
+                State = FriendshipState.Friend,
+                Request = userRequester,
+                Requested = userRequested
+            };
+            fContext.Add(friendship);
+            Assert.IsFalse(uBL.AreFriends(userRequester, AnotherUser));
         }
     }
 }
