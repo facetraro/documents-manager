@@ -41,6 +41,11 @@ export class ListAdminsComponent {
   modifyUser(id:string){
     this.router.navigate((['/modifyAdmin']), { queryParams: { userToModify: id} });
   }
+  viewCharts(id:string){
+    let date1 = "10/6/2018";
+    let date2 = "18/6/2018";
+    this.router.navigate((['/viewChart']), { queryParams: { idUser: id, dateOne : date1, dateTwo : date2} });
+  }
   deleteUser(id:string){
     this.adminService.deleteAdmin(this.activeToken,id).subscribe(response => window.location.reload()), 
     error => this.showErrorMessage(error);

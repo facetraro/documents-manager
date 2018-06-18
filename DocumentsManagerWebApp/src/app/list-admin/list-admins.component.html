@@ -46,17 +46,21 @@
                             <td>{{aFullUserData.username | lowercase }}</td>
                             <td>{{aFullUserData.email | lowercase}}</td>
                             <td>
+                                <button (click)="viewCharts(aFullUserData.id)">
+                                        Añadir Amigo
+                                </button>
+                                &nbsp;
                                 <button (click)="addFriendUser(aFullUserData.id)">
                                     Añadir Amigo
-                            </button>
-                            &nbsp;
-                            <button (click)="modifyUser(aFullUserData.id)">
-                                    Modificar
-                            </button>
-                            &nbsp;
-                            <button (click)="deleteUser(aFullUserData.id)">
-                                    Eliminar
-                            </button>
+                                </button>
+                                &nbsp;
+                                <button (click)="modifyUser(aFullUserData.id)">
+                                        Modificar
+                                </button>
+                                &nbsp;
+                                <button (click)="deleteUser(aFullUserData.id)">
+                                        Eliminar
+                                </button>
                             </td>
                         </tr>
                     </tbody>

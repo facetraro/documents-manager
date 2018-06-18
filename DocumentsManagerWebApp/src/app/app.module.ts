@@ -30,6 +30,9 @@ import { NewFormatComponent } from './new-format/new-format.component';
 import { ModifyFormatComponent } from './modify-format/modify-format.component';
 import { ListDocumentComponent } from './list-document/list-document.component';
 import { DocumentService } from './list-document/document.service';
+import { ViewChartComponent } from './view-chart/view-chart.component';
+import { SelectDatesComponent } from './select-dates/select-dates.component';
+import { ChartService } from './view-chart/chart.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { DocumentService } from './list-document/document.service';
     ListFormatComponent,
     NewFormatComponent,
     ModifyFormatComponent,
-    ListDocumentComponent
+    ListDocumentComponent,
+    ViewChartComponent,
+    SelectDatesComponent
   ],
   imports: [
     HttpModule,
@@ -66,6 +71,7 @@ import { DocumentService } from './list-document/document.service';
     DocumentService,
     FormatService, 
     EditorService, 
+    ChartService,
     ManageToken
   ],
   bootstrap: [AppComponent]

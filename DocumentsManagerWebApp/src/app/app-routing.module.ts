@@ -15,6 +15,7 @@ import { ListFormatComponent } from './list-format/list-format.component';
 import { NewFormatComponent } from './new-format/new-format.component';
 import { ModifyFormatComponent } from './modify-format/modify-format.component';
 import { ListDocumentComponent } from './list-document/list-document.component';
+import { ViewChartComponent } from './view-chart/view-chart.component';
 
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'newFormat', component: NewFormatComponent },
   { path: 'modifyFormat', component: ModifyFormatComponent },
   { path: 'documents', component: ListDocumentComponent },
+  { path: 'viewChart', component: ViewChartComponent },
 ];
 
 @NgModule({
