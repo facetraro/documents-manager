@@ -33,6 +33,7 @@ import { DocumentService } from './list-document/document.service';
 import { ViewChartComponent } from './view-chart/view-chart.component';
 import { SelectDatesComponent } from './select-dates/select-dates.component';
 import { ChartService } from './view-chart/chart.service';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ChartService } from './view-chart/chart.service';
     HttpModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [
     LoginService, 
