@@ -184,6 +184,7 @@
     <Compile Include="Controllers\StyleClassController.cs" />
     <Compile Include="Dtos\ChartDto.cs" />
     <Compile Include="Dtos\ChartValue.cs" />
+    <Compile Include="Controllers\UserDocumentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

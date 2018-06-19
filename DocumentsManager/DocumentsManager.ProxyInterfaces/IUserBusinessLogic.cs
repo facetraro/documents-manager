@@ -12,5 +12,6 @@ namespace DocumentsManager.ProxyInterfaces
         Guid CreateADocument(Document doc, Guid tokenId);
         bool UpdateADocument(Guid id, Document aDocument, Guid tokenId);
         bool DeleteADocument(Document aDocument, Guid tokenId);
+        List<Document> GetDocumentsFromUser(User user, Guid tokenId);
     }
 }

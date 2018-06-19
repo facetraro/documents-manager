@@ -45,6 +45,15 @@ namespace DocumentsManager.ProxyAcces
             AccessControl(tokenId);
             return uBL.UpdateADocument(id, aDocument, tokenId);
         }
+        public List<Document> GetDocumentsFromUser(User user,Guid tokenId)
+        {
+           AccessControl(tokenId);
+           AreFriends(user, tokenId);
+           return uBL.GetDocumentsFromUser(user, tokenId); 
+        }
+        public User GetUserById(Guid id) {
+            return uBL.GetUserById(id);
+        }
         #endregion
         #region DocumentBL
         public IEnumerable<Document> GetAllDocuments(Guid tokenId)
@@ -250,6 +259,12 @@ namespace DocumentsManager.ProxyAcces
             }
            
         }
+
+        public void AreFriends(User user, Guid tokenId) {
+            if (!uBL.AreFriends(user, uBL.GetUserByToken(tokenId))){
+                throw new NotFriendsException(user.Username);
+            }
+        }
         #endregion
         public Guid LogIn(string username, string password) {
             User user = uBL.GetUserByUsername(username);
@@ -262,8 +277,6 @@ namespace DocumentsManager.ProxyAcces
         public void LogOut(Guid token) {
             uBL.LogOut(token);
         }
-
-
 
     }
 }

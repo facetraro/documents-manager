@@ -66,11 +66,13 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public List<Document> GetDocumentsFromUser(User user)
         {
+            UserContext uContext = new UserContext();
+            User dbUser = uContext.GetById(user.Id);
             DocumentContext dContext = new DocumentContext();
             List<Document> documentsFromUser = new List<Document>();
             foreach (ModifyDocumentHistory historyi in GetAllHistories())
             {
-                if (historyi.User.Equals(user) && historyi.State == ModifyState.Added)
+                if (historyi.User.Equals(dbUser) && historyi.State == ModifyState.Added)
                 {
                     documentsFromUser.Add(dContext.GetById(historyi.Document.Id));
                 }

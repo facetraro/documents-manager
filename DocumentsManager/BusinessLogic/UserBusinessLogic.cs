@@ -129,6 +129,14 @@ namespace DocumentsManager.BusinessLogic
         public User GetUserById(Guid id)
         {
             UserContext uContext = new UserContext();
+            User userToSearch = new AdminUser
+            {
+                Id = id
+            };
+            if (!uContext.Exists(userToSearch))
+            {
+                throw new ObjectDoesNotExists(uContext);
+            }
             return uContext.GetById(id);
         }
         protected User AuthenticateUser(string username, string password)
@@ -216,6 +224,29 @@ namespace DocumentsManager.BusinessLogic
                 }
             }
             return registered;
+        }
+
+        public List<Document> GetDocumentsFromUser(User user, Guid tokenId)
+        {
+            ModifyDocumentHistoryContext mContext = new ModifyDocumentHistoryContext();
+            return mContext.GetDocumentsFromUser(user);
+        }
+        public bool AreFriends(User anUser, User anotherUser) {
+            bool areFriends = false;
+            FriendshipContext fshContext = new FriendshipContext();
+            List<Friendship> relationships = fshContext.GetAllFriendships();
+            foreach (Friendship relationi in relationships)
+            {
+                if (relationi.IsFriendship() && relationi.Request.Equals(anUser) && relationi.Requested.Equals(anotherUser))
+                {
+                    areFriends = true;
+                }
+                if (relationi.IsFriendship() && relationi.Request.Equals(anotherUser) && relationi.Requested.Equals(anUser))
+                {
+                    areFriends = true;
+                }
+            }
+            return areFriends;
         }
     }
 }
