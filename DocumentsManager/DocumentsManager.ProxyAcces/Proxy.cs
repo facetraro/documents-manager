@@ -45,16 +45,18 @@ namespace DocumentsManager.ProxyAcces
             AccessControl(tokenId);
             return uBL.UpdateADocument(id, aDocument, tokenId);
         }
-        public List<Document> GetDocumentsFromUser(User user,Guid tokenId)
+        public List<Document> GetDocumentsFromUser(User user, Guid tokenId)
         {
-           AccessControl(tokenId);
-           AreFriends(user, tokenId);
-           return uBL.GetDocumentsFromUser(user, tokenId); 
+            AccessControl(tokenId);
+            AreFriendsControl(user, tokenId);
+            return uBL.GetDocumentsFromUser(user, tokenId);
         }
-        public User GetUserById(Guid id) {
+        public User GetUserById(Guid id)
+        {
             return uBL.GetUserById(id);
         }
-        public bool AddFriend(Guid userId, Guid tokenId) {
+        public bool AddFriend(Guid userId, Guid tokenId)
+        {
             AccessControl(tokenId);
             User responsibleUser = uBL.GetUserByToken(tokenId);
             User user = uBL.GetUserById(userId);
@@ -62,18 +64,39 @@ namespace DocumentsManager.ProxyAcces
             {
                 return uBL.AddFriend(userId, tokenId);
             }
-            else {
+            else
+            {
                 throw new AlreadyFriendsException(user.Username);
             }
 
         }
-        public List<User> GetFriends(Guid tokenId) {
+        public List<User> GetFriends(Guid tokenId)
+        {
             AccessControl(tokenId);
             return uBL.GetFriends(tokenId);
         }
-        public List<User> GetRequests(Guid tokenId) {
+        public List<User> GetRequests(Guid tokenId)
+        {
             AccessControl(tokenId);
             return uBL.GetRequests(tokenId);
+        }
+        public void RejectRequest(Guid userId, Guid tokenId)
+        {
+            AccessControl(tokenId);
+            uBL.RejectRequest(userId, tokenId);
+        }
+        public Guid LogIn(string username, string password)
+        {
+            User user = uBL.GetUserByUsername(username);
+            if (!uBL.IdRegistered(user))
+            {
+                throw new ObjectDoesNotExists(user);
+            }
+            return uBL.LogIn(username, password);
+        }
+        public void LogOut(Guid token)
+        {
+            uBL.LogOut(token);
         }
         #endregion
         #region DocumentBL
@@ -116,14 +139,14 @@ namespace DocumentsManager.ProxyAcces
         public Guid AddAdmin(AdminUser admin, Guid tokenId)
         {
             AccessControl(tokenId);
-            UserValid(admin);
+            UserValidControl(admin);
             return aBL.AddAdmin(admin, tokenId);
         }
 
         public Guid AddEditor(EditorUser editor, Guid tokenId)
         {
             AccessControl(tokenId);
-            UserValid(editor);
+            UserValidControl(editor);
             return aBL.AddEditor(editor, tokenId);
         }
 
@@ -142,7 +165,7 @@ namespace DocumentsManager.ProxyAcces
         public bool UpdateAdmin(Guid id, AdminUser newAdmin, Guid tokenId)
         {
             AccessControl(tokenId);
-            UserValid(newAdmin);
+            UserValidControl(newAdmin);
             return aBL.UpdateAdmin(id, newAdmin, tokenId);
         }
         #endregion
@@ -162,7 +185,7 @@ namespace DocumentsManager.ProxyAcces
         public bool UpdateEditor(Guid id, EditorUser newEditor, Guid tokenId)
         {
             AccessControl(tokenId);
-            UserValid(newEditor);
+            UserValidControl(newEditor);
             return eBL.UpdateEditor(id, newEditor, tokenId);
         }
         public bool DeleteEditor(Guid id, Guid tokenId)
@@ -211,19 +234,19 @@ namespace DocumentsManager.ProxyAcces
         public StyleClass GetStyleById(Guid id, Guid tokenId)
         {
             AccessControl(tokenId);
-            return sBL.GetStyleById(id,tokenId);
+            return sBL.GetStyleById(id, tokenId);
         }
 
         public Guid AddStyle(StyleClass style, Guid tokenId)
         {
             AccessControl(tokenId);
-            return sBL.AddStyle(style,tokenId);
+            return sBL.AddStyle(style, tokenId);
         }
 
         public bool DeleteStyle(Guid id, Guid tokenId)
         {
             AccessControl(tokenId);
-            return sBL.DeleteStyle(id,tokenId);
+            return sBL.DeleteStyle(id, tokenId);
         }
 
         public bool UpdateStyle(Guid id, StyleClass newStyle, Guid tokenId)
@@ -233,11 +256,13 @@ namespace DocumentsManager.ProxyAcces
         }
         #endregion
         #region Charts
-        public ChartIntDate GetChartModificationsByUser(User user, DateTime since, DateTime until, Guid tokenId) {
+        public ChartIntDate GetChartModificationsByUser(User user, DateTime since, DateTime until, Guid tokenId)
+        {
             AccessControl(tokenId);
             return aBL.GetChartModificationsByUser(user, since, until, tokenId);
         }
-        public ChartIntDate GetChartCreationByUser(User user, DateTime since, DateTime until, Guid tokenId) {
+        public ChartIntDate GetChartCreationByUser(User user, DateTime since, DateTime until, Guid tokenId)
+        {
             AccessControl(tokenId);
             return aBL.GetChartCreationByUser(user, since, until, tokenId);
         }
@@ -245,7 +270,6 @@ namespace DocumentsManager.ProxyAcces
         #region Excpetions
         public void AccessControl(Guid tokenId)
         {
-            //throw exceptions here
             User responsibleUser = uBL.GetUserByToken(tokenId);
             if (!uBL.IdRegistered(responsibleUser))
             {
@@ -256,7 +280,8 @@ namespace DocumentsManager.ProxyAcces
                 throw new SessionExpiredException();
             }
         }
-        public void UserValid(User potentialUser) {
+        public void UserValidControl(User potentialUser)
+        {
 
             if (!potentialUser.IsCommonAttrValid(potentialUser.Name))
             {
@@ -278,26 +303,16 @@ namespace DocumentsManager.ProxyAcces
             {
                 throw new InvalidUserPasswordException();
             }
-           
+
         }
 
-        public void AreFriends(User user, Guid tokenId) {
-            if (!uBL.AreFriends(user, uBL.GetUserByToken(tokenId))){
+        public void AreFriendsControl(User user, Guid tokenId)
+        {
+            if (!uBL.AreFriends(user, uBL.GetUserByToken(tokenId)))
+            {
                 throw new NotFriendsException(user.Username);
             }
         }
         #endregion
-        public Guid LogIn(string username, string password) {
-            User user = uBL.GetUserByUsername(username);
-            if (!uBL.IdRegistered(user))
-            {
-                throw new ObjectDoesNotExists(user);
-            }
-            return uBL.LogIn(username, password);
-        }
-        public void LogOut(Guid token) {
-            uBL.LogOut(token);
-        }
-
     }
 }

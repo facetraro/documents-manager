@@ -41,24 +41,43 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/ManageRequests/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            return NotFound();
         }
 
         // POST: api/ManageRequests
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post(Guid userId, Guid token)
         {
+            try
+            {
+                return Ok(proxyAccess.AddFriend(userId, token));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // PUT: api/ManageRequests/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(int id, [FromBody]string value)
         {
+            return NotFound();
         }
 
         // DELETE: api/ManageRequests/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(Guid userId, Guid token)
         {
+            try
+            {
+                proxyAccess.RejectRequest(userId, token);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
