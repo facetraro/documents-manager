@@ -4,6 +4,7 @@ import { Parragraph } from "./parragraph";
 
 export class DocumentModel {
     id:string;
+    title: string;
     parragraphs: Parragraph[];
     footer: Footer;
     header: Header;
@@ -13,6 +14,7 @@ export class DocumentModel {
         this.footer=new Footer;
         this.header=new Header;
         this.id="";
+        this.title="";
     }
   }
  

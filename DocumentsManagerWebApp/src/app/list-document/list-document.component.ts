@@ -16,6 +16,7 @@ export class ListDocumentComponent implements OnInit {
 
   constructor( service:DocumentService ) { 
     this.service=service;
+    this.documents=[];
     this.tokenManagment=new ManageToken;
     this.activeToken=this.tokenManagment.getToken();
     this.loadDocuments(this.activeToken);
@@ -26,7 +27,7 @@ export class ListDocumentComponent implements OnInit {
   }
 
   loadDocuments(token: string ){
-    this.service.getAllDocuments(token).subscribe(response => console.log(response)), 
+    this.service.getAllDocuments(token).subscribe(response => this.documents=response), 
       error => this.showErrorMessage(error);
   }
 
