@@ -53,16 +53,16 @@ namespace DocumentsManager.BusinessLogic
         }
         public Guid AddDocument(Document doc, User responsibleUser)
         {
-               
-                if (!IdRegistered(responsibleUser))
-                {
-                    throw new ObjectDoesNotExists(responsibleUser);
-                }
-                DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
-                Guid id = documentLogic.Add(doc);
-                AddModifyHistory(responsibleUser, doc, ModifyState.Added);
-                return id;
-                        
+
+            if (!IdRegistered(responsibleUser))
+            {
+                throw new ObjectDoesNotExists(responsibleUser);
+            }
+            DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
+            Guid id = documentLogic.Add(doc);
+            AddModifyHistory(responsibleUser, doc, ModifyState.Added);
+            return id;
+
         }
         public bool DeleteDocument(Document aDocument, User responsibleUser)
         {
@@ -89,14 +89,14 @@ namespace DocumentsManager.BusinessLogic
         {
             AddModifyHistory(user, doc, state);
         }
-       
+
         public void ModifyParragraphs(Document aDocument, User responsibleUser)
         {
             DocumentContext documentContext = new DocumentContext();
             documentContext.ModifyParragraphs(aDocument);
         }
 
-       
+
         public void ModifyDocumentProperties(Document aDocument, User responsibleUser)
         {
             DocumentContext documentContext = new DocumentContext();
@@ -190,8 +190,8 @@ namespace DocumentsManager.BusinessLogic
             SessionAccess sessionAccess = new SessionAccess();
             sessionAccess.ClearAll();
         }
-        
-        
+
+
         public bool IdRegistered(User anUser)
         {
             UserContext uContext = new UserContext();
@@ -231,7 +231,54 @@ namespace DocumentsManager.BusinessLogic
             ModifyDocumentHistoryContext mContext = new ModifyDocumentHistoryContext();
             return mContext.GetDocumentsFromUser(user);
         }
-        public bool AreFriends(User anUser, User anotherUser) {
+        public bool AddFriend(Guid userId, Guid tokenId)
+        {
+            bool added = false;
+            FriendshipContext fshContext = new FriendshipContext();
+            User responsibleUser = GetUserByToken(tokenId);
+            User possibleFriend = GetUserById(userId);
+            List<Friendship> relationships = fshContext.GetAllFriendships();
+            if (AreFriends(responsibleUser, possibleFriend)) throw new AlreadyFriendsException(possibleFriend.Username);
+            if (AlreadySentRequest(responsibleUser, possibleFriend)) throw new AlreadySentRequestException(possibleFriend.Username);
+            foreach (Friendship relationi in relationships)
+            {
+                bool alreadyRecieved = relationi.IsRequest() && relationi.Request.Equals(possibleFriend) && relationi.Requested.Equals(responsibleUser);
+                if (alreadyRecieved)
+                {
+                    relationi.State = FriendshipState.Friend;
+                    fshContext.Modify(relationi);
+                    added = true;
+                }
+            }
+            if (!added)
+            {
+                Friendship relation = new Friendship();
+                relation.State = FriendshipState.Request;
+                relation.Id = Guid.NewGuid();
+                relation.Request=GetUserById(responsibleUser.Id);
+                relation.Requested=GetUserById(possibleFriend.Id);
+                fshContext.Add(relation);
+                added = true;
+            }
+            return added;
+        }
+        private bool AlreadySentRequest(User responsibleUser, User possibleFriend)
+        {
+            bool alreadySent = false;
+            FriendshipContext fshContext = new FriendshipContext();
+            List<Friendship> relationships = fshContext.GetAllFriendships();
+
+            foreach (Friendship relationi in relationships)
+            {
+                if (relationi.IsRequest() && relationi.Request.Equals(responsibleUser) && relationi.Requested.Equals(possibleFriend))
+                {
+                    alreadySent = true;
+                }
+            }
+            return alreadySent;
+        }
+        public bool AreFriends(User anUser, User anotherUser)
+        {
             bool areFriends = false;
             FriendshipContext fshContext = new FriendshipContext();
             List<Friendship> relationships = fshContext.GetAllFriendships();
