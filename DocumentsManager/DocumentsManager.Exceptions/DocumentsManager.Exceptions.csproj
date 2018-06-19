@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddingYourselfException.cs" />
+    <Compile Include="AlreadyFriendsException.cs" />
+    <Compile Include="AlreadySentRequestException.cs" />
     <Compile Include="CantDeleteLoggedUserException.cs" />
     <Compile Include="InvalidUserAttrException.cs" />
     <Compile Include="InvalidUserEmailException.cs" />

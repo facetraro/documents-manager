@@ -177,6 +177,7 @@
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\FormatController.cs" />
     <Compile Include="Controllers\EditorController.cs" />
+    <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\LogOutController.cs" />
     <Compile Include="Controllers\ModifiedChartController.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Dtos\ChartDto.cs" />
     <Compile Include="Dtos\ChartValue.cs" />
     <Compile Include="Controllers\UserDocumentsController.cs" />
+    <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
