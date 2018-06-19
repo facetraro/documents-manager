@@ -28,16 +28,25 @@ namespace DocumentsManager.Web.Api.Controllers
         // GET: api/ModifiedChart/5
         public IHttpActionResult Get(Guid Id, string dateOne, string dateTwo, Guid token)
         {
-            DateTime dateFrom =DateTime.Parse(dateOne);
-            DateTime dateTo = DateTime.Parse(dateTwo);
+            DateTime dateFrom = new DateTime();
+            DateTime dateTo = new DateTime();
+            try
+            {
+                dateFrom = DateTime.Parse(dateOne);
+                dateTo = DateTime.Parse(dateTwo);
+            }
+            catch (Exception)
+            {
+                BadRequest("Los formatos para las fechas no son validos");
+            }
             User user = new AdminUser();
             try
             {
                 user = proxyAccess.GetAdminByID(Id, token);
             }
-            catch (WrongUserType)
+            catch (WrongUserType ex)
             {
-                user = proxyAccess.GetEditorByID(Id, token);
+                return BadRequest(ex.Message);
             }
             catch (ObjectDoesNotExists ex) {
                 return BadRequest(ex.Message);

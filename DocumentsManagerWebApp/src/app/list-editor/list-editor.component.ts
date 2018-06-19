@@ -23,7 +23,6 @@ import { EditorService } from './editor.service';
       private router: Router
     ) {
       this.tokenManagment=new ManageToken;
-      this.addFriendImgPath = '/media/add.png';
       this.activeToken=this.tokenManagment.getToken();
       this.loadUsers(this.activeToken);
     }
@@ -36,6 +35,9 @@ import { EditorService } from './editor.service';
     }
     addFriendUser(id:string){
       console.log(id);
+    }
+    viewCharts(id:string){
+      this.router.navigate((['/viewChart']), { queryParams: { idUser: id } });
     }
     modifyUser(id:string){
       this.router.navigate((['/modifyEditor']), { queryParams: { userToModify: id} });

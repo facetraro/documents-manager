@@ -1,5 +1,6 @@
 ﻿using DocumentsManager.Exceptions;
 using DocumentsManager.ProxyAcces;
+using DocumentsManager.Web.Api.Dtos;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -26,26 +27,34 @@ namespace DocumentsManager.Web.Api.Controllers
         [HttpGet]
         [Route("CreatorsChart")]
         // GET: api/CreatorsChart/5
-        public string Get(Guid Id, string dateOne, string dateTwo, Guid token)
+        public IHttpActionResult Get(Guid Id, string dateOne, string dateTwo, Guid token)
         {
-            DateTime dateFrom = DateTime.Parse(dateOne);
-            DateTime dateTo = DateTime.Parse(dateTwo);
+            DateTime dateFrom = new DateTime();
+            DateTime dateTo = new DateTime();
+            try
+            {
+                dateFrom = DateTime.Parse(dateOne);
+                dateTo = DateTime.Parse(dateTwo);
+            }
+            catch (Exception)
+            {
+                BadRequest("Los formatos para las fechas no son validos");
+            }
             User user = new AdminUser();
             try
             {
-                user = proxyAccess.GetAdminByID(Id,token);
+                user = proxyAccess.GetAdminByID(Id, token);
             }
-            catch (WrongUserType)
+            catch (WrongUserType ex)
             {
-
-                user = proxyAccess.GetEditorByID(Id, token);
+                return BadRequest(ex.Message);
             }
             catch (ObjectDoesNotExists ex)
             {
-                return ex.Message;
+                return BadRequest(ex.Message);
             }
-
-            return proxyAccess.GetChartCreationByUser(user, dateFrom, dateTo, token).ToString();
+            var chart = proxyAccess.GetChartCreationByUser(user, dateFrom, dateTo, token);
+            return Ok(new ChartDto(chart));
         }
 
         // POST: api/CreatorsChart
