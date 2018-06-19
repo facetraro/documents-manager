@@ -1,5 +1,7 @@
 ﻿using DocumentsManager.Exceptions;
 using DocumentsManager.ProxyAcces;
+using DocumentsManager.Web.Api.Dtos;
+using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +23,22 @@ namespace DocumentsManager.Web.Api.Controllers
             this.proxyAccess = new Proxy();
         }
         // GET: api/Friends
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(Guid token)
         {
-            return NotFound();
+            try
+            {
+                List<User> friends = proxyAccess.GetFriends(token);
+                List<UserDto> dtoFriends = new List<UserDto>();
+                foreach (User useri in friends)
+                {
+                    dtoFriends.Add(new Dtos.UserDto(useri));
+                }
+                return Ok(dtoFriends);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/Friends/5
@@ -33,34 +48,16 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/Friends
-        public IHttpActionResult Post(Guid userID, Guid token)
+        public IHttpActionResult Post(Guid userId, Guid token)
         {
             try
             {
-
-                return Ok();
+                return Ok(proxyAccess.AddFriend(userId, token));
             }
-            catch (SessionExpiredException ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            catch (NoUserLoggedException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (UserNotAuthorizedException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (AlreadyFriendsException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (AlreadySentRequestException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
 
         }
 
