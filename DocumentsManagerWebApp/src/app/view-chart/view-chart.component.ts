@@ -11,11 +11,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewChartComponent implements OnInit {
   tokenManagment: ManageToken;
-  chart:Chart[];
+  chart:Chart;
   activeToken="";
   dateOne:string;
   dateTwo:string;
   id:string;
+  public lineChartData:Array<any>  = [{data: [], label: 'Documentos'}];
+  public lineChartLabels:Array<any> =  [];
   constructor(service:ChartService, _currentRoute:ActivatedRoute) { 
     this.tokenManagment=new ManageToken;
     this.activeToken=this.tokenManagment.getToken();
@@ -37,19 +39,49 @@ export class ViewChartComponent implements OnInit {
 
     console.log(this.dateOne);
     console.log(this.dateTwo);
-    service.modifyGetChart(this.id,this.dateOne,this.dateTwo,this.activeToken).subscribe(response => console.log(response)), 
+    service.modifyGetChart(this.id,this.dateOne,this.dateTwo,this.activeToken).subscribe(response => this.showChart(response)), 
     error => this.showErrorMessage(error);
   }
 
-  showChart(response:Chart[]){
+  showChart(response:Chart){
     this.chart=response;
-    console.log(this.chart);
+    let datas:Array<string>  = [];
+    this.chart.values.forEach(element => {
+      datas.push(element.value);
+      this.lineChartLabels.push(element.date);
+    });
+    this.lineChartData=[{data: datas, label: 'Documentos'}];
   }
 
   showErrorMessage(error:any){
     alert(error);
   }
   ngOnInit() {
+  }
+
+  public lineChartOptions:any = {
+    responsive: true
+  };
+  public lineChartColors:Array<any> = [
+    { // grey
+      backgroundColor: 'rgba(0,255,0,0.2)',
+      borderColor: 'rgba(0,255,0,1)',
+      pointBackgroundColor: 'rgba(0,255,0,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(0,255,0,0.8)'
+    }
+  ];
+  public lineChartLegend:boolean = true;
+  public lineChartType:string = 'line';
+  
+  // events
+  public chartClicked(e:any):void {
+    console.log(e);
+  }
+ 
+  public chartHovered(e:any):void {
+    console.log(e);
   }
 
 }
