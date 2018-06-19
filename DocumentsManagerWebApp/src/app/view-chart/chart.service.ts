@@ -17,18 +17,14 @@ export class ChartService {
 
   modifyGetChart(userId:string, dateOne:string, dateTwo:string, token : string) : Observable<Chart> {
     let apiUrl= new Url;
-    console.log(userId);
     let url = apiUrl.globalUrl+"/ModifiersChart/?id="+userId+"&dateOne="+dateOne+"&dateTwo="+dateTwo+"&token="+token;
-    console.log(url);
     return this.httpService.get(url)
     .map((response: Response) => <Chart> (response.json()))
     .catch(this.handleError);
   };
   createGetChart(userId:string, dateOne:string, dateTwo:string, token : string) : Observable<Chart> {
     let apiUrl= new Url;
-    console.log(userId);
     let url = apiUrl.globalUrl+"/CreatorsChart/?id="+userId+"&dateOne="+dateOne+"&dateTwo="+dateTwo+"&token="+token;
-    console.log(url);
     return this.httpService.get(url)
     .map((response: Response) => <Chart> (response.json()))
     .catch(this.handleError);
@@ -36,7 +32,9 @@ export class ChartService {
 
   private handleError(error: Response) {
     console.error(error);
+   
     this.specificError=error.json();
-    return Observable.throw(this.specificError.message || 'Se perdio la conexion con la Api.' );
+    alert(this.specificError.message || 'Se perdio la conexion con la Api.');
+    return Observable.throw(this.specificError.message || 'Se perdio la conexion con la Api.');
   }
 }

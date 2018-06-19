@@ -3,6 +3,7 @@ import { ChartService } from './chart.service';
 import { ManageToken } from '../manage-token';
 import { Chart } from './chart';
 import { ActivatedRoute } from '@angular/router';
+import { DateForm } from './date-form';
 
 @Component({
   selector: 'app-view-chart',
@@ -16,34 +17,21 @@ export class ViewChartComponent implements OnInit {
   dateOne:string;
   dateTwo:string;
   id:string;
+  date:DateForm;
+  service:ChartService;
   public lineChartDataAux:Array<any> =[] ;
-  public lineChartData:Array<any>  = [{data: [], label: 'Documentos'}, {data: [], label: 'Documentos2'}];
+  public lineChartData:Array<any>  = [{data: [], label: ''}, {data: [], label: ''}];
   public lineChartLabels:Array<any> =  [];
   constructor(service:ChartService, _currentRoute:ActivatedRoute) { 
     this.tokenManagment=new ManageToken;
+    this.date=new DateForm;
     this.activeToken=this.tokenManagment.getToken();
     _currentRoute.queryParams
     .filter(params => params.idUser)
     .subscribe(params => {
       this.id = params.idUser;
-    });  
-    _currentRoute.queryParams
-    .filter(params => params.dateOne)
-    .subscribe(params => {
-      this.dateOne = params.dateOne;
-    });  
-    _currentRoute.queryParams
-    .filter(params => params.dateTwo)
-    .subscribe(params => {
-      this.dateTwo = params.dateTwo;
-    });  
-
-    console.log(this.dateOne);
-    console.log(this.dateTwo);
-    service.modifyGetChart(this.id,this.dateOne,this.dateTwo,this.activeToken).subscribe(response => this.addTheAnotherChart(response, service)), 
-    error => this.showErrorMessage(error);
-   
-    
+    });    
+    this.service=service;  
   }
 
   addTheAnotherChart(response:Chart,service:ChartService){
@@ -77,6 +65,17 @@ export class ViewChartComponent implements OnInit {
     alert(error);
   }
   ngOnInit() {
+  }
+
+  refreshChart(){
+    if(this.date.since.length!=0 && this.date.until.length!=0){
+      this.dateOne=this.date.since;
+      this.dateTwo=this.date.until;
+      this.service.modifyGetChart(this.id,this.dateOne,this.dateTwo,this.activeToken).subscribe(response => this.addTheAnotherChart(response, this.service)), 
+      error => this.showErrorMessage(error);
+    } else {
+      alert("Alguna fecha no es valida");
+    }
   }
 
   public lineChartOptions:any = {

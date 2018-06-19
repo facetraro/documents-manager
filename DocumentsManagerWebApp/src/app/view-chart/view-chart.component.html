@@ -1,3 +1,11 @@
+<div>
+<hr>
+<p>Fecha Hasta: <input [(ngModel)]="date.since" type="date"></p>
+<p>Fecha Desde:  <input [(ngModel)]="date.until" type="date"></p>
+<button (click)="refreshChart()">
+    Ver Estadisticas
+</button>
+<hr>
 <div class="row">
   <div >
     <div class="col-md-6">
@@ -13,6 +21,7 @@
                   (chartClick)="chartClicked($event)"></canvas>
       </div>
     </div>
-  
     </div>
   </div>
+  <app-go-home></app-go-home>
+</div>

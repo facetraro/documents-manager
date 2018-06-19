@@ -31,7 +31,6 @@ import { ModifyFormatComponent } from './modify-format/modify-format.component';
 import { ListDocumentComponent } from './list-document/list-document.component';
 import { DocumentService } from './list-document/document.service';
 import { ViewChartComponent } from './view-chart/view-chart.component';
-import { SelectDatesComponent } from './select-dates/select-dates.component';
 import { ChartService } from './view-chart/chart.service';
 import { ChartsModule } from 'ng2-charts';
 
@@ -56,7 +55,6 @@ import { ChartsModule } from 'ng2-charts';
     ModifyFormatComponent,
     ListDocumentComponent,
     ViewChartComponent,
-    SelectDatesComponent
   ],
   imports: [
     HttpModule,

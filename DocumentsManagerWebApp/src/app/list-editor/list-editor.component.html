@@ -46,9 +46,9 @@
                           <td>{{aFullUserData.username | lowercase }}</td>
                           <td>{{aFullUserData.email | lowercase}}</td>
                           <td>
-                              <button (click)="addFriendUser(aFullUserData.id)">
-                                  Añadir Amigo
-                          </button>
+                            <button (click)="viewCharts(aFullUserData.id)">
+                                Estadisticas
+                            </button>
                           &nbsp;
                           <button (click)="modifyUser(aFullUserData.id)">
                                   Modificar
