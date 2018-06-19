@@ -180,6 +180,7 @@
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\LogOutController.cs" />
+    <Compile Include="Controllers\ManageRequestsController.cs" />
     <Compile Include="Controllers\ModifiedChartController.cs" />
     <Compile Include="Controllers\PrintDocumentController.cs" />
     <Compile Include="Controllers\StyleClassController.cs" />
