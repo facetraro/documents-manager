@@ -317,5 +317,20 @@ namespace DocumentsManager.BusinessLogic
             }
             return friends;
         }
+        public List<User> GetRequests(Guid tokenId)
+        {
+            List<User> requests = new List<User>();
+            FriendshipContext fshContext = new FriendshipContext();
+            List<Friendship> relationships = fshContext.GetAllFriendships();
+            User responsibleUser = GetUserByToken(tokenId);
+            foreach (Friendship relationi in relationships)
+            {
+                if (relationi.IsRequest() && relationi.Requested.Equals(responsibleUser))
+                {
+                        requests.Add(relationi.Request);
+                }
+            }
+            return requests;
+        }
     }
 }
