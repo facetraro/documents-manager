@@ -24,6 +24,15 @@ export class ChartService {
     .map((response: Response) => <Chart> (response.json()))
     .catch(this.handleError);
   };
+  createGetChart(userId:string, dateOne:string, dateTwo:string, token : string) : Observable<Chart> {
+    let apiUrl= new Url;
+    console.log(userId);
+    let url = apiUrl.globalUrl+"/CreatorsChart/?id="+userId+"&dateOne="+dateOne+"&dateTwo="+dateTwo+"&token="+token;
+    console.log(url);
+    return this.httpService.get(url)
+    .map((response: Response) => <Chart> (response.json()))
+    .catch(this.handleError);
+  };
 
   private handleError(error: Response) {
     console.error(error);

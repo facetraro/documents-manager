@@ -16,7 +16,8 @@ export class ViewChartComponent implements OnInit {
   dateOne:string;
   dateTwo:string;
   id:string;
-  public lineChartData:Array<any>  = [{data: [], label: 'Documentos'}];
+  public lineChartDataAux:Array<any> =[] ;
+  public lineChartData:Array<any>  = [{data: [], label: 'Documentos'}, {data: [], label: 'Documentos2'}];
   public lineChartLabels:Array<any> =  [];
   constructor(service:ChartService, _currentRoute:ActivatedRoute) { 
     this.tokenManagment=new ManageToken;
@@ -39,18 +40,37 @@ export class ViewChartComponent implements OnInit {
 
     console.log(this.dateOne);
     console.log(this.dateTwo);
-    service.modifyGetChart(this.id,this.dateOne,this.dateTwo,this.activeToken).subscribe(response => this.showChart(response)), 
+    service.modifyGetChart(this.id,this.dateOne,this.dateTwo,this.activeToken).subscribe(response => this.addTheAnotherChart(response, service)), 
+    error => this.showErrorMessage(error);
+   
+    
+  }
+
+  addTheAnotherChart(response:Chart,service:ChartService){
+    this.showChart(response, "Todas las Modificaciones");
+    service.createGetChart(this.id,this.dateOne,this.dateTwo,this.activeToken).subscribe(response => this.addTheLastChart(response)), 
     error => this.showErrorMessage(error);
   }
 
-  showChart(response:Chart){
+  addTheLastChart(response:Chart){
+    this.showChart(response, "Creaciones");
+    this.lineChartData=[this.lineChartDataAux.pop(), this.lineChartDataAux.pop()];
+  }
+  
+  showChart(response:Chart, labelName : string){
     this.chart=response;
+    let lineChartLabelsAlreadyLoaded = true ;
+    if(this.lineChartLabels.length==0){
+      lineChartLabelsAlreadyLoaded = false;
+    }
     let datas:Array<string>  = [];
     this.chart.values.forEach(element => {
       datas.push(element.value);
-      this.lineChartLabels.push(element.date);
+      if(lineChartLabelsAlreadyLoaded==false){
+        this.lineChartLabels.push(element.date);
+      }
     });
-    this.lineChartData=[{data: datas, label: 'Documentos'}];
+    this.lineChartDataAux.push({data: datas, label: labelName});
   }
 
   showErrorMessage(error:any){
@@ -63,13 +83,21 @@ export class ViewChartComponent implements OnInit {
     responsive: true
   };
   public lineChartColors:Array<any> = [
-    { // grey
+    { // green
       backgroundColor: 'rgba(0,255,0,0.2)',
       borderColor: 'rgba(0,255,0,1)',
       pointBackgroundColor: 'rgba(0,255,0,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(0,255,0,0.8)'
+    },
+    { // green
+      backgroundColor: 'rgba(0,255,255,0.2)',
+      borderColor: 'rgba(0,255,255,1)',
+      pointBackgroundColor: 'rgba(0,255,255,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(0,255,255,0.8)'
     }
   ];
   public lineChartLegend:boolean = true;
