@@ -16,6 +16,6 @@ namespace DocumentsManager.ProxyInterfaces
         bool AddFriend(Guid userId, Guid tokenId);
         List<User> GetFriends(Guid tokenId);
         List<User> GetRequests(Guid tokenId);
-        
+        void RejectRequest(Guid userId, Guid tokenId);
     }
 }

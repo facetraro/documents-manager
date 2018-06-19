@@ -325,7 +325,8 @@ namespace DocumentsManager.BusinessLogic
             User responsibleUser = GetUserByToken(tokenId);
             foreach (Friendship relationi in relationships)
             {
-                if (relationi.IsRequest() && relationi.Requested.Equals(responsibleUser))
+                bool requestToRequested = relationi.Requested.Equals(responsibleUser);
+                if (relationi.IsRequest() && requestToRequested)
                 {
                     requests.Add(relationi.Request);
                 }
@@ -340,7 +341,9 @@ namespace DocumentsManager.BusinessLogic
             List<Friendship> relationships = fshContext.GetAllFriendships();
             foreach (Friendship relationi in relationships)
             {
-                if (relationi.IsRequest() && relationi.Request.Equals(possibleFriend) && relationi.Requested.Equals(responsibleUser))
+                bool requestFromRequester = relationi.Request.Equals(possibleFriend);
+                bool requestToRequested = relationi.Requested.Equals(responsibleUser);
+                if (relationi.IsRequest() && requestFromRequester && requestToRequested)
                 {
                     fshContext.Remove(relationi);
                     return;
