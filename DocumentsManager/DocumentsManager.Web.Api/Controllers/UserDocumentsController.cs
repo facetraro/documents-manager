@@ -1,5 +1,6 @@
 ﻿using DocumentsManager.Exceptions;
 using DocumentsManager.ProxyAcces;
+using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -31,9 +32,16 @@ namespace DocumentsManager.Web.Api.Controllers
         // GET: api/UserDocuments/5
         public IHttpActionResult Get(Guid userId, Guid token)
         {
-            try {
+            try
+            {
                 User user = proxyAccess.GetUserById(userId);
-                return Ok(proxyAccess.GetDocumentsFromUser(user, token));
+                List<DocumentDto> DtodocumentsFromUser = new List<DocumentDto>();
+                List<Document> documentsFromUser = proxyAccess.GetDocumentsFromUser(user, token);
+                foreach (Document doci in documentsFromUser)
+                {
+                    DtodocumentsFromUser.Add(new DocumentDto(doci));
+                }
+                return Ok(DtodocumentsFromUser);
             }
             catch (SessionExpiredException ex)
             {
@@ -44,6 +52,10 @@ namespace DocumentsManager.Web.Api.Controllers
                 return BadRequest(ex.Message);
             }
             catch (UserNotAuthorizedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (NotFriendsException ex)
             {
                 return BadRequest(ex.Message);
             }
