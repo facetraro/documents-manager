@@ -112,6 +112,19 @@ namespace DocumentsManager.BusinessLogic.Charts
             return toString;
         }
 
+        public List<Tuple<string, string>> GetValues()
+        {
+            List<Tuple<string, string>> allValues = new List<Tuple<string, string>>();
+            for (int i = 0; i < Date.Count; i++)
+            {
+                string firstValue = $"{Date[i].Day}/{Date[i].Month}/{Date[i].Year}";
+                string lastValue = $"{Value[i]}";
+                Tuple<string, string> newTuple = new Tuple<string, string>(firstValue, lastValue);
+                allValues.Add(newTuple);
+            }
+            return allValues;
+        }
+
         public override string ToString()
         {
             return GetString();

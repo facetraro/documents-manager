@@ -1,10 +1,10 @@
+import { ChartValue } from "src/app/view-chart/chart-value";
+
+
 export class Chart {
-    value:string[];
-    date: string[];
-    
+    values:ChartValue[];
     constructor(){
-        this.value=[];
-        this.date=[];
+        this.values=[];
     }
   }
  

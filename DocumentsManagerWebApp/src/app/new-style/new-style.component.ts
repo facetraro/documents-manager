@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FullUserData } from 'src/app/list-admin/FullUserData';
 import { ManageToken } from 'src/app/manage-token';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { StyleService } from '../list-styles/style.service';
 import { StyleModel } from '../list-styles/styleModel';
 import { StyleAttributes } from '../list-styles/StyleAttributes';
@@ -17,6 +17,7 @@ export class NewStyleComponent implements OnInit {
   tokenManagment:ManageToken;
   private attributes:StyleAttributes[];
   constructor(
+    private activatedRoute: ActivatedRoute,
     private styleService : StyleService,
     private router: Router
   ) { 

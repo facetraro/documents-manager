@@ -182,6 +182,8 @@
     <Compile Include="Controllers\ModifiedChartController.cs" />
     <Compile Include="Controllers\PrintDocumentController.cs" />
     <Compile Include="Controllers\StyleClassController.cs" />
+    <Compile Include="Dtos\ChartDto.cs" />
+    <Compile Include="Dtos\ChartValue.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

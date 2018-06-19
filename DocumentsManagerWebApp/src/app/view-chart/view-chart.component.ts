@@ -13,13 +13,31 @@ export class ViewChartComponent implements OnInit {
   tokenManagment: ManageToken;
   chart:Chart[];
   activeToken="";
+  dateOne:string;
+  dateTwo:string;
+  id:string;
   constructor(service:ChartService, _currentRoute:ActivatedRoute) { 
     this.tokenManagment=new ManageToken;
     this.activeToken=this.tokenManagment.getToken();
-    let id = "" + _currentRoute.snapshot.params['id']; 
-    let dateOne = "" + _currentRoute.snapshot.params['dateOne']; 
-    let dateTwo = "" + _currentRoute.snapshot.params['dateTwo']; 
-    service.modifyGetChart(id,dateOne,dateTwo,this.activeToken).subscribe(response => this.chart=response), 
+    _currentRoute.queryParams
+    .filter(params => params.idUser)
+    .subscribe(params => {
+      this.id = params.idUser;
+    });  
+    _currentRoute.queryParams
+    .filter(params => params.dateOne)
+    .subscribe(params => {
+      this.dateOne = params.dateOne;
+    });  
+    _currentRoute.queryParams
+    .filter(params => params.dateTwo)
+    .subscribe(params => {
+      this.dateTwo = params.dateTwo;
+    });  
+
+    console.log(this.dateOne);
+    console.log(this.dateTwo);
+    service.modifyGetChart(this.id,this.dateOne,this.dateTwo,this.activeToken).subscribe(response => console.log(response)), 
     error => this.showErrorMessage(error);
   }
 

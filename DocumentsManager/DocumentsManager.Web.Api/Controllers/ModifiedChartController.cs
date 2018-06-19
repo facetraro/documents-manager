@@ -1,5 +1,6 @@
 ﻿using DocumentsManager.Exceptions;
 using DocumentsManager.ProxyAcces;
+using DocumentsManager.Web.Api.Dtos;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace DocumentsManager.Web.Api.Controllers
         [HttpGet]
         [Route("ModifiersChart")]
         // GET: api/ModifiedChart/5
-        public string Get(Guid Id, string dateOne, string dateTwo, Guid token)
+        public IHttpActionResult Get(Guid Id, string dateOne, string dateTwo, Guid token)
         {
             DateTime dateFrom =DateTime.Parse(dateOne);
             DateTime dateTo = DateTime.Parse(dateTwo);
@@ -39,9 +40,10 @@ namespace DocumentsManager.Web.Api.Controllers
                 user = proxyAccess.GetEditorByID(Id, token);
             }
             catch (ObjectDoesNotExists ex) {
-                return ex.Message;
+                return BadRequest(ex.Message);
             }
-            return proxyAccess.GetChartModificationsByUser(user, dateFrom, dateTo, token).ToString();
+            var chart = proxyAccess.GetChartModificationsByUser(user, dateFrom, dateTo, token);
+            return Ok(new ChartDto(chart));
         }
 
         // POST: api/ModifiedChart

@@ -15,11 +15,13 @@ export class ChartService {
     }
     specificError:MessageError;
 
-  modifyGetChart(userId:string, dateOne:string, dateTwo:string, token : string) : Observable<Chart[]> {
+  modifyGetChart(userId:string, dateOne:string, dateTwo:string, token : string) : Observable<Chart> {
     let apiUrl= new Url;
+    console.log(userId);
     let url = apiUrl.globalUrl+"/ModifiersChart/?id="+userId+"&dateOne="+dateOne+"&dateTwo="+dateTwo+"&token="+token;
+    console.log(url);
     return this.httpService.get(url)
-    .map((response: Response) => <Chart[]> response.json())
+    .map((response: Response) => <Chart> (response.json()))
     .catch(this.handleError);
   };
 
