@@ -779,5 +779,121 @@ namespace DocumentsManager.BusinessLogic.Tests
             uBL.LogOut(token2);
             TearDown();
         }
+        [TestMethod]
+        public void GetRequestsTest()
+        {
+            SetUp();
+            FriendshipContext fContext = new FriendshipContext();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userRequester = EntitiesExampleInstances.TestAdminUser();
+            userRequester.Username = "requester";
+            userRequester.Email = "requester@requester";
+            AdminUser userRequested = EntitiesExampleInstances.TestAdminUser();
+            userRequested.Username = "requested";
+            userRequested.Email = "requested@requested";
+            aBL.AddAdmin(userRequester, Guid.NewGuid());
+            aBL.AddAdmin(userRequested, Guid.NewGuid());
+            Guid token1 = uBL.LogIn(userRequester.Username, userRequester.Password);
+            uBL.AddFriend(userRequested.Id, token1);
+            uBL.LogOut(token1);
+            Guid token2 = uBL.LogIn(userRequested.Username, userRequested.Password);
+            List<User> friends = uBL.GetRequests(token2);
+            Assert.AreEqual(1, friends.Count);
+            uBL.LogOut(token2);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetRequestsAddedTest()
+        {
+            SetUp();
+            FriendshipContext fContext = new FriendshipContext();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userRequester = EntitiesExampleInstances.TestAdminUser();
+            userRequester.Username = "requester";
+            userRequester.Email = "requester@requester";
+            AdminUser userRequested = EntitiesExampleInstances.TestAdminUser();
+            userRequested.Username = "requested";
+            userRequested.Email = "requested@requested";
+            aBL.AddAdmin(userRequester, Guid.NewGuid());
+            aBL.AddAdmin(userRequested, Guid.NewGuid());
+            Guid token1 = uBL.LogIn(userRequester.Username, userRequester.Password);
+            uBL.AddFriend(userRequested.Id, token1);
+            uBL.LogOut(token1);
+            Guid token2 = uBL.LogIn(userRequested.Username, userRequested.Password);
+            uBL.AddFriend(userRequester.Id, token2);
+            List<User> friends = uBL.GetRequests(token2);
+            Assert.AreEqual(0, friends.Count);
+            uBL.LogOut(token2);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetRequestsTestZero()
+        {
+            SetUp();
+            FriendshipContext fContext = new FriendshipContext();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userRequester = EntitiesExampleInstances.TestAdminUser();
+            userRequester.Username = "requester";
+            userRequester.Email = "requester@requester";
+            AdminUser userRequested = EntitiesExampleInstances.TestAdminUser();
+            userRequested.Username = "requested";
+            userRequested.Email = "requested@requested";
+            aBL.AddAdmin(userRequester, Guid.NewGuid());
+            aBL.AddAdmin(userRequested, Guid.NewGuid());
+            Guid token1 = uBL.LogIn(userRequester.Username, userRequester.Password);
+            List<User> friends = uBL.GetRequests(token1);
+            uBL.LogOut(token1);
+            Assert.AreEqual(0, friends.Count);
+            TearDown();
+        }
+        [TestMethod]
+        public void RejectRequestTest()
+        {
+            SetUp();
+            FriendshipContext fContext = new FriendshipContext();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userRequester = EntitiesExampleInstances.TestAdminUser();
+            userRequester.Username = "requester";
+            userRequester.Email = "requester@requester";
+            AdminUser userRequested = EntitiesExampleInstances.TestAdminUser();
+            userRequested.Username = "requested";
+            userRequested.Email = "requested@requested";
+            aBL.AddAdmin(userRequester, Guid.NewGuid());
+            aBL.AddAdmin(userRequested, Guid.NewGuid());
+            Guid token1 = uBL.LogIn(userRequester.Username, userRequester.Password);
+            uBL.AddFriend(userRequested.Id, token1);
+            uBL.LogOut(token1);
+            Guid token2 = uBL.LogIn(userRequested.Username, userRequested.Password);
+            uBL.RejectRequest(userRequester.Id, token2);
+            List<User> friends = uBL.GetRequests(token2);
+            Assert.AreEqual(0, friends.Count);
+            uBL.LogOut(token2);
+            TearDown();
+        }
+        [ExpectedException(typeof(ObjectDoesNotExists))]
+        [TestMethod]
+        public void RejectInexistentRequestTest()
+        {
+            SetUp();
+            FriendshipContext fContext = new FriendshipContext();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userRequester = EntitiesExampleInstances.TestAdminUser();
+            userRequester.Username = "requester";
+            userRequester.Email = "requester@requester";
+            AdminUser userRequested = EntitiesExampleInstances.TestAdminUser();
+            userRequested.Username = "requested";
+            userRequested.Email = "requested@requested";
+            aBL.AddAdmin(userRequester, Guid.NewGuid());
+            aBL.AddAdmin(userRequested, Guid.NewGuid());
+            Guid token = uBL.LogIn(userRequester.Username, userRequester.Password);
+            uBL.RejectRequest(userRequested.Id, token);
+            uBL.LogOut(token);
+            TearDown();
+        }
     }
 }
