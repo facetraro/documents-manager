@@ -238,6 +238,7 @@ namespace DocumentsManager.BusinessLogic
             User responsibleUser = GetUserByToken(tokenId);
             User possibleFriend = GetUserById(userId);
             List<Friendship> relationships = fshContext.GetAllFriendships();
+            if (responsibleUser.Equals(possibleFriend)) throw new AddingYourselfException();
             if (AreFriends(responsibleUser, possibleFriend)) throw new AlreadyFriendsException(possibleFriend.Username);
             if (AlreadySentRequest(responsibleUser, possibleFriend)) throw new AlreadySentRequestException(possibleFriend.Username);
             foreach (Friendship relationi in relationships)
@@ -255,8 +256,8 @@ namespace DocumentsManager.BusinessLogic
                 Friendship relation = new Friendship();
                 relation.State = FriendshipState.Request;
                 relation.Id = Guid.NewGuid();
-                relation.Request=GetUserById(responsibleUser.Id);
-                relation.Requested=GetUserById(possibleFriend.Id);
+                relation.Request = GetUserById(responsibleUser.Id);
+                relation.Requested = GetUserById(possibleFriend.Id);
                 fshContext.Add(relation);
                 added = true;
             }
@@ -267,7 +268,6 @@ namespace DocumentsManager.BusinessLogic
             bool alreadySent = false;
             FriendshipContext fshContext = new FriendshipContext();
             List<Friendship> relationships = fshContext.GetAllFriendships();
-
             foreach (Friendship relationi in relationships)
             {
                 if (relationi.IsRequest() && relationi.Request.Equals(responsibleUser) && relationi.Requested.Equals(possibleFriend))
@@ -294,6 +294,28 @@ namespace DocumentsManager.BusinessLogic
                 }
             }
             return areFriends;
+        }
+        public List<User> GetFriends(Guid tokenId)
+        {
+            List<User> friends = new List<User>();
+            FriendshipContext fshContext = new FriendshipContext();
+            List<Friendship> relationships = fshContext.GetAllFriendships();
+            User responsibleUser = GetUserByToken(tokenId);
+            foreach (Friendship relationi in relationships)
+            {
+                if (relationi.IsFriendship() && (relationi.Request.Equals(responsibleUser) || relationi.Requested.Equals(responsibleUser)))
+                {
+                    if (relationi.Request.Equals(responsibleUser))
+                    {
+                        friends.Add(relationi.Request);
+                    }
+                    else
+                    {
+                        friends.Add(relationi.Requested);
+                    }
+                }
+            }
+            return friends;
         }
     }
 }

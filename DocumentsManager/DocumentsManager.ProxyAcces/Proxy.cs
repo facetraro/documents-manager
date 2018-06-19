@@ -67,6 +67,10 @@ namespace DocumentsManager.ProxyAcces
             }
 
         }
+        public List<User> GetFriends(Guid tokenId) {
+            AccessControl(tokenId);
+            return uBL.GetFriends(tokenId);
+        }
         #endregion
         #region DocumentBL
         public IEnumerable<Document> GetAllDocuments(Guid tokenId)
