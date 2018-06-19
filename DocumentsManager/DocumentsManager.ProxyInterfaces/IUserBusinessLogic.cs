@@ -14,5 +14,6 @@ namespace DocumentsManager.ProxyInterfaces
         bool DeleteADocument(Document aDocument, Guid tokenId);
         List<Document> GetDocumentsFromUser(User user, Guid tokenId);
         bool AddFriend(Guid userId, Guid tokenId);
+        List<User> GetFriends(Guid tokenId);
     }
 }
