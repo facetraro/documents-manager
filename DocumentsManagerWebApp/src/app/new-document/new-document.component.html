@@ -68,13 +68,15 @@
               </tr>
           </tbody>
           </table>
-          <h4>Añadir nuevo Parrafo</h4>
+          <h4>Parrafo a añadir</h4>
           <label>Estilo:
           <select [(ngModel)]="parragraphStyle.id" placeholder="id"> 
               <option *ngFor="let c of allStyles" [ngValue]="c.id+'###'+c.name">{{c.name}}</option>
             </select>
           </label>     
           <br>    
+          <br>    
+          <div *ngIf='actualParragraphs && actualParragraphs.length'><label>Textos:</label></div>
           <table class='table' *ngIf='actualParragraphs && actualParragraphs.length'>
               <!--Cabezal de la tabla -->
               <thead>
@@ -99,7 +101,7 @@
           </tbody>
           </table>
         </div>
-        <h4> Añadir texto al nuevo Parrafo:</h4>
+        <h4> Añadir texto al Parrafo:</h4>
         <br>
       <label>Texto:
         <input [(ngModel)]="simpleText" placeholder="texto">
