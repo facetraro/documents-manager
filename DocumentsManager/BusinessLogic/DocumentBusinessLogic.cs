@@ -114,7 +114,15 @@ namespace DocumentsManager.BusinessLogic
         public IEnumerable<Document> GetAllDocuments(Guid tokenId)
         {
             DocumentContext context = new DocumentContext();
-            return context.GetDocuments();
+            List<Document> allNotDeletedDocuments = new List<Document>();
+            foreach (var item in context.GetDocuments())
+            {
+                if (!AlreadyDeleted(item))
+                {
+                    allNotDeletedDocuments.Add(item);
+                }
+            }
+            return allNotDeletedDocuments;
         }
 
         public Document GetById(Guid id)
