@@ -36,6 +36,7 @@ import { ChartsModule } from 'ng2-charts';
 import { NewDocumentComponent } from './new-document/new-document.component';
 import { ModifyDocumentComponent } from './modify-document/modify-document.component';
 import { PrintDocumentComponent } from './print-document/print-document.component';
+import { AllUsersComponent } from './all-users/all-users.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { PrintDocumentComponent } from './print-document/print-document.componen
     NewDocumentComponent,
     ModifyDocumentComponent,
     PrintDocumentComponent,
+    AllUsersComponent,
   ],
   imports: [
     HttpModule,
