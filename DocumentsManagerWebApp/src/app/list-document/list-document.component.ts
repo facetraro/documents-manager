@@ -30,6 +30,10 @@ export class ListDocumentComponent implements OnInit {
     this.router.navigate((['/newDocument']));
   }
 
+  printDocument(id:string){
+    this.router.navigate((['/printDocument']), { queryParams: { idDoc: id} });
+  }
+
   modifyDocument(id:string){
     this.router.navigate((['/modifyDocument']), { queryParams: { idDoc: id} });
   }

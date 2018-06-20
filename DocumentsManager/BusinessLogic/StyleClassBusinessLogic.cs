@@ -42,7 +42,9 @@ namespace DocumentsManager.BusinessLogic
         private string GetAllEndAttributesTags(StyleClass style)
         {
             string htmlResult = String.Empty;
-            foreach (var item in style.Attributes)
+            List<StyleAttribute> reverseList = style.Attributes;
+            reverseList.Reverse();
+            foreach (var item in reverseList)
             {
                 htmlResult = htmlResult + item.GetEndTag();
             }

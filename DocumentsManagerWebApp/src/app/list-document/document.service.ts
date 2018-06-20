@@ -11,6 +11,7 @@ import { DocumentModel } from './document-model';
   providedIn: 'root'
 })
 export class DocumentService {
+ 
   constructor(
     private httpService: Http) { 
     }
@@ -58,7 +59,16 @@ export class DocumentService {
     .map((response: Response) => <string> response.json())
     .catch(this.handleError);
   };
-  
+
+  printDocument(token : string, id : string): Observable<string> {
+    let apiUrl= new Url;
+    let url = apiUrl.globalUrl+"/api/PrintDocument/?id="+id+"&token="+token;
+    console.log(url);
+    return this.httpService.get(url)
+    .map((response: Response) => <string> response.json())
+    .catch(this.handleError);
+  };
+
 private handleError(error: Response) {
     console.error(error);
     this.specificError=error.json();
