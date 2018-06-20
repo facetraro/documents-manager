@@ -86,27 +86,36 @@ export class NewDocumentComponent implements OnInit {
      let newSingleParragraph=new Header;
      newSingleParragraph.style=new StyleModel;
      let splitter = this.simpleStyle.id.split("###");
-     newSingleParragraph.style.id=splitter[0];
-     newSingleParragraph.style.name=splitter[1];
-     newSingleParragraph.text=this.simpleText;
-     newSingleParragraph.id=this.countTexts+"";
-     this.countTexts++;
-     this.actualParragraphs.push(newSingleParragraph);
+     if(splitter.length==2){
+      newSingleParragraph.style.id=splitter[0];
+      newSingleParragraph.style.name=splitter[1];
+      newSingleParragraph.text=this.simpleText;
+      newSingleParragraph.id=this.countTexts+"";
+      this.countTexts++;
+      this.actualParragraphs.push(newSingleParragraph);
+     } else {
+       this.showErrorMessage("No se puede añadir un texto al parrrafo sin estilo.");
+     }
+    
   }
 
   addParragraph(){
     let newParragraph=new Parragraph;
     newParragraph.style=new StyleModel;
     let splitter = this.parragraphStyle.id.split("###");
-    newParragraph.style.id=splitter[0];
-    newParragraph.style.name=splitter[1];
-    newParragraph.id=this.countParragraph+"";
-    this.countParragraph++;
-    this.actualParragraphs.forEach(element => {
-      newParragraph.texts.push(element);
-    });
-    this.actualParragraphs=[];
-    this.parragraphs.push(newParragraph);
+    if(splitter.length==2){
+      newParragraph.style.id=splitter[0];
+      newParragraph.style.name=splitter[1];
+      newParragraph.id=this.countParragraph+"";
+      this.countParragraph++;
+      this.actualParragraphs.forEach(element => {
+        newParragraph.texts.push(element);
+      });
+      this.actualParragraphs=[];
+      this.parragraphs.push(newParragraph);
+    } else {
+      this.showErrorMessage("No se puede añadir un parrafo sin estilo.");
+    }
  }
 
   deleteParragraph(id:number){
@@ -130,13 +139,22 @@ export class NewDocumentComponent implements OnInit {
     }
 
     addDocument(){
+      let allValidations=true;
       let footer=new Footer;
       let splitterFooter = this.footerStyle.id.split("###");
       footer.style.id=splitterFooter[0];
       footer.style.name=splitterFooter[1];
+      if(splitterFooter.length!=2){
+        this.showErrorMessage("No se puede añadir un footer sin estilo.");
+        allValidations=false;
+      }
       footer.text=this.footer;
       let header=new Header;
       let splitterHeader = this.headerStyle.id.split("###");
+      if(splitterHeader.length!=2 && allValidations){
+        this.showErrorMessage("No se puede añadir un header sin estilo.");
+        allValidations=false;
+      }
       header.style.id=splitterHeader[0];
       header.style.name=splitterHeader[1];
       header.text=this.header;
@@ -145,8 +163,17 @@ export class NewDocumentComponent implements OnInit {
       this.document.parragraphs=this.parragraphs;
       this.document.format.id=this.format.id;
       this.document.style.id=this.style.id;
-      console.log(this.document);
-      this.addNewDocument();
+      if(this.style.id.length==0 && allValidations){
+        this.showErrorMessage("No se puede añadir un documento sin estilo.");
+        allValidations=false;
+      }
+      if(this.format.id.length==0 && allValidations){
+        this.showErrorMessage("No se puede añadir un documento sin formato.");
+        allValidations=false;
+      }
+      if(allValidations==true){
+        this.addNewDocument();
+      }
     }
 
     documentAddedOk(){
