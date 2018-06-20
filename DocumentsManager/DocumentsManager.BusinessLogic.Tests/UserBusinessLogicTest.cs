@@ -965,6 +965,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(result.Count == 1);
             Assert.IsTrue(result.ElementAt(0).Average == 3);
             Assert.IsTrue(result.Contains(contained));
+            TearDown();
         }
         [TestMethod]
         public void GetTopRankedDocumentsTestTwo()
@@ -1003,6 +1004,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(result.Count == 1);
             Assert.IsTrue(result.ElementAt(0).Average == 4);
             Assert.IsTrue(result.Contains(contained));
+            TearDown();
         }
         [TestMethod]
         public void GetTopRankedDocumentsTestThree()
@@ -1050,6 +1052,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(result.Count == 1);
             Assert.IsTrue(result.ElementAt(0).Average == 3);
             Assert.IsTrue(result.Contains(contained));
+            TearDown();
         }
         [TestMethod]
         public void GetTopRankedDocumentsTestTwoDocs()
@@ -1101,6 +1104,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(result.Count == 2);
             Assert.IsTrue(result.Contains(contained1));
             Assert.IsTrue(result.Contains(contained2));
+            TearDown();
         }
         [TestMethod]
         public void GetTopRankedDocumentsTestZeroDocs()
@@ -1117,6 +1121,101 @@ namespace DocumentsManager.BusinessLogic.Tests
             DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
             List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(Guid.NewGuid());
             Assert.IsTrue(result.Count == 0);
+            TearDown();
+        }
+        [TestMethod]
+        public void AddReviewTestZero()
+        {
+            TearDown();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            Guid token = uBL.LogIn(userReviewer.Username, userReviewer.Password);
+            List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(token);
+            DocumentAverageDto contained1 = new DocumentAverageDto();
+            Assert.IsTrue(result.Count == 0);
+            TearDown();
+        }
+        [TestMethod]
+        public void AddReviewTest()
+        {
+            TearDown();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Document docAdded = AddADocumentToDB();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            Guid token =uBL.LogIn(userReviewer.Username, userReviewer.Password);
+            Review review = new Review
+            {
+                Commentator = new EditorUser(),
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 5
+            };
+            uBL.AddReview(review, token);
+            List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(token);
+            DocumentAverageDto contained1 = new DocumentAverageDto();
+            contained1.Id = docAdded.Id;
+            Assert.IsTrue(result.Count == 1);
+            Assert.IsTrue(result.Contains(contained1));
+            TearDown();
+        }
+        [TestMethod]
+        public void AddReviewTestTwo()
+        {
+            TearDown();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Document docAdded = AddADocumentToDB();
+            Document docAdded2 = AddADocumentToDB();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            Guid token = uBL.LogIn(userReviewer.Username, userReviewer.Password);
+            Review review = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 5
+            };
+            Review review2 = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded2.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 3
+            };
+            uBL.AddReview(review, token);
+            uBL.AddReview(review2, token);
+            List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(token);
+            DocumentAverageDto contained1 = new DocumentAverageDto();
+            contained1.Id = docAdded.Id;
+            DocumentAverageDto contained2 = new DocumentAverageDto();
+            contained2.Id = docAdded2.Id;
+            Assert.IsTrue(result.Count == 2);
+            Assert.IsTrue(result.Contains(contained1));
+            Assert.IsTrue(result.Contains(contained2));
+            TearDown();
         }
     }
 }
