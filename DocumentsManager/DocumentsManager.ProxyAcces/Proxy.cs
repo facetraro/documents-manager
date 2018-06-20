@@ -3,11 +3,10 @@ using DocumentsManager.ProxyInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DocumentsMangerEntities;
 using DocumentsManager.BusinessLogic.Charts;
 using DocumentsManager.Exceptions;
+using static DtosAndModels.DocumentDtoAverage;
 
 namespace DocumentsManager.ProxyAcces
 {
@@ -84,6 +83,10 @@ namespace DocumentsManager.ProxyAcces
         {
             AccessControl(tokenId);
             uBL.RejectRequest(userId, tokenId);
+        }
+        public List<DocumentAverageDto> GetTopRankedDocuments(Guid tokenId) {
+            AccessControl(tokenId);
+            return uBL.GetTopRankedDocuments(tokenId);
         }
         public Guid LogIn(string username, string password)
         {
@@ -305,7 +308,6 @@ namespace DocumentsManager.ProxyAcces
             }
 
         }
-
         public void AreFriendsControl(User user, Guid tokenId)
         {
             if (!uBL.AreFriends(user, uBL.GetUserByToken(tokenId)))
@@ -313,6 +315,7 @@ namespace DocumentsManager.ProxyAcces
                 throw new NotFriendsException(user.Username);
             }
         }
+       
         #endregion
     }
 }

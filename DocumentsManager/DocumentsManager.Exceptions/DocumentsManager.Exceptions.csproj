@@ -47,6 +47,8 @@
     <Compile Include="InvalidUserAttrException.cs" />
     <Compile Include="InvalidUserEmailException.cs" />
     <Compile Include="InvalidUserPasswordException.cs" />
+    <Compile Include="InvalidValueForRanking.cs" />
+    <Compile Include="NotEnoughDocumentsException.cs" />
     <Compile Include="NotFriendsException.cs" />
     <Compile Include="SessionExpiredException.cs" />
     <Compile Include="StyleAttributeNotRecognized.cs" />

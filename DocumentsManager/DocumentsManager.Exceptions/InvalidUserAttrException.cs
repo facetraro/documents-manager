@@ -8,7 +8,7 @@ namespace DocumentsManager.Exceptions
 {
     public class InvalidUserAttrException : Exception
     {
-        private static string message = " debe tener almenos 3 caracteres.";
+        static string message = " debe tener almenos 3 caracteres.";
         public InvalidUserAttrException(string atribute) : base("Error: El "+atribute+message)
         {
         }
