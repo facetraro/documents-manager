@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8B29DE6D-2EE3-4C95-8DF7-F890263F52CD}</ProjectGuid>
+    <ProjectGuid>{784C649D-7308-4672-AF05-8329C1C8AC58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DocumentsManager.BusinessLogic</RootNamespace>
-    <AssemblyName>DocumentsManager.BusinessLogic</AssemblyName>
+    <RootNamespace>DtosAndModels</RootNamespace>
+    <AssemblyName>DtosAndModels</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,59 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminBusinessLogic.cs" />
-    <Compile Include="EditorBusinessLogic.cs" />
-    <Compile Include="FooterBusinessLogic.cs" />
-    <Compile Include="FormatBusinessLogic.cs" />
-    <Compile Include="HeaderBusinessLogic.cs" />
-    <Compile Include="IPrintableObject.cs" />
-    <Compile Include="LoggedToken.cs" />
-    <Compile Include="ILoggerMethod.cs" />
-    <Compile Include="LoggerMethod.cs" />
-    <Compile Include="ParragraphBusinessLogic.cs" />
-    <Compile Include="PrintableFooter.cs" />
-    <Compile Include="PrintableHeader.cs" />
-    <Compile Include="PrintableParragraph.cs" />
-    <Compile Include="PrintableText.cs" />
+    <Compile Include="Dtos\DocumentDtoAverage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DocumentBusinessLogic.cs" />
-    <Compile Include="TextBusinessLogic.cs" />
-    <Compile Include="UserBusinessLogic.cs" />
-    <Compile Include="StyleClassBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DocumentsManager.AuthenticationToken\DocumentsManager.AuthenticationToken.csproj">
-      <Project>{4E29186B-65BD-422B-B4CB-6E3C81D83241}</Project>
-      <Name>DocumentsManager.AuthenticationToken</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DocumentsManager.BusinessLogic.Charts\DocumentsManager.BusinessLogic.Charts.csproj">
-      <Project>{80E332CD-14BF-42AC-B302-A36A4806ABF4}</Project>
-      <Name>DocumentsManager.BusinessLogic.Charts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Data.DA.Handler\DocumentsManager.Data.DA.Handler.csproj">
       <Project>{08679660-B159-4575-9066-71059A3C33AF}</Project>
       <Name>DocumentsManager.Data.DA.Handler</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DocumentsManager.Data.Logger\DocumentsManager.Data.Logger.csproj">
-      <Project>{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}</Project>
-      <Name>DocumentsManager.Data.Logger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj">
-      <Project>{34E362D2-1A27-48BB-8FE5-91A89124B556}</Project>
-      <Name>DocumentsManager.Exceptions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DocumentsManager.ProxyInterfaces\DocumentsManager.ProxyInterfaces.csproj">
-      <Project>{27dc7037-7ed5-45d8-852a-1c29c0cdb4ac}</Project>
-      <Name>DocumentsManager.ProxyInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\DocumentsMangerEntities\DocumentsManger.Data.csproj">
       <Project>{80D195AE-B71A-465A-A588-7397AE023E8F}</Project>
       <Name>DocumentsManger.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DtosAndModels\DocumentsManager.DtosAndModels.csproj">
-      <Project>{784C649D-7308-4672-AF05-8329C1C8AC58}</Project>
-      <Name>DocumentsManager.DtosAndModels</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

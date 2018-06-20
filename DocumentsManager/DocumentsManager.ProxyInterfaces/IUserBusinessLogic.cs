@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DtosAndModels.DocumentDtoAverage;
 
 namespace DocumentsManager.ProxyInterfaces
 {
@@ -17,5 +18,6 @@ namespace DocumentsManager.ProxyInterfaces
         List<User> GetFriends(Guid tokenId);
         List<User> GetRequests(Guid tokenId);
         void RejectRequest(Guid userId, Guid tokenId);
+        List<DocumentAverageDto> GetTopRankedDocuments(Guid tokenId);
     }
 }

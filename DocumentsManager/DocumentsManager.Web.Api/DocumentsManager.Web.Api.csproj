@@ -183,6 +183,7 @@
     <Compile Include="Controllers\ManageRequestsController.cs" />
     <Compile Include="Controllers\ModifiedChartController.cs" />
     <Compile Include="Controllers\PrintDocumentController.cs" />
+    <Compile Include="Controllers\RankDocumentsController.cs" />
     <Compile Include="Controllers\StyleClassController.cs" />
     <Compile Include="Dtos\ChartDto.cs" />
     <Compile Include="Dtos\ChartValue.cs" />
@@ -256,6 +257,10 @@
     <ProjectReference Include="..\DocumentsMangerEntities\DocumentsManger.Data.csproj">
       <Project>{80D195AE-B71A-465A-A588-7397AE023E8F}</Project>
       <Name>DocumentsManger.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DtosAndModels\DocumentsManager.DtosAndModels.csproj">
+      <Project>{784c649d-7308-4672-af05-8329c1c8ac58}</Project>
+      <Name>DocumentsManager.DtosAndModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

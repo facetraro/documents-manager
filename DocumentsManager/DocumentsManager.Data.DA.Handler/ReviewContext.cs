@@ -15,7 +15,20 @@ namespace DocumentsManager.Data.DA.Handler
         {
             Review reviewToDB = newReview;
             reviewToDB.Commented.Header.Text.StyleClass = null;
+            reviewToDB.Commented.Header.StyleClass = null;
+            reviewToDB.Commented.StyleClass = null;
+            reviewToDB.Commented.Footer.StyleClass = null;
             reviewToDB.Commented.Footer.Text.StyleClass = null;
+            reviewToDB.Commented.Format = null;
+            foreach (Parragraph pi in newReview.Commented.Parragraphs)
+            {
+                pi.StyleClass = null;
+                foreach (Text ti in pi.Texts)
+                {
+                    ti.StyleClass = null;
+                }
+            }
+
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -77,6 +90,18 @@ namespace DocumentsManager.Data.DA.Handler
                 modified = true;
             }
             return modified;
+        }
+        public List<Review> GetReviewsFromDocument(Guid id)
+        {
+            List<Review> reviews = new List<Review>();
+            foreach (Review revi in GetAllReviews())
+            {
+                if (id.Equals(revi.Commented.Id))
+                {
+                    reviews.Add(revi);
+                }
+            }
+            return reviews;
         }
     }
 }

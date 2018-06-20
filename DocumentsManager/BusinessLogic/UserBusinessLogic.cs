@@ -5,9 +5,7 @@ using DocumentsManager.ProxyInterfaces;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static DtosAndModels.DocumentDtoAverage;
 
 namespace DocumentsManager.BusinessLogic
 {
@@ -350,6 +348,37 @@ namespace DocumentsManager.BusinessLogic
                 }
             }
             throw new ObjectDoesNotExists(new Friendship());
-        } 
+        }
+        public List<DocumentAverageDto> GetTopRankedDocuments(Guid tokenId)
+        {
+            List<DocumentAverageDto> topRanked = new List<DocumentAverageDto>();
+            DocumentContext dContext = new DocumentContext();
+            List<DocumentAverageDto> allDocsRanked = new List<DocumentAverageDto>();
+            foreach (Document doci in dContext.GetDocuments())
+            {
+                allDocsRanked.Add(new DocumentAverageDto(doci));
+            }
+            DocumentAverageDto docDtoToAdd = new DocumentAverageDto();
+            double bestDocAverage = 0;
+            int times = 3;
+            if (times > allDocsRanked.Count) times = allDocsRanked.Count;
+            for (int i = 0; i < times; i++)
+            {
+                bestDocAverage = 0;
+                foreach (DocumentAverageDto docDtoi in allDocsRanked)
+                {
+                    if (!topRanked.Contains(docDtoi))
+                    {
+                        if (docDtoi.Average >= bestDocAverage)
+                        {
+                            bestDocAverage = docDtoi.Average;
+                            docDtoToAdd = docDtoi;
+                        }
+                    }
+                }
+                topRanked.Add(docDtoToAdd);
+            }
+            return topRanked;
+        }
     }
 }
