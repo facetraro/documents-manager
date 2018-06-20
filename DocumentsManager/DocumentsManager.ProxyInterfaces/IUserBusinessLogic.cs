@@ -19,5 +19,6 @@ namespace DocumentsManager.ProxyInterfaces
         List<User> GetRequests(Guid tokenId);
         void RejectRequest(Guid userId, Guid tokenId);
         List<DocumentAverageDto> GetTopRankedDocuments(Guid tokenId);
+        void AddReview(Review reviewToAdd, Guid tokenId);
     }
 }
