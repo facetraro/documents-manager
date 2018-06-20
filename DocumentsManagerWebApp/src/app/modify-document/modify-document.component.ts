@@ -9,14 +9,14 @@ import { FormatService } from '../list-format/format.service';
 import { ManageToken } from '../manage-token';
 import { StyleModel } from '../list-styles/styleModel';
 import { DocumentService } from '../list-document/document.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-new-document',
-  templateUrl: './new-document.component.html',
-  styleUrls: ['./new-document.component.css']
+  selector: 'app-modify-document',
+  templateUrl: './modify-document.component.html',
+  styleUrls: ['./modify-document.component.css']
 })
-export class NewDocumentComponent implements OnInit {
+export class ModifyDocumentComponent implements OnInit {
   document:DocumentModel;
   footer:string;
   footerStyle:StyleModel;
@@ -26,7 +26,7 @@ export class NewDocumentComponent implements OnInit {
   simpleStyle:StyleModel;
   parragraphStyle:StyleModel;
   format:Format;
-  style:StyleModel;
+  style:string;
   parragraphs:Parragraph[];
   actualParragraphs:Header[];
   allStyles:StyleModel[];
@@ -43,7 +43,8 @@ export class NewDocumentComponent implements OnInit {
     styleService: StyleService, 
     formatService: FormatService,
     documentService: DocumentService,
-    router: Router
+    router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.router=router;
     this.documentService=documentService;
@@ -59,7 +60,7 @@ export class NewDocumentComponent implements OnInit {
     this.simpleStyle=new StyleModel;
     this.parragraphStyle=new StyleModel;
     this.format=new Format;
-    this.style=new StyleModel;
+    this.style="";
     this.actualParragraphs=[];
     this.parragraphs=[];
     this.allStyles=[];
@@ -81,6 +82,7 @@ export class NewDocumentComponent implements OnInit {
     this.styleService.getAllStyles(token).subscribe(response => this.allStyles=response), 
       error => this.showErrorMessage(error);
   }
+ 
 
   addTextToParragraph(){
      let newSingleParragraph=new Header;
@@ -138,32 +140,21 @@ export class NewDocumentComponent implements OnInit {
       this.countTexts--;
     }
 
-    addDocument(){
+    modifyDocument(){
       let allValidations=true;
       let footer=new Footer;
-      let splitterFooter = this.footerStyle.id.split("###");
-      footer.style.id=splitterFooter[0];
-      footer.style.name=splitterFooter[1];
-      if(splitterFooter.length!=2){
-        this.showErrorMessage("No se puede añadir un footer sin estilo.");
-        allValidations=false;
-      }
       footer.text=this.footer;
+      console.log(this.footerStyle.id);
+      footer.style.id=this.footerStyle.id;
       let header=new Header;
-      let splitterHeader = this.headerStyle.id.split("###");
-      if(splitterHeader.length!=2 && allValidations){
-        this.showErrorMessage("No se puede añadir un header sin estilo.");
-        allValidations=false;
-      }
-      header.style.id=splitterHeader[0];
-      header.style.name=splitterHeader[1];
+      header.style.id=this.headerStyle.id;
       header.text=this.header;
       this.document.footer=footer;
       this.document.header=header;
       this.document.parragraphs=this.parragraphs;
       this.document.format.id=this.format.id;
-      this.document.style.id=this.style.id;
-      if(this.style.id.length==0 && allValidations){
+      this.document.style.id=this.style;
+      if(this.style.length==0 && allValidations){
         this.showErrorMessage("No se puede añadir un documento sin estilo.");
         allValidations=false;
       }
@@ -172,7 +163,7 @@ export class NewDocumentComponent implements OnInit {
         allValidations=false;
       }
       if(allValidations==true){
-        this.addNewDocument();
+        this.modifyTheDocument();
       }
     }
 
@@ -181,13 +172,39 @@ export class NewDocumentComponent implements OnInit {
       this.router.navigate((['/documents']));
     }
   
-    addNewDocument(){
+    modifyTheDocument(){
       let token=this.tokenManagment.getToken();
-      this.documentService.newDocument(token, this.document).subscribe(response => this.documentAddedOk(), 
+      console.log(this.document);
+      this.documentService.modifyDocument(token, this.document).subscribe(response => this.documentAddedOk(), 
       error => this.showErrorMessage(error));
     }
 
   ngOnInit() {
+    let idDoc="";
+    this.activatedRoute.queryParams
+    .filter(params => params.idDoc)
+    .subscribe(params => {
+      idDoc = params.idDoc;
+    });  
+    let token=this.tokenManagment.getToken();
+    this.loadDocument(token, idDoc);
+  }
+  loadDocument(token: string , id:string){
+    this.documentService.getDocument(token, id).subscribe(response => {this.document=response; this.loadIntoUiDocument() }), 
+      error => this.showErrorMessage(error);
+  }
+  loadIntoUiDocument(){
+      this.footerStyle.id=this.document.footer.style.id;
+      this.footerStyle.name=this.document.footer.style.name;
+      this.headerStyle.id=this.document.header.style.id;
+      this.headerStyle.name=this.document.header.style.name;
+      this.format.id=this.document.format.id;
+      this.format.name=this.document.format.name;
+      this.style=this.document.style.id;
+      console.log(this.style);
+      this.footer=this.document.footer.text;
+      this.header=this.document.header.text;
+      this.parragraphs=this.document.parragraphs;
   }
 
 }

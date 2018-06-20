@@ -17,6 +17,8 @@ import { ModifyFormatComponent } from './modify-format/modify-format.component';
 import { ListDocumentComponent } from './list-document/list-document.component';
 import { ViewChartComponent } from './view-chart/view-chart.component';
 import { NewDocumentComponent } from './new-document/new-document.component';
+import { ModifyDocumentComponent } from './modify-document/modify-document.component';
+import { PrintDocumentComponent } from './print-document/print-document.component';
 
 
 
@@ -39,6 +41,8 @@ const routes: Routes = [
   { path: 'documents', component: ListDocumentComponent },
   { path: 'viewChart', component: ViewChartComponent },
   { path: 'newDocument', component: NewDocumentComponent },
+  { path: 'modifyDocument', component: ModifyDocumentComponent },
+  { path: 'printDocument', component: PrintDocumentComponent },
 ];
 
 @NgModule({

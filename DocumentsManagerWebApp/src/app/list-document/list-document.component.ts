@@ -29,6 +29,19 @@ export class ListDocumentComponent implements OnInit {
   addDocument(){
     this.router.navigate((['/newDocument']));
   }
+
+  printDocument(id:string){
+    this.router.navigate((['/printDocument']), { queryParams: { idDoc: id} });
+  }
+
+  modifyDocument(id:string){
+    this.router.navigate((['/modifyDocument']), { queryParams: { idDoc: id} });
+  }
+
+  deleteDocument(id:string){
+    this.service.deleteDocument(this.tokenManagment.getToken(),id).subscribe(response => window.location.reload()), 
+    error => this.showErrorMessage(error);
+  }
   loadDocuments(token: string ){
     this.service.getAllDocuments(token).subscribe(response => this.documents=response), 
       error => this.showErrorMessage(error);

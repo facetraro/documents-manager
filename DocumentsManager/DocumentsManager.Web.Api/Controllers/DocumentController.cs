@@ -71,6 +71,7 @@ namespace DocumentsManager.Web.Api.Controllers
         {
             try
             {
+                model.Id = Guid.Empty;
                 Document documentToAdd = GetEntityDocument(model);
                 Guid id = proxyAccess.CreateADocument(documentToAdd, token);
                 return Ok(id);
@@ -93,7 +94,7 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 Document documentToModify = GetEntityDocument(model);
                 bool updateResult = proxyAccess.UpdateADocument(id, documentToModify, token);
-                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, documentToModify);
+                return Ok(id);
             }
             catch (NoUserLoggedException ex)
             {

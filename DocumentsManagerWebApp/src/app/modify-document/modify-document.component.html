@@ -1,5 +1,5 @@
 <div align="center">
-    <h2>Añadir Nuevo Documento</h2>
+    <h2>Modificar Documento</h2>
 
 
       <label>Nombre:
@@ -8,15 +8,15 @@
       <br>
       <br>
       <label>Estilo:
-        <select [(ngModel)]="style.id" placeholder="id"> 
-          <option *ngFor="let c of allStyles" [ngValue]="c.id">{{c.name}}</option>
+        <select [(ngModel)]="style" placeholder="id"> 
+          <option *ngFor="let c of allStyles" [ngValue]="c.id"  [selected]="c.id == style">{{c.name}}</option>
         </select>
       </label>
       <br>
       <br>
       <label>Formato:
-        <select [(ngModel)]="format.id" placeholder="id"> 
-          <option *ngFor="let c of allFormats" [ngValue]="c.id">{{c.name}}</option>
+        <select [(ngModel)]="format" placeholder="id"> 
+          <option *ngFor="let c of allFormats" [ngValue]="c.id" [selected]="c.id == format.id">{{c.name}}</option>
         </select>
       </label>
      <h3>Header</h3>
@@ -26,8 +26,8 @@
     <br>
     <br>
     <label>Estilo:
-        <select [(ngModel)]="headerStyle.id" placeholder="id"> 
-          <option *ngFor="let c of allStyles" [ngValue]="c.id+'###'+c.name">{{c.name}}</option>
+        <select [(ngModel)]="headerStyle.id"> 
+          <option *ngFor="let c of allStyles" [ngValue]="c.id" [selected]="c.id == headerStyle.id">{{c.name}}</option>
         </select>
       </label>
       <h3>Footer</h3>
@@ -38,7 +38,7 @@
       <br>
       <label>Estilo:
           <select [(ngModel)]="footerStyle.id" placeholder="id"> 
-            <option *ngFor="let c of allStyles" [ngValue]="c.id+'###'+c.name">{{c.name}}</option>
+            <option *ngFor="let c of allStyles" [ngValue]="c.id" [selected]="c.id == footerStyle.id">{{c.name}}</option>
           </select>
         </label>
 
@@ -120,8 +120,8 @@
             Añadir Parrafo
         </button>    
         <br>
-<button (click)="addDocument()">
-    Añadir Documento
+<button (click)="modifyDocument()">
+    Modificar Documento
 </button>    
 <app-go-home></app-go-home>  
 </div>

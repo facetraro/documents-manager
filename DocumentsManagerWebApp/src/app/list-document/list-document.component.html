@@ -40,11 +40,15 @@
                             <td>{{aDocument.id }}</td>
                             <td>{{aDocument.title | uppercase}}</td>
                             <td>
-                                <button (click)="modifyUser(aFullUserData.id)">
+                                <button (click)="printDocument(aDocument.id)">
+                                        Ver Documento
+                                </button>
+                                &nbsp;
+                                <button (click)="modifyDocument(aDocument.id)">
                                         Modificar
                                 </button>
                                 &nbsp;
-                                <button (click)="deleteUser(aFullUserData.id)">
+                                <button (click)="deleteDocument(aDocument.id)">
                                         Eliminar
                                 </button>
                             </td>

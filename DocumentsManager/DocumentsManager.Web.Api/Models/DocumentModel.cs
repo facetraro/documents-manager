@@ -33,20 +33,24 @@ namespace DocumentsManager.Web.Api.Models
             Format = new FormatDto(aDocument.Format);
             Style = new StyleClassDto(aDocument.StyleClass);
             Header = new HeaderModel(aDocument.Header);
-            Footer =  new FooterModel(aDocument.Footer);
+            Footer = new FooterModel(aDocument.Footer);
             Title = aDocument.Title;
             Parragraphs = new List<ParragraphModel>();
             foreach (Parragraph pi in aDocument.Parragraphs)
             {
-                Parragraphs.Add( new ParragraphModel(pi));
+                Parragraphs.Add(new ParragraphModel(pi));
             }
         }
 
         public Document GetEntityModel()
         {
+            DocumentBusinessLogic documentBL = new DocumentBusinessLogic();
+
+          
             StyleClassBusinessLogic styleBL = new StyleClassBusinessLogic();
             FormatBusinessLogic formatBL = new FormatBusinessLogic();
-            Document document = new Document {
+            Document document = new Document
+            {
                 Id = Guid.NewGuid(),
                 Footer = new Footer(),
                 Header = new Header(),
@@ -55,11 +59,8 @@ namespace DocumentsManager.Web.Api.Models
                 StyleClass = new StyleClass(),
                 Title = ""
             };
-            
-            if (!Id.Equals(Guid.Empty))
-            {
-                document.Id = Id;
-            }
+
+           
             if (!String.IsNullOrEmpty(Title))
             {
                 document.Title = Title;
@@ -68,10 +69,17 @@ namespace DocumentsManager.Web.Api.Models
             {
                 document.Parragraphs.Add(pmi.GetEntityModel());
             }
+            if (!Id.Equals(Guid.Empty))
+            {
+                Document oldDocument = documentBL.GetFullDocument(Id, Guid.NewGuid());
+                document.Id = Id;
+                Header.Id = oldDocument.Header.Id;
+                Footer.Id = oldDocument.Footer.Id;
+            }           
             document.Header = Header.GetEntityModel();
             document.Footer = Footer.GetEntityModel();
             document.StyleClass = styleBL.GetStyleById(Style.Id, Guid.NewGuid());
-            document.Format = formatBL.GetFormatByID(Format.Id, Guid.NewGuid());        
+            document.Format = formatBL.GetFormatByID(Format.Id, Guid.NewGuid());
             return document;
         }
     }
