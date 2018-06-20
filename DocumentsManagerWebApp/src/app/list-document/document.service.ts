@@ -28,6 +28,7 @@ export class DocumentService {
   getDocument(token : string, id : string) : Observable<DocumentModel> {
     let apiUrl= new Url;
     let url = apiUrl.globalUrl+"/api/Document/?id="+id+"&token="+token;
+    console.log(url);
     return this.httpService.get(url)
     .map((response: Response) => <DocumentModel> response.json())
     .catch(this.handleError);

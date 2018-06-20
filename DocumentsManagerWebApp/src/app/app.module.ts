@@ -34,6 +34,7 @@ import { ViewChartComponent } from './view-chart/view-chart.component';
 import { ChartService } from './view-chart/chart.service';
 import { ChartsModule } from 'ng2-charts';
 import { NewDocumentComponent } from './new-document/new-document.component';
+import { ModifyDocumentComponent } from './modify-document/modify-document.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { NewDocumentComponent } from './new-document/new-document.component';
     ListDocumentComponent,
     ViewChartComponent,
     NewDocumentComponent,
+    ModifyDocumentComponent,
   ],
   imports: [
     HttpModule,
