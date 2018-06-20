@@ -1,7 +1,7 @@
 <div align="center">
-  <table class='table' align="center">
-    <th>
     <h2>Añadir Nuevo Documento</h2>
+
+
       <label>Nombre:
         <input [(ngModel)]="document.title" placeholder="title">
       </label>
@@ -19,9 +19,7 @@
           <option *ngFor="let c of allFormats" [ngValue]="c.id">{{c.name}}</option>
         </select>
       </label>
-  </th>
-  <th>
-    <h3>Header</h3>
+     <h3>Header</h3>
     <label>Nombre:
       <input [(ngModel)]="header" placeholder="texto">
     </label>
@@ -32,10 +30,21 @@
           <option *ngFor="let c of allStyles" [ngValue]="c.id+'###'+c.name">{{c.name}}</option>
         </select>
       </label>
-  </th>
-  <th>
-      <h3>Parrafos</h3>
+      <h3>Footer</h3>
+      <label>Nombre:
+        <input [(ngModel)]="footer" placeholder="texto">
+      </label>
+      <br>
+      <br>
+      <label>Estilo:
+          <select [(ngModel)]="footerStyle.id" placeholder="id"> 
+            <option *ngFor="let c of allStyles" [ngValue]="c.id+'###'+c.name">{{c.name}}</option>
+          </select>
+        </label>
+
       <div>
+      <h3>Parrafos</h3>
+      
           <table class='table' *ngIf='parragraphs && parragraphs.length'>
               <!--Cabezal de la tabla -->
               <thead>
@@ -60,13 +69,12 @@
           </tbody>
           </table>
           <h4>Añadir nuevo Parrafo</h4>
-          Estilo:
+          <label>Estilo:
           <select [(ngModel)]="parragraphStyle.id" placeholder="id"> 
               <option *ngFor="let c of allStyles" [ngValue]="c.id+'###'+c.name">{{c.name}}</option>
             </select>
-          <br>
-          <br>
-          
+          </label>     
+          <br>    
           <table class='table' *ngIf='actualParragraphs && actualParragraphs.length'>
               <!--Cabezal de la tabla -->
               <thead>
@@ -91,8 +99,7 @@
           </tbody>
           </table>
         </div>
-        Añadir texto al nuevo Parrafo:
-        <br>
+        <h4> Añadir texto al nuevo Parrafo:</h4>
         <br>
       <label>Texto:
         <input [(ngModel)]="simpleText" placeholder="texto">
@@ -103,30 +110,14 @@
           <select [(ngModel)]="simpleStyle.id" placeholder="id"> 
             <option *ngFor="let c of allStyles" [ngValue]="c.id+'###'+c.name">{{c.name}}</option>
           </select>
-        </label>
-        <br>
-        <br>
+        </label><br><br>
         <button (click)="addTextToParragraph()">
             Añadir Texto
-        </button>   <br><br>
+        </button>   <br>
         <button (click)="addParragraph()">
             Añadir Parrafo
         </button>    
-      </th>
-  <th>
-      <h3>Footer</h3>
-      <label>Nombre:
-        <input [(ngModel)]="footer" placeholder="texto">
-      </label>
-      <br>
-      <br>
-      <label>Estilo:
-          <select [(ngModel)]="footerStyle.id" placeholder="id"> 
-            <option *ngFor="let c of allStyles" [ngValue]="c.id+'###'+c.name">{{c.name}}</option>
-          </select>
-        </label>
-  </th>
-</table>
+        <br>
 <button (click)="addDocument()">
     Añadir Documento
 </button>      

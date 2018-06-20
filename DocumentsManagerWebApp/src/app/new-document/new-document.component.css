@@ -11,6 +11,11 @@ h2 {
     font-family: "Verdana", Sans-serif;
 }
 
+
+h4 {
+    font-family: "Verdana", Sans-serif;
+}
+
 form {
     border: 3px solid #f1f1f1;
 }
@@ -41,23 +46,22 @@ button {
     align-content: center;
 }
 
-table {
-    width: 100%;
-    font-family: "Verdana", Sans-serif;
-}
-tr {
-    height: 50px;
-}
-
-th {
-    height: 50px;
-}
-
-
 h3 {
     font-family: "Verdana", Sans-serif;
 }
 
+table {
+    width: 40%;
+    font-family: "Verdana", Sans-serif;
+    font-size: 11px;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
 
 /* Add a hover effect for buttons */
 button:hover {
