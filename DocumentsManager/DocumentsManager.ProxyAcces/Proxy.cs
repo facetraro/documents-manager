@@ -39,6 +39,13 @@ namespace DocumentsManager.ProxyAcces
             AccessControl(tokenId);
             return uBL.DeleteADocument(aDocument, tokenId);
         }
+
+        public void AddReview(Review reviewToAdd, Guid tokenId)
+        {
+            AccessControl(tokenId);
+            uBL.AddReview(reviewToAdd,tokenId);
+        }
+
         public bool UpdateADocument(Guid id, Document aDocument, Guid tokenId)
         {
             AccessControl(tokenId);

@@ -1,6 +1,7 @@
 ﻿using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
+using DtosAndModels.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,9 +42,22 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/RankDocuments
-        public IHttpActionResult Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]ReviewModel review, Guid token)
         {
-            return NotFound();
+            try
+            {
+                if (review == null)
+                {
+                    throw new ArgumentNullException();
+                }
+                Review reviewToAdd = GetEntityReview(review);
+                proxyAccess.AddReview(reviewToAdd, token);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT: api/RankDocuments/5
@@ -56,6 +70,10 @@ namespace DocumentsManager.Web.Api.Controllers
         public IHttpActionResult Delete(int id)
         {
             return NotFound();
+        }
+        public Review GetEntityReview(ReviewModel model)
+        {
+            return model.GetEntityModel();
         }
     }
 }
