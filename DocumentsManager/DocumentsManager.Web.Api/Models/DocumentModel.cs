@@ -10,8 +10,8 @@ namespace DocumentsManager.Web.Api.Models
     public class DocumentModel
     {
         public Guid Id { get; set; }
-        public Guid FormatId { get; set; }
-        public Guid StyleClassId { get; set; }
+        public FormatDto Format { get; set; }
+        public StyleClassDto Style { get; set; }
         public HeaderModel Header { get; set; }
         public FooterModel Footer { get; set; }
         public string Title { get; set; }
@@ -19,8 +19,8 @@ namespace DocumentsManager.Web.Api.Models
         public DocumentModel()
         {
             Id = Guid.NewGuid();
-            FormatId = Guid.NewGuid();
-            StyleClassId = Guid.NewGuid();
+            Format = new FormatDto(new DocumentsMangerEntities.Format());
+            Style = new StyleClassDto();
             Header = new HeaderModel();
             Footer = new FooterModel();
             Title = "";
@@ -29,8 +29,8 @@ namespace DocumentsManager.Web.Api.Models
         public DocumentModel(Document aDocument)
         {
             Id = Guid.NewGuid();
-            FormatId = aDocument.Format.Id;
-            StyleClassId = aDocument.StyleClass.Id;
+            Format = new FormatDto(aDocument.Format);
+            Style = new StyleClassDto(aDocument.StyleClass);
             Header = new HeaderModel(aDocument.Header);
             Footer =  new FooterModel(aDocument.Footer);
             Title = aDocument.Title;
@@ -69,8 +69,8 @@ namespace DocumentsManager.Web.Api.Models
             }
             document.Header = Header.GetEntityModel();
             document.Footer = Footer.GetEntityModel();
-            document.StyleClass = styleBL.GetStyleById(StyleClassId, Guid.NewGuid());
-            document.Format = formatBL.GetFormatByID(FormatId, Guid.NewGuid());        
+            document.StyleClass = styleBL.GetStyleById(Style.Id, Guid.NewGuid());
+            document.Format = formatBL.GetFormatByID(Format.Id, Guid.NewGuid());        
             return document;
         }
     }

@@ -10,19 +10,20 @@ namespace DocumentsManager.Web.Api.Models
     public class HeaderModel
     {
         public Guid Id { get; set; }
-        public TextModel Text { get; set; }
-        public Guid StyleClassId { get; set; }
+        public string Text { get; set; }
+        public StyleClassDto Style { get; set; }
         public HeaderModel()
         {
             Id = Guid.NewGuid();
-            Text = new TextModel();
-            StyleClassId = Guid.NewGuid();
+            Text = string.Empty;
+            Style = new StyleClassDto();
         }
         public HeaderModel(Header aHeader)
         {
             Id = Guid.NewGuid();
-            Text = new TextModel (aHeader.Text);
-            StyleClassId = aHeader.StyleClass.Id;
+            Text = aHeader.Text.WrittenText;
+            Style.Id = aHeader.StyleClass.Id;
+            Style.Name = aHeader.StyleClass.Name;
         }
         public Header GetEntityModel()
         {
@@ -32,8 +33,12 @@ namespace DocumentsManager.Web.Api.Models
             {
                 header.Id = Id;
             }
-            header.Text = Text.GetEntityModel();
-            header.StyleClass = styleBL.GetStyleById(StyleClassId, Guid.NewGuid());
+            header.Text = new DocumentsMangerEntities.Text();
+            header.Text.Id = Guid.NewGuid();
+            header.StyleClass = new StyleClass();
+            header.Text.StyleClass = styleBL.GetStyleById(Style.Id, Guid.NewGuid());
+            header.Text.WrittenText = Text;
+            header.StyleClass = styleBL.GetStyleById(Style.Id, Guid.NewGuid());
             return header;
         }
     }

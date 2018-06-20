@@ -11,18 +11,18 @@ namespace DocumentsManager.Web.Api.Models
     {
 
         public Guid Id { get; set; }
-        public Guid StyleClassId { get; set; }
+        public Guid Style { get; set; }
         public string Text { get; set; }
         public TextModel() {
             Id = Guid.NewGuid();
             Text = "";
-            StyleClassId = Guid.NewGuid();
+            Style = Guid.NewGuid();
         }
         public TextModel(Text aText)
         {
             Id = Guid.NewGuid();
             Text = aText.WrittenText;
-            StyleClassId = aText.StyleClass.Id;
+            Style = aText.StyleClass.Id;
         }
         public Text GetEntityModel()
         {
@@ -33,7 +33,7 @@ namespace DocumentsManager.Web.Api.Models
                 text.Id = Id;
             }
             text.WrittenText = Text;
-            text.StyleClass = styleBL.GetStyleById(StyleClassId, Guid.NewGuid());
+            text.StyleClass = styleBL.GetStyleById(Style, Guid.NewGuid());
             return text;
         }
     }

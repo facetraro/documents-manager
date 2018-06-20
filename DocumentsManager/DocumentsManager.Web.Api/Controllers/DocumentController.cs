@@ -32,8 +32,7 @@ namespace DocumentsManager.Web.Api.Controllers
             List<DocumentDto> documents = new List<DocumentDto>();
             foreach (var item in documentsComplete)
             {
-                Document doc = proxyAccess.GetFullDocument(item.Id, token);
-                documents.Add(new DocumentDto(doc));
+                 documents.Add(new DocumentDto(item));
             }
             if (documents == null)
             {
@@ -73,7 +72,7 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 Document documentToAdd = GetEntityDocument(model);
                 Guid id = proxyAccess.CreateADocument(documentToAdd, token);
-                return CreatedAtRoute("DefaultApi", new { id = documentToAdd.Id }, documentToAdd);
+                return Ok(id);
             }
             catch (NoUserLoggedException ex)
             {

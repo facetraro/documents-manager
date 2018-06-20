@@ -1,13 +1,14 @@
 import { StyleModel } from "../list-styles/styleModel";
+import { Header } from "./header";
 
 export class Parragraph {
     id:string;
-    text:string;
+    texts:Header[];
     style:StyleModel;
     
     constructor(){
         this.id="";
-        this.text="";
+        this.texts=[];
         this.style=new StyleModel;
     }
   }
