@@ -380,5 +380,13 @@ namespace DocumentsManager.BusinessLogic
             }
             return topRanked;
         }
+        public void AddReview(Review reviewToAdd, Guid tokenId)
+        {
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            reviewToAdd.Commentator = GetUserByToken(tokenId);
+            reviewToAdd.Id = Guid.NewGuid();
+            ReviewContext rContext = new ReviewContext();
+            rContext.Add(reviewToAdd);
+        }
     }
 }
