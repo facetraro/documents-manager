@@ -10,7 +10,7 @@ namespace DocumentsMangerEntities
     {
         public virtual Text Text { get; set; }
 
-   
+        
         public override bool Equals(object obj)
         {
             Header anotherHeader = obj as Header;

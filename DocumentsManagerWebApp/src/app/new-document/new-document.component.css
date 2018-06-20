@@ -1,11 +1,23 @@
-p {
+label {
     font-family: "Verdana", Sans-serif;
-    text-align: center;
-    font-size: 10;
+}
+
+body {
+    font-family: "Verdana", Sans-serif;
+}
+
+
+h2 {
+    font-family: "Verdana", Sans-serif;
+}
+
+
+h4 {
+    font-family: "Verdana", Sans-serif;
 }
 
 form {
-    border: 8px solid #f1f1f1;
+    border: 3px solid #f1f1f1;
 }
 
 /* Full-width inputs */
@@ -23,19 +35,23 @@ input[type=text], input[type=password] {
 button {
     background-color: #4CAF50;
     color: white;
-    padding: 5px 5px;
-    margin: 0px 0;
+    padding: 14px 20px;
+    margin: 8px 0;
     border: none;
     cursor: pointer;
     font-family: "Verdana", Sans-serif;
-    width: 30%;
+    width: 20%;
     box-align: center;
     align-self: center;
     align-content: center;
 }
 
+h3 {
+    font-family: "Verdana", Sans-serif;
+}
+
 table {
-    width: 100%;
+    width: 40%;
     font-family: "Verdana", Sans-serif;
     font-size: 11px;
 }

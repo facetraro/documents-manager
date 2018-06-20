@@ -28,6 +28,9 @@ private activeToken:string;
   goListFormats(){
     this.router.navigate((['/formats']));
   }
+  goListDocuments(){
+    this.router.navigate((['/documents']));
+  }
   ngOnInit() {
   }
 

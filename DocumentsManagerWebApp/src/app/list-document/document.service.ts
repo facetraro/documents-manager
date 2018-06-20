@@ -36,6 +36,7 @@ export class DocumentService {
   newDocument(token : string, newDocument:DocumentModel) : Observable<string> {
     let apiUrl= new Url;
     let url = apiUrl.globalUrl+"/api/Document/?token="+token;
+    console.log(newDocument);
     return this.httpService.post(url,newDocument)
     .map((response: Response) => <string> response.json())
     .catch(this.handleError);

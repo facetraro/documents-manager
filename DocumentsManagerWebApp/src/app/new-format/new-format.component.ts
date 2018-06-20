@@ -33,18 +33,19 @@ export class NewFormatComponent implements OnInit {
     this.loadStyles(this.tokenManagment.getToken());
   }
 
-  ngOnInit() {
-  }
-
-  loadLocalStyles(stylesResponse: Array<StyleFromFormat> ){
-    this.allStyles=stylesResponse;
-    console.log(this.allStyles);
-  }
-
+ 
   loadStyles(token: string ){
     this.styleService.getAllStyles(token).subscribe(response => this.loadLocalStyles(response)), 
       error => this.showErrorMessage(error);
   }
+
+  ngOnInit() {
+  }
+  loadLocalStyles(stylesResponse: Array<StyleFromFormat> ){
+    this.allStyles=stylesResponse;
+  }
+
+ 
   deleteStyle(type:string){
     let indexToDelete=-1;
     console.log(type);

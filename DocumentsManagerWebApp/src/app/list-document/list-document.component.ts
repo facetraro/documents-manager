@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DocumentService } from './document.service';
 import { DocumentModel } from './document-model';
 import { ManageToken } from '../manage-token';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-document',
@@ -14,8 +15,9 @@ export class ListDocumentComponent implements OnInit {
   activeToken:string;
   documents:DocumentModel[];
 
-  constructor( service:DocumentService ) { 
+  constructor( service:DocumentService, private router: Router ) { 
     this.service=service;
+    this.documents=[];
     this.tokenManagment=new ManageToken;
     this.activeToken=this.tokenManagment.getToken();
     this.loadDocuments(this.activeToken);
@@ -24,9 +26,11 @@ export class ListDocumentComponent implements OnInit {
   showErrorMessage(error:any){
     alert(error);
   }
-
+  addDocument(){
+    this.router.navigate((['/newDocument']));
+  }
   loadDocuments(token: string ){
-    this.service.getAllDocuments(token).subscribe(response => console.log(response)), 
+    this.service.getAllDocuments(token).subscribe(response => this.documents=response), 
       error => this.showErrorMessage(error);
   }
 

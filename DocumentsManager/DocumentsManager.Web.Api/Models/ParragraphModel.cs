@@ -10,21 +10,25 @@ namespace DocumentsManager.Web.Api.Models
     public class ParragraphModel
     {
         public Guid Id { get; set; }
-        public List<TextModel> Texts { get; set; }
-        public Guid StyleClassId { get; set; }
+        public List<HeaderDto> Texts { get; set; }
+        public StyleClassDto Style { get; set; }
         public ParragraphModel()
         {
             Id = Guid.NewGuid();
-            StyleClassId = Guid.NewGuid();
-            Texts = new List<TextModel>();
+            Style = new StyleClassDto();
+            Texts = new List<HeaderDto>();
         }
         public ParragraphModel(Parragraph aParragraph) {
             Id = Guid.NewGuid();
-            StyleClassId = aParragraph.StyleClass.Id;
-            Texts = new List<TextModel>();
+            Style = new StyleClassDto(aParragraph.StyleClass);
+            Texts = new List<HeaderDto>();
             foreach (Text ti in aParragraph.Texts)
             {
-                Texts.Add(new TextModel(ti));
+                HeaderDto text = new HeaderDto();
+                text.text = ti.WrittenText;
+                text.Id = ti.Id;
+                text.Style = new StyleClassDto(ti.StyleClass);
+                Texts.Add(text);
             }
         }
         public Parragraph GetEntityModel()
@@ -39,11 +43,15 @@ namespace DocumentsManager.Web.Api.Models
             {
                 parragraph.Id = Id;
             }
-            foreach (TextModel tmi in Texts)
+            foreach (HeaderDto tmi in Texts)
             {
-                parragraph.Texts.Add(tmi.GetEntityModel());
+                Text newText = new Text();
+                newText.StyleClass = styleBL.GetStyleById(tmi.Style.Id, Guid.NewGuid());
+                newText.WrittenText = tmi.text;
+                newText.Id = Guid.NewGuid();
+                parragraph.Texts.Add(newText);
             }
-            parragraph.StyleClass = styleBL.GetStyleById(StyleClassId, Guid.NewGuid());
+            parragraph.StyleClass = styleBL.GetStyleById(Style.Id, Guid.NewGuid());
             return parragraph;
         }
     }

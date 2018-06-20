@@ -35,6 +35,7 @@ export class ViewChartComponent implements OnInit {
   }
 
   addTheAnotherChart(response:Chart,service:ChartService){
+    this.lineChartLabels=[];
     this.showChart(response, "Todas las Modificaciones");
     service.createGetChart(this.id,this.dateOne,this.dateTwo,this.activeToken).subscribe(response => this.addTheLastChart(response)), 
     error => this.showErrorMessage(error);
