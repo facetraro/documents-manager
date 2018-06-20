@@ -77,6 +77,10 @@
       <Project>{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}</Project>
       <Name>DocumentsManager.Data.Logger</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.Dtos\DocumentsManager.Dtos.csproj">
+      <Project>{DBB827B3-C1AF-4116-83BC-5F6246E20830}</Project>
+      <Name>DocumentsManager.Dtos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj">
       <Project>{34E362D2-1A27-48BB-8FE5-91A89124B556}</Project>
       <Name>DocumentsManager.Exceptions</Name>
@@ -88,10 +92,6 @@
     <ProjectReference Include="..\DocumentsMangerEntities\DocumentsManger.Data.csproj">
       <Project>{80D195AE-B71A-465A-A588-7397AE023E8F}</Project>
       <Name>DocumentsManger.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DtosAndModels\DocumentsManager.DtosAndModels.csproj">
-      <Project>{784C649D-7308-4672-AF05-8329C1C8AC58}</Project>
-      <Name>DocumentsManager.DtosAndModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

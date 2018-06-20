@@ -5,7 +5,7 @@ using DocumentsManager.ProxyInterfaces;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
-using static DtosAndModels.DocumentDtoAverage;
+using DocumentsManager.Dtos;
 
 namespace DocumentsManager.BusinessLogic
 {

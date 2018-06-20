@@ -40,11 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dtos\DocumentDtoAverage.cs" />
-    <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocumentsManager.BusinessLogic.Charts\DocumentsManager.BusinessLogic.Charts.csproj">
+      <Project>{80E332CD-14BF-42AC-B302-A36A4806ABF4}</Project>
+      <Name>DocumentsManager.BusinessLogic.Charts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Data.DA.Handler\DocumentsManager.Data.DA.Handler.csproj">
       <Project>{08679660-B159-4575-9066-71059A3C33AF}</Project>
       <Name>DocumentsManager.Data.DA.Handler</Name>

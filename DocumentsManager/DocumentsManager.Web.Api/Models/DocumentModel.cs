@@ -1,4 +1,5 @@
 ﻿using DocumentsManager.BusinessLogic;
+using DocumentsManager.Dtos;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;

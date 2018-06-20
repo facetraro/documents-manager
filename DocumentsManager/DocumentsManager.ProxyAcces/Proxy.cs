@@ -6,7 +6,7 @@ using System.Linq;
 using DocumentsMangerEntities;
 using DocumentsManager.BusinessLogic.Charts;
 using DocumentsManager.Exceptions;
-using static DtosAndModels.DocumentDtoAverage;
+using DocumentsManager.Dtos;
 
 namespace DocumentsManager.ProxyAcces
 {

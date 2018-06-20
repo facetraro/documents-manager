@@ -1,13 +1,14 @@
 ﻿using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
-using DtosAndModels.Models;
+using DocumentsManager.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using DtosAndModels.Models;
 
 namespace DocumentsManager.Web.Api.Controllers
 {

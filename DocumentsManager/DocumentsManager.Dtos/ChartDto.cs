@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DocumentsManager.Web.Api.Dtos
+namespace DocumentsManager.Dtos
 {
     public class ChartDto
     {
@@ -13,7 +14,7 @@ namespace DocumentsManager.Web.Api.Dtos
         {
             foreach (var item in chart.GetValues())
             {
-                ChartValue newValue = new ChartValue(item.Item1,item.Item2);
+                ChartValue newValue = new ChartValue(item.Item1, item.Item2);
                 Values.Add(newValue);
             }
         }

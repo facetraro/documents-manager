@@ -1,4 +1,5 @@
-﻿using DocumentsManager.Exceptions;
+﻿using DocumentsManager.Dtos;
+using DocumentsManager.Exceptions;
 using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;

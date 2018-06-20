@@ -1,6 +1,6 @@
 ﻿using DocumentsManager.ProxyAcces;
-using DocumentsManager.Web.Api.Dtos;
 using DocumentsMangerEntities;
+using DocumentsManager.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,7 @@ namespace DocumentsManager.Web.Api.Controllers
                 List<UserDto> dtoRequests = new List<UserDto>();
                 foreach (User useri in requests)
                 {
-                    dtoRequests.Add(new Dtos.UserDto(useri));
+                    dtoRequests.Add(new UserDto(useri));
                 }
                 return Ok(dtoRequests);
             }

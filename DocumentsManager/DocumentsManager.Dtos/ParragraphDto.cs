@@ -2,17 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DocumentsManager.Web.Api.Models
+namespace DocumentsManager.Dtos
 {
     public class ParragraphDto
     {
         public Guid Id { get; set; }
 
-        public StyleClassDto Style{ get; set; }
+        public StyleClassDto Style { get; set; }
         public List<HeaderDto> texts { get; set; }
-        public ParragraphDto(Parragraph aParragraph) {
+        public ParragraphDto(Parragraph aParragraph)
+        {
             this.Id = aParragraph.Id;
             this.Style = new StyleClassDto(aParragraph.StyleClass);
             this.texts = new List<HeaderDto>();

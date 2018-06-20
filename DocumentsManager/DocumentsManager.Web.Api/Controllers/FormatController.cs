@@ -2,6 +2,7 @@
 using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
+using DocumentsManager.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

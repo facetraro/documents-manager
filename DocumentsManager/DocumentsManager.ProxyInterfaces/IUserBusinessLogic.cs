@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DtosAndModels.DocumentDtoAverage;
+using DocumentsManager.Dtos;
 
 namespace DocumentsManager.ProxyInterfaces
 {

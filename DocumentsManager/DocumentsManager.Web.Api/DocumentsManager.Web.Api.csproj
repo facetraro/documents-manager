@@ -184,27 +184,19 @@
     <Compile Include="Controllers\ModifiedChartController.cs" />
     <Compile Include="Controllers\PrintDocumentController.cs" />
     <Compile Include="Controllers\RankDocumentsController.cs" />
+    <Compile Include="Controllers\ReviewModel.cs" />
     <Compile Include="Controllers\StyleClassController.cs" />
-    <Compile Include="Dtos\ChartDto.cs" />
-    <Compile Include="Dtos\ChartValue.cs" />
     <Compile Include="Controllers\UserDocumentsController.cs" />
-    <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminModel.cs" />
-    <Compile Include="Dtos\DocumentDto.cs" />
-    <Compile Include="Dtos\FooterDto.cs" />
-    <Compile Include="Dtos\FormatDto.cs" />
     <Compile Include="Models\DocumentModel.cs" />
     <Compile Include="Models\FooterModel.cs" />
     <Compile Include="Models\FormatModel.cs" />
-    <Compile Include="Dtos\HeaderDto.cs" />
     <Compile Include="Models\HeaderModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\EditorModel.cs" />
-    <Compile Include="Dtos\ParragraphDto.cs" />
-    <Compile Include="Dtos\StyleClassDto.cs" />
     <Compile Include="Models\ParragraphModel.cs" />
     <Compile Include="Models\StyleClassModel.cs" />
     <Compile Include="Models\TextModel.cs" />
@@ -234,6 +226,14 @@
       <Project>{80e332cd-14bf-42ac-b302-a36a4806abf4}</Project>
       <Name>DocumentsManager.BusinessLogic.Charts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.Data.DA.Handler\DocumentsManager.Data.DA.Handler.csproj">
+      <Project>{08679660-B159-4575-9066-71059A3C33AF}</Project>
+      <Name>DocumentsManager.Data.DA.Handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.Dtos\DocumentsManager.Dtos.csproj">
+      <Project>{DBB827B3-C1AF-4116-83BC-5F6246E20830}</Project>
+      <Name>DocumentsManager.Dtos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj">
       <Project>{34E362D2-1A27-48BB-8FE5-91A89124B556}</Project>
       <Name>DocumentsManager.Exceptions</Name>
@@ -257,10 +257,6 @@
     <ProjectReference Include="..\DocumentsMangerEntities\DocumentsManger.Data.csproj">
       <Project>{80D195AE-B71A-465A-A588-7397AE023E8F}</Project>
       <Name>DocumentsManger.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DtosAndModels\DocumentsManager.DtosAndModels.csproj">
-      <Project>{784c649d-7308-4672-af05-8329c1c8ac58}</Project>
-      <Name>DocumentsManager.DtosAndModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

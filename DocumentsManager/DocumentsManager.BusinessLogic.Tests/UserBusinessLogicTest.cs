@@ -8,7 +8,7 @@ using DocumentsManager.Data.DA.Handler;
 using DocumentsManagerExampleInstances;
 using System.Linq;
 using DocumentsManager.AuthenticationToken;
-using static DtosAndModels.DocumentDtoAverage;
+using DocumentsManager.Dtos;
 
 namespace DocumentsManager.BusinessLogic.Tests
 {

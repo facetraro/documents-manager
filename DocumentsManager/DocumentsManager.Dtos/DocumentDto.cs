@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DocumentsManager.Web.Api.Models
+namespace DocumentsManager.Dtos
 {
     public class DocumentDto
     {
@@ -13,14 +14,15 @@ namespace DocumentsManager.Web.Api.Models
         public virtual HeaderDto Header { get; set; }
         public Guid Id { get; set; }
         public virtual List<ParragraphDto> Parragraphs { get; set; }
-        public virtual StyleClassDto StyleClass { get; set; }
+        public virtual StyleClassDto Style { get; set; }
         public string Title { get; set; }
-        public DocumentDto(Document aDocument) {
+        public DocumentDto(Document aDocument)
+        {
             Footer = new FooterDto(aDocument.Footer);
             Format = new FormatDto(aDocument.Format);
             Header = new HeaderDto(aDocument.Header);
             Id = aDocument.Id;
-            StyleClass = new StyleClassDto(aDocument.StyleClass);
+            Style = new StyleClassDto(aDocument.StyleClass);
             Title = aDocument.Title;
             Parragraphs = new List<ParragraphDto>();
             List<Parragraph> parragraps = aDocument.Parragraphs;

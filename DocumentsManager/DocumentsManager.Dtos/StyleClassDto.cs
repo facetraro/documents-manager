@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DocumentsManager.Web.Api.Models
+namespace DocumentsManager.Dtos
 {
     public class StyleClassDto
     {
@@ -30,7 +31,7 @@ namespace DocumentsManager.Web.Api.Models
             {
                 style.Name = Name;
             }
-            
+
             return style;
         }
     }

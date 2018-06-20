@@ -1,6 +1,6 @@
-﻿using DocumentsManager.Exceptions;
+﻿using DocumentsManager.Dtos;
+using DocumentsManager.Exceptions;
 using DocumentsManager.ProxyAcces;
-using DocumentsManager.Web.Api.Dtos;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;

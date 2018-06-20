@@ -1,7 +1,7 @@
 ﻿using DocumentsManager.Exceptions;
 using DocumentsManager.ProxyAcces;
-using DocumentsManager.Web.Api.Dtos;
 using DocumentsMangerEntities;
+using DocumentsManager.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace DocumentsManager.Web.Api.Controllers
                 List<UserDto> dtoFriends = new List<UserDto>();
                 foreach (User useri in friends)
                 {
-                    dtoFriends.Add(new Dtos.UserDto(useri));
+                    dtoFriends.Add(new UserDto(useri));
                 }
                 return Ok(dtoFriends);
             }
