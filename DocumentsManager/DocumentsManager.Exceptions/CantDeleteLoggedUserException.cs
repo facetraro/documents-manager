@@ -8,7 +8,7 @@ namespace DocumentsManager.Exceptions
 {
     public class CantDeleteLoggedUserException : Exception
     {
-        private static string message = "No se puede eliminar el usuario que esta loggeado.";
+        static string message = "No se puede eliminar el usuario que esta loggeado.";
         public CantDeleteLoggedUserException() : base(message)
         {
         }

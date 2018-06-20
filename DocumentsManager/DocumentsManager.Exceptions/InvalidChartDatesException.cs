@@ -8,7 +8,7 @@ namespace DocumentsManager.Exceptions
 {
     public class InvalidChartDatesException : Exception
     {
-        private static string message = "La fecha [Desde] no puede ser despues que la fecha [Hasta]";
+        static string message = "La fecha [Desde] no puede ser despues que la fecha [Hasta]";
         public InvalidChartDatesException() : base(message)
         {
         }

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace DocumentsManager.Exceptions
 {
-    public class NoUserLoggedException:Exception
+    public class InvalidValueForRanking : Exception
     {
-        static string message = "No hay ningun usuario logeado para hacer esa acción";
-        public NoUserLoggedException() : base(message)
+        static string message = "La valoración debe ser entre 1 y 5";
+        public InvalidValueForRanking() : base(message)
         {
-
         }
     }
 }

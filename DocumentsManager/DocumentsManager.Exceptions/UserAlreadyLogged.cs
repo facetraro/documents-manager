@@ -8,7 +8,7 @@ namespace DocumentsManager.Exceptions
 {
     public class UserAlreadyLogged : Exception
     {
-        private static string message = "El usuario ya tiene una sesion iniciada en el sistema.";
+        static string message = "El usuario ya tiene una sesion iniciada en el sistema.";
         public UserAlreadyLogged() : base(message)
         {
         }

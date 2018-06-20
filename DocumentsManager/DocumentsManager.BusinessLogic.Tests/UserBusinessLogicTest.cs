@@ -8,6 +8,7 @@ using DocumentsManager.Data.DA.Handler;
 using DocumentsManagerExampleInstances;
 using System.Linq;
 using DocumentsManager.AuthenticationToken;
+using static DtosAndModels.DocumentDtoAverage;
 
 namespace DocumentsManager.BusinessLogic.Tests
 {
@@ -25,6 +26,47 @@ namespace DocumentsManager.BusinessLogic.Tests
             context.Add(newuser);
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             adminBL.LogIn(newuser.Username, newuser.Password);
+        }
+        private Document AddADocumentToDB()
+        {
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser user = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "userCreator@userCreator" + Guid.NewGuid(),
+                Name = "userCreator",
+                Password = "userCreator",
+                Surname = "userCreator",
+                Username = "userCreator" + Guid.NewGuid()
+            };
+            aBL.AddAdmin(user, Guid.NewGuid());
+            Guid token = aBL.LogIn(user.Username, user.Password);
+            StyleClassBusinessLogic sBL = new StyleClassBusinessLogic();
+            FormatBusinessLogic fBL = new FormatBusinessLogic();
+            Format testFormat = EntitiesExampleInstances.TestFormat();
+            StyleClass testStyle = EntitiesExampleInstances.TestStyleClass();
+            testFormat.StyleClasses = new List<StyleClass>();
+            testFormat.StyleClasses.Add(testStyle);
+            sBL.AddStyle(testStyle, token);
+            Guid formatId = fBL.AddFormat(testFormat, token);
+            testFormat.Id = formatId;
+            Document testDocument = EntitiesExampleInstances.TestDocument();
+            testDocument.StyleClass = testStyle;
+            testDocument.Header.StyleClass = testStyle;
+            testDocument.Header.Text.StyleClass = testStyle;
+            testDocument.Footer.StyleClass = testStyle;
+            testDocument.Footer.Text.StyleClass = testStyle;
+            testDocument.Format = testFormat;
+            foreach (Parragraph pi in testDocument.Parragraphs)
+            {
+                pi.StyleClass = testStyle;
+                foreach (Text ti in pi.Texts)
+                {
+                    ti.StyleClass = testStyle;
+                }
+            }
+            aBL.AddDocument(testDocument, aBL.GetUserByToken(token));
+            return testDocument;
         }
 
         public void TearDown()
@@ -893,6 +935,286 @@ namespace DocumentsManager.BusinessLogic.Tests
             Guid token = uBL.LogIn(userRequester.Username, userRequester.Password);
             uBL.RejectRequest(userRequested.Id, token);
             uBL.LogOut(token);
+            TearDown();
+        }
+        [TestMethod]
+        public void GetTopRankedDocumentsTest()
+        {
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Document docAdded = AddADocumentToDB();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            Review review = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded.Id,Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 3
+            };
+            rContext.Add(review);
+            List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(Guid.NewGuid());
+            DocumentAverageDto contained = new DocumentAverageDto();
+            contained.Id = docAdded.Id;
+            Assert.IsTrue(result.Count == 1);
+            Assert.IsTrue(result.ElementAt(0).Average == 3);
+            Assert.IsTrue(result.Contains(contained));
+            TearDown();
+        }
+        [TestMethod]
+        public void GetTopRankedDocumentsTestTwo()
+        {
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Document docAdded = AddADocumentToDB();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            Review review = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 3
+            };
+            Review review2 = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 5
+            };
+            rContext.Add(review);
+            rContext.Add(review2);
+            List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(Guid.NewGuid());
+            DocumentAverageDto contained = new DocumentAverageDto();
+            contained.Id = docAdded.Id;
+            Assert.IsTrue(result.Count == 1);
+            Assert.IsTrue(result.ElementAt(0).Average == 4);
+            Assert.IsTrue(result.Contains(contained));
+            TearDown();
+        }
+        [TestMethod]
+        public void GetTopRankedDocumentsTestThree()
+        {
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Document docAdded = AddADocumentToDB();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            Review review = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 3
+            };
+            Review review2 = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 5
+            };
+            Review review3 = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 1
+            };
+            rContext.Add(review);
+            rContext.Add(review2);
+            rContext.Add(review3);
+            List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(Guid.NewGuid());
+            DocumentAverageDto contained = new DocumentAverageDto();
+            contained.Id = docAdded.Id;
+            Assert.IsTrue(result.Count == 1);
+            Assert.IsTrue(result.ElementAt(0).Average == 3);
+            Assert.IsTrue(result.Contains(contained));
+            TearDown();
+        }
+        [TestMethod]
+        public void GetTopRankedDocumentsTestTwoDocs()
+        {
+            TearDown();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Document docAdded = AddADocumentToDB();
+            Document docAdded2 = AddADocumentToDB();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            Review review = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 3
+            };
+            Review review2 = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 5
+            };
+            Review review3 = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded2.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 1
+            };
+            rContext.Add(review);
+            rContext.Add(review2);
+            rContext.Add(review3);
+            List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(Guid.NewGuid());
+            DocumentAverageDto contained1 = new DocumentAverageDto();
+            contained1.Id = docAdded.Id;
+            DocumentAverageDto contained2 = new DocumentAverageDto();
+            contained2.Id = docAdded2.Id;
+            Assert.IsTrue(result.Count == 2);
+            Assert.IsTrue(result.Contains(contained1));
+            Assert.IsTrue(result.Contains(contained2));
+            TearDown();
+        }
+        [TestMethod]
+        public void GetTopRankedDocumentsTestZeroDocs()
+        {
+            TearDown();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(Guid.NewGuid());
+            Assert.IsTrue(result.Count == 0);
+            TearDown();
+        }
+        [TestMethod]
+        public void AddReviewTestZero()
+        {
+            TearDown();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            Guid token = uBL.LogIn(userReviewer.Username, userReviewer.Password);
+            List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(token);
+            DocumentAverageDto contained1 = new DocumentAverageDto();
+            Assert.IsTrue(result.Count == 0);
+            TearDown();
+        }
+        [TestMethod]
+        public void AddReviewTest()
+        {
+            TearDown();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Document docAdded = AddADocumentToDB();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            Guid token =uBL.LogIn(userReviewer.Username, userReviewer.Password);
+            Review review = new Review
+            {
+                Commentator = new EditorUser(),
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 5
+            };
+            uBL.AddReview(review, token);
+            List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(token);
+            DocumentAverageDto contained1 = new DocumentAverageDto();
+            contained1.Id = docAdded.Id;
+            Assert.IsTrue(result.Count == 1);
+            Assert.IsTrue(result.Contains(contained1));
+            TearDown();
+        }
+        [TestMethod]
+        public void AddReviewTestTwo()
+        {
+            TearDown();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Document docAdded = AddADocumentToDB();
+            Document docAdded2 = AddADocumentToDB();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            Guid token = uBL.LogIn(userReviewer.Username, userReviewer.Password);
+            Review review = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 5
+            };
+            Review review2 = new Review
+            {
+                Commentator = userReviewer,
+                Commented = dBL.GetDocumentById(docAdded2.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 3
+            };
+            uBL.AddReview(review, token);
+            uBL.AddReview(review2, token);
+            List<DocumentAverageDto> result = uBL.GetTopRankedDocuments(token);
+            DocumentAverageDto contained1 = new DocumentAverageDto();
+            contained1.Id = docAdded.Id;
+            DocumentAverageDto contained2 = new DocumentAverageDto();
+            contained2.Id = docAdded2.Id;
+            Assert.IsTrue(result.Count == 2);
+            Assert.IsTrue(result.Contains(contained1));
+            Assert.IsTrue(result.Contains(contained2));
             TearDown();
         }
     }

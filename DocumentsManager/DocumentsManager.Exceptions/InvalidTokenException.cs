@@ -8,7 +8,7 @@ namespace DocumentsManager.Exceptions
 {
     public class InvalidTokenException : Exception
     {
-        private static string message = "El Token no es válido";
+        static string message = "El Token no es válido";
         public InvalidTokenException() : base(message)
         {
         }

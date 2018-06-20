@@ -8,7 +8,7 @@ namespace DocumentsManager.Exceptions
 {
     public class UserNotAuthorizedException : Exception
     {
-        private static string message = "El usuario no esta autorizado a ingresar a este sitio.";
+        static string message = "El usuario no esta autorizado a ingresar a este sitio.";
         public UserNotAuthorizedException() : base(message)
         {
 

@@ -8,7 +8,7 @@ namespace DocumentsManager.Exceptions
 {
     public class AlreadySentRequestException : Exception
     {
-        private static string message = "Ya le has enviado una solicitud al usuario ";
+        static string message = "Ya le has enviado una solicitud al usuario ";
 
         public AlreadySentRequestException(string username) : base(message + username)
         {

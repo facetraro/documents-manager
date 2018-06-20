@@ -36,18 +36,11 @@ namespace DocumentsManager.Web.Api.Controllers
                 }
                 return Ok(admins);
             }
-            catch (SessionExpiredException ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            catch (NoUserLoggedException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (UserNotAuthorizedException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            
         }
         // GET: api/Admin/5
         public IHttpActionResult Get(Guid id, Guid token)

@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.BusinessLo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.ImportedItemsParser", "DocumentsManager.ImportedItemsParser\DocumentsManager.ImportedItemsParser.csproj", "{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsManager.DtosAndModels", "DtosAndModels\DocumentsManager.DtosAndModels.csproj", "{784C649D-7308-4672-AF05-8329C1C8AC58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{784C649D-7308-4672-AF05-8329C1C8AC58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{784C649D-7308-4672-AF05-8329C1C8AC58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{784C649D-7308-4672-AF05-8329C1C8AC58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{784C649D-7308-4672-AF05-8329C1C8AC58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
