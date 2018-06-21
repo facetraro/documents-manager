@@ -11,7 +11,6 @@ namespace DocumentsManager.BusinessLogic
 {
     public class UserBusinessLogic : IUserBusinessLogic
     {
-
         public Guid CreateADocument(Document doc, Guid tokenId)
         {
             User responsibleUser = GetUserByToken(tokenId);
@@ -51,7 +50,6 @@ namespace DocumentsManager.BusinessLogic
         }
         public Guid AddDocument(Document doc, User responsibleUser)
         {
-
             if (!IdRegistered(responsibleUser))
             {
                 throw new ObjectDoesNotExists(responsibleUser);
@@ -60,15 +58,12 @@ namespace DocumentsManager.BusinessLogic
             Guid id = documentLogic.Add(doc);
             AddModifyHistory(responsibleUser, doc, ModifyState.Added);
             return id;
-
         }
         public bool DeleteDocument(Document aDocument, User responsibleUser)
         {
             AddModifyHistory(responsibleUser, aDocument, ModifyState.Removed);
             return true;
         }
-
-
         public bool UpdateDocument(Guid id, Document aDocument, User responsibleUser)
         {
             DocumentBusinessLogic documentBL = new DocumentBusinessLogic();
@@ -93,7 +88,6 @@ namespace DocumentsManager.BusinessLogic
             DocumentContext documentContext = new DocumentContext();
             documentContext.ModifyParragraphs(aDocument);
         }
-
 
         public void ModifyDocumentProperties(Document aDocument, User responsibleUser)
         {
@@ -349,12 +343,37 @@ namespace DocumentsManager.BusinessLogic
             }
             throw new ObjectDoesNotExists(new Friendship());
         }
+
+        public List<Document> GetNotDeletedDocuments()
+        {
+            List<Document> notDeletedDocuments = new List<Document>();
+            DocumentContext dContext = new DocumentContext();
+            ModifyDocumentHistoryContext historyContext = new ModifyDocumentHistoryContext();
+            List<ModifyDocumentHistory> allHistories = historyContext.GetAllHistories();
+            foreach (Document doci in dContext.GetDocuments())
+            {
+                bool documentWasDeleted = false;
+                foreach (var item in allHistories)
+                {
+                    if (item.State == ModifyState.Removed && item.Document.Equals(doci))
+                    {
+                        documentWasDeleted = true;
+                    }
+                }
+                if (!documentWasDeleted)
+                {
+                    notDeletedDocuments.Add(doci);
+                }
+            }
+            return notDeletedDocuments;
+        }
+
         public List<DocumentAverageDto> GetTopRankedDocuments(Guid tokenId)
         {
             List<DocumentAverageDto> topRanked = new List<DocumentAverageDto>();
-            DocumentContext dContext = new DocumentContext();
+
             List<DocumentAverageDto> allDocsRanked = new List<DocumentAverageDto>();
-            foreach (Document doci in dContext.GetDocuments())
+            foreach (Document doci in GetNotDeletedDocuments())
             {
                 allDocsRanked.Add(new DocumentAverageDto(doci));
             }

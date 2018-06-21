@@ -41,6 +41,9 @@ import { ViewRequestsComponent } from './view-requests/view-requests.component';
 import { ListFriendsComponent } from './list-friends/list-friends.component';
 import { ViewFriendProfileComponent } from './view-friend-profile/view-friend-profile.component';
 import { ReviewDocumentComponent } from './review-document/review-document.component';
+import { TopDocumentsComponent } from './top-documents/top-documents.component';
+import { TopDocumentsService } from './top-documents/top-documents.service';
+import { ReviewService } from './review-document/review.service';
 
 @NgModule({
   declarations: [
@@ -71,6 +74,7 @@ import { ReviewDocumentComponent } from './review-document/review-document.compo
     ListFriendsComponent,
     ViewFriendProfileComponent,
     ReviewDocumentComponent,
+    TopDocumentsComponent,
   ],
   imports: [
     HttpModule,
@@ -88,6 +92,9 @@ import { ReviewDocumentComponent } from './review-document/review-document.compo
     FormatService, 
     EditorService, 
     ChartService,
+    DocumentService,
+    TopDocumentsService,
+    ReviewService,
     ManageToken
   ],
   bootstrap: [AppComponent]
