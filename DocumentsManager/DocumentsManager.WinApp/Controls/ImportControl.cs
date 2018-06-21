@@ -11,6 +11,7 @@ using DocumentsManager.FormatImportation;
 using DocumentsMangerEntities;
 using DocumentsManager.ImportedItemsParser;
 using DocumentsManager.BusinessLogic;
+using DocumentsManager.Data.Logger;
 
 namespace DocumentsManager.WinApp.Controls
 {
@@ -24,6 +25,7 @@ namespace DocumentsManager.WinApp.Controls
         private AdminBusinessLogic aBL;
         private FormatBusinessLogic fBL;
         private StyleClassBusinessLogic sBL;
+        private LoggerMethod lm;
         public ImportControl(Panel panel, IFormatImportation importation)
         {
             importer = importation;
@@ -34,6 +36,7 @@ namespace DocumentsManager.WinApp.Controls
             aBL = new AdminBusinessLogic();
             sBL = new StyleClassBusinessLogic();
             fBL = new FormatBusinessLogic();
+            lm = new LoggerMethod();
         }
         private void LoadRequiredParamaters()
         {
@@ -147,6 +150,15 @@ namespace DocumentsManager.WinApp.Controls
                     fBL.AddFormat(formati, Guid.NewGuid());
                 }
                 MessageBox.Show("Se importaron los formatos y estilos correctamente.");
+                LoggerType log = new LoggerType
+                {
+                    Date = DateTime.Now,
+                    Action = ActionType.Importation,
+                    UserBy = UserLogged.Username,
+                    Id = new Guid()
+                };
+
+                lm.AddLogger(log);
                 MainPanel.Controls.Clear();
                 UserControl menuControl = new MainMenu(MainPanel);
                 MainPanel.Controls.Add(menuControl);

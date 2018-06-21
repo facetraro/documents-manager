@@ -8,6 +8,7 @@ using DocumentsManager.Data.DA.Handler;
 using DocumentsManager.Exceptions;
 using DocumentsManager.ProxyInterfaces;
 using DocumentsManager.BusinessLogic.Charts;
+using DocumentsManager.Data.Logger;
 
 namespace DocumentsManager.BusinessLogic
 {
@@ -18,6 +19,15 @@ namespace DocumentsManager.BusinessLogic
             User user = AuthenticateUser(username, password);
             if (user != null)
             {
+                LoggerMethod lm = new LoggerMethod();
+                LoggerType log = new LoggerType
+                {
+                    Date = DateTime.Now,
+                    Action = ActionType.LogIn,
+                    UserBy = username,
+                    Id = new Guid()
+                };
+                lm.AddLogger(log);
                 return user;
             }
             return null;
@@ -31,7 +41,8 @@ namespace DocumentsManager.BusinessLogic
                 {
                     return;
                 }
-                throw new UserNotAuthorizedException();
+                throw new Exception("Debes ser un administrador del sistema para utilizar esta aplicación.");
+
             }
         }
         public ChartIntDate GetChartModificationsByUser(User user, DateTime since, DateTime until, Guid tokenId)

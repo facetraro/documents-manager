@@ -59,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CheckLog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CheckLog.Designer.cs">
+      <DependentUpon>CheckLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FormatCreator.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -121,6 +127,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserLogged.cs" />
+    <EmbeddedResource Include="Controls\CheckLog.resx">
+      <DependentUpon>CheckLog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\FormatCreator.resx">
       <DependentUpon>FormatCreator.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,6 +188,14 @@
     <ProjectReference Include="..\BusinessLogic\DocumentsManager.BusinessLogic.csproj">
       <Project>{8B29DE6D-2EE3-4C95-8DF7-F890263F52CD}</Project>
       <Name>DocumentsManager.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.Data.Logger\DocumentsManager.Data.Logger.csproj">
+      <Project>{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}</Project>
+      <Name>DocumentsManager.Data.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.Exceptions\DocumentsManager.Exceptions.csproj">
+      <Project>{34E362D2-1A27-48BB-8FE5-91A89124B556}</Project>
+      <Name>DocumentsManager.Exceptions</Name>
     </ProjectReference>
     <ProjectReference Include="..\DocumentsManager.FormatImportation\DocumentsManager.FormatImportation.csproj">
       <Project>{2150776E-D2F1-4CD4-81F4-2B05D18D4C14}</Project>

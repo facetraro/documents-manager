@@ -17,7 +17,7 @@ namespace DocumentsManager.WinApp
         {
             InitializeComponent();
             mainPanel.Controls.Clear();
-            UserControl mainMenu  = new Controls.MainMenu(mainPanel);
+            UserControl mainMenu  = new LoginControl(mainPanel);
             mainPanel.Controls.Add(mainMenu);
         }
     }

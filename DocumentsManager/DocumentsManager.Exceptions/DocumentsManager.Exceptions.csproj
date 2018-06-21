@@ -49,6 +49,7 @@
     <Compile Include="InvalidUserEmailException.cs" />
     <Compile Include="InvalidUserPasswordException.cs" />
     <Compile Include="InvalidValueForRanking.cs" />
+    <Compile Include="NotAdminOrDoesntExistsException.cs" />
     <Compile Include="NotEnoughDocumentsException.cs" />
     <Compile Include="NotFriendsException.cs" />
     <Compile Include="SessionExpiredException.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="ObjectDoesNotExists.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAlreadyLogged.cs" />
+    <Compile Include="UserNotRegisteredException.cs" />
     <Compile Include="WrongUserType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

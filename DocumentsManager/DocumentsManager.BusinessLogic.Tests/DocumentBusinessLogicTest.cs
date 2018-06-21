@@ -121,7 +121,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             string parragraphText = "DefaultText";
             string parragraph = "<br>" + styleClassBL.GetHtmlText(new StyleClass(), parragraphText) ;
             string printedDocument = documentBL.PrintDocument(testDocument, Guid.NewGuid());
-            string expectedResult = "<html><body><title>PrintableDocument</title><head><p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>HEADER</em></strong></p></head><br><p>DefaultText</p><footer><p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>FOOTER</em></strong></p></footer></body></html>";
+            string expectedResult = "<html><body><title>PrintableDocument</title><head><p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>HEADER</strong></em></p></head><br><p>DefaultText</p><footer><p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>FOOTER</strong></em></p></footer></body></html>";
             Assert.AreEqual(printedDocument.Trim(), expectedResult.Trim());
             TearDown();
         }

@@ -6,6 +6,7 @@ using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
 using DocumentsManager.Dtos;
+using DocumentsManager.Data.Logger;
 
 namespace DocumentsManager.BusinessLogic
 {
@@ -142,8 +143,14 @@ namespace DocumentsManager.BusinessLogic
                 {
                     return userFromDB;
                 }
+                else {
+                    throw new InvalidCredentialException();
+                }
             }
-            throw new InvalidCredentialException();
+            else {
+                throw new UserNotRegisteredException();
+            }
+            
         }
         public Guid LogIn(string username, string password)
         {
@@ -152,6 +159,15 @@ namespace DocumentsManager.BusinessLogic
             {
                 SessionAccess sessionAccess = new SessionAccess();
                 Guid newToken = sessionAccess.Add(userFromDB.Id);
+                LoggerMethod lm = new LoggerMethod();
+                LoggerType log = new LoggerType {
+                    Date = DateTime.Now,
+                    Action = ActionType.LogIn,
+                    UserBy = username,
+                    Id = new Guid()
+            };
+                
+                lm.AddLogger(log);
                 return newToken;
             }
             return new Guid();

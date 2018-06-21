@@ -75,7 +75,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             StyleClassBusinessLogic logic = new StyleClassBusinessLogic();
             StyleClass newStyle = EntitiesExampleInstances.TestStyleClass();
             string result = logic.GetHtmlText(newStyle, "ExampleInstance");
-            string expected = "<p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>ExampleInstance</em></strong></p>";
+            string expected = "<p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>ExampleInstance</strong></em></p>";
             Assert.AreEqual(expected, result);
         }
     }
