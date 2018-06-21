@@ -41,6 +41,7 @@ import { ViewRequestsComponent } from './view-requests/view-requests.component';
 import { ListFriendsComponent } from './list-friends/list-friends.component';
 import { ViewFriendProfileComponent } from './view-friend-profile/view-friend-profile.component';
 import { ReviewDocumentComponent } from './review-document/review-document.component';
+import { TopDocumentsComponent } from './top-documents/top-documents.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { ReviewDocumentComponent } from './review-document/review-document.compo
     ListFriendsComponent,
     ViewFriendProfileComponent,
     ReviewDocumentComponent,
+    TopDocumentsComponent,
   ],
   imports: [
     HttpModule,

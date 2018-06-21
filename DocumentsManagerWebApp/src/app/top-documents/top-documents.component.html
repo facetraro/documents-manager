@@ -1,0 +1,24 @@
+<div>
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <div style="overflow-x:auto;">
+               <p *ngIf='documents && documents.length'> TOP DOCUMENTOS: </p>
+                <table class='table' *ngIf='documents && documents.length'>
+                 
+                    <thead>
+                        <tr>
+                            <th>Titulo</th>
+                            <th>Valoracion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let aDocument of documents'  >
+                            <td>{{aDocument.title | uppercase }}</td>
+                            <td>{{aDocument.average}} ★</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

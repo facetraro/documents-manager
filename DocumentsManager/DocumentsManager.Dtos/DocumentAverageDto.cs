@@ -30,11 +30,14 @@ namespace DocumentsManager.Dtos
             double average = 0;
             ReviewContext rContext = new ReviewContext();
             List<Review> reviewsDoci = rContext.GetReviewsFromDocument(Id);
-            foreach (Review revi in reviewsDoci)
+            if (reviewsDoci.Count > 0)
             {
-                average = average + revi.Rating;
+                foreach (Review revi in reviewsDoci)
+                {
+                    average = average + revi.Rating;
+                }
+                average = average / reviewsDoci.Count;
             }
-            average = average / reviewsDoci.Count;
             return average;
         }
         public override bool Equals(object obj)
