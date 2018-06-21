@@ -23,6 +23,7 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
 import { ListFriendsComponent } from './list-friends/list-friends.component';
 import { ViewFriendProfileComponent } from './view-friend-profile/view-friend-profile.component';
+import { ReviewDocumentComponent } from './review-document/review-document.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'friendRequests', component: ViewRequestsComponent },
   { path: 'friends', component: ListFriendsComponent },
   { path: 'profile', component: ViewFriendProfileComponent },
+  { path: 'reviewDocument', component: ReviewDocumentComponent },
 ];
 
 @NgModule({

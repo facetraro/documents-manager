@@ -40,6 +40,7 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
 import { ListFriendsComponent } from './list-friends/list-friends.component';
 import { ViewFriendProfileComponent } from './view-friend-profile/view-friend-profile.component';
+import { ReviewDocumentComponent } from './review-document/review-document.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { ViewFriendProfileComponent } from './view-friend-profile/view-friend-pr
     ViewRequestsComponent,
     ListFriendsComponent,
     ViewFriendProfileComponent,
+    ReviewDocumentComponent,
   ],
   imports: [
     HttpModule,

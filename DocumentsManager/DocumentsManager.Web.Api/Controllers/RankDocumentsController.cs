@@ -53,7 +53,7 @@ namespace DocumentsManager.Web.Api.Controllers
                 }
                 Review reviewToAdd = GetEntityReview(review);
                 proxyAccess.AddReview(reviewToAdd, token);
-                return Ok();
+                return Ok(200);
             }
             catch (Exception ex)
             {
