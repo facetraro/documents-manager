@@ -24,33 +24,35 @@ import { ViewRequestsComponent } from './view-requests/view-requests.component';
 import { ListFriendsComponent } from './list-friends/list-friends.component';
 import { ViewFriendProfileComponent } from './view-friend-profile/view-friend-profile.component';
 import { ReviewDocumentComponent } from './review-document/review-document.component';
+import { DocumentsManagerGuardService } from './documents-manager-guard.service';
+import { AdminGuardService } from './admin-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: MainMenuComponent },
-  { path: 'admins', component: ListAdminsComponent },
-  { path: 'newAdmin', component: NewAdminComponent },
-  { path: 'modifyAdmin', component: ModifyAdminComponent },
-  { path: 'editors', component: ListEditorsComponent },
-  { path: 'newEditor', component: NewEditorComponent },
-  { path: 'modifyEditor', component: ModifyEditorComponent },
-  { path: 'styles', component: ListStylesComponent },
-  { path: 'newStyle', component: NewStyleComponent },
-  { path: 'modifyStyle', component: ModifyStyleComponent },
-  { path: 'formats', component: ListFormatComponent },
-  { path: 'newFormat', component: NewFormatComponent },
-  { path: 'modifyFormat', component: ModifyFormatComponent },
-  { path: 'documents', component: ListDocumentComponent },
-  { path: 'viewChart', component: ViewChartComponent },
-  { path: 'newDocument', component: NewDocumentComponent },
-  { path: 'modifyDocument', component: ModifyDocumentComponent },
-  { path: 'printDocument', component: PrintDocumentComponent },
-  { path: 'users', component: AllUsersComponent },
-  { path: 'friendRequests', component: ViewRequestsComponent },
-  { path: 'friends', component: ListFriendsComponent },
-  { path: 'profile', component: ViewFriendProfileComponent },
-  { path: 'reviewDocument', component: ReviewDocumentComponent },
+  { path: 'home', component: MainMenuComponent, canActivate: [DocumentsManagerGuardService]},
+  { path: 'admins', component: ListAdminsComponent, canActivate: [AdminGuardService]},
+  { path: 'newAdmin', component: NewAdminComponent, canActivate: [AdminGuardService] },
+  { path: 'modifyAdmin', component: ModifyAdminComponent, canActivate: [AdminGuardService] },
+  { path: 'editors', component: ListEditorsComponent, canActivate: [AdminGuardService] },
+  { path: 'newEditor', component: NewEditorComponent, canActivate: [AdminGuardService] },
+  { path: 'modifyEditor', component: ModifyEditorComponent, canActivate: [AdminGuardService] },
+  { path: 'styles', component: ListStylesComponent, canActivate: [AdminGuardService] },
+  { path: 'newStyle', component: NewStyleComponent, canActivate: [AdminGuardService] },
+  { path: 'modifyStyle', component: ModifyStyleComponent, canActivate: [AdminGuardService] },
+  { path: 'formats', component: ListFormatComponent, canActivate: [AdminGuardService] },
+  { path: 'newFormat', component: NewFormatComponent, canActivate: [AdminGuardService] },
+  { path: 'modifyFormat', component: ModifyFormatComponent, canActivate: [AdminGuardService] },
+  { path: 'documents', component: ListDocumentComponent, canActivate: [DocumentsManagerGuardService] },
+  { path: 'viewChart', component: ViewChartComponent, canActivate: [AdminGuardService] },
+  { path: 'newDocument', component: NewDocumentComponent, canActivate: [DocumentsManagerGuardService] },
+  { path: 'modifyDocument', component: ModifyDocumentComponent, canActivate: [DocumentsManagerGuardService] },
+  { path: 'printDocument', component: PrintDocumentComponent, canActivate: [DocumentsManagerGuardService] },
+  { path: 'users', component: AllUsersComponent, canActivate: [DocumentsManagerGuardService] },
+  { path: 'friendRequests', component: ViewRequestsComponent, canActivate: [DocumentsManagerGuardService] },
+  { path: 'friends', component: ListFriendsComponent, canActivate: [DocumentsManagerGuardService] },
+  { path: 'profile', component: ViewFriendProfileComponent, canActivate: [DocumentsManagerGuardService] },
+  { path: 'reviewDocument', component: ReviewDocumentComponent, canActivate: [DocumentsManagerGuardService] },
 ];
 
 @NgModule({

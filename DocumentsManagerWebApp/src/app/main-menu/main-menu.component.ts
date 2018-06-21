@@ -11,8 +11,10 @@ export class MainMenuComponent implements OnInit {
  
 private tokenManagment:ManageToken;
 private activeToken:string;
+private role:string;
   constructor(private router: Router) {
     this.tokenManagment=new ManageToken;
+    this.role=this.tokenManagment.getRole();
     this.activeToken=this.tokenManagment.getToken();
     }
 

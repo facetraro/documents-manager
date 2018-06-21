@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 // Add the RxJS Observable operators we need in this app.
 import '../rxjs-operators';
 import { Url } from 'src/app/url';
+import { LoginModel } from './login-model';
 
 
 @Injectable({
@@ -19,11 +20,11 @@ export class LoginService {
     }
     specificError:MessageError;
 
-  logIn(newSessionUser:User) : Observable<string> {
+  logIn(newSessionUser:User) : Observable<LoginModel> {
     let apiUrl= new Url;
     let url = apiUrl.globalUrl+"/api/Login/?Username="+newSessionUser.username;
     return this.httpService.post(url,newSessionUser)
-    .map((response: Response) => <string> response.json())
+    .map((response: Response) => <LoginModel> response.json())
     .catch(this.handleError);
   };
   

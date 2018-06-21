@@ -5,6 +5,7 @@ import { LoginService } from 'src/app/login/login.service';
 import { ManageToken } from '../manage-token';
 import { AppRoutingModule } from '../app-routing.module';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { LoginModel } from './login-model';
 
 
 @Component({
@@ -35,9 +36,11 @@ export class LoginComponent implements OnInit {
       alert(error);
   }
 
-  login(response:string){
-    this.localStorageSession.saveToken(response);
-    this.router.navigate((['/home']));
+  login(response:LoginModel){
+    this.localStorageSession.saveToken(response.id);
+    this.localStorageSession.saveRole(response.role);
+    console.log(response);
+      this.router.navigate((['/home']));
    }
 
   userLogin(user: User ){
