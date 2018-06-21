@@ -1,6 +1,6 @@
 ﻿namespace DocumentsManager.WinApp.Controls
 {
-    partial class FormatCreator
+    partial class ModifyFormat
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -32,15 +32,15 @@
             this.buttonDeleteStyle = new System.Windows.Forms.Button();
             this.labelStylesToAdd2 = new System.Windows.Forms.Label();
             this.labelAddedStyles = new System.Windows.Forms.Label();
-            this.textBoxFormatName = new System.Windows.Forms.TextBox();
             this.buttonAddAStyle = new System.Windows.Forms.Button();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.listBoxStylesToAdd = new System.Windows.Forms.ListBox();
-            this.listBoxPossibleStyles = new System.Windows.Forms.ListBox();
             this.labelStylesToAdd1 = new System.Windows.Forms.Label();
             this.labelFormatName = new System.Windows.Forms.Label();
             this.buttonBack = new System.Windows.Forms.Button();
             this.buttonCreateFormat = new System.Windows.Forms.Button();
+            this.textBoxFN = new System.Windows.Forms.TextBox();
+            this.listBoxStylesKeep = new System.Windows.Forms.ListBox();
+            this.listBoxStylesToLeave = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,18 +49,18 @@
             this.panel1.Controls.Add(this.buttonDeleteStyle);
             this.panel1.Controls.Add(this.labelStylesToAdd2);
             this.panel1.Controls.Add(this.labelAddedStyles);
-            this.panel1.Controls.Add(this.textBoxFormatName);
             this.panel1.Controls.Add(this.buttonAddAStyle);
             this.panel1.Controls.Add(this.labelTitle);
-            this.panel1.Controls.Add(this.listBoxStylesToAdd);
-            this.panel1.Controls.Add(this.listBoxPossibleStyles);
             this.panel1.Controls.Add(this.labelStylesToAdd1);
             this.panel1.Controls.Add(this.labelFormatName);
             this.panel1.Controls.Add(this.buttonBack);
             this.panel1.Controls.Add(this.buttonCreateFormat);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Controls.Add(this.textBoxFN);
+            this.panel1.Controls.Add(this.listBoxStylesKeep);
+            this.panel1.Controls.Add(this.listBoxStylesToLeave);
+            this.panel1.Location = new System.Drawing.Point(4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(630, 538);
+            this.panel1.Size = new System.Drawing.Size(609, 558);
             this.panel1.TabIndex = 0;
             // 
             // buttonDeleteStyle
@@ -68,10 +68,10 @@
             this.buttonDeleteStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonDeleteStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.buttonDeleteStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonDeleteStyle.Location = new System.Drawing.Point(227, 280);
+            this.buttonDeleteStyle.Location = new System.Drawing.Point(214, 268);
             this.buttonDeleteStyle.Name = "buttonDeleteStyle";
             this.buttonDeleteStyle.Size = new System.Drawing.Size(61, 44);
-            this.buttonDeleteStyle.TabIndex = 11;
+            this.buttonDeleteStyle.TabIndex = 20;
             this.buttonDeleteStyle.Text = "▲";
             this.buttonDeleteStyle.UseVisualStyleBackColor = false;
             this.buttonDeleteStyle.Click += new System.EventHandler(this.buttonDeleteStyle_Click);
@@ -79,37 +79,30 @@
             // labelStylesToAdd2
             // 
             this.labelStylesToAdd2.AutoSize = true;
-            this.labelStylesToAdd2.Location = new System.Drawing.Point(48, 201);
+            this.labelStylesToAdd2.Location = new System.Drawing.Point(8, 183);
             this.labelStylesToAdd2.Name = "labelStylesToAdd2";
             this.labelStylesToAdd2.Size = new System.Drawing.Size(74, 17);
-            this.labelStylesToAdd2.TabIndex = 10;
+            this.labelStylesToAdd2.TabIndex = 19;
             this.labelStylesToAdd2.Text = "a agregar:";
             // 
             // labelAddedStyles
             // 
             this.labelAddedStyles.AutoSize = true;
-            this.labelAddedStyles.Location = new System.Drawing.Point(29, 381);
+            this.labelAddedStyles.Location = new System.Drawing.Point(8, 357);
             this.labelAddedStyles.Name = "labelAddedStyles";
             this.labelAddedStyles.Size = new System.Drawing.Size(125, 17);
-            this.labelAddedStyles.TabIndex = 9;
+            this.labelAddedStyles.TabIndex = 18;
             this.labelAddedStyles.Text = "Estilos agregados:";
-            // 
-            // textBoxFormatName
-            // 
-            this.textBoxFormatName.Location = new System.Drawing.Point(227, 75);
-            this.textBoxFormatName.Name = "textBoxFormatName";
-            this.textBoxFormatName.Size = new System.Drawing.Size(203, 22);
-            this.textBoxFormatName.TabIndex = 8;
             // 
             // buttonAddAStyle
             // 
             this.buttonAddAStyle.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonAddAStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.buttonAddAStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonAddAStyle.Location = new System.Drawing.Point(386, 280);
+            this.buttonAddAStyle.Location = new System.Drawing.Point(376, 268);
             this.buttonAddAStyle.Name = "buttonAddAStyle";
             this.buttonAddAStyle.Size = new System.Drawing.Size(62, 44);
-            this.buttonAddAStyle.TabIndex = 7;
+            this.buttonAddAStyle.TabIndex = 17;
             this.buttonAddAStyle.Text = "▼";
             this.buttonAddAStyle.UseVisualStyleBackColor = false;
             this.buttonAddAStyle.Click += new System.EventHandler(this.buttonAddAStyle_Click);
@@ -118,56 +111,38 @@
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.labelTitle.Location = new System.Drawing.Point(222, 24);
+            this.labelTitle.Location = new System.Drawing.Point(209, 12);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(208, 29);
-            this.labelTitle.TabIndex = 6;
+            this.labelTitle.TabIndex = 16;
             this.labelTitle.Text = "Agreagar Formato";
-            // 
-            // listBoxStylesToAdd
-            // 
-            this.listBoxStylesToAdd.FormattingEnabled = true;
-            this.listBoxStylesToAdd.ItemHeight = 16;
-            this.listBoxStylesToAdd.Location = new System.Drawing.Point(178, 330);
-            this.listBoxStylesToAdd.Name = "listBoxStylesToAdd";
-            this.listBoxStylesToAdd.Size = new System.Drawing.Size(309, 148);
-            this.listBoxStylesToAdd.TabIndex = 5;
-            // 
-            // listBoxPossibleStyles
-            // 
-            this.listBoxPossibleStyles.FormattingEnabled = true;
-            this.listBoxPossibleStyles.ItemHeight = 16;
-            this.listBoxPossibleStyles.Location = new System.Drawing.Point(178, 125);
-            this.listBoxPossibleStyles.Name = "listBoxPossibleStyles";
-            this.listBoxPossibleStyles.Size = new System.Drawing.Size(309, 148);
-            this.listBoxPossibleStyles.TabIndex = 4;
             // 
             // labelStylesToAdd1
             // 
             this.labelStylesToAdd1.AutoSize = true;
-            this.labelStylesToAdd1.Location = new System.Drawing.Point(29, 184);
+            this.labelStylesToAdd1.Location = new System.Drawing.Point(8, 166);
             this.labelStylesToAdd1.Name = "labelStylesToAdd1";
             this.labelStylesToAdd1.Size = new System.Drawing.Size(121, 17);
-            this.labelStylesToAdd1.TabIndex = 3;
+            this.labelStylesToAdd1.TabIndex = 15;
             this.labelStylesToAdd1.Text = "Seleccione estilos";
             // 
             // labelFormatName
             // 
             this.labelFormatName.AutoSize = true;
-            this.labelFormatName.Location = new System.Drawing.Point(29, 78);
+            this.labelFormatName.Location = new System.Drawing.Point(3, 60);
             this.labelFormatName.Name = "labelFormatName";
             this.labelFormatName.Size = new System.Drawing.Size(141, 17);
-            this.labelFormatName.TabIndex = 2;
+            this.labelFormatName.TabIndex = 14;
             this.labelFormatName.Text = "Nombre del Formato:";
             // 
             // buttonBack
             // 
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonBack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonBack.Location = new System.Drawing.Point(14, 500);
+            this.buttonBack.Location = new System.Drawing.Point(11, 514);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(81, 35);
-            this.buttonBack.TabIndex = 1;
+            this.buttonBack.TabIndex = 13;
             this.buttonBack.Text = "Volver";
             this.buttonBack.UseVisualStyleBackColor = false;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
@@ -176,21 +151,46 @@
             // 
             this.buttonCreateFormat.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonCreateFormat.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonCreateFormat.Location = new System.Drawing.Point(536, 501);
+            this.buttonCreateFormat.Location = new System.Drawing.Point(513, 514);
             this.buttonCreateFormat.Name = "buttonCreateFormat";
             this.buttonCreateFormat.Size = new System.Drawing.Size(84, 35);
-            this.buttonCreateFormat.TabIndex = 0;
+            this.buttonCreateFormat.TabIndex = 12;
             this.buttonCreateFormat.Text = "Crear";
             this.buttonCreateFormat.UseVisualStyleBackColor = false;
             this.buttonCreateFormat.Click += new System.EventHandler(this.buttonCreateFormat_Click);
             // 
-            // FormatCreator
+            // textBoxFN
+            // 
+            this.textBoxFN.Location = new System.Drawing.Point(214, 60);
+            this.textBoxFN.Name = "textBoxFN";
+            this.textBoxFN.Size = new System.Drawing.Size(203, 22);
+            this.textBoxFN.TabIndex = 2;
+            // 
+            // listBoxStylesKeep
+            // 
+            this.listBoxStylesKeep.FormattingEnabled = true;
+            this.listBoxStylesKeep.ItemHeight = 16;
+            this.listBoxStylesKeep.Location = new System.Drawing.Point(161, 318);
+            this.listBoxStylesKeep.Name = "listBoxStylesKeep";
+            this.listBoxStylesKeep.Size = new System.Drawing.Size(387, 148);
+            this.listBoxStylesKeep.TabIndex = 1;
+            // 
+            // listBoxStylesToLeave
+            // 
+            this.listBoxStylesToLeave.FormattingEnabled = true;
+            this.listBoxStylesToLeave.ItemHeight = 16;
+            this.listBoxStylesToLeave.Location = new System.Drawing.Point(161, 98);
+            this.listBoxStylesToLeave.Name = "listBoxStylesToLeave";
+            this.listBoxStylesToLeave.Size = new System.Drawing.Size(387, 164);
+            this.listBoxStylesToLeave.TabIndex = 0;
+            // 
+            // ModifyFormat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
-            this.Name = "FormatCreator";
-            this.Size = new System.Drawing.Size(631, 542);
+            this.Name = "ModifyFormat";
+            this.Size = new System.Drawing.Size(616, 560);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -200,17 +200,17 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ListBox listBoxStylesKeep;
+        private System.Windows.Forms.ListBox listBoxStylesToLeave;
+        private System.Windows.Forms.TextBox textBoxFN;
+        private System.Windows.Forms.Button buttonDeleteStyle;
+        private System.Windows.Forms.Label labelStylesToAdd2;
+        private System.Windows.Forms.Label labelAddedStyles;
         private System.Windows.Forms.Button buttonAddAStyle;
         private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.ListBox listBoxStylesToAdd;
-        private System.Windows.Forms.ListBox listBoxPossibleStyles;
         private System.Windows.Forms.Label labelStylesToAdd1;
         private System.Windows.Forms.Label labelFormatName;
         private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.Button buttonCreateFormat;
-        private System.Windows.Forms.Label labelAddedStyles;
-        private System.Windows.Forms.TextBox textBoxFormatName;
-        private System.Windows.Forms.Label labelStylesToAdd2;
-        private System.Windows.Forms.Button buttonDeleteStyle;
     }
 }

@@ -24,5 +24,9 @@ namespace DocumentsMangerEntities
             }
             return Id.Equals(anotherFormat.Id);
         }
+        public override string ToString()
+        {
+            return "Nombre: " + Name + ", cantidad de Estilos: " + StyleClasses.Count;
+        }
     }
 }

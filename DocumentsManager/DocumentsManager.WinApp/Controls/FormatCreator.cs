@@ -55,6 +55,7 @@ namespace DocumentsManager.WinApp.Controls
                 {
                     throw new Exception("El nombre debe contener almenos 3 letras");
                 }
+                fBL.AddFormat(newFormat,Guid.NewGuid());
                 MessageBox.Show("Se creo el formato: " + newFormat.Name + " correctamente.");
                 MainPanel.Controls.Clear();
                 UserControl manageFormatControl = new ManageFormat(MainPanel);
@@ -68,16 +69,29 @@ namespace DocumentsManager.WinApp.Controls
 
         private void buttonAddAStyle_Click(object sender, EventArgs e)
         {
-            StyleClass selectedStyle = listBoxPossibleStyles.SelectedItem as StyleClass;
-            listBoxPossibleStyles.Items.Remove(selectedStyle);
-            listBoxStylesToAdd.Items.Add(selectedStyle);
+            if (listBoxPossibleStyles.SelectedIndex != -1)
+            {
+                StyleClass selectedStyle = listBoxPossibleStyles.SelectedItem as StyleClass;
+                listBoxPossibleStyles.Items.Remove(selectedStyle);
+                listBoxStylesToAdd.Items.Add(selectedStyle);
+            }
+            else {
+                MessageBox.Show("Debes seleccionar un Estilo para realizar esta acción");
+            }
         }
 
         private void buttonDeleteStyle_Click(object sender, EventArgs e)
         {
-            StyleClass selectedStyle = listBoxStylesToAdd.SelectedItem as StyleClass;
+            if (listBoxStylesToAdd.SelectedIndex != -1)
+            {
+                StyleClass selectedStyle = listBoxStylesToAdd.SelectedItem as StyleClass;
             listBoxStylesToAdd.Items.Remove(selectedStyle);
             listBoxPossibleStyles.Items.Add(selectedStyle);
+            }
+            else
+            {
+                MessageBox.Show("Debes seleccionar un Estilo para realizar esta acción");
+            }
         }
     }
 }

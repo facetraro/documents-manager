@@ -38,5 +38,12 @@ namespace DocumentsManager.WinApp.Controls
             UserControl createFormatControl = new FormatCreator(MainPanel);
             MainPanel.Controls.Add(createFormatControl);
         }
+
+        private void buttonMaintainFormat_Click(object sender, EventArgs e)
+        {
+            MainPanel.Controls.Clear();
+            UserControl maintainFormatsControl = new MaintainFormats(MainPanel);
+            MainPanel.Controls.Add(maintainFormatsControl);
+        }
     }
 }

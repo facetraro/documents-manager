@@ -77,7 +77,7 @@ namespace DocumentsMangerEntities
             return validation;
         }
         public override string ToString() {
-            return Name;
+            return "Nombre: " + Name + ", cantidad de Atributos: " + Attributes.Count; 
         }
     }
 }

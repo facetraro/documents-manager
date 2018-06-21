@@ -38,20 +38,22 @@
             // 
             this.comboBox.FormattingEnabled = true;
             this.comboBox.Location = new System.Drawing.Point(72, 110);
-            this.comboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox.Name = "comboBox";
             this.comboBox.Size = new System.Drawing.Size(391, 24);
             this.comboBox.TabIndex = 0;
             // 
             // buttonNext
             // 
+            this.buttonNext.BackColor = System.Drawing.Color.ForestGreen;
+            this.buttonNext.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.buttonNext.Location = new System.Drawing.Point(431, 302);
-            this.buttonNext.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonNext.Margin = new System.Windows.Forms.Padding(4);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(100, 28);
             this.buttonNext.TabIndex = 1;
             this.buttonNext.Text = "Continuar";
-            this.buttonNext.UseVisualStyleBackColor = true;
+            this.buttonNext.UseVisualStyleBackColor = false;
             this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
             // label1
@@ -67,13 +69,15 @@
             // 
             // buttonVolver
             // 
+            this.buttonVolver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.buttonVolver.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.buttonVolver.Location = new System.Drawing.Point(20, 302);
             this.buttonVolver.Margin = new System.Windows.Forms.Padding(4);
             this.buttonVolver.Name = "buttonVolver";
             this.buttonVolver.Size = new System.Drawing.Size(100, 28);
             this.buttonVolver.TabIndex = 5;
             this.buttonVolver.Text = "Volver";
-            this.buttonVolver.UseVisualStyleBackColor = true;
+            this.buttonVolver.UseVisualStyleBackColor = false;
             this.buttonVolver.Click += new System.EventHandler(this.buttonVolver_Click);
             // 
             // SelectImportMode
@@ -84,7 +88,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.comboBox);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SelectImportMode";
             this.Size = new System.Drawing.Size(548, 348);
             this.ResumeLayout(false);

@@ -35,13 +35,15 @@
             // 
             // buttonDll
             // 
+            this.buttonDll.BackColor = System.Drawing.Color.ForestGreen;
+            this.buttonDll.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.buttonDll.Location = new System.Drawing.Point(444, 126);
             this.buttonDll.Margin = new System.Windows.Forms.Padding(4);
             this.buttonDll.Name = "buttonDll";
             this.buttonDll.Size = new System.Drawing.Size(144, 28);
             this.buttonDll.TabIndex = 0;
             this.buttonDll.Text = "Buscar DLL\'s";
-            this.buttonDll.UseVisualStyleBackColor = true;
+            this.buttonDll.UseVisualStyleBackColor = false;
             this.buttonDll.Click += new System.EventHandler(this.buttonDll_Click);
             // 
             // label1
@@ -57,13 +59,15 @@
             // 
             // buttonVolver
             // 
+            this.buttonVolver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.buttonVolver.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.buttonVolver.Location = new System.Drawing.Point(4, 126);
             this.buttonVolver.Margin = new System.Windows.Forms.Padding(4);
             this.buttonVolver.Name = "buttonVolver";
             this.buttonVolver.Size = new System.Drawing.Size(100, 28);
             this.buttonVolver.TabIndex = 4;
             this.buttonVolver.Text = "Volver";
-            this.buttonVolver.UseVisualStyleBackColor = true;
+            this.buttonVolver.UseVisualStyleBackColor = false;
             this.buttonVolver.Click += new System.EventHandler(this.buttonVolver_Click);
             // 
             // ImportMethods

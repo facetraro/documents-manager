@@ -34,24 +34,28 @@
             // 
             // buttonImport
             // 
-            this.buttonImport.Location = new System.Drawing.Point(484, 430);
-            this.buttonImport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonImport.BackColor = System.Drawing.Color.ForestGreen;
+            this.buttonImport.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonImport.Location = new System.Drawing.Point(479, 423);
+            this.buttonImport.Margin = new System.Windows.Forms.Padding(4);
             this.buttonImport.Name = "buttonImport";
-            this.buttonImport.Size = new System.Drawing.Size(100, 28);
+            this.buttonImport.Size = new System.Drawing.Size(105, 35);
             this.buttonImport.TabIndex = 0;
             this.buttonImport.Text = "Importar";
-            this.buttonImport.UseVisualStyleBackColor = true;
+            this.buttonImport.UseVisualStyleBackColor = false;
             this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
             // 
             // buttonVolver
             // 
-            this.buttonVolver.Location = new System.Drawing.Point(15, 430);
+            this.buttonVolver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.buttonVolver.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonVolver.Location = new System.Drawing.Point(15, 423);
             this.buttonVolver.Margin = new System.Windows.Forms.Padding(4);
             this.buttonVolver.Name = "buttonVolver";
-            this.buttonVolver.Size = new System.Drawing.Size(100, 28);
+            this.buttonVolver.Size = new System.Drawing.Size(106, 35);
             this.buttonVolver.TabIndex = 5;
             this.buttonVolver.Text = "Volver";
-            this.buttonVolver.UseVisualStyleBackColor = true;
+            this.buttonVolver.UseVisualStyleBackColor = false;
             this.buttonVolver.Click += new System.EventHandler(this.buttonVolver_Click);
             // 
             // ImportControl
@@ -60,7 +64,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.buttonVolver);
             this.Controls.Add(this.buttonImport);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ImportControl";
             this.Size = new System.Drawing.Size(604, 475);
             this.ResumeLayout(false);
