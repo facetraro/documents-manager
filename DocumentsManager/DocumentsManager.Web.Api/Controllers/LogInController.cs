@@ -1,6 +1,8 @@
-﻿using DocumentsManager.Exceptions;
+﻿using DocumentsManager.Dtos;
+using DocumentsManager.Exceptions;
 using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
+using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,8 @@ namespace DocumentsManager.Web.Api.Controllers
     public class LogInController : ApiController
     {
         private Proxy proxyAccess;
-        public LogInController() {
+        public LogInController()
+        {
             proxyAccess = new Proxy();
         }
         // GET: api/LogIn
@@ -29,12 +32,23 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/LogIn
-        public IHttpActionResult Post(string username,[FromBody]LogInModel model)
+        public IHttpActionResult Post(string username, [FromBody]LogInModel model)
         {
             try
             {
                 Guid token = proxyAccess.LogIn(username, model.Password);
-                return Ok(token);
+                LogInDto newLogIn = new LogInDto();
+                newLogIn.Id = token;
+                User userLogged = proxyAccess.GetUserByToken(token);
+                if (userLogged is AdminUser)
+                {
+                    newLogIn.Role = "Admin";
+                }
+                else
+                {
+                    newLogIn.Role = "Editor";
+                }
+                return Ok(newLogIn);
             }
             catch (LostConnectionWithDataBase exception)
             {

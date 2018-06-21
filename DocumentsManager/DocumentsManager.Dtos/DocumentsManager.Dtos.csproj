@@ -50,6 +50,7 @@
     <Compile Include="ParragraphDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyleClassDto.cs" />
+    <Compile Include="LogInDto.cs" />
     <Compile Include="UserDto.cs" />
   </ItemGroup>
   <ItemGroup>
