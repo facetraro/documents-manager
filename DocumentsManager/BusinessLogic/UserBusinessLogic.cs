@@ -236,8 +236,7 @@ namespace DocumentsManager.BusinessLogic
 
         public List<Document> GetDocumentsFromUser(User user, Guid tokenId)
         {
-            ModifyDocumentHistoryContext mContext = new ModifyDocumentHistoryContext();
-            return mContext.GetDocumentsFromUser(user);
+            return GetNotDeletedDocuments(user);
         }
         public bool AddFriend(Guid userId, Guid tokenId)
         {
@@ -360,13 +359,24 @@ namespace DocumentsManager.BusinessLogic
             throw new ObjectDoesNotExists(new Friendship());
         }
 
-        public List<Document> GetNotDeletedDocuments()
+        public List<Document> GetNotDeletedDocuments(User user=null)
         {
             List<Document> notDeletedDocuments = new List<Document>();
             DocumentContext dContext = new DocumentContext();
             ModifyDocumentHistoryContext historyContext = new ModifyDocumentHistoryContext();
             List<ModifyDocumentHistory> allHistories = historyContext.GetAllHistories();
-            foreach (Document doci in dContext.GetDocuments())
+            List<Document> allDocuments = new List<Document>();
+
+            if (user == null)
+            {
+                allDocuments = dContext.GetDocuments();
+            }
+            else
+            {
+                ModifyDocumentHistoryContext mContext = new ModifyDocumentHistoryContext();
+                allDocuments = mContext.GetDocumentsFromUser(user);
+            }
+            foreach (Document doci in allDocuments)
             {
                 bool documentWasDeleted = false;
                 foreach (var item in allHistories)

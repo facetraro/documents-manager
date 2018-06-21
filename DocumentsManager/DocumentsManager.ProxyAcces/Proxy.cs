@@ -44,7 +44,7 @@ namespace DocumentsManager.ProxyAcces
         {
             AccessControl(tokenId);
             ReviewControl(reviewToAdd, tokenId);
-            uBL.AddReview(reviewToAdd,tokenId);
+            uBL.AddReview(reviewToAdd, tokenId);
         }
 
         public bool UpdateADocument(Guid id, Document aDocument, Guid tokenId)
@@ -55,7 +55,6 @@ namespace DocumentsManager.ProxyAcces
         public List<Document> GetDocumentsFromUser(User user, Guid tokenId)
         {
             AccessControl(tokenId);
-            AreFriendsControl(user, tokenId);
             return uBL.GetDocumentsFromUser(user, tokenId);
         }
         public User GetUserById(Guid id)
@@ -92,7 +91,8 @@ namespace DocumentsManager.ProxyAcces
             AccessControl(tokenId);
             uBL.RejectRequest(userId, tokenId);
         }
-        public List<DocumentAverageDto> GetTopRankedDocuments(Guid tokenId) {
+        public List<DocumentAverageDto> GetTopRankedDocuments(Guid tokenId)
+        {
             AccessControl(tokenId);
             return uBL.GetTopRankedDocuments(tokenId);
         }
@@ -238,7 +238,7 @@ namespace DocumentsManager.ProxyAcces
         {
             AccessControl(tokenId);
             return fBL.DeleteFormat(id, tokenId);
-        }    
+        }
         #endregion
         #region styleBL
         public IEnumerable<StyleClass> GetAllStyleClasses(Guid tokenId)
@@ -323,7 +323,8 @@ namespace DocumentsManager.ProxyAcces
         }
         public void AreFriendsControl(User user, Guid tokenId)
         {
-            if (!uBL.AreFriends(user, uBL.GetUserByToken(tokenId)))
+            User loggedUser = uBL.GetUserByToken(tokenId);
+            if (user.Id != loggedUser.Id && !uBL.AreFriends(user, loggedUser))
             {
                 throw new NotFriendsException(user.Username);
             }
