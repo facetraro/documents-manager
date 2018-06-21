@@ -77,6 +77,32 @@ namespace DocumentsManager.BusinessLogic.Tests
         }
 
         [TestMethod]
+        public void IsNotStyleInDocumentsTest()
+        {
+            DocumentContext contextDocument = new DocumentContext();
+            DocumentContextTest testDocument = new DocumentContextTest();
+            Document document = testDocument.setUp(contextDocument);
+            DocumentBusinessLogic logic = new DocumentBusinessLogic();
+            Document fullDocument = logic.GetDocumentById(document.Id, Guid.NewGuid());
+            StyleClassBusinessLogic scBL = new StyleClassBusinessLogic();
+            Assert.IsFalse(scBL.IsStyleInDocuments(new StyleClass()));
+            TearDown();
+        }
+        [ExpectedException(typeof(StyleClassUsedInAnotherElement))]
+        [TestMethod]
+        public void IsStyleInDocumentsTest()
+        {
+            DocumentContext contextDocument = new DocumentContext();
+            DocumentContextTest testDocument = new DocumentContextTest();
+            Document document = testDocument.setUp(contextDocument);
+            DocumentBusinessLogic logic = new DocumentBusinessLogic();
+            Document fullDocument = logic.GetDocumentById(document.Id, Guid.NewGuid());
+            StyleClassBusinessLogic scBL = new StyleClassBusinessLogic();
+            scBL.IsStyleInDocuments(document.StyleClass);
+            TearDown();
+        }
+
+        [TestMethod]
         public void PrintDocumentTest()
         {
             DocumentBusinessLogic documentBL = new DocumentBusinessLogic();
