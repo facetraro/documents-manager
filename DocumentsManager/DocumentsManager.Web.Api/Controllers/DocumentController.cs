@@ -29,7 +29,7 @@ namespace DocumentsManager.Web.Api.Controllers
         [Route("Documents")]
         public IHttpActionResult Get(Guid token)
         {
-            IEnumerable<Document> documentsComplete = proxyAccess.GetAllDocuments(token);
+            IEnumerable<Document> documentsComplete = proxyAccess.GetDocumentsFromUser(proxyAccess.GetUserByToken(token),token);
             List<DocumentDto> documents = new List<DocumentDto>();
             foreach (var item in documentsComplete)
             {

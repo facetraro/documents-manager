@@ -109,6 +109,11 @@ namespace DocumentsManager.ProxyAcces
         {
             uBL.LogOut(token);
         }
+        public User GetUserByToken(Guid tokenId)
+        {
+            AccessControl(tokenId);
+            return uBL.GetUserByToken(tokenId);
+        }
         #endregion
         #region DocumentBL
         public IEnumerable<Document> GetAllDocuments(Guid tokenId)
@@ -233,7 +238,7 @@ namespace DocumentsManager.ProxyAcces
         {
             AccessControl(tokenId);
             return fBL.DeleteFormat(id, tokenId);
-        }
+        }    
         #endregion
         #region styleBL
         public IEnumerable<StyleClass> GetAllStyleClasses(Guid tokenId)
