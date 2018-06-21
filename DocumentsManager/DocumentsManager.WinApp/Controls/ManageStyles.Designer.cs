@@ -58,6 +58,7 @@
             this.buttonBack.TabIndex = 8;
             this.buttonBack.Text = "Volver";
             this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // buttonMaintainStyle
             // 

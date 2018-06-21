@@ -28,7 +28,16 @@ namespace DocumentsManager.WinApp.Controls
 
         private void buttonMaintainStyle_Click(object sender, EventArgs e)
         {
+            MainPanel.Controls.Clear();
+            UserControl manageFormatControl = new MaintainStyles(MainPanel);
+            MainPanel.Controls.Add(manageFormatControl);
+        }
 
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            MainPanel.Controls.Clear();
+            UserControl menuControl = new MainMenu(MainPanel);
+            MainPanel.Controls.Add(menuControl);
         }
     }
 }

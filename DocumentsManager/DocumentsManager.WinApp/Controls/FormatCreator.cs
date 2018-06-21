@@ -93,5 +93,30 @@ namespace DocumentsManager.WinApp.Controls
                 MessageBox.Show("Debes seleccionar un Estilo para realizar esta acción");
             }
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void labelFormatName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxFormatName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBoxStylesToAdd_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelTitle_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

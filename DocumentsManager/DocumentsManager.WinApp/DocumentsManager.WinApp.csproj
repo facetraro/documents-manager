@@ -95,6 +95,12 @@
     <Compile Include="Controls\MaintainFormats.Designer.cs">
       <DependentUpon>MaintainFormats.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MaintainStyles.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MaintainStyles.Designer.cs">
+      <DependentUpon>MaintainStyles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ManageFormat.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -112,6 +118,12 @@
     </Compile>
     <Compile Include="Controls\ModifyFormat.Designer.cs">
       <DependentUpon>ModifyFormat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModifyStyle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ModifyStyle.Designer.cs">
+      <DependentUpon>ModifyStyle.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\SelectImportMode.cs">
       <SubType>UserControl</SubType>
@@ -151,6 +163,9 @@
     <EmbeddedResource Include="Controls\MaintainFormats.resx">
       <DependentUpon>MaintainFormats.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MaintainStyles.resx">
+      <DependentUpon>MaintainStyles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ManageFormat.resx">
       <DependentUpon>ManageFormat.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ModifyFormat.resx">
       <DependentUpon>ModifyFormat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ModifyStyle.resx">
+      <DependentUpon>ModifyStyle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SelectImportMode.resx">
       <DependentUpon>SelectImportMode.cs</DependentUpon>

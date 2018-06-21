@@ -63,6 +63,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(472, 437);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // buttonDeleteStyle
             // 
@@ -105,6 +106,7 @@
             this.textBoxFormatName.Name = "textBoxFormatName";
             this.textBoxFormatName.Size = new System.Drawing.Size(153, 20);
             this.textBoxFormatName.TabIndex = 8;
+            this.textBoxFormatName.TextChanged += new System.EventHandler(this.textBoxFormatName_TextChanged);
             // 
             // buttonAddAStyle
             // 
@@ -130,6 +132,7 @@
             this.labelTitle.Size = new System.Drawing.Size(153, 24);
             this.labelTitle.TabIndex = 6;
             this.labelTitle.Text = "Agregar Formato";
+            this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
             // 
             // listBoxStylesToAdd
             // 
@@ -139,6 +142,7 @@
             this.listBoxStylesToAdd.Name = "listBoxStylesToAdd";
             this.listBoxStylesToAdd.Size = new System.Drawing.Size(233, 121);
             this.listBoxStylesToAdd.TabIndex = 5;
+            this.listBoxStylesToAdd.SelectedIndexChanged += new System.EventHandler(this.listBoxStylesToAdd_SelectedIndexChanged);
             // 
             // listBoxPossibleStyles
             // 
@@ -168,6 +172,7 @@
             this.labelFormatName.Size = new System.Drawing.Size(105, 13);
             this.labelFormatName.TabIndex = 2;
             this.labelFormatName.Text = "Nombre del Formato:";
+            this.labelFormatName.Click += new System.EventHandler(this.labelFormatName_Click);
             // 
             // buttonBack
             // 
