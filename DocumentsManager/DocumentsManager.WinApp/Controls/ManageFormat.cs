@@ -45,5 +45,10 @@ namespace DocumentsManager.WinApp.Controls
             UserControl maintainFormatsControl = new MaintainFormats(MainPanel);
             MainPanel.Controls.Add(maintainFormatsControl);
         }
+
+        private void labelTItle_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

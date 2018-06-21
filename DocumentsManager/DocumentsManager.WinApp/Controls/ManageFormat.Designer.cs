@@ -41,11 +41,13 @@
             // 
             this.labelTItle.AutoSize = true;
             this.labelTItle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.labelTItle.Location = new System.Drawing.Point(13, 16);
+            this.labelTItle.Location = new System.Drawing.Point(10, 13);
+            this.labelTItle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTItle.Name = "labelTItle";
-            this.labelTItle.Size = new System.Drawing.Size(249, 29);
+            this.labelTItle.Size = new System.Drawing.Size(193, 25);
             this.labelTItle.TabIndex = 0;
             this.labelTItle.Text = "Gestión de Formatos";
+            this.labelTItle.Click += new System.EventHandler(this.labelTItle_Click);
             // 
             // panel1
             // 
@@ -54,18 +56,20 @@
             this.panel1.Controls.Add(this.buttonBack);
             this.panel1.Controls.Add(this.buttonMaintainFormat);
             this.panel1.Controls.Add(this.labelTItle);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(293, 305);
+            this.panel1.Size = new System.Drawing.Size(220, 248);
             this.panel1.TabIndex = 1;
             // 
             // buttonImportFormats
             // 
             this.buttonImportFormats.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonImportFormats.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonImportFormats.Location = new System.Drawing.Point(69, 171);
+            this.buttonImportFormats.Location = new System.Drawing.Point(52, 139);
+            this.buttonImportFormats.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonImportFormats.Name = "buttonImportFormats";
-            this.buttonImportFormats.Size = new System.Drawing.Size(154, 37);
+            this.buttonImportFormats.Size = new System.Drawing.Size(116, 30);
             this.buttonImportFormats.TabIndex = 4;
             this.buttonImportFormats.Text = "Importar Formatos";
             this.buttonImportFormats.UseVisualStyleBackColor = false;
@@ -75,9 +79,10 @@
             // 
             this.buttonADdFormat.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonADdFormat.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonADdFormat.Location = new System.Drawing.Point(69, 85);
+            this.buttonADdFormat.Location = new System.Drawing.Point(52, 69);
+            this.buttonADdFormat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonADdFormat.Name = "buttonADdFormat";
-            this.buttonADdFormat.Size = new System.Drawing.Size(154, 37);
+            this.buttonADdFormat.Size = new System.Drawing.Size(116, 30);
             this.buttonADdFormat.TabIndex = 1;
             this.buttonADdFormat.Text = "Crear Formato";
             this.buttonADdFormat.UseVisualStyleBackColor = false;
@@ -87,9 +92,10 @@
             // 
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonBack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonBack.Location = new System.Drawing.Point(69, 232);
+            this.buttonBack.Location = new System.Drawing.Point(52, 188);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(154, 37);
+            this.buttonBack.Size = new System.Drawing.Size(116, 30);
             this.buttonBack.TabIndex = 3;
             this.buttonBack.Text = "Volver";
             this.buttonBack.UseVisualStyleBackColor = false;
@@ -99,9 +105,10 @@
             // 
             this.buttonMaintainFormat.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonMaintainFormat.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonMaintainFormat.Location = new System.Drawing.Point(69, 128);
+            this.buttonMaintainFormat.Location = new System.Drawing.Point(52, 104);
+            this.buttonMaintainFormat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonMaintainFormat.Name = "buttonMaintainFormat";
-            this.buttonMaintainFormat.Size = new System.Drawing.Size(154, 37);
+            this.buttonMaintainFormat.Size = new System.Drawing.Size(116, 30);
             this.buttonMaintainFormat.TabIndex = 2;
             this.buttonMaintainFormat.Text = "Mantener Formatos";
             this.buttonMaintainFormat.UseVisualStyleBackColor = false;
@@ -109,11 +116,12 @@
             // 
             // ManageFormat
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ManageFormat";
-            this.Size = new System.Drawing.Size(299, 310);
+            this.Size = new System.Drawing.Size(224, 252);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

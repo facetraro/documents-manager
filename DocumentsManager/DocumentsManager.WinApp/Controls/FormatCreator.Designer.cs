@@ -59,8 +59,9 @@
             this.panel1.Controls.Add(this.buttonBack);
             this.panel1.Controls.Add(this.buttonCreateFormat);
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(630, 538);
+            this.panel1.Size = new System.Drawing.Size(472, 437);
             this.panel1.TabIndex = 0;
             // 
             // buttonDeleteStyle
@@ -68,9 +69,10 @@
             this.buttonDeleteStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonDeleteStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.buttonDeleteStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonDeleteStyle.Location = new System.Drawing.Point(227, 280);
+            this.buttonDeleteStyle.Location = new System.Drawing.Point(170, 228);
+            this.buttonDeleteStyle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonDeleteStyle.Name = "buttonDeleteStyle";
-            this.buttonDeleteStyle.Size = new System.Drawing.Size(61, 44);
+            this.buttonDeleteStyle.Size = new System.Drawing.Size(46, 36);
             this.buttonDeleteStyle.TabIndex = 11;
             this.buttonDeleteStyle.Text = "▲";
             this.buttonDeleteStyle.UseVisualStyleBackColor = false;
@@ -79,26 +81,29 @@
             // labelStylesToAdd2
             // 
             this.labelStylesToAdd2.AutoSize = true;
-            this.labelStylesToAdd2.Location = new System.Drawing.Point(48, 201);
+            this.labelStylesToAdd2.Location = new System.Drawing.Point(36, 163);
+            this.labelStylesToAdd2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelStylesToAdd2.Name = "labelStylesToAdd2";
-            this.labelStylesToAdd2.Size = new System.Drawing.Size(74, 17);
+            this.labelStylesToAdd2.Size = new System.Drawing.Size(55, 13);
             this.labelStylesToAdd2.TabIndex = 10;
             this.labelStylesToAdd2.Text = "a agregar:";
             // 
             // labelAddedStyles
             // 
             this.labelAddedStyles.AutoSize = true;
-            this.labelAddedStyles.Location = new System.Drawing.Point(29, 381);
+            this.labelAddedStyles.Location = new System.Drawing.Point(22, 310);
+            this.labelAddedStyles.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAddedStyles.Name = "labelAddedStyles";
-            this.labelAddedStyles.Size = new System.Drawing.Size(125, 17);
+            this.labelAddedStyles.Size = new System.Drawing.Size(93, 13);
             this.labelAddedStyles.TabIndex = 9;
             this.labelAddedStyles.Text = "Estilos agregados:";
             // 
             // textBoxFormatName
             // 
-            this.textBoxFormatName.Location = new System.Drawing.Point(227, 75);
+            this.textBoxFormatName.Location = new System.Drawing.Point(170, 61);
+            this.textBoxFormatName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxFormatName.Name = "textBoxFormatName";
-            this.textBoxFormatName.Size = new System.Drawing.Size(203, 22);
+            this.textBoxFormatName.Size = new System.Drawing.Size(153, 20);
             this.textBoxFormatName.TabIndex = 8;
             // 
             // buttonAddAStyle
@@ -106,9 +111,10 @@
             this.buttonAddAStyle.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonAddAStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.buttonAddAStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonAddAStyle.Location = new System.Drawing.Point(386, 280);
+            this.buttonAddAStyle.Location = new System.Drawing.Point(290, 228);
+            this.buttonAddAStyle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonAddAStyle.Name = "buttonAddAStyle";
-            this.buttonAddAStyle.Size = new System.Drawing.Size(62, 44);
+            this.buttonAddAStyle.Size = new System.Drawing.Size(46, 36);
             this.buttonAddAStyle.TabIndex = 7;
             this.buttonAddAStyle.Text = "▼";
             this.buttonAddAStyle.UseVisualStyleBackColor = false;
@@ -118,45 +124,48 @@
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.labelTitle.Location = new System.Drawing.Point(222, 24);
+            this.labelTitle.Location = new System.Drawing.Point(166, 20);
+            this.labelTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(208, 29);
+            this.labelTitle.Size = new System.Drawing.Size(153, 24);
             this.labelTitle.TabIndex = 6;
-            this.labelTitle.Text = "Agreagar Formato";
+            this.labelTitle.Text = "Agregar Formato";
             // 
             // listBoxStylesToAdd
             // 
             this.listBoxStylesToAdd.FormattingEnabled = true;
-            this.listBoxStylesToAdd.ItemHeight = 16;
-            this.listBoxStylesToAdd.Location = new System.Drawing.Point(178, 330);
+            this.listBoxStylesToAdd.Location = new System.Drawing.Point(134, 268);
+            this.listBoxStylesToAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBoxStylesToAdd.Name = "listBoxStylesToAdd";
-            this.listBoxStylesToAdd.Size = new System.Drawing.Size(309, 148);
+            this.listBoxStylesToAdd.Size = new System.Drawing.Size(233, 121);
             this.listBoxStylesToAdd.TabIndex = 5;
             // 
             // listBoxPossibleStyles
             // 
             this.listBoxPossibleStyles.FormattingEnabled = true;
-            this.listBoxPossibleStyles.ItemHeight = 16;
-            this.listBoxPossibleStyles.Location = new System.Drawing.Point(178, 125);
+            this.listBoxPossibleStyles.Location = new System.Drawing.Point(134, 102);
+            this.listBoxPossibleStyles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBoxPossibleStyles.Name = "listBoxPossibleStyles";
-            this.listBoxPossibleStyles.Size = new System.Drawing.Size(309, 148);
+            this.listBoxPossibleStyles.Size = new System.Drawing.Size(233, 121);
             this.listBoxPossibleStyles.TabIndex = 4;
             // 
             // labelStylesToAdd1
             // 
             this.labelStylesToAdd1.AutoSize = true;
-            this.labelStylesToAdd1.Location = new System.Drawing.Point(29, 184);
+            this.labelStylesToAdd1.Location = new System.Drawing.Point(22, 150);
+            this.labelStylesToAdd1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelStylesToAdd1.Name = "labelStylesToAdd1";
-            this.labelStylesToAdd1.Size = new System.Drawing.Size(121, 17);
+            this.labelStylesToAdd1.Size = new System.Drawing.Size(92, 13);
             this.labelStylesToAdd1.TabIndex = 3;
             this.labelStylesToAdd1.Text = "Seleccione estilos";
             // 
             // labelFormatName
             // 
             this.labelFormatName.AutoSize = true;
-            this.labelFormatName.Location = new System.Drawing.Point(29, 78);
+            this.labelFormatName.Location = new System.Drawing.Point(22, 63);
+            this.labelFormatName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelFormatName.Name = "labelFormatName";
-            this.labelFormatName.Size = new System.Drawing.Size(141, 17);
+            this.labelFormatName.Size = new System.Drawing.Size(105, 13);
             this.labelFormatName.TabIndex = 2;
             this.labelFormatName.Text = "Nombre del Formato:";
             // 
@@ -164,9 +173,10 @@
             // 
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonBack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonBack.Location = new System.Drawing.Point(14, 500);
+            this.buttonBack.Location = new System.Drawing.Point(10, 406);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(81, 35);
+            this.buttonBack.Size = new System.Drawing.Size(61, 28);
             this.buttonBack.TabIndex = 1;
             this.buttonBack.Text = "Volver";
             this.buttonBack.UseVisualStyleBackColor = false;
@@ -176,9 +186,10 @@
             // 
             this.buttonCreateFormat.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonCreateFormat.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonCreateFormat.Location = new System.Drawing.Point(536, 501);
+            this.buttonCreateFormat.Location = new System.Drawing.Point(402, 407);
+            this.buttonCreateFormat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonCreateFormat.Name = "buttonCreateFormat";
-            this.buttonCreateFormat.Size = new System.Drawing.Size(84, 35);
+            this.buttonCreateFormat.Size = new System.Drawing.Size(63, 28);
             this.buttonCreateFormat.TabIndex = 0;
             this.buttonCreateFormat.Text = "Crear";
             this.buttonCreateFormat.UseVisualStyleBackColor = false;
@@ -186,11 +197,12 @@
             // 
             // FormatCreator
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormatCreator";
-            this.Size = new System.Drawing.Size(631, 542);
+            this.Size = new System.Drawing.Size(473, 440);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

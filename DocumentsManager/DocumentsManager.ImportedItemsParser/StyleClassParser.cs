@@ -188,7 +188,7 @@ namespace DocumentsManager.ImportedItemsParser
         {
             foreach (StyleAttribute item in styleClass.Attributes)
             {
-                string newAttribute = item.ToString();
+                string newAttribute = item.GetStringParse();
                 newStyleClass.StyleAttributes.Add(newAttribute);
             }
         }

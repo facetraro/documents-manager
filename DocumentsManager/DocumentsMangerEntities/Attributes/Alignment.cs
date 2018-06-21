@@ -43,10 +43,10 @@ namespace DocumentsMangerEntities
         {
             return String.Empty;
         }
-        public override string ToString()
+  
+        public override string GetStringParse()
         {
-            return base.ToString()+"###"+this.TextAlignment.GetStringParser(); 
-        }
-
+            return base.ToString() + "###" + this.TextAlignment.GetStringParser();
+        } 
     }
 }

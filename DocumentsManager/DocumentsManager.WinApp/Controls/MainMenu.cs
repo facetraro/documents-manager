@@ -37,5 +37,12 @@ namespace DocumentsManager.WinApp.Controls
             UserControl manageFormatControl = new ManageFormat(MainPanel);
             MainPanel.Controls.Add(manageFormatControl);
         }
+
+        private void buttonManageStyles_Click(object sender, EventArgs e)
+        {
+            MainPanel.Controls.Clear();
+            UserControl manageFormatControl = new ManageStyles(MainPanel);
+            MainPanel.Controls.Add(manageFormatControl);
+        }
     }
 }
