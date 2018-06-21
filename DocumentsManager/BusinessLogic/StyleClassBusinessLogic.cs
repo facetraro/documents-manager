@@ -94,7 +94,7 @@ namespace DocumentsManager.BusinessLogic
                 father = context.GetById(style.Based.Id);
                 return IsThisStyleInTheChainOfBased(father, firstStyle);
             }
-            return false;  
+            return false;
         }
 
         public Guid AddStyle(StyleClass newStyle, Guid tokenId)
@@ -121,7 +121,52 @@ namespace DocumentsManager.BusinessLogic
             return styles;
         }
 
+        public bool CanDeleteStyle(StyleClass toDelete)
+        {
+            StyleClassContextHandler context = new StyleClassContextHandler();
+            return !context.AreStyleBasedOnHim(toDelete);
+        }
 
+        public bool IsStyleInDocument(StyleClass style, Document aDocument)
+        {
+            if (aDocument.StyleClass.Equals(style))
+            {
+                throw new StyleClassUsedInAnotherElement("Documento");
+            }
+            if (aDocument.Footer.StyleClass.Equals(style))
+            {
+                throw new StyleClassUsedInAnotherElement("Footer");
+            }
+            if (aDocument.Header.StyleClass.Equals(style))
+            {
+                throw new StyleClassUsedInAnotherElement("Header");
+            }
+            foreach (var item in aDocument.Parragraphs)
+            {
+                if (item.StyleClass.Equals(style))
+                {
+                    throw new StyleClassUsedInAnotherElement("Parrafo");
+                }
+                foreach (var specificText in item.Texts)
+                {
+                    if (specificText.StyleClass.Equals(style))
+                    {
+                        throw new StyleClassUsedInAnotherElement("Texto de Parrafo");
+                    }
+                }
+            }
+            return false;
+        } 
+
+        public bool IsStyleInDocuments(StyleClass style)
+        {
+            DocumentContext documentContext = new DocumentContext();
+            foreach (var item in documentContext.GetDocuments())
+            {
+                IsStyleInDocument(style, item);
+            }
+            return false;
+        }
 
         public bool DeleteStyle(Guid id, Guid tokenId)
         {

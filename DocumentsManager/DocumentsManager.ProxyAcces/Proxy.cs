@@ -262,12 +262,16 @@ namespace DocumentsManager.ProxyAcces
         public bool DeleteStyle(Guid id, Guid tokenId)
         {
             AccessControl(tokenId);
+            StyleClass styleToDelete = sBL.GetStyleById(id, tokenId);
+            ValidateDontHaveChilds(styleToDelete);
+            sBL.IsStyleInDocuments(styleToDelete);
             return sBL.DeleteStyle(id, tokenId);
         }
 
         public bool UpdateStyle(Guid id, StyleClass newStyle, Guid tokenId)
         {
             AccessControl(tokenId);
+            ValidateChainOfBased(newStyle);
             return sBL.UpdateStyle(id, newStyle, tokenId);
         }
         #endregion
@@ -284,6 +288,23 @@ namespace DocumentsManager.ProxyAcces
         }
         #endregion
         #region Excpetions
+        public void ValidateChainOfBased(StyleClass newStyle)
+        {
+            if (newStyle.Based != null)
+            {
+                if (sBL.IsThisStyleInTheChainOfBased(newStyle.Based, newStyle))
+                {
+                    throw new StyleBasedCicleDetected();
+                }
+            }
+        }
+        public void ValidateDontHaveChilds(StyleClass style)
+        {
+            if (sBL.CanDeleteStyle(style))
+            {
+                throw new StyleHasStylesBasedOnHim();
+            }
+        }
         public void AccessControl(Guid tokenId)
         {
             User responsibleUser = uBL.GetUserByToken(tokenId);
@@ -321,6 +342,7 @@ namespace DocumentsManager.ProxyAcces
             }
 
         }
+      
         public void AreFriendsControl(User user, Guid tokenId)
         {
             User loggedUser = uBL.GetUserByToken(tokenId);

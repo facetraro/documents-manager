@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DocumentsManager.Exceptions
 {
-    public class NotAdminOrDoesntExistsException : Exception
+    public class StyleHasStylesBasedOnHim : Exception
     {
-        static string message = "Esta aplicación es estrictamente para usuarios administradores registrados en el sistema";
-        public NotAdminOrDoesntExistsException() : base(message) { }
+        static string message = "Esta Clase Estilo tiene otros Estilos basados en él.";
+        public StyleHasStylesBasedOnHim() : base(message) { }
     }
 }

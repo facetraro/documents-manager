@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DocumentsManager.Exceptions
 {
-    public class InvalidCredentialException : Exception
+    public class StyleClassUsedInAnotherElement : Exception
     {
-        static string message = "La contraseña ingresada no es correcta";
-        public InvalidCredentialException() : base(message)
+        static string message = "StyleClass esta contenido en elemento ";
+        public StyleClassUsedInAnotherElement(string element) : base("StyleClass esta contenido en elemento "+ element)
         {
 
         }

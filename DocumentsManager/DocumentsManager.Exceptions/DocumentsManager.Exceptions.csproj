@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StyleClassUsedInAnotherElement.cs" />
+    <Compile Include="StyleHasStylesBasedOnHim.cs" />
+    <Compile Include="StyleBasedCicleDetected.cs" />
     <Compile Include="AlreadyReviewDocument.cs" />
     <Compile Include="AddingYourselfException.cs" />
     <Compile Include="AlreadyFriendsException.cs" />

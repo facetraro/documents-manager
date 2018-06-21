@@ -45,7 +45,7 @@ namespace DocumentsManager.Data.DA.Handler
                 totalStyles = GetLazy().Count;
             }
         }
-        private bool AreStyleBasedOnHim(StyleClass style)
+        public bool AreStyleBasedOnHim(StyleClass style)
         {
             foreach (var item in GetLazy())
             {
@@ -112,7 +112,6 @@ namespace DocumentsManager.Data.DA.Handler
                 StyleClass style = unitOfWork.StyleClassRepository.GetByID(id);
                 db.Styles.Include("Attributes").ToList();
                 db.Styles.Include("Formats").ToList();
-               // List<StyleClass> something = db.Styles.Include(x => x.Based).ToList();
                 return style;
             }
         }
