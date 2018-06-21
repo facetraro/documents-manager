@@ -170,7 +170,10 @@ namespace DocumentsManager.BusinessLogic
             Format formatToDelete = fBL.GetFormatByID(id,Guid.NewGuid());
             foreach (Document doci in dBL.GetAllDocuments(Guid.NewGuid()))
             {
-                if (doci.Format.Equals(formatToDelete)) canDelete = false;
+                if (doci.Format.Equals(formatToDelete))
+                {
+                    canDelete = false;
+                }
             }
             return canDelete;
         }
