@@ -36,6 +36,11 @@ import { ChartsModule } from 'ng2-charts';
 import { NewDocumentComponent } from './new-document/new-document.component';
 import { ModifyDocumentComponent } from './modify-document/modify-document.component';
 import { PrintDocumentComponent } from './print-document/print-document.component';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { ViewRequestsComponent } from './view-requests/view-requests.component';
+import { ListFriendsComponent } from './list-friends/list-friends.component';
+import { ViewFriendProfileComponent } from './view-friend-profile/view-friend-profile.component';
+import { ReviewDocumentComponent } from './review-document/review-document.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +66,11 @@ import { PrintDocumentComponent } from './print-document/print-document.componen
     NewDocumentComponent,
     ModifyDocumentComponent,
     PrintDocumentComponent,
+    AllUsersComponent,
+    ViewRequestsComponent,
+    ListFriendsComponent,
+    ViewFriendProfileComponent,
+    ReviewDocumentComponent,
   ],
   imports: [
     HttpModule,

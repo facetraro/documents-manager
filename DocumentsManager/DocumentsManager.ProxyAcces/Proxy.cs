@@ -43,6 +43,7 @@ namespace DocumentsManager.ProxyAcces
         public void AddReview(Review reviewToAdd, Guid tokenId)
         {
             AccessControl(tokenId);
+            ReviewControl(reviewToAdd, tokenId);
             uBL.AddReview(reviewToAdd,tokenId);
         }
 
@@ -322,7 +323,14 @@ namespace DocumentsManager.ProxyAcces
                 throw new NotFriendsException(user.Username);
             }
         }
-       
+        public void ReviewControl(Review reviewToAdd, Guid tokenId)
+        {
+            if (!uBL.IsHisFirstReviewToDocument(reviewToAdd, tokenId))
+            {
+                throw new AlreadyReviewDocument();
+            }
+        }
+
         #endregion
     }
 }

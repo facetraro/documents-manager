@@ -1,0 +1,23 @@
+<div align="center">
+    <hr>
+      <h2>Añadir Reseña</h2>
+      <label>Comentario:
+        <input [(ngModel)]="review.feedback" placeholder="comentario">
+      </label>
+      <br>
+      <br>
+      <label>
+      Puntaje:
+      <select [(ngModel)]=" review.rating">
+          <option *ngFor="let c of reviewValues" [ngValue]="c.id">{{c.name}}</option>
+      </select>
+      </label>
+      <br>
+      <br>
+      <div align="center">
+          <button (click)="addReview()">
+                  Añadir Reseña
+          </button>
+      </div>
+      <app-go-home></app-go-home>
+  </div>

@@ -1217,5 +1217,57 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsTrue(result.Contains(contained2));
             TearDown();
         }
+        [TestMethod]
+        public void FirstReviewToDocumentTest()
+        {
+            TearDown();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Document docAdded = AddADocumentToDB();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            Guid token = uBL.LogIn(userReviewer.Username, userReviewer.Password);
+            Review review = new Review
+            {
+                Commentator = new EditorUser(),
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 5
+            };
+            Assert.IsTrue(uBL.IsHisFirstReviewToDocument(review, token));
+            TearDown();
+        }
+        [TestMethod]
+        public void AlreadyReviewedDocumentTest()
+        {
+            TearDown();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Document docAdded = AddADocumentToDB();
+            UserBusinessLogic uBL = new UserBusinessLogic();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            AdminUser userReviewer = EntitiesExampleInstances.TestAdminUser();
+            userReviewer.Username = "reviewer";
+            userReviewer.Email = "reviewer@reviewer";
+            aBL.AddAdmin(userReviewer, Guid.NewGuid());
+            ReviewContext rContext = new ReviewContext();
+            DocumentBusinessLogicTest blTest = new DocumentBusinessLogicTest();
+            Guid token = uBL.LogIn(userReviewer.Username, userReviewer.Password);
+            Review review = new Review
+            {
+                Commentator = new EditorUser(),
+                Commented = dBL.GetDocumentById(docAdded.Id, Guid.NewGuid()),
+                FeedBack = "a certain review",
+                Id = Guid.NewGuid(),
+                Rating = 5
+            };
+            uBL.AddReview(review, token);
+            Assert.IsFalse(uBL.IsHisFirstReviewToDocument(review, token));
+            TearDown();
+        }  
     }
 }

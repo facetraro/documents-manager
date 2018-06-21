@@ -34,9 +34,13 @@ export class PrintDocumentComponent implements OnInit {
   showErrorMessage(error:any){
     alert(error);
   }
-
+  loadDocumentDiv(htmlDocument : string){
+    var div = document.createElement('div');
+    div.innerHTML = htmlDocument;
+    document.getElementById("documentDiv").appendChild(div);
+  }
   loadDocument(token: string , id:string){
-    this.documentService.printDocument(token, id).subscribe(response => this.documentInHTML=response), 
+    this.documentService.printDocument(token, id).subscribe(response => this.loadDocumentDiv(response)), 
       error => this.showErrorMessage(error);
   }
 }

@@ -11,11 +11,21 @@ import { DocumentModel } from './document-model';
   providedIn: 'root'
 })
 export class DocumentService {
- 
+
+
   constructor(
     private httpService: Http) { 
     }
     specificError:MessageError;
+
+    getDocumentsByUser(token : string, id : string): Observable<DocumentModel[]> {
+      let apiUrl= new Url;
+      let url = apiUrl.globalUrl+"/api/UserDocuments/?userId="+id+"&token="+token;
+      return this.httpService.get(url)
+      .map((response: Response) => <DocumentModel[]> response.json())
+      .catch(this.handleError);
+    }
+   
 
   getAllDocuments(token : string) : Observable<DocumentModel[]> {
     let apiUrl= new Url;

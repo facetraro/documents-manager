@@ -305,11 +305,11 @@ namespace DocumentsManager.BusinessLogic
                 {
                     if (relationi.Request.Equals(responsibleUser))
                     {
-                        friends.Add(relationi.Request);
+                        friends.Add(relationi.Requested);
                     }
                     else
                     {
-                        friends.Add(relationi.Requested);
+                        friends.Add(relationi.Request);
                     }
                 }
             }
@@ -387,6 +387,21 @@ namespace DocumentsManager.BusinessLogic
             reviewToAdd.Id = Guid.NewGuid();
             ReviewContext rContext = new ReviewContext();
             rContext.Add(reviewToAdd);
+        }
+        public bool IsHisFirstReviewToDocument(Review reviewToAdd, Guid tokenId)
+        {
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            reviewToAdd.Commentator = GetUserByToken(tokenId);
+            ReviewContext rContext = new ReviewContext();
+            List<Review> reviewsDoci = rContext.GetReviewsFromDocument(reviewToAdd.Commented.Id);
+            foreach (Review revi in reviewsDoci)
+            {
+                if (revi.Commentator.Id == reviewToAdd.Commentator.Id)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

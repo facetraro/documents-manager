@@ -19,8 +19,11 @@ import { ViewChartComponent } from './view-chart/view-chart.component';
 import { NewDocumentComponent } from './new-document/new-document.component';
 import { ModifyDocumentComponent } from './modify-document/modify-document.component';
 import { PrintDocumentComponent } from './print-document/print-document.component';
-
-
+import { AllUsersComponent } from './all-users/all-users.component';
+import { ViewRequestsComponent } from './view-requests/view-requests.component';
+import { ListFriendsComponent } from './list-friends/list-friends.component';
+import { ViewFriendProfileComponent } from './view-friend-profile/view-friend-profile.component';
+import { ReviewDocumentComponent } from './review-document/review-document.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -43,6 +46,11 @@ const routes: Routes = [
   { path: 'newDocument', component: NewDocumentComponent },
   { path: 'modifyDocument', component: ModifyDocumentComponent },
   { path: 'printDocument', component: PrintDocumentComponent },
+  { path: 'users', component: AllUsersComponent },
+  { path: 'friendRequests', component: ViewRequestsComponent },
+  { path: 'friends', component: ListFriendsComponent },
+  { path: 'profile', component: ViewFriendProfileComponent },
+  { path: 'reviewDocument', component: ReviewDocumentComponent },
 ];
 
 @NgModule({

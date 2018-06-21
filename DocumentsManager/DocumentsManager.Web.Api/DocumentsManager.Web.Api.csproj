@@ -184,7 +184,6 @@
     <Compile Include="Controllers\ModifiedChartController.cs" />
     <Compile Include="Controllers\PrintDocumentController.cs" />
     <Compile Include="Controllers\RankDocumentsController.cs" />
-    <Compile Include="Controllers\ReviewModel.cs" />
     <Compile Include="Controllers\StyleClassController.cs" />
     <Compile Include="Controllers\UserDocumentsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -198,6 +197,7 @@
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\EditorModel.cs" />
     <Compile Include="Models\ParragraphModel.cs" />
+    <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\StyleClassModel.cs" />
     <Compile Include="Models\TextModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

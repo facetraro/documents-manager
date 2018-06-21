@@ -1,0 +1,37 @@
+<div>
+    <!--Tabla de mascotas -->
+    <div class='table-responsive'>
+        <div style="overflow-x:auto;">
+            <div align="center" class='table-responsive' *ngIf= 'users.length==0'>
+                <p>No tiene amigos</p>
+            </div>
+            <table class='table' *ngIf='users && users.length'>
+                <!--Cabezal de la tabla -->
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Usuario</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <!--Cuerpo de la tabla-->
+                <tbody>
+                    <tr *ngFor='let aFullUserData of users'  >
+                        <td>{{aFullUserData.name | uppercase}}</td>
+                        <td>{{aFullUserData.surname }}</td>
+                        <td>{{aFullUserData.username | lowercase }}</td>
+                        <td>{{aFullUserData.email | lowercase}}</td>
+                        <td>
+                            <button (click)="viewProfile(aFullUserData.id,aFullUserData.username)">
+                                Ver Perfil
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <app-go-home></app-go-home>
+</div>
