@@ -76,5 +76,8 @@ namespace DocumentsMangerEntities
             }
             return validation;
         }
+        public override string ToString() {
+            return Name;
+        }
     }
 }

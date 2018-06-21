@@ -34,16 +34,18 @@
             // mainPanel
             // 
             this.mainPanel.Location = new System.Drawing.Point(0, 2);
+            this.mainPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(556, 389);
+            this.mainPanel.Size = new System.Drawing.Size(753, 569);
             this.mainPanel.TabIndex = 0;
             // 
             // DocumentsManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 391);
+            this.ClientSize = new System.Drawing.Size(745, 574);
             this.Controls.Add(this.mainPanel);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "DocumentsManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Documents Manager";
