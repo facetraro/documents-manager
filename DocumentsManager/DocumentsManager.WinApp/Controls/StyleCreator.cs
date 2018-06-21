@@ -32,6 +32,12 @@ namespace DocumentsManager.WinApp.Controls
             comboBox.Items.Add(new Underline());
             comboBox.Items.Add(new Bold());
             comboBox.Items.Add(new Italics());
+            StyleClassBusinessLogic scBL = new StyleClassBusinessLogic();
+            IEnumerable<StyleClass> styles = scBL.GetAllStyleClasses(new Guid());
+            foreach (var item in styles)
+            {
+                comboBoxBasedOn.Items.Add(item);
+            }
         }
         private void LoadTextAlignment()
         {
@@ -93,6 +99,10 @@ namespace DocumentsManager.WinApp.Controls
             {
                 StyleClassBusinessLogic scBL = new StyleClassBusinessLogic();
                 StyleClass newStyle = new StyleClass();
+                if (comboBoxBasedOn.SelectedIndex != -1)
+                {
+                    newStyle.Based = (StyleClass) comboBoxBasedOn.SelectedItem;
+                }
                 newStyle.Name = textBoxStyleName.Text;
                 foreach (StyleAttribute item in listBoxAttributesToAdd.Items)
                 {
@@ -107,7 +117,7 @@ namespace DocumentsManager.WinApp.Controls
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                }    
+                }
             }
             else
             {
@@ -198,6 +208,11 @@ namespace DocumentsManager.WinApp.Controls
         private void buttonBack_Click(object sender, EventArgs e)
         {
             GoBack();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            comboBoxBasedOn.SelectedIndex = -1;
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DocumentsManager.BusinessLogic;
 using DocumentsMangerEntities;
+using DocumentsManager.ProxyAcces;
 
 namespace DocumentsManager.WinApp.Controls
 {
@@ -33,6 +34,17 @@ namespace DocumentsManager.WinApp.Controls
             {
                 listBoxAttributesToAdd.Items.Add(item);
             }
+            if (styleClassToEdit.Based != null)
+            {
+                for (int i = 0; i < comboBoxBasedOn.Items.Count; i++)
+                {
+                    StyleClass aStyle = (StyleClass)comboBoxBasedOn.Items[i];
+                    if (aStyle.Id.Equals(styleClassToEdit.Based.Id))
+                    {
+                        comboBoxBasedOn.SelectedIndex = i;
+                    }
+                }
+            }
         }
 
         private void LoadAllStyleAttributesToComboBox()
@@ -45,6 +57,15 @@ namespace DocumentsManager.WinApp.Controls
             comboBox.Items.Add(new Underline());
             comboBox.Items.Add(new Bold());
             comboBox.Items.Add(new Italics());
+            StyleClassBusinessLogic scBL = new StyleClassBusinessLogic();
+            IEnumerable<StyleClass> styles = scBL.GetAllStyleClasses(new Guid());
+            foreach (var item in styles)
+            {
+                if (!item.Id.Equals(Id))
+                {
+                    comboBoxBasedOn.Items.Add(item);
+                }
+            }
         }
         private void ClearValuesComponents()
         {
@@ -58,6 +79,10 @@ namespace DocumentsManager.WinApp.Controls
             {
                 StyleClassBusinessLogic scBL = new StyleClassBusinessLogic();
                 StyleClass newStyle = new StyleClass();
+                if (comboBoxBasedOn.SelectedIndex != -1)
+                {
+                    newStyle.Based = (StyleClass)comboBoxBasedOn.SelectedItem;
+                }
                 newStyle.Id = Id;
                 newStyle.Name = textBoxStyleName.Text;
                 foreach (StyleAttribute item in listBoxAttributesToAdd.Items)
@@ -66,7 +91,8 @@ namespace DocumentsManager.WinApp.Controls
                 }
                 try
                 {
-                    scBL.UpdateStyle(Id, newStyle, new Guid());
+                    Proxy proxy = new Proxy();
+                    proxy.UpdateStyle(Id, newStyle, new Guid(),false);
                     MessageBox.Show("Estilo Modificado correctamente");
                     GoBack();
                 }
@@ -210,6 +236,11 @@ namespace DocumentsManager.WinApp.Controls
             {
                 numericUpDown.Visible = true;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            comboBoxBasedOn.SelectedIndex = -1;
         }
     }
 }

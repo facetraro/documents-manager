@@ -20,5 +20,15 @@ namespace DocumentsManager.WinApp
             UserControl mainMenu  = new LoginControl(mainPanel);
             mainPanel.Controls.Add(mainMenu);
         }
+
+        private void toolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
+
+        private void jkjikbToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
     }
 }

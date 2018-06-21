@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DocumentsManager.BusinessLogic;
 using DocumentsMangerEntities;
+using DocumentsManager.ProxyAcces;
 
 namespace DocumentsManager.WinApp.Controls
 {
@@ -67,7 +68,8 @@ namespace DocumentsManager.WinApp.Controls
                 try
                 {
                     StyleClass style = (StyleClass)listBoxStyles.SelectedItem;
-                    scBL.DeleteStyle(style.Id, new Guid());
+                    Proxy proxy = new Proxy();
+                    proxy.DeleteStyle(style.Id, new Guid(), false);
                     MessageBox.Show("Estilo eliminado correctamente");
                     GoBack();
                 }

@@ -124,7 +124,7 @@ namespace DocumentsManager.BusinessLogic
         public bool CanDeleteStyle(StyleClass toDelete)
         {
             StyleClassContextHandler context = new StyleClassContextHandler();
-            return !context.AreStyleBasedOnHim(toDelete);
+            return context.AreStyleBasedOnHim(toDelete);
         }
 
         public bool IsStyleInDocument(StyleClass style, Document aDocument)

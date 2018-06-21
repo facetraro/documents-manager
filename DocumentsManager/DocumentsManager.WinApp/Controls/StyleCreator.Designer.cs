@@ -42,6 +42,9 @@
             this.labelFormatName = new System.Windows.Forms.Label();
             this.buttonBack = new System.Windows.Forms.Button();
             this.buttonCreateFormat = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxBasedOn = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -59,6 +62,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.comboBoxBasedOn);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.numericUpDown);
             this.panel1.Controls.Add(this.comboBoxAttributeValue);
             this.panel1.Controls.Add(this.comboBox);
@@ -80,7 +86,7 @@
             // 
             // numericUpDown
             // 
-            this.numericUpDown.Location = new System.Drawing.Point(134, 163);
+            this.numericUpDown.Location = new System.Drawing.Point(134, 190);
             this.numericUpDown.Minimum = new decimal(new int[] {
             2,
             0,
@@ -98,7 +104,7 @@
             // comboBoxAttributeValue
             // 
             this.comboBoxAttributeValue.FormattingEnabled = true;
-            this.comboBoxAttributeValue.Location = new System.Drawing.Point(134, 162);
+            this.comboBoxAttributeValue.Location = new System.Drawing.Point(134, 189);
             this.comboBoxAttributeValue.Name = "comboBoxAttributeValue";
             this.comboBoxAttributeValue.Size = new System.Drawing.Size(454, 21);
             this.comboBoxAttributeValue.TabIndex = 13;
@@ -106,7 +112,7 @@
             // comboBox
             // 
             this.comboBox.FormattingEnabled = true;
-            this.comboBox.Location = new System.Drawing.Point(134, 109);
+            this.comboBox.Location = new System.Drawing.Point(134, 144);
             this.comboBox.Name = "comboBox";
             this.comboBox.Size = new System.Drawing.Size(454, 21);
             this.comboBox.TabIndex = 12;
@@ -170,7 +176,7 @@
             // labelStylesToAdd1
             // 
             this.labelStylesToAdd1.AutoSize = true;
-            this.labelStylesToAdd1.Location = new System.Drawing.Point(22, 112);
+            this.labelStylesToAdd1.Location = new System.Drawing.Point(22, 147);
             this.labelStylesToAdd1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelStylesToAdd1.Name = "labelStylesToAdd1";
             this.labelStylesToAdd1.Size = new System.Drawing.Size(79, 13);
@@ -213,6 +219,38 @@
             this.buttonCreateFormat.UseVisualStyleBackColor = false;
             this.buttonCreateFormat.Click += new System.EventHandler(this.buttonCreateFormat_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 108);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Basado en:";
+            // 
+            // comboBoxBasedOn
+            // 
+            this.comboBoxBasedOn.FormattingEnabled = true;
+            this.comboBoxBasedOn.Location = new System.Drawing.Point(134, 105);
+            this.comboBoxBasedOn.Name = "comboBoxBasedOn";
+            this.comboBoxBasedOn.Size = new System.Drawing.Size(384, 21);
+            this.comboBoxBasedOn.TabIndex = 16;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button1.Location = new System.Drawing.Point(529, 99);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(59, 28);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Limpiar";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // StyleCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,5 +282,8 @@
         private System.Windows.Forms.ComboBox comboBoxAttributeValue;
         private System.Windows.Forms.ComboBox comboBox;
         private System.Windows.Forms.NumericUpDown numericUpDown;
+        private System.Windows.Forms.ComboBox comboBoxBasedOn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
     }
 }
