@@ -24,7 +24,7 @@
                         <td>{{aFullUserData.username | lowercase }}</td>
                         <td>{{aFullUserData.email | lowercase}}</td>
                         <td>
-                            <button (click)="viewProfile(aFullUserData.id)">
+                            <button (click)="viewProfile(aFullUserData.id,aFullUserData.username)">
                                 Ver Perfil
                             </button>
                         </td>

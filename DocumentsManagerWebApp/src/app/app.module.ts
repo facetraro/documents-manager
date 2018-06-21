@@ -39,6 +39,7 @@ import { PrintDocumentComponent } from './print-document/print-document.componen
 import { AllUsersComponent } from './all-users/all-users.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
 import { ListFriendsComponent } from './list-friends/list-friends.component';
+import { ViewFriendProfileComponent } from './view-friend-profile/view-friend-profile.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { ListFriendsComponent } from './list-friends/list-friends.component';
     AllUsersComponent,
     ViewRequestsComponent,
     ListFriendsComponent,
+    ViewFriendProfileComponent,
   ],
   imports: [
     HttpModule,

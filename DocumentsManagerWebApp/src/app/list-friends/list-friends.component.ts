@@ -32,6 +32,13 @@ export class ListFriendsComponent implements OnInit {
   showErrorMessage(error:any){
     alert(error);
   }
+
+  viewProfile(id:string,username:string){
+    console.log(id);
+    console.log(username);
+    this.router.navigate((['/profile']), { queryParams: { userToView: username, userId: id } });
+  }
+ 
   loadFriends(token: string ){
     this.friendshipService.getAllFriends(token).subscribe(response => this.users=response), 
       error => this.showErrorMessage(error);

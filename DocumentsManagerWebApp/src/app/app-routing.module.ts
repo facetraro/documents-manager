@@ -22,6 +22,7 @@ import { PrintDocumentComponent } from './print-document/print-document.componen
 import { AllUsersComponent } from './all-users/all-users.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
 import { ListFriendsComponent } from './list-friends/list-friends.component';
+import { ViewFriendProfileComponent } from './view-friend-profile/view-friend-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'users', component: AllUsersComponent },
   { path: 'friendRequests', component: ViewRequestsComponent },
   { path: 'friends', component: ListFriendsComponent },
+  { path: 'profile', component: ViewFriendProfileComponent },
 ];
 
 @NgModule({
