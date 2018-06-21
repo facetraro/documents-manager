@@ -41,7 +41,7 @@ namespace DocumentsManager.BusinessLogic
                 {
                     return;
                 }
-                throw new Exception("Debes ser un administrador del sistema para utilizar esta aplicación.");
+                throw new NotAdminOrDoesntExistsException();
 
             }
         }

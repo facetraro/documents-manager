@@ -1,0 +1,26 @@
+{
+"Name":"JSONFormatTEST2",
+"Styles":[
+	{
+	"Name":"JSONStyleTest4",
+	"StyleAttributes":[
+		"TamanioLetra###8",
+		"Negrita"	
+		]
+	},
+	{
+	"Name":"JSONStyleTest5",
+	"StyleAttributes":[
+		"TamanioLetra###8",
+		"Cursiva"	
+		]
+	},
+	{
+	"Name":"JSONStyleTest6",
+	"StyleAttributes":[
+		"TamanioLetra###4",
+		"Negrita"	
+		]
+	}
+	]
+}
