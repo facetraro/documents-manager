@@ -388,5 +388,20 @@ namespace DocumentsManager.BusinessLogic
             ReviewContext rContext = new ReviewContext();
             rContext.Add(reviewToAdd);
         }
+        public bool IsHisFirstReviewToDocument(Review reviewToAdd, Guid tokenId)
+        {
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            reviewToAdd.Commentator = GetUserByToken(tokenId);
+            ReviewContext rContext = new ReviewContext();
+            List<Review> reviewsDoci = rContext.GetReviewsFromDocument(reviewToAdd.Commented.Id);
+            foreach (Review revi in reviewsDoci)
+            {
+                if (revi.Commentator.Id == reviewToAdd.Commentator.Id)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
