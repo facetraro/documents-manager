@@ -37,7 +37,7 @@ export class PrintDocumentComponent implements OnInit {
   loadDocumentDiv(htmlDocument : string){
     var div = document.createElement('div');
     div.innerHTML = htmlDocument;
-    document.getElementById("documentDiv").appendChild(div);
+    document.getElementById("documentDiv").innerHTML=htmlDocument;
   }
   loadDocument(token: string , id:string){
     this.documentService.printDocument(token, id).subscribe(response => this.loadDocumentDiv(response)), 
