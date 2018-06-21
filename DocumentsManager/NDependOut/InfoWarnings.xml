@@ -4,14 +4,14 @@
   <Info>Concurrent mode</Info>
   <Info>.NET Assemblies loaded from {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManagerTesting\bin\Debug} 
    DocumentsManagerTesting.dll   v1.0.0.0
-   DocumentsMangerEntities.dll   v1.0.0.0
-   DocumentsManagerExampleInstances.dll   v1.0.0.0
    System.Web.Http.dll   v5.2.6.0
    System.Web.Http.Cors.dll   v5.2.6.0
    System.Net.Http.Formatting.dll   v5.2.6.0</Info>
   <Info>.NET Assemblies loaded from {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManagerDATesting\bin\Debug} 
+   DocumentsMangerEntities.dll   v1.0.0.0
    DocumentsManagerDATesting.dll   v1.0.0.0
    DocumentsManagerDataAccess.dll   v1.0.0.0
+   DocumentsManagerExampleInstances.dll   v1.0.0.0
    DocumentsManager.Data.Repository.dll   v1.0.0.0
    DocumentsManager.Data.DA.Handler.dll   v1.0.0.0
    DocumentsManager.BusinessLogic.dll   v1.0.0.0
@@ -52,7 +52,31 @@
    System.Drawing.dll   v4.0.0.0
    System.Xml.Linq.dll   v4.0.0.0
    System.Xml.dll   v4.0.0.0</Info>
-  <Info>237 source files parsed ; all source files found ; all source files in-sync with PDB</Info>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\Login.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\Login.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\PrincipalWindows.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Properties\Resources.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\CheckLog.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\FormatCreator.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\FormatCreator.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\ImportControl.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\ImportMethods.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\MainMenu.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\MainMenu.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\MaintainFormats.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\ManageFormat.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\ManageFormat.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\ModifyFormat.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\SelectImportMode.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\MaintainStyles.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\MaintainStyles.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\ManageStyles.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\ManageStyles.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\ModifyStyle.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\ModifyStyle.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\StyleCreator.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Warning>The source file {C:\Users\Fabian\Documents\193221.194738\DocumentsManager\DocumentsManager.WinApp\Controls\StyleCreator.Designer.cs} (last modified 21/6/2018 11:47:56) and the PDB file of the assembly {DocumentsManager.WinApp} (last modified 21/6/2018 7:54:50) are not in-sync.</Warning>
+  <Info>244 source files parsed ; all source files found ; 24 source files not in-sync with PDB</Info>
   <Info>0 code rule has been extracted from code.</Info>
   <Info>No dependency cycle detected in assemblies referencement graph.</Info>
   <Info>Do merge code generated by compiler into application code.</Info>
