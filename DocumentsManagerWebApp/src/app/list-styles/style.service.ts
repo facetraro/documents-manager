@@ -18,7 +18,6 @@ export class StyleService {
   getAllStyles(token : string) : Observable<StyleModel[]> {
     let apiUrl= new Url;
     let url = apiUrl.globalUrl+"/viewStyles/?token="+token;
-    console.log(url);
     return this.httpService.get(url)
     .map((response: Response) => <StyleModel[]> response.json())
     .catch(this.handleError);

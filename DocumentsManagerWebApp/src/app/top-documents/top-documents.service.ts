@@ -19,7 +19,6 @@ export class TopDocumentsService {
   getTopDocuments(token : string) : Observable<TopDocumentsModel[]> {
     let apiUrl= new Url;
     let url = apiUrl.globalUrl+"/api/RankDocuments/?token="+token;
-    console.log(url);
     return this.httpService.get(url)
     .map((response: Response) => <TopDocumentsModel[]> response.json())
     .catch(this.handleError);

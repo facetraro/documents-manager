@@ -22,7 +22,7 @@ export class TopDocumentsComponent implements OnInit {
   }
 
   loadDocuments(token: string ){
-    this.service.getTopDocuments(token).subscribe(response => {this.documents=response, console.log(response)}), 
+    this.service.getTopDocuments(token).subscribe(response => this.documents=response), 
       error => this.showErrorMessage(error);
   }
 
