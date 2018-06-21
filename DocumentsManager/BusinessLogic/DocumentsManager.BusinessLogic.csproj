@@ -46,7 +46,6 @@
     <Compile Include="FormatBusinessLogic.cs" />
     <Compile Include="HeaderBusinessLogic.cs" />
     <Compile Include="IPrintableObject.cs" />
-    <Compile Include="LoggedToken.cs" />
     <Compile Include="ILoggerMethod.cs" />
     <Compile Include="LoggerMethod.cs" />
     <Compile Include="ParragraphBusinessLogic.cs" />

@@ -176,24 +176,28 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // DELETE: api/Admin/5
-        public HttpResponseMessage Delete(Guid id, Guid token)
+        public IHttpActionResult Delete(Guid id, Guid token)
         {
             try
             {
                 bool updateResult = proxyAccess.DeleteAdmin(id, token);
-                return Request.CreateResponse(HttpStatusCode.Accepted, updateResult);
+                return Ok(updateResult);
             }
             catch (ObjectDoesNotExists doesNotExists)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, doesNotExists.Message);
+                return BadRequest(doesNotExists.Message);
             }
             catch (CantDeleteLoggedUserException ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                return BadRequest(ex.Message);
             }
             catch (ArgumentNullException ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
         public AdminUser GetEntityAdmin(AdminModel model)

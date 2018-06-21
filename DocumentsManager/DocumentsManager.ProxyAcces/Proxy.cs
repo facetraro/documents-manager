@@ -169,6 +169,10 @@ namespace DocumentsManager.ProxyAcces
         public bool DeleteAdmin(Guid id, Guid tokenId)
         {
             AccessControl(tokenId);
+            if (DeletingYourself(id, tokenId))
+            {
+                throw new CantDeleteLoggedUserException();
+            }
             return aBL.DeleteAdmin(id, tokenId);
         }
 
@@ -369,6 +373,13 @@ namespace DocumentsManager.ProxyAcces
             {
                 throw new AlreadyReviewDocument();
             }
+        }
+        public bool DeletingYourself(Guid id, Guid tokenId) {
+            if (GetUserById(id).Equals(GetUserByToken(tokenId)))
+            {
+                return true;
+            }
+            return false;
         }
 
         #endregion
