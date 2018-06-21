@@ -38,11 +38,19 @@ namespace DocumentsManager.WinApp.Controls
             MainPanel.Controls.Add(manageFormatControl);
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             MainPanel.Controls.Clear();
             UserControl seeLogControl = new CheckLog(MainPanel);
             MainPanel.Controls.Add(seeLogControl);
+        }
+
+        private void buttonManageStyles_Click(object sender, EventArgs e)
+        {
+            MainPanel.Controls.Clear();
+            UserControl manageFormatControl = new ManageStyles(MainPanel);
+            MainPanel.Controls.Add(manageFormatControl);
         }
     }
 }

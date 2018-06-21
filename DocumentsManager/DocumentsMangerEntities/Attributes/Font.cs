@@ -51,9 +51,9 @@ namespace DocumentsMangerEntities
         {
             return String.Empty;
         }
-        public override string ToString()
+        public override string GetStringParse()
         {
-            return base.ToString()+"###"+this.FontType.GetStringParser(); 
+            return base.ToString() + "###" + this.FontType.GetStringParser();
         }
     }
 }

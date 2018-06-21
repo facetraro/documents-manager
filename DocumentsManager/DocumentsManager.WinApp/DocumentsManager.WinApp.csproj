@@ -101,11 +101,23 @@
     <Compile Include="Controls\MaintainFormats.Designer.cs">
       <DependentUpon>MaintainFormats.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MaintainStyles.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MaintainStyles.Designer.cs">
+      <DependentUpon>MaintainStyles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ManageFormat.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ManageFormat.Designer.cs">
       <DependentUpon>ManageFormat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ManageStyles.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ManageStyles.Designer.cs">
+      <DependentUpon>ManageStyles.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ModifyFormat.cs">
       <SubType>UserControl</SubType>
@@ -113,11 +125,23 @@
     <Compile Include="Controls\ModifyFormat.Designer.cs">
       <DependentUpon>ModifyFormat.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ModifyStyle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ModifyStyle.Designer.cs">
+      <DependentUpon>ModifyStyle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SelectImportMode.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\SelectImportMode.Designer.cs">
       <DependentUpon>SelectImportMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StyleCreator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\StyleCreator.Designer.cs">
+      <DependentUpon>StyleCreator.cs</DependentUpon>
     </Compile>
     <Compile Include="PrincipalWindows.cs">
       <SubType>Form</SubType>
@@ -149,14 +173,26 @@
     <EmbeddedResource Include="Controls\MaintainFormats.resx">
       <DependentUpon>MaintainFormats.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MaintainStyles.resx">
+      <DependentUpon>MaintainStyles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ManageFormat.resx">
       <DependentUpon>ManageFormat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ManageStyles.resx">
+      <DependentUpon>ManageStyles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ModifyFormat.resx">
       <DependentUpon>ModifyFormat.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ModifyStyle.resx">
+      <DependentUpon>ModifyStyle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\SelectImportMode.resx">
       <DependentUpon>SelectImportMode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StyleCreator.resx">
+      <DependentUpon>StyleCreator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrincipalWindows.resx">
       <DependentUpon>PrincipalWindows.cs</DependentUpon>

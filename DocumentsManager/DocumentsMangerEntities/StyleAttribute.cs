@@ -48,6 +48,9 @@ namespace DocumentsMangerEntities
             else
                 return Name.CompareTo(other.Name);
         }
-
+        public virtual string GetStringParse()
+        {
+            return this.Name;
+        }
     }
 }

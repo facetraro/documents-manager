@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonManageStyles = new System.Windows.Forms.Button();
             this.buttonManageFormats = new System.Windows.Forms.Button();
             this.labelMainMenu = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,54 +45,10 @@
             this.panel1.Controls.Add(this.buttonManageFormats);
             this.panel1.Controls.Add(this.labelMainMenu);
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(513, 482);
+            this.panel1.Size = new System.Drawing.Size(503, 480);
             this.panel1.TabIndex = 0;
-            // 
-            // buttonExit
-            // 
-            this.buttonExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.buttonExit.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonExit.Location = new System.Drawing.Point(163, 373);
-            this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(190, 37);
-            this.buttonExit.TabIndex = 5;
-            this.buttonExit.Text = "Salir";
-            this.buttonExit.UseVisualStyleBackColor = false;
-            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
-            // 
-            // buttonManageStyles
-            // 
-            this.buttonManageStyles.BackColor = System.Drawing.Color.ForestGreen;
-            this.buttonManageStyles.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonManageStyles.Location = new System.Drawing.Point(163, 199);
-            this.buttonManageStyles.Name = "buttonManageStyles";
-            this.buttonManageStyles.Size = new System.Drawing.Size(190, 37);
-            this.buttonManageStyles.TabIndex = 4;
-            this.buttonManageStyles.Text = "Gestión de Estilos";
-            this.buttonManageStyles.UseVisualStyleBackColor = false;
-            // 
-            // buttonManageFormats
-            // 
-            this.buttonManageFormats.BackColor = System.Drawing.Color.ForestGreen;
-            this.buttonManageFormats.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonManageFormats.Location = new System.Drawing.Point(163, 130);
-            this.buttonManageFormats.Name = "buttonManageFormats";
-            this.buttonManageFormats.Size = new System.Drawing.Size(190, 37);
-            this.buttonManageFormats.TabIndex = 1;
-            this.buttonManageFormats.Text = "Gestión de Formatos";
-            this.buttonManageFormats.UseVisualStyleBackColor = false;
-            this.buttonManageFormats.Click += new System.EventHandler(this.buttonManageFormats_Click);
-            // 
-            // labelMainMenu
-            // 
-            this.labelMainMenu.AutoSize = true;
-            this.labelMainMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.labelMainMenu.Location = new System.Drawing.Point(158, 29);
-            this.labelMainMenu.Name = "labelMainMenu";
-            this.labelMainMenu.Size = new System.Drawing.Size(181, 29);
-            this.labelMainMenu.TabIndex = 0;
-            this.labelMainMenu.Text = "Menú Principal";
             // 
             // button1
             // 
@@ -106,11 +62,62 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // buttonExit
+            // 
+            this.buttonExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.buttonExit.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonExit.Location = new System.Drawing.Point(163, 331);
+            this.buttonExit.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(190, 30);
+            this.buttonExit.TabIndex = 5;
+            this.buttonExit.Text = "Salir";
+            this.buttonExit.UseVisualStyleBackColor = false;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            // 
+            // buttonManageStyles
+            // 
+            this.buttonManageStyles.BackColor = System.Drawing.Color.ForestGreen;
+            this.buttonManageStyles.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonManageStyles.Location = new System.Drawing.Point(163, 216);
+            this.buttonManageStyles.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonManageStyles.Name = "buttonManageStyles";
+            this.buttonManageStyles.Size = new System.Drawing.Size(190, 30);
+            this.buttonManageStyles.TabIndex = 4;
+            this.buttonManageStyles.Text = "Gestión de Estilos";
+            this.buttonManageStyles.UseVisualStyleBackColor = false;
+            this.buttonManageStyles.Click += new System.EventHandler(this.buttonManageStyles_Click);
+            // 
+            // buttonManageFormats
+            // 
+            this.buttonManageFormats.BackColor = System.Drawing.Color.ForestGreen;
+            this.buttonManageFormats.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonManageFormats.Location = new System.Drawing.Point(163, 152);
+            this.buttonManageFormats.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonManageFormats.Name = "buttonManageFormats";
+            this.buttonManageFormats.Size = new System.Drawing.Size(190, 30);
+            this.buttonManageFormats.TabIndex = 1;
+            this.buttonManageFormats.Text = "Gestión de Formatos";
+            this.buttonManageFormats.UseVisualStyleBackColor = false;
+            this.buttonManageFormats.Click += new System.EventHandler(this.buttonManageFormats_Click);
+            // 
+            // labelMainMenu
+            // 
+            this.labelMainMenu.AutoSize = true;
+            this.labelMainMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.labelMainMenu.Location = new System.Drawing.Point(186, 38);
+            this.labelMainMenu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelMainMenu.Name = "labelMainMenu";
+            this.labelMainMenu.Size = new System.Drawing.Size(141, 25);
+            this.labelMainMenu.TabIndex = 0;
+            this.labelMainMenu.Text = "Menú Principal";
+            // 
             // MainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainMenu";
             this.Size = new System.Drawing.Size(515, 482);
             this.panel1.ResumeLayout(false);
