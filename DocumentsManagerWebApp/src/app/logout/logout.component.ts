@@ -28,6 +28,7 @@ export class LogoutComponent implements OnInit {
 
   logout(response:string){
     this.localStorageSession.saveToken("");
+    this.localStorageSession.saveRole("");
     alert("Se ha cerrado la sesion con éxito.");
     this.router.navigate((['/login']));
    }

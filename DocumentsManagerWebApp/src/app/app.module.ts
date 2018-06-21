@@ -45,7 +45,7 @@ import { TopDocumentsComponent } from './top-documents/top-documents.component';
 import { TopDocumentsService } from './top-documents/top-documents.service';
 import { ReviewService } from './review-document/review.service';
 import { DocumentsManagerGuardService } from './documents-manager-guard.service';
-
+import { AdminGuardService } from './admin-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -96,6 +96,7 @@ import { DocumentsManagerGuardService } from './documents-manager-guard.service'
     DocumentService,
     TopDocumentsService,
     ReviewService,
+    AdminGuardService,
     DocumentsManagerGuardService,
     ManageToken
   ],
