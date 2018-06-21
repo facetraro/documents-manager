@@ -27,7 +27,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             adminBL.LogIn(newuser.Username, newuser.Password);
         }
-        private Document AddADocumentToDB()
+        protected Document AddADocumentToDB()
         {
             AdminBusinessLogic aBL = new AdminBusinessLogic();
             AdminUser user = new AdminUser
