@@ -31,6 +31,15 @@ private activeToken:string;
   goListDocuments(){
     this.router.navigate((['/documents']));
   }
+  goRequests(){
+    this.router.navigate((['/friendRequests']));
+  }
+  goAllUsers(){
+    this.router.navigate((['/users']));
+  }
+  goListFriends(){
+    this.router.navigate((['/friends']));
+  }
   ngOnInit() {
   }
 

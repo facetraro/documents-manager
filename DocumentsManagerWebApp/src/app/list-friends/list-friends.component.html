@@ -2,6 +2,9 @@
     <!--Tabla de mascotas -->
     <div class='table-responsive'>
         <div style="overflow-x:auto;">
+            <div align="center" class='table-responsive' *ngIf= 'users.length==0'>
+                <p>No tiene amigos</p>
+            </div>
             <table class='table' *ngIf='users && users.length'>
                 <!--Cabezal de la tabla -->
                 <thead>
