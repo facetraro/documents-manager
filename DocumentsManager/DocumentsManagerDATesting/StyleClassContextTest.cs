@@ -105,7 +105,7 @@ namespace DocumentsManagerDATesting
             newStyle.Based = fatherStyle;
             context.Add(fatherStyle);
             context.Add(newStyle);
-            context.Remove(fatherStyle);
+            context.Remove(newStyle);
             Assert.AreEqual(context.GetLazy().Count, 1);
             TearDown();
         }
