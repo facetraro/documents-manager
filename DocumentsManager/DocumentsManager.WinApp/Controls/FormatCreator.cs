@@ -94,11 +94,6 @@ namespace DocumentsManager.WinApp.Controls
             }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void labelFormatName_Click(object sender, EventArgs e)
         {
 

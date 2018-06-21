@@ -39,7 +39,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(99, 63);
+            this.label2.Location = new System.Drawing.Point(26, 63);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(218, 13);
@@ -50,7 +50,7 @@
             // 
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonBack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonBack.Location = new System.Drawing.Point(43, 318);
+            this.buttonBack.Location = new System.Drawing.Point(11, 423);
             this.buttonBack.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(69, 24);
@@ -63,7 +63,7 @@
             // 
             this.buttonDeleteStyle.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonDeleteStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonDeleteStyle.Location = new System.Drawing.Point(178, 318);
+            this.buttonDeleteStyle.Location = new System.Drawing.Point(278, 423);
             this.buttonDeleteStyle.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDeleteStyle.Name = "buttonDeleteStyle";
             this.buttonDeleteStyle.Size = new System.Drawing.Size(69, 24);
@@ -76,7 +76,7 @@
             // 
             this.buttonModifyStyle.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonModifyStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonModifyStyle.Location = new System.Drawing.Point(313, 318);
+            this.buttonModifyStyle.Location = new System.Drawing.Point(545, 423);
             this.buttonModifyStyle.Margin = new System.Windows.Forms.Padding(2);
             this.buttonModifyStyle.Name = "buttonModifyStyle";
             this.buttonModifyStyle.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -100,16 +100,17 @@
             // listBoxStyles
             // 
             this.listBoxStyles.FormattingEnabled = true;
-            this.listBoxStyles.Location = new System.Drawing.Point(101, 79);
+            this.listBoxStyles.Location = new System.Drawing.Point(29, 78);
             this.listBoxStyles.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxStyles.Name = "listBoxStyles";
-            this.listBoxStyles.Size = new System.Drawing.Size(223, 212);
+            this.listBoxStyles.Size = new System.Drawing.Size(569, 316);
             this.listBoxStyles.TabIndex = 6;
             // 
             // MaintainStyles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonDeleteStyle);
@@ -117,7 +118,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxStyles);
             this.Name = "MaintainStyles";
-            this.Size = new System.Drawing.Size(412, 361);
+            this.Size = new System.Drawing.Size(627, 462);
             this.ResumeLayout(false);
             this.PerformLayout();
 

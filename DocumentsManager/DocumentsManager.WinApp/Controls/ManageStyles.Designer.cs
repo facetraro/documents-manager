@@ -38,7 +38,7 @@
             // 
             this.buttonAddStyle.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonAddStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonAddStyle.Location = new System.Drawing.Point(74, 70);
+            this.buttonAddStyle.Location = new System.Drawing.Point(259, 93);
             this.buttonAddStyle.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddStyle.Name = "buttonAddStyle";
             this.buttonAddStyle.Size = new System.Drawing.Size(116, 30);
@@ -51,7 +51,7 @@
             // 
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonBack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonBack.Location = new System.Drawing.Point(74, 189);
+            this.buttonBack.Location = new System.Drawing.Point(259, 374);
             this.buttonBack.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(116, 30);
@@ -64,7 +64,7 @@
             // 
             this.buttonMaintainStyle.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonMaintainStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonMaintainStyle.Location = new System.Drawing.Point(74, 105);
+            this.buttonMaintainStyle.Location = new System.Drawing.Point(259, 143);
             this.buttonMaintainStyle.Margin = new System.Windows.Forms.Padding(2);
             this.buttonMaintainStyle.Name = "buttonMaintainStyle";
             this.buttonMaintainStyle.Size = new System.Drawing.Size(116, 30);
@@ -77,7 +77,7 @@
             // 
             this.labelTItle.AutoSize = true;
             this.labelTItle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.labelTItle.Location = new System.Drawing.Point(48, 13);
+            this.labelTItle.Location = new System.Drawing.Point(231, 24);
             this.labelTItle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTItle.Name = "labelTItle";
             this.labelTItle.Size = new System.Drawing.Size(168, 25);
@@ -88,12 +88,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.buttonAddStyle);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonMaintainStyle);
             this.Controls.Add(this.labelTItle);
             this.Name = "ManageStyles";
-            this.Size = new System.Drawing.Size(250, 263);
+            this.Size = new System.Drawing.Size(627, 462);
             this.ResumeLayout(false);
             this.PerformLayout();
 

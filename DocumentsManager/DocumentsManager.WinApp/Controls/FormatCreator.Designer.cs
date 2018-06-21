@@ -46,6 +46,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.buttonDeleteStyle);
             this.panel1.Controls.Add(this.labelStylesToAdd2);
             this.panel1.Controls.Add(this.labelAddedStyles);
@@ -58,20 +59,19 @@
             this.panel1.Controls.Add(this.labelFormatName);
             this.panel1.Controls.Add(this.buttonBack);
             this.panel1.Controls.Add(this.buttonCreateFormat);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(472, 437);
+            this.panel1.Size = new System.Drawing.Size(625, 460);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // buttonDeleteStyle
             // 
             this.buttonDeleteStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonDeleteStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.buttonDeleteStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonDeleteStyle.Location = new System.Drawing.Point(170, 228);
-            this.buttonDeleteStyle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDeleteStyle.Location = new System.Drawing.Point(134, 228);
+            this.buttonDeleteStyle.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDeleteStyle.Name = "buttonDeleteStyle";
             this.buttonDeleteStyle.Size = new System.Drawing.Size(46, 36);
             this.buttonDeleteStyle.TabIndex = 11;
@@ -101,10 +101,10 @@
             // 
             // textBoxFormatName
             // 
-            this.textBoxFormatName.Location = new System.Drawing.Point(170, 61);
-            this.textBoxFormatName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxFormatName.Location = new System.Drawing.Point(134, 60);
+            this.textBoxFormatName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxFormatName.Name = "textBoxFormatName";
-            this.textBoxFormatName.Size = new System.Drawing.Size(153, 20);
+            this.textBoxFormatName.Size = new System.Drawing.Size(477, 20);
             this.textBoxFormatName.TabIndex = 8;
             this.textBoxFormatName.TextChanged += new System.EventHandler(this.textBoxFormatName_TextChanged);
             // 
@@ -113,8 +113,8 @@
             this.buttonAddAStyle.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonAddAStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.buttonAddAStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonAddAStyle.Location = new System.Drawing.Point(290, 228);
-            this.buttonAddAStyle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAddAStyle.Location = new System.Drawing.Point(560, 227);
+            this.buttonAddAStyle.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddAStyle.Name = "buttonAddAStyle";
             this.buttonAddAStyle.Size = new System.Drawing.Size(46, 36);
             this.buttonAddAStyle.TabIndex = 7;
@@ -126,7 +126,7 @@
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.labelTitle.Location = new System.Drawing.Point(166, 20);
+            this.labelTitle.Location = new System.Drawing.Point(235, 19);
             this.labelTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(153, 24);
@@ -138,9 +138,9 @@
             // 
             this.listBoxStylesToAdd.FormattingEnabled = true;
             this.listBoxStylesToAdd.Location = new System.Drawing.Point(134, 268);
-            this.listBoxStylesToAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxStylesToAdd.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxStylesToAdd.Name = "listBoxStylesToAdd";
-            this.listBoxStylesToAdd.Size = new System.Drawing.Size(233, 121);
+            this.listBoxStylesToAdd.Size = new System.Drawing.Size(477, 121);
             this.listBoxStylesToAdd.TabIndex = 5;
             this.listBoxStylesToAdd.SelectedIndexChanged += new System.EventHandler(this.listBoxStylesToAdd_SelectedIndexChanged);
             // 
@@ -148,9 +148,9 @@
             // 
             this.listBoxPossibleStyles.FormattingEnabled = true;
             this.listBoxPossibleStyles.Location = new System.Drawing.Point(134, 102);
-            this.listBoxPossibleStyles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxPossibleStyles.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxPossibleStyles.Name = "listBoxPossibleStyles";
-            this.listBoxPossibleStyles.Size = new System.Drawing.Size(233, 121);
+            this.listBoxPossibleStyles.Size = new System.Drawing.Size(477, 121);
             this.listBoxPossibleStyles.TabIndex = 4;
             // 
             // labelStylesToAdd1
@@ -178,8 +178,8 @@
             // 
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonBack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonBack.Location = new System.Drawing.Point(10, 406);
-            this.buttonBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonBack.Location = new System.Drawing.Point(2, 430);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(61, 28);
             this.buttonBack.TabIndex = 1;
@@ -191,8 +191,8 @@
             // 
             this.buttonCreateFormat.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonCreateFormat.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonCreateFormat.Location = new System.Drawing.Point(402, 407);
-            this.buttonCreateFormat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCreateFormat.Location = new System.Drawing.Point(560, 430);
+            this.buttonCreateFormat.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCreateFormat.Name = "buttonCreateFormat";
             this.buttonCreateFormat.Size = new System.Drawing.Size(63, 28);
             this.buttonCreateFormat.TabIndex = 0;
@@ -204,10 +204,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormatCreator";
-            this.Size = new System.Drawing.Size(473, 440);
+            this.Size = new System.Drawing.Size(627, 462);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

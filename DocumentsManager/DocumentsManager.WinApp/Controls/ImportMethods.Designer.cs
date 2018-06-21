@@ -37,10 +37,9 @@
             // 
             this.buttonDll.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonDll.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonDll.Location = new System.Drawing.Point(444, 126);
-            this.buttonDll.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonDll.Location = new System.Drawing.Point(498, 422);
             this.buttonDll.Name = "buttonDll";
-            this.buttonDll.Size = new System.Drawing.Size(144, 28);
+            this.buttonDll.Size = new System.Drawing.Size(108, 23);
             this.buttonDll.TabIndex = 0;
             this.buttonDll.Text = "Buscar DLL\'s";
             this.buttonDll.UseVisualStyleBackColor = false;
@@ -50,10 +49,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(181, 17);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(210, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(241, 25);
+            this.label1.Size = new System.Drawing.Size(189, 18);
             this.label1.TabIndex = 2;
             this.label1.Text = "Documents Manager";
             // 
@@ -61,10 +59,9 @@
             // 
             this.buttonVolver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonVolver.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonVolver.Location = new System.Drawing.Point(4, 126);
-            this.buttonVolver.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonVolver.Location = new System.Drawing.Point(15, 422);
             this.buttonVolver.Name = "buttonVolver";
-            this.buttonVolver.Size = new System.Drawing.Size(100, 28);
+            this.buttonVolver.Size = new System.Drawing.Size(75, 23);
             this.buttonVolver.TabIndex = 4;
             this.buttonVolver.Text = "Volver";
             this.buttonVolver.UseVisualStyleBackColor = false;
@@ -72,14 +69,14 @@
             // 
             // ImportMethods
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.buttonVolver);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonDll);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ImportMethods";
-            this.Size = new System.Drawing.Size(592, 158);
+            this.Size = new System.Drawing.Size(627, 462);
             this.ResumeLayout(false);
             this.PerformLayout();
 

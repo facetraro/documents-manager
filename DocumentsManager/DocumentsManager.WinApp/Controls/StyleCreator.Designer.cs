@@ -30,6 +30,10 @@
         {
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxAttributeValue = new System.Windows.Forms.ComboBox();
+            this.comboBox = new System.Windows.Forms.ComboBox();
+            this.buttonDeleteStyle = new System.Windows.Forms.Button();
             this.labelAddedStyles = new System.Windows.Forms.Label();
             this.textBoxStyleName = new System.Windows.Forms.TextBox();
             this.buttonAddAStyle = new System.Windows.Forms.Button();
@@ -38,10 +42,6 @@
             this.labelFormatName = new System.Windows.Forms.Label();
             this.buttonBack = new System.Windows.Forms.Button();
             this.buttonCreateFormat = new System.Windows.Forms.Button();
-            this.buttonDeleteStyle = new System.Windows.Forms.Button();
-            this.comboBox = new System.Windows.Forms.ComboBox();
-            this.comboBoxAttributeValue = new System.Windows.Forms.ComboBox();
-            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +50,7 @@
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.labelTitle.Location = new System.Drawing.Point(173, 17);
+            this.labelTitle.Location = new System.Drawing.Point(247, 15);
             this.labelTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(128, 24);
@@ -72,11 +72,59 @@
             this.panel1.Controls.Add(this.labelFormatName);
             this.panel1.Controls.Add(this.buttonBack);
             this.panel1.Controls.Add(this.buttonCreateFormat);
-            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Location = new System.Drawing.Point(2, 7);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(472, 437);
+            this.panel1.Size = new System.Drawing.Size(627, 462);
             this.panel1.TabIndex = 1;
+            // 
+            // numericUpDown
+            // 
+            this.numericUpDown.Location = new System.Drawing.Point(134, 163);
+            this.numericUpDown.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDown.Name = "numericUpDown";
+            this.numericUpDown.Size = new System.Drawing.Size(454, 20);
+            this.numericUpDown.TabIndex = 14;
+            this.numericUpDown.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // comboBoxAttributeValue
+            // 
+            this.comboBoxAttributeValue.FormattingEnabled = true;
+            this.comboBoxAttributeValue.Location = new System.Drawing.Point(134, 162);
+            this.comboBoxAttributeValue.Name = "comboBoxAttributeValue";
+            this.comboBoxAttributeValue.Size = new System.Drawing.Size(454, 21);
+            this.comboBoxAttributeValue.TabIndex = 13;
+            // 
+            // comboBox
+            // 
+            this.comboBox.FormattingEnabled = true;
+            this.comboBox.Location = new System.Drawing.Point(134, 109);
+            this.comboBox.Name = "comboBox";
+            this.comboBox.Size = new System.Drawing.Size(454, 21);
+            this.comboBox.TabIndex = 12;
+            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            // 
+            // buttonDeleteStyle
+            // 
+            this.buttonDeleteStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.buttonDeleteStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.buttonDeleteStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonDeleteStyle.Location = new System.Drawing.Point(134, 219);
+            this.buttonDeleteStyle.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonDeleteStyle.Name = "buttonDeleteStyle";
+            this.buttonDeleteStyle.Size = new System.Drawing.Size(46, 36);
+            this.buttonDeleteStyle.TabIndex = 11;
+            this.buttonDeleteStyle.Text = "▲";
+            this.buttonDeleteStyle.UseVisualStyleBackColor = false;
+            this.buttonDeleteStyle.Click += new System.EventHandler(this.buttonDeleteStyle_Click);
             // 
             // labelAddedStyles
             // 
@@ -93,7 +141,7 @@
             this.textBoxStyleName.Location = new System.Drawing.Point(134, 61);
             this.textBoxStyleName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxStyleName.Name = "textBoxStyleName";
-            this.textBoxStyleName.Size = new System.Drawing.Size(233, 20);
+            this.textBoxStyleName.Size = new System.Drawing.Size(454, 20);
             this.textBoxStyleName.TabIndex = 8;
             // 
             // buttonAddAStyle
@@ -101,7 +149,7 @@
             this.buttonAddAStyle.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonAddAStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.buttonAddAStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonAddAStyle.Location = new System.Drawing.Point(321, 219);
+            this.buttonAddAStyle.Location = new System.Drawing.Point(542, 219);
             this.buttonAddAStyle.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddAStyle.Name = "buttonAddAStyle";
             this.buttonAddAStyle.Size = new System.Drawing.Size(46, 36);
@@ -116,7 +164,7 @@
             this.listBoxAttributesToAdd.Location = new System.Drawing.Point(134, 268);
             this.listBoxAttributesToAdd.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxAttributesToAdd.Name = "listBoxAttributesToAdd";
-            this.listBoxAttributesToAdd.Size = new System.Drawing.Size(233, 121);
+            this.listBoxAttributesToAdd.Size = new System.Drawing.Size(454, 121);
             this.listBoxAttributesToAdd.TabIndex = 5;
             // 
             // labelStylesToAdd1
@@ -143,7 +191,7 @@
             // 
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonBack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonBack.Location = new System.Drawing.Point(10, 406);
+            this.buttonBack.Location = new System.Drawing.Point(2, 427);
             this.buttonBack.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(61, 28);
@@ -156,7 +204,7 @@
             // 
             this.buttonCreateFormat.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonCreateFormat.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonCreateFormat.Location = new System.Drawing.Point(402, 407);
+            this.buttonCreateFormat.Location = new System.Drawing.Point(555, 427);
             this.buttonCreateFormat.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCreateFormat.Name = "buttonCreateFormat";
             this.buttonCreateFormat.Size = new System.Drawing.Size(63, 28);
@@ -165,61 +213,14 @@
             this.buttonCreateFormat.UseVisualStyleBackColor = false;
             this.buttonCreateFormat.Click += new System.EventHandler(this.buttonCreateFormat_Click);
             // 
-            // buttonDeleteStyle
-            // 
-            this.buttonDeleteStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.buttonDeleteStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.buttonDeleteStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonDeleteStyle.Location = new System.Drawing.Point(134, 219);
-            this.buttonDeleteStyle.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonDeleteStyle.Name = "buttonDeleteStyle";
-            this.buttonDeleteStyle.Size = new System.Drawing.Size(46, 36);
-            this.buttonDeleteStyle.TabIndex = 11;
-            this.buttonDeleteStyle.Text = "▲";
-            this.buttonDeleteStyle.UseVisualStyleBackColor = false;
-            this.buttonDeleteStyle.Click += new System.EventHandler(this.buttonDeleteStyle_Click);
-            // 
-            // comboBox
-            // 
-            this.comboBox.FormattingEnabled = true;
-            this.comboBox.Location = new System.Drawing.Point(134, 109);
-            this.comboBox.Name = "comboBox";
-            this.comboBox.Size = new System.Drawing.Size(233, 21);
-            this.comboBox.TabIndex = 12;
-            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            // 
-            // comboBoxAttributeValue
-            // 
-            this.comboBoxAttributeValue.FormattingEnabled = true;
-            this.comboBoxAttributeValue.Location = new System.Drawing.Point(134, 162);
-            this.comboBoxAttributeValue.Name = "comboBoxAttributeValue";
-            this.comboBoxAttributeValue.Size = new System.Drawing.Size(233, 21);
-            this.comboBoxAttributeValue.TabIndex = 13;
-            // 
-            // numericUpDown
-            // 
-            this.numericUpDown.Location = new System.Drawing.Point(134, 163);
-            this.numericUpDown.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numericUpDown.Name = "numericUpDown";
-            this.numericUpDown.Size = new System.Drawing.Size(233, 20);
-            this.numericUpDown.TabIndex = 14;
-            this.numericUpDown.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
             // StyleCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panel1);
             this.Name = "StyleCreator";
-            this.Size = new System.Drawing.Size(471, 449);
+            this.Size = new System.Drawing.Size(627, 462);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();

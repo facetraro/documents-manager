@@ -41,6 +41,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.buttonCheckLog);
             this.panel1.Controls.Add(this.listBoxLogs);
             this.panel1.Controls.Add(this.labelDateUntil);
@@ -48,18 +49,20 @@
             this.panel1.Controls.Add(this.dateTimePickerUntil);
             this.panel1.Controls.Add(this.dateTimePickerSince);
             this.panel1.Controls.Add(this.buttonBack);
-            this.panel1.Location = new System.Drawing.Point(4, 4);
+            this.panel1.Location = new System.Drawing.Point(5, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(508, 489);
+            this.panel1.Size = new System.Drawing.Size(622, 457);
             this.panel1.TabIndex = 0;
             // 
             // buttonCheckLog
             // 
             this.buttonCheckLog.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonCheckLog.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonCheckLog.Location = new System.Drawing.Point(221, 133);
+            this.buttonCheckLog.Location = new System.Drawing.Point(531, 33);
+            this.buttonCheckLog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonCheckLog.Name = "buttonCheckLog";
-            this.buttonCheckLog.Size = new System.Drawing.Size(85, 40);
+            this.buttonCheckLog.Size = new System.Drawing.Size(64, 32);
             this.buttonCheckLog.TabIndex = 8;
             this.buttonCheckLog.Text = "Consultar";
             this.buttonCheckLog.UseVisualStyleBackColor = false;
@@ -68,51 +71,56 @@
             // listBoxLogs
             // 
             this.listBoxLogs.FormattingEnabled = true;
-            this.listBoxLogs.ItemHeight = 16;
-            this.listBoxLogs.Location = new System.Drawing.Point(69, 179);
+            this.listBoxLogs.Location = new System.Drawing.Point(28, 99);
+            this.listBoxLogs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBoxLogs.Name = "listBoxLogs";
-            this.listBoxLogs.Size = new System.Drawing.Size(391, 228);
+            this.listBoxLogs.Size = new System.Drawing.Size(567, 316);
             this.listBoxLogs.TabIndex = 7;
             // 
             // labelDateUntil
             // 
             this.labelDateUntil.AutoSize = true;
-            this.labelDateUntil.Location = new System.Drawing.Point(8, 92);
+            this.labelDateUntil.Location = new System.Drawing.Point(35, 52);
+            this.labelDateUntil.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelDateUntil.Name = "labelDateUntil";
-            this.labelDateUntil.Size = new System.Drawing.Size(90, 17);
+            this.labelDateUntil.Size = new System.Drawing.Size(69, 13);
             this.labelDateUntil.TabIndex = 6;
             this.labelDateUntil.Text = "Fecha hasta:";
             // 
             // labelDateSince
             // 
             this.labelDateSince.AutoSize = true;
-            this.labelDateSince.Location = new System.Drawing.Point(8, 69);
+            this.labelDateSince.Location = new System.Drawing.Point(35, 33);
+            this.labelDateSince.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelDateSince.Name = "labelDateSince";
-            this.labelDateSince.Size = new System.Drawing.Size(94, 17);
+            this.labelDateSince.Size = new System.Drawing.Size(72, 13);
             this.labelDateSince.TabIndex = 5;
             this.labelDateSince.Text = "Fecha desde:";
             // 
             // dateTimePickerUntil
             // 
-            this.dateTimePickerUntil.Location = new System.Drawing.Point(124, 93);
+            this.dateTimePickerUntil.Location = new System.Drawing.Point(122, 53);
+            this.dateTimePickerUntil.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePickerUntil.Name = "dateTimePickerUntil";
-            this.dateTimePickerUntil.Size = new System.Drawing.Size(277, 22);
+            this.dateTimePickerUntil.Size = new System.Drawing.Size(209, 20);
             this.dateTimePickerUntil.TabIndex = 4;
             // 
             // dateTimePickerSince
             // 
-            this.dateTimePickerSince.Location = new System.Drawing.Point(124, 65);
+            this.dateTimePickerSince.Location = new System.Drawing.Point(122, 30);
+            this.dateTimePickerSince.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePickerSince.Name = "dateTimePickerSince";
-            this.dateTimePickerSince.Size = new System.Drawing.Size(277, 22);
+            this.dateTimePickerSince.Size = new System.Drawing.Size(209, 20);
             this.dateTimePickerSince.TabIndex = 3;
             // 
             // buttonBack
             // 
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonBack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonBack.Location = new System.Drawing.Point(17, 437);
+            this.buttonBack.Location = new System.Drawing.Point(2, 427);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(81, 35);
+            this.buttonBack.Size = new System.Drawing.Size(61, 28);
             this.buttonBack.TabIndex = 2;
             this.buttonBack.Text = "Volver";
             this.buttonBack.UseVisualStyleBackColor = false;
@@ -120,11 +128,13 @@
             // 
             // CheckLog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "CheckLog";
-            this.Size = new System.Drawing.Size(515, 496);
+            this.Size = new System.Drawing.Size(627, 462);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

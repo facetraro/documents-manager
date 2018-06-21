@@ -53,7 +53,7 @@
             0,
             0});
             this.numericUpDown.Name = "numericUpDown";
-            this.numericUpDown.Size = new System.Drawing.Size(233, 20);
+            this.numericUpDown.Size = new System.Drawing.Size(443, 20);
             this.numericUpDown.TabIndex = 26;
             this.numericUpDown.Value = new decimal(new int[] {
             2,
@@ -66,7 +66,7 @@
             this.comboBox.FormattingEnabled = true;
             this.comboBox.Location = new System.Drawing.Point(138, 106);
             this.comboBox.Name = "comboBox";
-            this.comboBox.Size = new System.Drawing.Size(233, 21);
+            this.comboBox.Size = new System.Drawing.Size(443, 21);
             this.comboBox.TabIndex = 25;
             this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
@@ -99,7 +99,7 @@
             this.textBoxStyleName.Location = new System.Drawing.Point(138, 58);
             this.textBoxStyleName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxStyleName.Name = "textBoxStyleName";
-            this.textBoxStyleName.Size = new System.Drawing.Size(233, 20);
+            this.textBoxStyleName.Size = new System.Drawing.Size(443, 20);
             this.textBoxStyleName.TabIndex = 22;
             // 
             // buttonAddAStyle
@@ -107,7 +107,7 @@
             this.buttonAddAStyle.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonAddAStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.buttonAddAStyle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonAddAStyle.Location = new System.Drawing.Point(325, 216);
+            this.buttonAddAStyle.Location = new System.Drawing.Point(535, 216);
             this.buttonAddAStyle.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddAStyle.Name = "buttonAddAStyle";
             this.buttonAddAStyle.Size = new System.Drawing.Size(46, 36);
@@ -133,7 +133,7 @@
             this.listBoxAttributesToAdd.Location = new System.Drawing.Point(138, 265);
             this.listBoxAttributesToAdd.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxAttributesToAdd.Name = "listBoxAttributesToAdd";
-            this.listBoxAttributesToAdd.Size = new System.Drawing.Size(233, 121);
+            this.listBoxAttributesToAdd.Size = new System.Drawing.Size(443, 121);
             this.listBoxAttributesToAdd.TabIndex = 19;
             // 
             // labelStylesToAdd1
@@ -160,7 +160,7 @@
             // 
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonBack.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonBack.Location = new System.Drawing.Point(14, 403);
+            this.buttonBack.Location = new System.Drawing.Point(2, 432);
             this.buttonBack.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(61, 28);
@@ -173,7 +173,7 @@
             // 
             this.buttonCreateFormat.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonCreateFormat.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonCreateFormat.Location = new System.Drawing.Point(406, 404);
+            this.buttonCreateFormat.Location = new System.Drawing.Point(562, 432);
             this.buttonCreateFormat.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCreateFormat.Name = "buttonCreateFormat";
             this.buttonCreateFormat.Size = new System.Drawing.Size(63, 28);
@@ -185,15 +185,16 @@
             // comboBoxAttributeValue
             // 
             this.comboBoxAttributeValue.FormattingEnabled = true;
-            this.comboBoxAttributeValue.Location = new System.Drawing.Point(138, 159);
+            this.comboBoxAttributeValue.Location = new System.Drawing.Point(138, 162);
             this.comboBoxAttributeValue.Name = "comboBoxAttributeValue";
-            this.comboBoxAttributeValue.Size = new System.Drawing.Size(233, 21);
+            this.comboBoxAttributeValue.Size = new System.Drawing.Size(443, 21);
             this.comboBoxAttributeValue.TabIndex = 27;
             // 
             // ModifyStyle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.comboBoxAttributeValue);
             this.Controls.Add(this.numericUpDown);
             this.Controls.Add(this.comboBox);
@@ -208,7 +209,7 @@
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonCreateFormat);
             this.Name = "ModifyStyle";
-            this.Size = new System.Drawing.Size(482, 447);
+            this.Size = new System.Drawing.Size(627, 462);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

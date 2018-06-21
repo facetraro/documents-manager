@@ -25,7 +25,10 @@ namespace DocumentsManager.WinApp
         }
         private void InitializeSystem()
         {
-            MessageBox.Show("OK");
+            UserLogged.Username = textBoxUsername.Text;
+            MainPanel.Controls.Clear();
+            UserControl menuControl = new Controls.MainMenu(MainPanel);
+            MainPanel.Controls.Add(menuControl);
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -36,12 +39,9 @@ namespace DocumentsManager.WinApp
                 {
                     logic.LogInWinApp(textBoxUsername.Text, textBoxPassword.Text);
                     InitializeSystem();
-                    UserLogged.Username = textBoxUsername.Text;
-                    MainPanel.Controls.Clear();
-                    UserControl menuControl = new Controls.MainMenu(MainPanel);
-                    MainPanel.Controls.Add(menuControl);
                 }
-                else {
+                else
+                {
                     throw new NotAdminOrDoesntExistsException();
                 }
             }
@@ -49,6 +49,11 @@ namespace DocumentsManager.WinApp
             {
                 MessageBox.Show(error.Message);
             }
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

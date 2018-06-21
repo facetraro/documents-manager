@@ -39,24 +39,25 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.buttonExit);
             this.panel1.Controls.Add(this.buttonManageStyles);
             this.panel1.Controls.Add(this.buttonManageFormats);
             this.panel1.Controls.Add(this.labelMainMenu);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(2, -3);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(503, 480);
+            this.panel1.Size = new System.Drawing.Size(627, 462);
             this.panel1.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.ForestGreen;
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(163, 267);
+            this.button1.Location = new System.Drawing.Point(207, 195);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(190, 37);
+            this.button1.Size = new System.Drawing.Size(190, 31);
             this.button1.TabIndex = 6;
             this.button1.Text = "Consultar Log";
             this.button1.UseVisualStyleBackColor = false;
@@ -66,7 +67,7 @@
             // 
             this.buttonExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.buttonExit.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonExit.Location = new System.Drawing.Point(163, 331);
+            this.buttonExit.Location = new System.Drawing.Point(207, 378);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(190, 30);
@@ -79,7 +80,7 @@
             // 
             this.buttonManageStyles.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonManageStyles.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonManageStyles.Location = new System.Drawing.Point(163, 216);
+            this.buttonManageStyles.Location = new System.Drawing.Point(207, 130);
             this.buttonManageStyles.Margin = new System.Windows.Forms.Padding(2);
             this.buttonManageStyles.Name = "buttonManageStyles";
             this.buttonManageStyles.Size = new System.Drawing.Size(190, 30);
@@ -92,7 +93,7 @@
             // 
             this.buttonManageFormats.BackColor = System.Drawing.Color.ForestGreen;
             this.buttonManageFormats.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.buttonManageFormats.Location = new System.Drawing.Point(163, 152);
+            this.buttonManageFormats.Location = new System.Drawing.Point(207, 72);
             this.buttonManageFormats.Margin = new System.Windows.Forms.Padding(2);
             this.buttonManageFormats.Name = "buttonManageFormats";
             this.buttonManageFormats.Size = new System.Drawing.Size(190, 30);
@@ -105,7 +106,7 @@
             // 
             this.labelMainMenu.AutoSize = true;
             this.labelMainMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.labelMainMenu.Location = new System.Drawing.Point(186, 38);
+            this.labelMainMenu.Location = new System.Drawing.Point(235, 26);
             this.labelMainMenu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMainMenu.Name = "labelMainMenu";
             this.labelMainMenu.Size = new System.Drawing.Size(141, 25);
@@ -116,10 +117,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainMenu";
-            this.Size = new System.Drawing.Size(515, 482);
+            this.Size = new System.Drawing.Size(627, 462);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
