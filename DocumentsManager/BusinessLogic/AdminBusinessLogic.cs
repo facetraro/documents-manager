@@ -163,6 +163,21 @@ namespace DocumentsManager.BusinessLogic
         {
             return DeleteAdmin(user.Id, tokenId);
         }
-       
+        public bool CanDeleteFormat(Guid id) {
+            bool canDelete = true;
+            FormatBusinessLogic fBL = new FormatBusinessLogic();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Format formatToDelete = fBL.GetFormatByID(id,Guid.NewGuid());
+            foreach (Document doci in dBL.GetAllDocuments(Guid.NewGuid()))
+            {
+                if (doci.Format.Equals(formatToDelete))
+                {
+                    canDelete = false;
+                }
+            }
+            return canDelete;
+        }
+
+
     }
 }

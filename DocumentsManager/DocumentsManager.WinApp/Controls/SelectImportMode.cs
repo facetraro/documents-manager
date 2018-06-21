@@ -13,11 +13,11 @@ namespace DocumentsManager.WinApp.Controls
 {
     public partial class SelectImportMode : UserControl
     {
-        private Panel mainPanel;
+        private Panel MainPanel;
         private List<IFormatImportation> importers;
         public SelectImportMode(Panel panel, List<IFormatImportation> importations)
         {
-            mainPanel = panel;
+            MainPanel = panel;
             importers = importations;
             InitializeComponent();
             LoadComboBox();
@@ -38,9 +38,16 @@ namespace DocumentsManager.WinApp.Controls
                 MessageBox.Show("No se selecciono ningun tipo de importacion.");
                 return;
             }
-            mainPanel.Controls.Clear();
-            UserControl importControl = new ImportControl(mainPanel, importation);
-            mainPanel.Controls.Add(importControl);
+            MainPanel.Controls.Clear();
+            UserControl importControl = new ImportControl(MainPanel, importation);
+            MainPanel.Controls.Add(importControl);
+        }
+
+        private void buttonVolver_Click(object sender, EventArgs e)
+        {
+            MainPanel.Controls.Clear();
+            UserControl importMethods = new ImportMethods(MainPanel);
+            MainPanel.Controls.Add(importMethods);
         }
     }
 }

@@ -17,8 +17,8 @@ namespace DocumentsManager.WinApp
         {
             InitializeComponent();
             mainPanel.Controls.Clear();
-            UserControl imports  = new ImportMethods(mainPanel);
-            mainPanel.Controls.Add(imports);
+            UserControl mainMenu  = new Controls.MainMenu(mainPanel);
+            mainPanel.Controls.Add(mainMenu);
         }
     }
 }

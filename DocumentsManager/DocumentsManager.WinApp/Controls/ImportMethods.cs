@@ -14,10 +14,10 @@ namespace DocumentsManager.WinApp.Controls
     public partial class ImportMethods : UserControl
     {
         private string FileNamePath;
-        private Panel mainPanel;
+        private Panel MainPanel;
         public ImportMethods(Panel panel)
         {
-            mainPanel = panel;
+            MainPanel = panel;
             InitializeComponent();
         }
 
@@ -43,9 +43,16 @@ namespace DocumentsManager.WinApp.Controls
                 MessageBox.Show("No se encontraron Importadores en ese Path");
                 return;
             }
-            mainPanel.Controls.Clear();
-            UserControl importControl = new SelectImportMode(mainPanel, importations);
-            mainPanel.Controls.Add(importControl);
+            MainPanel.Controls.Clear();
+            UserControl importControl = new SelectImportMode(MainPanel, importations);
+            MainPanel.Controls.Add(importControl);
+        }
+
+        private void buttonVolver_Click(object sender, EventArgs e)
+        {
+            MainPanel.Controls.Clear();
+            UserControl manageFormat = new ManageFormat(MainPanel);
+            MainPanel.Controls.Add(manageFormat);
         }
     }
 }

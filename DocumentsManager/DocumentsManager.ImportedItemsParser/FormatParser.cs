@@ -15,6 +15,7 @@ namespace DocumentsManager.ImportedItemsParser
             Format newFormat = new Format();
             newFormat.Name=importedFormat.Name;
             newFormat.StyleClasses = new List<StyleClass>();
+            newFormat.Id = Guid.NewGuid();
             foreach (var item in importedFormat.Styles)
             {
                 newFormat.StyleClasses.Add(StyleClassParser.Parse(item));

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace DocumentsManager.BusinessLogic.Tests
 {
     [TestClass]
-    public class AdminBusinessLogicTest
+    public class AdminBusinessLogicTest : UserBusinessLogicTest
     {
         private static string username = "testUsername";
         private static string password = "testPassword";
@@ -39,7 +39,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
-            User result = adminBL.LogInWithoutToken(username,password);
+            User result = adminBL.LogInWithoutToken(username, password);
             Assert.AreEqual(adminBL.GetUserByUsername(username), result);
             TearDown();
         }
@@ -149,7 +149,7 @@ namespace DocumentsManager.BusinessLogic.Tests
                 date1 = date1.AddDays(1);
             }
             Assert.IsTrue(expected.Equals(result));
-        }    
+        }
         [ExpectedException(typeof(InvalidChartDatesException))]
         [TestMethod]
         public void GetChartFromDatesException()
@@ -461,7 +461,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            Guid IdUserAdded = editorBL.AddEditor(anEditor,Guid.NewGuid());
+            Guid IdUserAdded = editorBL.AddEditor(anEditor, Guid.NewGuid());
             adminBL.GetAdminByID(anEditor.Id, Guid.NewGuid());
             TearDown();
         }
@@ -545,6 +545,31 @@ namespace DocumentsManager.BusinessLogic.Tests
 
             expected = chartResult.ToString();
             Assert.IsTrue(expected.Equals(result));
+            TearDown();
+        }
+        [TestMethod]
+        public void CanDeleteTestFalse()
+        {
+            TearDown();
+            Document docAdded = AddADocumentToDB();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            Assert.IsFalse(aBL.CanDeleteFormat(docAdded.Format.Id));
+            TearDown();
+        }
+        [TestMethod]
+        public void CanDeleteTestTrue()
+        {
+            TearDown();
+            FormatBusinessLogic fBL = new FormatBusinessLogic();
+            Format newFormat = new Format {
+                Id = Guid.NewGuid(),
+                Name="TestFormatCanDeleteTrue",
+                StyleClasses=new List<StyleClass>()
+            };
+            Guid formatId = fBL.AddFormat(newFormat, Guid.NewGuid());
+            Document docAdded = AddADocumentToDB();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            Assert.IsTrue(aBL.CanDeleteFormat(newFormat.Id));
             TearDown();
         }
     }

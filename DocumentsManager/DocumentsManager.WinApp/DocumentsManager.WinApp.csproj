@@ -41,6 +41,10 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\.nuget\packages\Newtonsoft.Json\11.0.2\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -55,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\FormatCreator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FormatCreator.Designer.cs">
+      <DependentUpon>FormatCreator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImportControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -73,6 +83,30 @@
     <Compile Include="Controls\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MainMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MaintainFormats.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MaintainFormats.Designer.cs">
+      <DependentUpon>MaintainFormats.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ManageFormat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ManageFormat.Designer.cs">
+      <DependentUpon>ManageFormat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModifyFormat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ModifyFormat.Designer.cs">
+      <DependentUpon>ModifyFormat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SelectImportMode.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,6 +121,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\FormatCreator.resx">
+      <DependentUpon>FormatCreator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ImportControl.resx">
       <DependentUpon>ImportControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -95,6 +132,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MaintainFormats.resx">
+      <DependentUpon>MaintainFormats.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ManageFormat.resx">
+      <DependentUpon>ManageFormat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ModifyFormat.resx">
+      <DependentUpon>ModifyFormat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SelectImportMode.resx">
       <DependentUpon>SelectImportMode.cs</DependentUpon>
@@ -133,6 +182,14 @@
     <ProjectReference Include="..\DocumentsManager.FormatImportation\DocumentsManager.FormatImportation.csproj">
       <Project>{2150776E-D2F1-4CD4-81F4-2B05D18D4C14}</Project>
       <Name>DocumentsManager.FormatImportation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.ImportedItemsParser\DocumentsManager.ImportedItemsParser.csproj">
+      <Project>{5E61CF6F-BB56-4866-B7C7-24E1456A4A42}</Project>
+      <Name>DocumentsManager.ImportedItemsParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentsMangerEntities\DocumentsManger.Data.csproj">
+      <Project>{80D195AE-B71A-465A-A588-7397AE023E8F}</Project>
+      <Name>DocumentsManger.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
