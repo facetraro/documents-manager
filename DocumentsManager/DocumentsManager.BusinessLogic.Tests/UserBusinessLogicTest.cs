@@ -1268,6 +1268,29 @@ namespace DocumentsManager.BusinessLogic.Tests
             uBL.AddReview(review, token);
             Assert.IsFalse(uBL.IsHisFirstReviewToDocument(review, token));
             TearDown();
-        }  
+        }
+        [TestMethod]
+        public void GetNotDeletedDocumentTest()
+        {
+            TearDown();
+            StyleClassContextHandler styleCtx = new StyleClassContextHandler();
+            FormatContext formatCtx = new FormatContext();
+            Document aDocument = setUpAllSameStyle(formatCtx, styleCtx);
+            UserContext uContext = new UserContext();
+            AdminUser admin = new AdminUser
+            {
+                Id = Guid.NewGuid(),
+                Email = "modifier@email.com",
+                Name = "testName",
+                Password = "testPassword",
+                Surname = "testSurname",
+                Username = "modifierUsername"
+            };
+            uContext.Add(admin);
+            UserBusinessLogic logic = new UserBusinessLogic();
+            logic.DeleteDocument(aDocument, admin);
+            Assert.IsTrue(logic.GetNotDeletedDocuments().Count==0);
+            TearDown();
+        }
     }
 }
