@@ -23,12 +23,18 @@ export class FriendshipService {
     .map((response: Response) => <FullUserData[]> response.json())
     .catch(this.handleError);
   };
-  
+
+  getAllRequests(token : string) : Observable<FullUserData[]> {
+    let apiUrl= new Url;
+    let url = apiUrl.globalUrl+"/api/ManageRequests/?token="+token;
+    return this.httpService.get(url)
+    .map((response: Response) => <FullUserData[]> response.json())
+    .catch(this.handleError);
+  };
 
   getFriend(token : string, id : string) : Observable<FullUserData> {
     let apiUrl= new Url;
     let url = apiUrl.globalUrl+"/api/Document/?id="+id+"&token="+token;
-    console.log(url);
     return this.httpService.get(url)
     .map((response: Response) => <FullUserData> response.json())
     .catch(this.handleError);
@@ -37,28 +43,19 @@ export class FriendshipService {
   addFriend(token : string,  id : string) : Observable<string> {
     let apiUrl= new Url;
     let url = apiUrl.globalUrl+"/api/Friends/?userId="+id+"&token="+token;
-    console.log(url);
     return this.httpService.post(url,id)
     .map((response: Response) => <string> response.json())
     .catch(this.handleError);
   };
   
-  deleteFriend(token : string, id : string) : Observable<string> {
+  rejectFriend(token : string, id : string) : Observable<string> {
     let apiUrl= new Url;
-    let url = apiUrl.globalUrl+"/api/Document/?userId="+id+"&token="+token;
-    return this.httpService.delete(url)
+    let url = apiUrl.globalUrl+"/api/ManageRequests/?userId="+id+"&token="+token;
+    return this.httpService.delete(url,id)
     .map((response: Response) => <string> response.json())
     .catch(this.handleError);
   };
 
-  printDocument(token : string, id : string): Observable<string> {
-    let apiUrl= new Url;
-    let url = apiUrl.globalUrl+"/api/PrintDocument/?id="+id+"&token="+token;
-    console.log(url);
-    return this.httpService.get(url)
-    .map((response: Response) => <string> response.json())
-    .catch(this.handleError);
-  };
 
 private handleError(error: Response) {
     console.error(error);

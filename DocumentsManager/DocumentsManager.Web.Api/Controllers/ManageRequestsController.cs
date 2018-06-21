@@ -72,7 +72,7 @@ namespace DocumentsManager.Web.Api.Controllers
             try
             {
                 proxyAccess.RejectRequest(userId, token);
-                return Ok();
+                return Ok(200);
             }
             catch (Exception ex)
             {

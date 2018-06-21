@@ -20,6 +20,7 @@ import { NewDocumentComponent } from './new-document/new-document.component';
 import { ModifyDocumentComponent } from './modify-document/modify-document.component';
 import { PrintDocumentComponent } from './print-document/print-document.component';
 import { AllUsersComponent } from './all-users/all-users.component';
+import { ViewRequestsComponent } from './view-requests/view-requests.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'modifyDocument', component: ModifyDocumentComponent },
   { path: 'printDocument', component: PrintDocumentComponent },
   { path: 'users', component: AllUsersComponent },
+  { path: 'friendRequests', component: ViewRequestsComponent },
 ];
 
 @NgModule({

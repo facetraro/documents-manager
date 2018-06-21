@@ -37,6 +37,7 @@ import { NewDocumentComponent } from './new-document/new-document.component';
 import { ModifyDocumentComponent } from './modify-document/modify-document.component';
 import { PrintDocumentComponent } from './print-document/print-document.component';
 import { AllUsersComponent } from './all-users/all-users.component';
+import { ViewRequestsComponent } from './view-requests/view-requests.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { AllUsersComponent } from './all-users/all-users.component';
     ModifyDocumentComponent,
     PrintDocumentComponent,
     AllUsersComponent,
+    ViewRequestsComponent,
   ],
   imports: [
     HttpModule,
