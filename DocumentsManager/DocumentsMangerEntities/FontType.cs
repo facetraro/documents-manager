@@ -1,6 +1,6 @@
 ﻿namespace DocumentsMangerEntities
 {
-    public enum FontType { Arial, CourierNew, TimesNewRoman } ;
+    public enum FontType { Arial, CourierNew, TimesNewRoman, Verdana} ;
     static class FontTypeToHTML
     {
         public static string GetString(this FontType fontType)
@@ -13,6 +13,8 @@
                     return "courier";
                 case FontType.TimesNewRoman:
                     return "times";
+                case FontType.Verdana:
+                    return "verdana";
             }
             return null;
         }
@@ -26,6 +28,8 @@
                     return "courier-new";
                 case FontType.TimesNewRoman:
                     return "times-new-roman";
+                case FontType.Verdana:
+                    return "verdana";
             }
             return null;
         }
