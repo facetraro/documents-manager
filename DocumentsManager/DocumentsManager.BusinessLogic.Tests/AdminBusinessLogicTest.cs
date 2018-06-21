@@ -55,7 +55,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             User result = adminBL.LogInWithoutToken(username, password + "differentPassword");
             TearDown();
         }
-        [ExpectedException(typeof(UserNotAuthorizedException))]
+        [ExpectedException(typeof(NotAdminOrDoesntExistsException))]
         [TestMethod]
         public void LogInWinAppNotAuthorized()
         {
