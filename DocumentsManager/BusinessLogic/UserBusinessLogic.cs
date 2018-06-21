@@ -305,11 +305,11 @@ namespace DocumentsManager.BusinessLogic
                 {
                     if (relationi.Request.Equals(responsibleUser))
                     {
-                        friends.Add(relationi.Request);
+                        friends.Add(relationi.Requested);
                     }
                     else
                     {
-                        friends.Add(relationi.Requested);
+                        friends.Add(relationi.Request);
                     }
                 }
             }

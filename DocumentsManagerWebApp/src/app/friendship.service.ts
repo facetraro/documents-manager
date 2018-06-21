@@ -18,7 +18,7 @@ export class FriendshipService {
 
   getAllFriends(token : string) : Observable<FullUserData[]> {
     let apiUrl= new Url;
-    let url = apiUrl.globalUrl+"/Documents/?token="+token;
+    let url = apiUrl.globalUrl+"/api/Friends/?token="+token;
     return this.httpService.get(url)
     .map((response: Response) => <FullUserData[]> response.json())
     .catch(this.handleError);
