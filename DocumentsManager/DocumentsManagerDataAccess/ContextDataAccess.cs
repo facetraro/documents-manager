@@ -35,7 +35,7 @@ namespace DocumentsManagerDataAccess
             modelBuilder.Entity<Format>().HasKey(F => F.Id);
             modelBuilder.Entity<StyleAttribute>().HasKey(S => S.Id);
             modelBuilder.Entity<Text>().HasKey(T => T.Id);
-            modelBuilder.Entity<StyleClass>().HasOptional(c => c.Based).WithOptionalPrincipal();
+            modelBuilder.Entity<StyleClass>().HasOptional(c => c.Based).WithOptionalDependent();
             modelBuilder.Entity<Header>().HasKey(H => H.Id);
             modelBuilder.Entity<Footer>().HasKey(F => F.Id);
             modelBuilder.Entity<Parragraph>().HasKey(P => P.Id);

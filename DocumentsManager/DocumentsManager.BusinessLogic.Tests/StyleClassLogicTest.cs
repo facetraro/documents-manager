@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DocumentsManager.BusinessLogic;
 using DocumentsMangerEntities;
 using DocumentsManagerExampleInstances;
+using DocumentsManager.Data.DA.Handler;
 
 namespace DocumentsManager.BusinessLogic.Tests
 {
@@ -77,6 +78,49 @@ namespace DocumentsManager.BusinessLogic.Tests
             string result = logic.GetHtmlText(newStyle, "ExampleInstance");
             string expected = "<p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>ExampleInstance</strong></em></p>";
             Assert.AreEqual(expected, result);
+        }
+        [TestMethod]
+        public void IsNotTheChainOfStyleClassTest()
+        {
+            StyleClass styleSon = new StyleClass();
+            styleSon.Id = Guid.NewGuid();
+            styleSon.Name = "firstOne";
+            StyleClass father = new StyleClass();
+            father.Name = "secondOne";
+            father.Id = Guid.NewGuid();
+            StyleClass fatherOfFather = new StyleClass();
+            fatherOfFather.Name = "thirdOne";
+            fatherOfFather.Id = Guid.NewGuid();
+            StyleClassContextHandler context = new StyleClassContextHandler();
+            context.Add(styleSon);
+            context.Add(fatherOfFather);
+            father.Based = fatherOfFather;
+            context.Add(father);
+            styleSon.Based = father;
+            StyleClassBusinessLogic logic = new StyleClassBusinessLogic();
+            Assert.IsFalse(logic.IsThisStyleInTheChainOfBased(styleSon.Based, styleSon));
+        }
+        [TestMethod]
+        public void IsInTheChainOfStyleClassTest()
+        {
+            StyleClass styleSon = new StyleClass();
+            styleSon.Id = Guid.NewGuid();
+            styleSon.Name = "firstOne";
+            StyleClass father = new StyleClass();
+            father.Name = "secondOne";
+            father.Id = Guid.NewGuid();
+            StyleClass fatherOfFather = new StyleClass();
+            fatherOfFather.Name = "thirdOne";
+            fatherOfFather.Id = Guid.NewGuid();
+            StyleClassContextHandler context = new StyleClassContextHandler();
+            context.Add(styleSon);
+            fatherOfFather.Based = styleSon;
+            context.Add(fatherOfFather);
+            father.Based = fatherOfFather;
+            context.Add(father);
+            styleSon.Based = father;
+            StyleClassBusinessLogic logic = new StyleClassBusinessLogic();
+            Assert.IsTrue(logic.IsThisStyleInTheChainOfBased(styleSon.Based, styleSon));
         }
     }
 }

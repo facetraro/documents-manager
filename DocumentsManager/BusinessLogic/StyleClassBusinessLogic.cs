@@ -69,9 +69,10 @@ namespace DocumentsManager.BusinessLogic
         }
         public string GetHtmlText(StyleClass style, string text)
         {
-            style.Attributes.Sort();
+            StyleClass getBased = style.GetBasedOnStyleClass();
+            getBased.Attributes.Sort();
             string htmlResult = String.Empty;
-            htmlResult = GetInitialTag(style) + GetAllIncialAttributesTags(style) + text + GetAllEndAttributesTags(style) + LastTag;
+            htmlResult = GetInitialTag(getBased) + GetAllIncialAttributesTags(getBased) + text + GetAllEndAttributesTags(getBased) + LastTag;
             return htmlResult;
         }
         public StyleClass GetStyleById(Guid id, Guid tokenId)
@@ -79,6 +80,23 @@ namespace DocumentsManager.BusinessLogic
             StyleClassContextHandler context = new StyleClassContextHandler();
             return context.GetById(id);
         }
+
+        public bool IsThisStyleInTheChainOfBased(StyleClass style, StyleClass firstStyle)
+        {
+            if (style.Equals(firstStyle))
+            {
+                return true;
+            }
+            if (style.Based != null)
+            {
+                StyleClass father = new StyleClass();
+                StyleClassContextHandler context = new StyleClassContextHandler();
+                father = context.GetById(style.Based.Id);
+                return IsThisStyleInTheChainOfBased(father, firstStyle);
+            }
+            return false;  
+        }
+
         public Guid AddStyle(StyleClass newStyle, Guid tokenId)
         {
             newStyle.Id = Guid.NewGuid();
