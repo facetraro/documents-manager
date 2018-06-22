@@ -8,7 +8,7 @@ namespace DocumentsManager.Exceptions
 {
     public class UserNotRegisteredException: Exception
     {
-        static string message = "ese usuario no existe.";
+        static string message = "Ese usuario no existe.";
         public UserNotRegisteredException() : base(message) { }
     }
 }

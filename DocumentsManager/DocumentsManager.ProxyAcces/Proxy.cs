@@ -98,7 +98,19 @@ namespace DocumentsManager.ProxyAcces
         }
         public Guid LogIn(string username, string password)
         {
-            User user = uBL.GetUserByUsername(username);
+            User user = new AdminUser();
+            try
+            {
+                user = uBL.GetUserByUsername(username);
+                if (user == null)
+                {
+                    throw new UserNotRegisteredException();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new UserNotRegisteredException();
+            }
             if (!uBL.IdRegistered(user))
             {
                 throw new ObjectDoesNotExists(user);
@@ -374,7 +386,8 @@ namespace DocumentsManager.ProxyAcces
                 throw new AlreadyReviewDocument();
             }
         }
-        public bool DeletingYourself(Guid id, Guid tokenId) {
+        public bool DeletingYourself(Guid id, Guid tokenId)
+        {
             if (GetUserById(id).Equals(GetUserByToken(tokenId)))
             {
                 return true;

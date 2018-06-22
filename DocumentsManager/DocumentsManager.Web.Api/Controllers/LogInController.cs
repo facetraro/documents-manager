@@ -62,6 +62,10 @@ namespace DocumentsManager.Web.Api.Controllers
             {
                 return BadRequest(credentialsException.Message);
             }
+            catch (Exception exc)
+            {
+                return BadRequest(exc.Message);
+            }
         }
 
         // PUT: api/LogIn/5
