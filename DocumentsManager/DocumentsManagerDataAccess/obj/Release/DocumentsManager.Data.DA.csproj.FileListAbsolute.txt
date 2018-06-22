@@ -1,0 +1,16 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\DocumentsManagerDataAccess.dll.config
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\DocumentsManagerDataAccess.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\DocumentsManagerDataAccess.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\DocumentsManager.AuthenticationToken.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\DocumentsManager.Data.Logger.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\DocumentsMangerEntities.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\EntityFramework.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\DocumentsManager.AuthenticationToken.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\DocumentsManager.Data.Logger.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\DocumentsMangerEntities.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\EntityFramework.xml
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\obj\Release\DocumentsManager.Data.DA.csprojResolveAssemblyReference.cache
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\obj\Release\DocumentsManagerDataAccess.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerDataAccess\obj\Release\DocumentsManagerDataAccess.pdb

@@ -1,0 +1,15 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\ImportedItemsParser.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\ImportedItemsParser.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\DocumentsManager.Exceptions.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\DocumentsManager.FormatImportation.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\DocumentsManager.ImportedItemsParser.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\DocumentsManagerExampleInstances.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\DocumentsMangerEntities.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\DocumentsManager.Exceptions.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\DocumentsManager.FormatImportation.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\DocumentsManager.ImportedItemsParser.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\DocumentsManagerExampleInstances.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\bin\Debug\DocumentsMangerEntities.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\obj\Debug\DocumentsManager.ImportedItemsParserTest.csprojResolveAssemblyReference.cache
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\obj\Debug\ImportedItemsParser.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\ImportedItemsParser\obj\Debug\ImportedItemsParser.pdb

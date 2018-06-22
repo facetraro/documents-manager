@@ -1,0 +1,16 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\DocumentsManager.ImportedItemsParser.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\DocumentsManager.ImportedItemsParser.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\DocumentsManager.Exceptions.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\DocumentsManager.FormatImportation.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\DocumentsManagerExampleInstances.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\DocumentsMangerEntities.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\DocumentsManager.Exceptions.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\DocumentsManager.FormatImportation.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\DocumentsManagerExampleInstances.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\DocumentsMangerEntities.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\bin\Debug\es\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\obj\Debug\DocumentsManager.ImportedItemsParser.csprojResolveAssemblyReference.cache
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\obj\Debug\DocumentsManager.ImportedItemsParser.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.ImportedItemsParser\obj\Debug\DocumentsManager.ImportedItemsParser.pdb

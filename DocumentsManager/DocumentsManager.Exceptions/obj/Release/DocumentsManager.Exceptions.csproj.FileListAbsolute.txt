@@ -1,0 +1,5 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Exceptions\bin\Release\DocumentsManager.Exceptions.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Exceptions\bin\Release\DocumentsManager.Exceptions.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Exceptions\obj\Release\DocumentsManager.Exceptions.csprojResolveAssemblyReference.cache
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Exceptions\obj\Release\DocumentsManager.Exceptions.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Exceptions\obj\Release\DocumentsManager.Exceptions.pdb

@@ -1,0 +1,4 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Exceptions\bin\Debug\DocumentsManager.Exceptions.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Exceptions\bin\Debug\DocumentsManager.Exceptions.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Exceptions\obj\Debug\DocumentsManager.Exceptions.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Exceptions\obj\Debug\DocumentsManager.Exceptions.pdb
