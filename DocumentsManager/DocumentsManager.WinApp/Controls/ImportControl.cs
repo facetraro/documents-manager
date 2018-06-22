@@ -55,6 +55,15 @@ namespace DocumentsManager.WinApp.Controls
             this.Controls.Add(newButton);
             return newButton;
         }
+        private Button AddStringParameter(string name)
+        {
+            Button newButton = new Button();
+            newButton.Text = "Buscar";
+            newButton.Click += (s, e) => { GetStringEvent(name); };
+            SetSecondBounds(newButton);
+            this.Controls.Add(newButton);
+            return newButton;
+        }
         private void AddParamater(Tuple<string, string> newTuple)
         {
             foreach (var item in parametersObtained)
@@ -64,6 +73,12 @@ namespace DocumentsManager.WinApp.Controls
                     parametersObtained.Remove(item);
                 }
             }
+            parametersObtained.Add(newTuple);
+        }
+        private void GetStringEvent(string name)
+        {
+            string result = Prompt.ShowInputDialog("Ingrese "+name, "");
+            Tuple<string, string> newTuple = new Tuple<string, string>(name, result);
             parametersObtained.Add(newTuple);
         }
         private void GetPathEvent(string name)
@@ -91,6 +106,10 @@ namespace DocumentsManager.WinApp.Controls
             SetDefaultBounds(newLabel);
             this.Controls.Add(newLabel);
             if (item.Item2 == ParameterType.Path)
+            {
+                return AddPathParameter(item.Item1);
+            }
+            if (item.Item2 == ParameterType.String)
             {
                 return AddPathParameter(item.Item1);
             }
@@ -145,7 +164,7 @@ namespace DocumentsManager.WinApp.Controls
                 {
                     foreach (StyleClass stylei in formati.StyleClasses)
                     {
-                        sBL.AddStyle(stylei,Guid.NewGuid());
+                        sBL.AddStyle(stylei, Guid.NewGuid());
                     }
                     fBL.AddFormat(formati, Guid.NewGuid());
                 }

@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace DocumentsManager.FormatImportation
 {
-    public enum ParameterType { Path };
+    public enum ParameterType { Path, String };
 }
