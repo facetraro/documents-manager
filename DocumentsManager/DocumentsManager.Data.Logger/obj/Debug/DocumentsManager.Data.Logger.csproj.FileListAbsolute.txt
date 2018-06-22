@@ -1,0 +1,4 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Data.Logger\bin\Debug\DocumentsManager.Data.Logger.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Data.Logger\bin\Debug\DocumentsManager.Data.Logger.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Data.Logger\obj\Debug\DocumentsManager.Data.Logger.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Data.Logger\obj\Debug\DocumentsManager.Data.Logger.pdb

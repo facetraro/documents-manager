@@ -1,6 +1,8 @@
-﻿using DocumentsManager.BusinessLogic;
+﻿using DocumentsManager.Dtos;
 using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
+using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +14,10 @@ namespace DocumentsManager.Web.Api.Controllers
 {
     public class LogInController : ApiController
     {
-        private UserBusinessLogic logic;
-        public LogInController() {
-            logic = new UserBusinessLogic();
+        private Proxy proxyAccess;
+        public LogInController()
+        {
+            proxyAccess = new Proxy();
         }
         // GET: api/LogIn
         public IHttpActionResult Get()
@@ -29,13 +32,23 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/LogIn
-        public IHttpActionResult Post(string username,[FromBody]LogInModel model)
+        public IHttpActionResult Post(string username, [FromBody]LogInModel model)
         {
             try
             {
-                Guid token = logic.LogIn(username, model.Password);
-                LoggedToken.SetToken(token);
-                return Ok(token);
+                Guid token = proxyAccess.LogIn(username, model.Password);
+                LogInDto newLogIn = new LogInDto();
+                newLogIn.Id = token;
+                User userLogged = proxyAccess.GetUserByToken(token);
+                if (userLogged is AdminUser)
+                {
+                    newLogIn.Role = "Admin";
+                }
+                else
+                {
+                    newLogIn.Role = "Editor";
+                }
+                return Ok(newLogIn);
             }
             catch (LostConnectionWithDataBase exception)
             {
@@ -48,6 +61,10 @@ namespace DocumentsManager.Web.Api.Controllers
             catch (InvalidCredentialException credentialsException)
             {
                 return BadRequest(credentialsException.Message);
+            }
+            catch (Exception exc)
+            {
+                return BadRequest(exc.Message);
             }
         }
 

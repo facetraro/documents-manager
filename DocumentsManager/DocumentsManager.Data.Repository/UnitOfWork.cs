@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DocumentsMangerEntities;
 using DocumentsManagerDataAccess;
 using DocumentsManager.AuthenticationToken;
+using DocumentsManager.Data.Logger;
 
 namespace DocumentsManager.Data.Repository
 {
@@ -23,13 +24,26 @@ namespace DocumentsManager.Data.Repository
         private GenericRepository<Document> documentRepository;
         private GenericRepository<ModifyDocumentHistory> historyRepository;
         private GenericRepository<Session> sessionRepository;
+        private GenericRepository<Friendship> friendshipRepository;
+        private GenericRepository<Review> reviewRepository;
+        private GenericRepository<LoggerType> loggerRepository;
 
 
         public UnitOfWork(ContextDataAccess documentsManagerContext)
         {
             context = documentsManagerContext;
         }
-
+        public IRepository<LoggerType> LoggerRepository
+        {
+            get
+            {
+                if (this.loggerRepository == null)
+                {
+                    this.loggerRepository = new GenericRepository<LoggerType>(context);
+                }
+                return loggerRepository;
+            }
+        }
         public IRepository<User> UserRepository
         {
             get
@@ -153,6 +167,28 @@ namespace DocumentsManager.Data.Repository
                     this.sessionRepository = new GenericRepository<Session>(context);
                 }
                 return sessionRepository;
+            }
+        }
+        public IRepository<Friendship> FriendshipRepository
+        {
+            get
+            {
+                if (this.friendshipRepository == null)
+                {
+                    this.friendshipRepository = new GenericRepository<Friendship>(context);
+                }
+                return friendshipRepository;
+            }
+        }
+        public IRepository<Review> ReviewRepository
+        {
+            get
+            {
+                if (this.reviewRepository == null)
+                {
+                    this.reviewRepository = new GenericRepository<Review>(context);
+                }
+                return reviewRepository;
             }
         }
 

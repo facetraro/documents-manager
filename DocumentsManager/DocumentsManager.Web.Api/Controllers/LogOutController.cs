@@ -1,4 +1,4 @@
-﻿using DocumentsManager.BusinessLogic;
+﻿using DocumentsManager.ProxyAcces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,10 @@ namespace DocumentsManager.Web.Api.Controllers
 {
     public class LogOutController : ApiController
     {
-        private UserBusinessLogic logic;
+        private Proxy proxyAccess;
         public LogOutController()
         {
-            logic = new UserBusinessLogic();
+            proxyAccess = new Proxy();
         }
         // GET: api/LogOut
         public IHttpActionResult Get()
@@ -28,11 +28,9 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/LogOut
-        public IHttpActionResult Post()
+        public IHttpActionResult Post(Guid token)
         {
-            Guid token = LoggedToken.GetToken();
-            LoggedToken.DeleteToken();
-            logic.LogOut(token);
+            proxyAccess.LogOut(token);
             return Ok(200);
         }
 

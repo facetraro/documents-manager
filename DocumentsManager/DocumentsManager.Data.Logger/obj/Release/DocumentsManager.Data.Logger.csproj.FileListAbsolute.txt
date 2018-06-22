@@ -1,0 +1,5 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Data.Logger\bin\Release\DocumentsManager.Data.Logger.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Data.Logger\bin\Release\DocumentsManager.Data.Logger.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Data.Logger\obj\Release\DocumentsManager.Data.Logger.csprojResolveAssemblyReference.cache
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Data.Logger\obj\Release\DocumentsManager.Data.Logger.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.Data.Logger\obj\Release\DocumentsManager.Data.Logger.pdb

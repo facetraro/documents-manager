@@ -8,7 +8,7 @@ namespace DocumentsManager.Exceptions
 {
     public class LostConnectionWithDataBase : Exception
     {
-        private static string message = "Se perdio la conexion con la Base de Datos";
+        static string message = "Se perdio la conexion con la Base de Datos";
         public LostConnectionWithDataBase() : base(message)
         {
 

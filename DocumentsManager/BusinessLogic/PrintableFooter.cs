@@ -24,7 +24,7 @@ namespace DocumentsManager.BusinessLogic
             string closeBody = "</body>";
             string closeHtml = "</html>";
             Footer footer = footerBL.GetById(FooterToPrint.Id);
-            StyleClass definedStyleClass = StyleClassBL.GetById(DefineStyleClass(containerDocument).Id);
+            StyleClass definedStyleClass = StyleClassBL.GetStyleById(DefineStyleClass(containerDocument).Id, Guid.NewGuid());
             if (definedStyleClass == null) definedStyleClass = new StyleClass();
             string textToPrint = "<footer>" + StyleClassBL.GetHtmlText(definedStyleClass, footer.Text.WrittenText) + "</footer>";
             return textToPrint + closeBody + closeHtml;
@@ -34,7 +34,7 @@ namespace DocumentsManager.BusinessLogic
         {
             TextBusinessLogic textBl = new TextBusinessLogic();
             FormatBusinessLogic formatBL = new FormatBusinessLogic();
-            Format documentFormat = formatBL.GetByID(containerDocument.Format.Id);
+            Format documentFormat = formatBL.GetFormatByID(containerDocument.Format.Id,Guid.NewGuid());
             Footer theFooter = footerBL.GetById(FooterToPrint.Id);
             StyleClass suitableStyleClass = new StyleClass();
             Text text = textBl.GetById(theFooter.Text.Id);

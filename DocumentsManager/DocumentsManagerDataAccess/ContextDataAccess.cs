@@ -1,4 +1,5 @@
 ﻿using DocumentsManager.AuthenticationToken;
+using DocumentsManager.Data.Logger;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,9 @@ namespace DocumentsManagerDataAccess
         public DbSet<Parragraph> Parragraphs { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<ModifyDocumentHistory> Histories { get; set; }
+        public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<LoggerType> Logs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -31,13 +35,16 @@ namespace DocumentsManagerDataAccess
             modelBuilder.Entity<Format>().HasKey(F => F.Id);
             modelBuilder.Entity<StyleAttribute>().HasKey(S => S.Id);
             modelBuilder.Entity<Text>().HasKey(T => T.Id);
-            modelBuilder.Entity<StyleClass>().HasOptional(c => c.Based).WithOptionalPrincipal();
+            modelBuilder.Entity<StyleClass>().HasOptional(c => c.Based).WithOptionalDependent();
             modelBuilder.Entity<Header>().HasKey(H => H.Id);
             modelBuilder.Entity<Footer>().HasKey(F => F.Id);
             modelBuilder.Entity<Parragraph>().HasKey(P => P.Id);
             modelBuilder.Entity<Document>().HasKey(D => D.Id);
             modelBuilder.Entity<ModifyDocumentHistory>().HasKey(MDH => MDH.Id);
             modelBuilder.Entity<Session>().HasKey(S => S.token);
+            modelBuilder.Entity<Friendship>().HasKey(F => F.Id);
+            modelBuilder.Entity<Review>().HasKey(R => R.Id);
+            modelBuilder.Entity<LoggerType>().HasKey(L => L.Id);
         }
     }
 }

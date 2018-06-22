@@ -33,17 +33,23 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(newHeader.StyleClass);
+                newHeader.Text.StyleClass = db.Styles.Find(newHeader.Text.StyleClass.Id);
                 unitOfWork.HeaderRepository.Insert(newHeader);
             }
         }
         public void Remove(Header headerToDelete)
         {
+            Header header = GetById(headerToDelete.Id);
             using (var db = new ContextDataAccess())
             {
+                Header headerFromDB = GetById(headerToDelete.Id);
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.HeaderRepository.Delete(headerToDelete);
+                if (headerFromDB != null)
+                {
+                    headerFromDB.Text.StyleClass = null;
+                    unitOfWork.HeaderRepository.Delete(headerFromDB.Id);
+                }
             }
-            Header header = GetById(headerToDelete.Id);
             if (header!=null)
             {
                 TextContext tContext = new TextContext();
@@ -53,12 +59,17 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Remove(Guid id)
         {
+            Header header = GetById(id);
             using (var db = new ContextDataAccess())
             {
+                Header headerFromDB = GetById(id);
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.HeaderRepository.Delete(id);
+                if (headerFromDB != null)
+                {
+                    headerFromDB.Text.StyleClass = null;
+                    unitOfWork.HeaderRepository.Delete(headerFromDB.Id);
+                }
             }
-            Header header = GetById(id);
             if (header != null)
             {
                 TextContext tContext = new TextContext();
@@ -67,6 +78,8 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public Header GetById(Guid id)
         {
+            StyleClassContextHandler sContext = new StyleClassContextHandler();
+            TextContext tContext = new TextContext();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -74,6 +87,11 @@ namespace DocumentsManager.Data.DA.Handler
                 Header theHeader = unitOfWork.HeaderRepository.GetByID(id);
                 db.Headers.Include("StyleClass").ToList().FirstOrDefault();
                 db.Headers.Include("Text").ToList().FirstOrDefault();
+                if (theHeader!=null)
+                {
+                    theHeader.Text = tContext.GetById(theHeader.Text.Id);
+                    theHeader.StyleClass = sContext.GetById(theHeader.StyleClass.Id);
+                }
                 return theHeader;
             }
         }

@@ -6,28 +6,52 @@ using System.Threading.Tasks;
 using DocumentsMangerEntities;
 using DocumentsManager.Data.DA.Handler;
 using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyInterfaces;
+using DocumentsManager.BusinessLogic.Charts;
+using DocumentsManager.Data.Logger;
 
 namespace DocumentsManager.BusinessLogic
 {
-    public class AdminBusinessLogic :UserBusinessLogic, IAdminsBusinessLogic
+    public class AdminBusinessLogic : UserBusinessLogic, IAdminsBusinessLogic, IChartsBusinessLogic
     {
-        private void ValidateAuthorizations()
+        public User LogInWithoutToken(string username, string password)
         {
-            Guid Token = LoggedToken.GetToken();
-            if (!(GetUserByToken(Token) is AdminUser))
+            User user = AuthenticateUser(username, password);
+            if (user != null)
             {
-                throw new UserNotAuthorizedException();
+                LoggerMethod lm = new LoggerMethod();
+                LoggerType log = new LoggerType
+                {
+                    Date = DateTime.Now,
+                    Action = ActionType.LogIn,
+                    UserBy = username,
+                    Id = new Guid()
+                };
+                lm.AddLogger(log);
+                return user;
+            }
+            return null;
+        }
+        public void LogInWinApp(string username, string password)
+        {
+            User user = LogInWithoutToken(username, password);
+            if (user != null)
+            {
+                if (user is AdminUser)
+                {
+                    return;
+                }
+                throw new NotAdminOrDoesntExistsException();
+
             }
         }
-        public ChartIntDate GetChartModificationsByUser(User user, DateTime since, DateTime until)
+        public ChartIntDate GetChartModificationsByUser(User user, DateTime since, DateTime until, Guid tokenId)
         {
-            ValidateAuthorizations();
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             return GetChartFromDates(GetDatesFromModifyDocument(user, null), since, until);
         }
-        public ChartIntDate GetChartCreationByUser(User user, DateTime since, DateTime until)
+        public ChartIntDate GetChartCreationByUser(User user, DateTime since, DateTime until, Guid tokenId)
         {
-            ValidateAuthorizations();
             DocumentBusinessLogic documentLogic = new DocumentBusinessLogic();
             return GetChartFromDates(GetDatesFromModifyDocument(user, ModifyState.Added), since, until);
         }
@@ -68,20 +92,19 @@ namespace DocumentsManager.BusinessLogic
             AddRegisterByDate(histories, chart);
             return chart;
         }
-        public Guid Add(AdminUser newAdmin)
+        public Guid AddAdmin(AdminUser newAdmin, Guid tokenId)
         {
-            ValidateAuthorizations();
             newAdmin.Id = Guid.NewGuid();
             UserContext userContext = new UserContext();
-            if (IdRegistered(newAdmin)) 
+            if (IdRegistered(newAdmin))
             {
                 throw new ObjectAlreadyExistsException("Id");
             }
-            if (EmailRegistered(newAdmin)) 
+            if (EmailRegistered(newAdmin))
             {
                 throw new ObjectAlreadyExistsException("email");
             }
-            if (UserNameRegistered(newAdmin)) 
+            if (UserNameRegistered(newAdmin))
             {
                 throw new ObjectAlreadyExistsException("username");
             }
@@ -89,13 +112,8 @@ namespace DocumentsManager.BusinessLogic
             return newAdmin.Id;
         }
 
-        public bool Delete(Guid id)
+        public bool DeleteAdmin(Guid id, Guid tokenId)
         {
-            ValidateAuthorizations();
-            if (id.Equals(GetUserByToken(LoggedToken.GetToken())))
-            {
-                throw new CantDeleteLoggedUserException();
-            }
             UserContext uContext = new UserContext();
             AdminUser idUser = new AdminUser();
             idUser.Id = id;
@@ -106,16 +124,14 @@ namespace DocumentsManager.BusinessLogic
             throw new ObjectDoesNotExists(idUser);
         }
 
-        public IEnumerable<AdminUser> GetAllAdmins()
+        public IEnumerable<AdminUser> GetAllAdmins(Guid tokenId)
         {
-            ValidateAuthorizations();
             UserContext uContext = new UserContext();
             return uContext.GetAdmins();
         }
 
-        public AdminUser GetByID(Guid id)
+        public AdminUser GetAdminByID(Guid id, Guid tokenId)
         {
-            ValidateAuthorizations();
             AdminUser userToReturn = new AdminUser();
             UserContext uContext = new UserContext();
             User userToVerify = uContext.GetById(id);
@@ -131,9 +147,8 @@ namespace DocumentsManager.BusinessLogic
             return userToReturn;
         }
 
-        public bool Update(Guid id, AdminUser newAdmin)
+        public bool UpdateAdmin(Guid id, AdminUser newAdmin, Guid tokenId)
         {
-            ValidateAuthorizations();
             UserContext uContext = new UserContext();
             bool updated = false;
             if (!uContext.Exists(newAdmin))
@@ -141,7 +156,7 @@ namespace DocumentsManager.BusinessLogic
                 throw new ObjectDoesNotExists(newAdmin);
             }
             updated = uContext.Modify(newAdmin);
-            User dbUser = GetByID(id);
+            User dbUser = GetAdminByID(id, Guid.NewGuid());
             if (!dbUser.hasSameInformation(newAdmin))
             {
                 updated = false;
@@ -149,17 +164,31 @@ namespace DocumentsManager.BusinessLogic
             return updated;
         }
 
-        public Guid Add(EditorUser user)
+        public Guid AddEditor(EditorUser user, Guid tokenId)
         {
-            ValidateAuthorizations();
             EditorBusinessLogic logic = new EditorBusinessLogic();
-            return logic.Add(user);
+            return logic.AddEditor(user, tokenId);
         }
 
-        public bool Delete(User user)
+        public bool DeleteAdmin(User user, Guid tokenId)
         {
-            ValidateAuthorizations();
-            return Delete(user.Id);
+            return DeleteAdmin(user.Id, tokenId);
         }
+        public bool CanDeleteFormat(Guid id) {
+            bool canDelete = true;
+            FormatBusinessLogic fBL = new FormatBusinessLogic();
+            DocumentBusinessLogic dBL = new DocumentBusinessLogic();
+            Format formatToDelete = fBL.GetFormatByID(id,Guid.NewGuid());
+            foreach (Document doci in dBL.GetAllDocuments(Guid.NewGuid()))
+            {
+                if (doci.Format.Equals(formatToDelete))
+                {
+                    canDelete = false;
+                }
+            }
+            return canDelete;
+        }
+
+
     }
 }

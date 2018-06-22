@@ -11,7 +11,7 @@ namespace DocumentsManager.BusinessLogic
             TextContext context = new TextContext();
             StyleClassBusinessLogic styleLogic = new StyleClassBusinessLogic();
             Text text = context.GetById(id);
-            text.StyleClass = styleLogic.GetById(text.StyleClass.Id);
+            text.StyleClass = styleLogic.GetStyleById(text.StyleClass.Id, Guid.NewGuid());
             return text;
         }
     }

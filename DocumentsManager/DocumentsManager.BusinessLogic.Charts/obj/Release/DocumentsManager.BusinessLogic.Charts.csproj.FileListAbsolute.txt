@@ -1,0 +1,7 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.BusinessLogic.Charts\bin\Release\DocumentsManager.BusinessLogic.Charts.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.BusinessLogic.Charts\bin\Release\DocumentsManager.BusinessLogic.Charts.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.BusinessLogic.Charts\bin\Release\DocumentsManager.Exceptions.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.BusinessLogic.Charts\bin\Release\DocumentsManager.Exceptions.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.BusinessLogic.Charts\obj\Release\DocumentsManager.BusinessLogic.Charts.csprojResolveAssemblyReference.cache
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.BusinessLogic.Charts\obj\Release\DocumentsManager.BusinessLogic.Charts.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.BusinessLogic.Charts\obj\Release\DocumentsManager.BusinessLogic.Charts.pdb

@@ -1,4 +1,4 @@
-﻿using DocumentsManager.BusinessLogic;
+﻿using DocumentsManager.ProxyAcces;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -11,14 +11,14 @@ namespace DocumentsManager.Web.Api.Controllers
 {
     public class PrintDocumentController : ApiController
     {
-        private IDocumentBusinessLogic documentBusinessLogic { get; set; }
-        public PrintDocumentController( IDocumentBusinessLogic dLogic)
+        private Proxy proxyAccess { get; set; }
+        public PrintDocumentController(Proxy proxy)
         {
-            this.documentBusinessLogic = dLogic;
+            this.proxyAccess = proxy;
         }
         public PrintDocumentController()
         {
-            this.documentBusinessLogic = new DocumentBusinessLogic();
+            this.proxyAccess = new Proxy();
         }
         // GET: api/PrintDocument
         public IEnumerable<string> Get()
@@ -27,10 +27,10 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/PrintDocument/5
-        public string Get(Guid id)
+        public string Get(Guid id, Guid token)
         {
-            Document toPrint = documentBusinessLogic.GetById(id);
-            return documentBusinessLogic.PrintDocument(toPrint);
+            Document toPrint = proxyAccess.GetDocumentById(id,token);
+            return proxyAccess.PrintDocument(toPrint,token);
         }
 
         // POST: api/PrintDocument

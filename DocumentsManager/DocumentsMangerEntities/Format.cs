@@ -11,6 +11,10 @@ namespace DocumentsMangerEntities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public virtual List<StyleClass> StyleClasses { get; set; }
+        public Format()
+        {
+            StyleClasses = new List<StyleClass>();
+        }
         public override bool Equals(object obj)
         {
             Format anotherFormat = obj as Format;
@@ -19,6 +23,10 @@ namespace DocumentsMangerEntities
                 return false;
             }
             return Id.Equals(anotherFormat.Id);
+        }
+        public override string ToString()
+        {
+            return "Nombre: " + Name + ", cantidad de Estilos: " + StyleClasses.Count;
         }
     }
 }

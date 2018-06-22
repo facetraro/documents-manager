@@ -22,7 +22,7 @@ namespace DocumentsManager.BusinessLogic
                 allTexts.Add(textLogic.GetById(item.Id));
             }
             parragraph.Texts = allTexts;
-            parragraph.StyleClass = styleLogic.GetById(parragraph.StyleClass.Id);
+            parragraph.StyleClass = styleLogic.GetStyleById(parragraph.StyleClass.Id, Guid.NewGuid());
             return parragraph;
         }
     }

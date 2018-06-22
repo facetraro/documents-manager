@@ -8,7 +8,7 @@ namespace DocumentsMangerEntities
         public TextAlignment TextAlignment { get; set; }
         public Alignment()
         {
-            Name = "Alineación";
+            Name = "Alineacion";
         }
         public override bool Equals(object obj)
         {
@@ -43,5 +43,10 @@ namespace DocumentsMangerEntities
         {
             return String.Empty;
         }
+  
+        public override string GetStringParse()
+        {
+            return base.ToString() + "###" + this.TextAlignment.GetStringParser();
+        } 
     }
 }

@@ -1,0 +1,39 @@
+<div>
+    <div align="center">
+           <h2> Perfil de {{username}} </h2>
+    </div>
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <div align="center" class='table-responsive' *ngIf= 'documents.length==0'>
+                <p>El usuario {{username}} no tiene Documentos en el sistema.</p>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class='table' *ngIf='documents && documents.length'>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titulo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let aDocument of documents'  >
+                            <td>{{aDocument.id }}</td>
+                            <td>{{aDocument.title | uppercase}}</td>
+                            <td>
+                                <button (click)="printDocument(aDocument.id)">
+                                        Ver Documento
+                                </button>
+                                &nbsp;
+                                <button (click)="reviewDocument(aDocument.id)">
+                                        Calificar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <app-go-home></app-go-home>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div>
+    <div align="center">
+        <button (click)="addDocument()">
+                Añadir Nuevo Documento
+        </button>
+    </div>
+    <br>
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <div style="overflow-x:auto;">
+                <table class='table' *ngIf='documents && documents.length'>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titulo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let aDocument of documents'  >
+                            <td>{{aDocument.id }}</td>
+                            <td>{{aDocument.title | uppercase}}</td>
+                            <td>
+                                <button (click)="printDocument(aDocument.id)">
+                                        Ver Documento
+                                </button>
+                                &nbsp;
+                                <button (click)="modifyDocument(aDocument.id)">
+                                        Modificar
+                                </button>
+                                &nbsp;
+                                <button (click)="deleteDocument(aDocument.id)">
+                                        Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <app-go-home></app-go-home>
+    </div>
+</div>

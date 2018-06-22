@@ -16,5 +16,18 @@
             }
             return null;
         }
+        public static string GetStringParser(this TextColor color)
+        {
+            switch (color)
+            {
+                case TextColor.Blue:
+                    return "0,0,128";
+                case TextColor.Black:
+                    return "0,0,0";
+                case TextColor.Red:
+                    return "128,0,0";
+            }
+            return null;
+        }
     }
 }

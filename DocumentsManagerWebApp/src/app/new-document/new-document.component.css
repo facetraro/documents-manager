@@ -1,0 +1,69 @@
+label {
+    font-family: "Verdana", Sans-serif;
+}
+
+body {
+    font-family: "Verdana", Sans-serif;
+}
+
+
+h2 {
+    font-family: "Verdana", Sans-serif;
+}
+
+
+h4 {
+    font-family: "Verdana", Sans-serif;
+}
+
+form {
+    border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 100%;
+    font-family: "Verdana", Sans-serif;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    font-family: "Verdana", Sans-serif;
+    width: 20%;
+    box-align: center;
+    align-self: center;
+    align-content: center;
+}
+
+h3 {
+    font-family: "Verdana", Sans-serif;
+}
+
+table {
+    width: 40%;
+    font-family: "Verdana", Sans-serif;
+    font-size: 11px;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}

@@ -1,0 +1,49 @@
+<div>
+  <div align="center">
+      <button (click)="addUser()">
+              Añadir Nuevo Usuario
+      </button>
+  </div>
+  <br>
+  <div class='panel-body'>
+      <div class='table-responsive'>
+          <div style="overflow-x:auto;">
+              <table class='table' *ngIf='users && users.length'>
+                  <thead>
+                      <tr>
+                          <th>Id</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                          <th>Usuario</th>
+                          <th>Correo</th>
+                          <th>Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor='let aFullUserData of users'  >
+                          <td>{{aFullUserData.id }}</td>
+                          <td>{{aFullUserData.name | uppercase}}</td>
+                          <td>{{aFullUserData.surname }}</td>
+                          <td>{{aFullUserData.username | lowercase }}</td>
+                          <td>{{aFullUserData.email | lowercase}}</td>
+                          <td>
+                            <button (click)="viewCharts(aFullUserData.id)">
+                                Estadisticas
+                            </button>
+                          &nbsp;
+                          <button (click)="modifyUser(aFullUserData.id)">
+                                  Modificar
+                          </button>
+                          &nbsp;
+                          <button (click)="deleteUser(aFullUserData.id)">
+                                  Eliminar
+                          </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <app-go-home></app-go-home>
+  </div>
+</div>

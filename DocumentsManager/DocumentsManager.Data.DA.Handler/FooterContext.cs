@@ -33,18 +33,23 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(newFooter.StyleClass);
+                newFooter.Text.StyleClass = db.Styles.Find(newFooter.Text.StyleClass.Id);
                 unitOfWork.FooterRepository.Insert(newFooter);
             }
         }
         public void Remove(Footer footerToDelete)
         {
-            
+            Footer footer = GetById(footerToDelete.Id);
             using (var db = new ContextDataAccess())
             {
+                Footer footerFromDB = GetById(footerToDelete.Id);
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.FooterRepository.Delete(footerToDelete);
+                if (footerFromDB != null)
+                {
+                    footerFromDB.Text.StyleClass = null;
+                    unitOfWork.FooterRepository.Delete(footerFromDB.Id);
+                }
             }
-            Footer footer = GetById(footerToDelete.Id);
             if (footer != null)
             {
                 TextContext tContext = new TextContext();
@@ -53,21 +58,29 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Remove(Guid id)
         {
+            Footer footer = GetById(id);
             using (var db = new ContextDataAccess())
             {
+
+                Footer footerFromDB = GetById(id);
                 var unitOfWork = new UnitOfWork(db);
-                unitOfWork.FooterRepository.Delete(id);
+                if (footerFromDB != null)
+                {
+                    footerFromDB.Text.StyleClass = null;
+                    unitOfWork.FooterRepository.Delete(footerFromDB.Id);
+                }
             }
-            Footer footer = GetById(id);
-            if (footer!=null)
+            if (footer != null)
             {
                 TextContext tContext = new TextContext();
                 tContext.Remove(footer.Text);
             }
-            
+
         }
         public Footer GetById(Guid id)
         {
+            TextContext tContext = new TextContext();
+            StyleClassContextHandler sContext = new StyleClassContextHandler();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -75,23 +88,28 @@ namespace DocumentsManager.Data.DA.Handler
                 Footer theFooter = unitOfWork.FooterRepository.GetByID(id);
                 db.Footers.Include("StyleClass").ToList().FirstOrDefault();
                 db.Footers.Include("Text").ToList().FirstOrDefault();
+                if (theFooter != null)
+                {
+                    theFooter.Text = tContext.GetById(theFooter.Text.Id);
+                    theFooter.StyleClass = sContext.GetById(theFooter.StyleClass.Id);
+                }
                 return theFooter;
             }
         }
         public void Modify(Footer modifiedFooter)
         {
+            TextContext tContext = new TextContext();
             Text oldText = new Text();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 Footer footerEntity = db.Footers.Find(modifiedFooter.Id);
-                oldText.WrittenText = modifiedFooter.Text.WrittenText;
-                oldText.Id = footerEntity.Text.Id;
-                oldText.StyleClass = modifiedFooter.Text.StyleClass;
+                oldText = tContext.GetById(footerEntity.Text.Id);
                 footerEntity.StyleClass = db.Styles.Find(modifiedFooter.StyleClass.Id); 
                 unitOfWork.FooterRepository.Update(footerEntity);
+                oldText.WrittenText = modifiedFooter.Text.WrittenText;
+                oldText.StyleClass = modifiedFooter.Text.StyleClass;
             }
-            TextContext tContext = new TextContext();
             tContext.Modify(oldText);
         }
     }

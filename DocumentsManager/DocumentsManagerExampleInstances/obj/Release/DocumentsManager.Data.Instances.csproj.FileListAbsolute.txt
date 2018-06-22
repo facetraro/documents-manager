@@ -1,0 +1,7 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerExampleInstances\bin\Release\DocumentsManagerExampleInstances.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerExampleInstances\bin\Release\DocumentsManagerExampleInstances.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerExampleInstances\bin\Release\DocumentsMangerEntities.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerExampleInstances\bin\Release\DocumentsMangerEntities.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerExampleInstances\obj\Release\DocumentsManager.Data.Instances.csprojResolveAssemblyReference.cache
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerExampleInstances\obj\Release\DocumentsManagerExampleInstances.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManagerExampleInstances\obj\Release\DocumentsManagerExampleInstances.pdb

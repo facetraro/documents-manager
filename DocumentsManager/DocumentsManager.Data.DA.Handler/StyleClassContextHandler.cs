@@ -45,7 +45,7 @@ namespace DocumentsManager.Data.DA.Handler
                 totalStyles = GetLazy().Count;
             }
         }
-        private bool AreStyleBasedOnHim(StyleClass style)
+        public bool AreStyleBasedOnHim(StyleClass style)
         {
             foreach (var item in GetLazy())
             {

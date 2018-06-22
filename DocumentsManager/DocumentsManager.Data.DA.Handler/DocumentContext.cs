@@ -33,7 +33,8 @@ namespace DocumentsManager.Data.DA.Handler
             fContext.Add(aDocument.Footer);
             hContext.Add(aDocument.Header);
         }
-        private void DeleteDocumentParragraphs(Document aDocument) {
+        private void DeleteDocumentParragraphs(Document aDocument)
+        {
             ParragraphContext pContext = new ParragraphContext();
             foreach (Parragraph parragraphi in aDocument.Parragraphs)
             {
@@ -76,6 +77,7 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.DocumentRepository.Insert(aDocument);
             }
             AddDocumentParragraphs(theParragraphs, aDocument);
+            aDocument.Parragraphs = theParragraphs;
         }
 
         public void ModifyParragraphs(Document aDocument)
@@ -123,8 +125,7 @@ namespace DocumentsManager.Data.DA.Handler
                 var unitOfWork = new UnitOfWork(db);
                 Document documenthEntity = db.Documents.Find(aDocument.Id);
                 documenthEntity.Parragraphs = new List<Parragraph>();
-                documenthEntity.StyleClass = aDocument.StyleClass;
-                db.Styles.Attach(documenthEntity.StyleClass);
+                documenthEntity.StyleClass = db.Styles.Find(aDocument.StyleClass.Id);
                 documenthEntity.Format = db.Formats.Find(aDocument.Format.Id);
                 documenthEntity.Footer = db.Footers.Find(aDocument.Footer.Id);
                 documenthEntity.Header = db.Headers.Find(aDocument.Header.Id);
@@ -138,15 +139,20 @@ namespace DocumentsManager.Data.DA.Handler
         {
             Document document = new Document();
             RemoveDocumentParagraphs(documentToDelete);
+            Document documentFromDB = GetById(documentToDelete.Id);
             documentToDelete.Parragraphs = new List<Parragraph>();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 document = GetById(documentToDelete.Id);
                 document.StyleClass = null;
-                unitOfWork.DocumentRepository.Delete(documentToDelete);
+                document.Footer.StyleClass = null;
+                document.Header.StyleClass = null;
+                document.Footer.Text.StyleClass = null;
+                document.Header.Text.StyleClass = null;
+                unitOfWork.DocumentRepository.Delete(document);
             }
-            DeleteDocumentParts(document);
+            DeleteDocumentParts(documentFromDB);
         }
 
         public List<Parragraph> GetParragraphOfDocument(Document aDocument)
@@ -166,6 +172,10 @@ namespace DocumentsManager.Data.DA.Handler
 
         public Document GetById(Guid id)
         {
+            ParragraphContext pContext = new ParragraphContext();
+            FooterContext fContext = new FooterContext();
+            HeaderContext hContext = new HeaderContext();
+            StyleClassContextHandler sContext = new StyleClassContextHandler();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -175,6 +185,20 @@ namespace DocumentsManager.Data.DA.Handler
                 db.Documents.Include("Header").ToList().FirstOrDefault();
                 db.Documents.Include("Format").ToList().FirstOrDefault();
                 db.Documents.Include("Parragraphs").ToList();
+                if (theDocument != null)
+                {
+                    List<Parragraph> eagerParragraphs = new List<Parragraph>();
+                    foreach (Parragraph pi in theDocument.Parragraphs)
+                    {
+                        eagerParragraphs.Add(pContext.GetById(pi.Id));
+                    }
+                    theDocument.Parragraphs = eagerParragraphs;
+                    theDocument.Footer = fContext.GetById(theDocument.Footer.Id);
+                    theDocument.Header = hContext.GetById(theDocument.Header.Id);
+                    theDocument.StyleClass = sContext.GetById(theDocument.StyleClass.Id);
+
+                }
+
                 return theDocument;
             }
         }

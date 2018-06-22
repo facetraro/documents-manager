@@ -36,6 +36,12 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.TextRepository.Insert(newText);
             }
         }
+
+        public void ClearOnlyInParragraphs()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Remove(Text textDelete)
         {
             using (var db = new ContextDataAccess())
@@ -44,6 +50,16 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.TextRepository.Delete(textDelete);
             }
         }
+
+        internal bool Exists(Text texti)
+        {
+            using (var db = new ContextDataAccess())
+            {
+                var unitOfWork = new UnitOfWork(db);
+                return unitOfWork.TextRepository.Exists(texti.Id);
+            }
+        }
+
         public void Remove(Guid id)
         {
             using (var db = new ContextDataAccess())
@@ -54,12 +70,16 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public Text GetById(Guid id)
         {
+            StyleClassContextHandler sContext = new StyleClassContextHandler();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-
                 Text theText = unitOfWork.TextRepository.GetByID(id);
                 db.Texts.Include("StyleClass").ToList().FirstOrDefault();
+                if (theText != null && theText.StyleClass != null)
+                {
+                    theText.StyleClass = sContext.GetById(theText.StyleClass.Id);
+                }
                 return theText;
             }
         }

@@ -1,0 +1,38 @@
+<div>
+  <div align="center">
+      <button (click)="addStyle()">
+              Añadir nuevo Estilo
+      </button>
+  </div>
+  <div class='panel-body'>
+      <div class='table-responsive'>
+          <div style="overflow-x:auto;">
+              <table class='table' *ngIf='styles && styles.length'>
+                  <thead>
+                      <tr>
+                          <th>Id</th>
+                          <th>Nombre</th>
+                          <th>Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor='let aFullStyleData of styles'  >
+                          <td>{{aFullStyleData.id }}</td>
+                          <td>{{aFullStyleData.name | uppercase}}</td>
+                          <td>
+                          <button (click)="modifyStyle(aFullStyleData.id)">
+                                  Modificar
+                          </button>
+                          &nbsp;
+                          <button (click)="deleteStyle(aFullStyleData.id)">
+                                  Eliminar
+                          </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <app-go-home></app-go-home>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<table align="center">
+  <div *ngIf="role=='Admin'">
+      <button (click)="goListAdmins()">
+          Gestion de Adminstradores
+        </button>
+        <button (click)="goListEditors()">
+            Gestion de Editores
+        </button>
+     </div>
+    <button (click)="goAllUsers()">
+      Ver Todos los Usuarios
+    </button>
+      <button (click)="goRequests()">
+          Ver Solicitudes de Amistad
+        </button>
+      <button (click)="goListFriends()">
+          Amigos
+        </button>
+    
+  
+      <button (click)="goListDocuments()">
+          Gestion de Documentos
+        </button>
+
+  <app-top-documents></app-top-documents>
+
+      <app-logout></app-logout>
+
+</table>
+

@@ -23,7 +23,7 @@ namespace DocumentsManager.BusinessLogic
         {
             string documentTitle = "<title>" + containerDocument.Title + "</title>";
             Header header = hContext.GetById(HeaderToPrint.Id);
-            StyleClass definedStyleClass = StyleClassBL.GetById(DefineStyleClass(containerDocument).Id);
+            StyleClass definedStyleClass = StyleClassBL.GetStyleById(DefineStyleClass(containerDocument).Id, Guid.NewGuid());
             if (definedStyleClass == null) definedStyleClass = new StyleClass();
             string textToPrint = "<head>" + StyleClassBL.GetHtmlText(definedStyleClass, header.Text.WrittenText) + "</head>";
             string openHtml = "<html>";
@@ -35,7 +35,7 @@ namespace DocumentsManager.BusinessLogic
         {
             TextBusinessLogic textBL = new TextBusinessLogic();
             FormatBusinessLogic formatBL = new FormatBusinessLogic();
-            Format documentFormat = formatBL.GetByID(containerDocument.Format.Id);
+            Format documentFormat = formatBL.GetFormatByID(containerDocument.Format.Id, Guid.NewGuid());
             Header theHeader = hContext.GetById(HeaderToPrint.Id);
             Text text = textBL.GetById(theHeader.Text.Id);
             StyleClass suitableStyleClass = new StyleClass();

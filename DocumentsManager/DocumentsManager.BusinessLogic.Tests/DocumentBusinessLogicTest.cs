@@ -34,6 +34,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             contextsc.Add(style);
             contextsc.Add(newDocument.Footer.StyleClass);
             contextsc.Add(newDocument.Header.StyleClass);
+            contextsc.Add(newDocument.Footer.Text.StyleClass);
+            contextsc.Add(newDocument.Header.Text.StyleClass);
             foreach (var item in newDocument.Format.StyleClasses)
             {
                 contextsc.Add(item);
@@ -63,7 +65,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             DocumentContextTest testDocument = new DocumentContextTest();
             Document document = testDocument.setUp(contextDocument);
             DocumentBusinessLogic logic = new DocumentBusinessLogic();
-            Document fullDocument = logic.GetDocumentById(document.Id);
+            Document fullDocument = logic.GetDocumentById(document.Id, Guid.NewGuid());
             Assert.IsFalse(fullDocument.Footer.Text == null);
             Assert.IsFalse(fullDocument.Footer.StyleClass == null);
             Assert.IsFalse(fullDocument.Header.Text == null);
@@ -71,6 +73,32 @@ namespace DocumentsManager.BusinessLogic.Tests
             Assert.IsFalse(fullDocument.Parragraphs[0].StyleClass == null);
             Assert.IsFalse(fullDocument.Parragraphs[0].Texts == null);
             Assert.IsFalse(fullDocument.Format.StyleClasses == null);
+            TearDown();
+        }
+
+        [TestMethod]
+        public void IsNotStyleInDocumentsTest()
+        {
+            DocumentContext contextDocument = new DocumentContext();
+            DocumentContextTest testDocument = new DocumentContextTest();
+            Document document = testDocument.setUp(contextDocument);
+            DocumentBusinessLogic logic = new DocumentBusinessLogic();
+            Document fullDocument = logic.GetDocumentById(document.Id, Guid.NewGuid());
+            StyleClassBusinessLogic scBL = new StyleClassBusinessLogic();
+            Assert.IsFalse(scBL.IsStyleInDocuments(new StyleClass()));
+            TearDown();
+        }
+        [ExpectedException(typeof(StyleClassUsedInAnotherElement))]
+        [TestMethod]
+        public void IsStyleInDocumentsTest()
+        {
+            DocumentContext contextDocument = new DocumentContext();
+            DocumentContextTest testDocument = new DocumentContextTest();
+            Document document = testDocument.setUp(contextDocument);
+            DocumentBusinessLogic logic = new DocumentBusinessLogic();
+            Document fullDocument = logic.GetDocumentById(document.Id, Guid.NewGuid());
+            StyleClassBusinessLogic scBL = new StyleClassBusinessLogic();
+            scBL.IsStyleInDocuments(document.StyleClass);
             TearDown();
         }
 
@@ -90,7 +118,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Footer footer = fContext.GetById(testDocument.Footer.Id);
             string parragraphText = "DefaultText";
             string parragraph = "<br>" + styleClassBL.GetHtmlText(new StyleClass(), parragraphText);
-            string printedDocument = documentBL.PrintDocument(testDocument);
+            string printedDocument = documentBL.PrintDocument(testDocument, Guid.NewGuid());
             string openHtml = "<html>";
             string openBody = "<body>";
             string documentTitle = "<title>" + testDocument.Title + "</title>";
@@ -118,8 +146,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             Footer footer = fContext.GetById(testDocument.Footer.Id);
             string parragraphText = "DefaultText";
             string parragraph = "<br>" + styleClassBL.GetHtmlText(new StyleClass(), parragraphText) ;
-            string printedDocument = documentBL.PrintDocument(testDocument);
-            string expectedResult = "<html><body><title>PrintableDocument</title><head><p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>HEADER</em></strong></p></head><br><p>DefaultText</p><footer><p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>FOOTER</em></strong></p></footer></body></html>";
+            string printedDocument = documentBL.PrintDocument(testDocument, Guid.NewGuid());
+            string expectedResult = "<html><body><title>PrintableDocument</title><head><p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>HEADER</strong></em></p></head><br><p>DefaultText</p><footer><p style=\" text-align: center ;  color: red ;  text-decoration: underline ;  font-size: 10pt; font-family: arial ; \"><em><strong>FOOTER</strong></em></p></footer></body></html>";
             Assert.AreEqual(printedDocument.Trim(), expectedResult.Trim());
             TearDown();
         }

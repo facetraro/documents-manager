@@ -64,6 +64,10 @@
       <Project>{4E29186B-65BD-422B-B4CB-6E3C81D83241}</Project>
       <Name>DocumentsManager.AuthenticationToken</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DocumentsManager.Data.Logger\DocumentsManager.Data.Logger.csproj">
+      <Project>{B3AADDFB-CB2B-4DA0-8F27-AF3DD2ED70AB}</Project>
+      <Name>DocumentsManager.Data.Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentsManagerDataAccess\DocumentsManager.Data.DA.csproj">
       <Project>{58405487-5C94-4569-8171-0ED3889C9A03}</Project>
       <Name>DocumentsManager.Data.DA</Name>

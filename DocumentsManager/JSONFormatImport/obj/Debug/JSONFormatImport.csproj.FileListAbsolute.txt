@@ -1,0 +1,9 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\JSONFormatImport\bin\Debug\JSONFormatImport.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\JSONFormatImport\bin\Debug\JSONFormatImport.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\JSONFormatImport\bin\Debug\DocumentsManager.FormatImportation.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\JSONFormatImport\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\JSONFormatImport\bin\Debug\DocumentsManager.FormatImportation.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\JSONFormatImport\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\JSONFormatImport\obj\Debug\JSONFormatImport.csprojResolveAssemblyReference.cache
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\JSONFormatImport\obj\Debug\JSONFormatImport.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\JSONFormatImport\obj\Debug\JSONFormatImport.pdb

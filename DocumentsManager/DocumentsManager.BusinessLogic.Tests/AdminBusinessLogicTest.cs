@@ -1,4 +1,5 @@
-﻿using DocumentsManager.Data.DA.Handler;
+﻿using DocumentsManager.BusinessLogic.Charts;
+using DocumentsManager.Data.DA.Handler;
 using DocumentsManager.Exceptions;
 using DocumentsManagerDATesting;
 using DocumentsManagerExampleInstances;
@@ -13,8 +14,10 @@ using System.Threading.Tasks;
 namespace DocumentsManager.BusinessLogic.Tests
 {
     [TestClass]
-    public class AdminBusinessLogicTest
+    public class AdminBusinessLogicTest : UserBusinessLogicTest
     {
+        private static string username = "testUsername";
+        private static string password = "testPassword";
         public void TearDown()
         {
             ClearDataBase.ClearAll();
@@ -24,11 +27,53 @@ namespace DocumentsManager.BusinessLogic.Tests
             TearDown();
             UserContext context = new UserContext();
             User newuser = EntitiesExampleInstances.TestAdminUser();
-            newuser.Username = "rareusername";
+            newuser.Username = username;
+            newuser.Password = password;
             newuser.Email = "rareemail";
             context.Add(newuser);
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             adminBL.LogIn(newuser.Username, newuser.Password);
+        }
+        [TestMethod]
+        public void LogInWithoutTokenOk()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            User result = adminBL.LogInWithoutToken(username, password);
+            Assert.AreEqual(adminBL.GetUserByUsername(username), result);
+            TearDown();
+        }
+        [ExpectedException(typeof(InvalidCredentialException))]
+        [TestMethod]
+        public void LogInWithoutTokenInvalidCredentials()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            UserContext uContext = new UserContext();
+            AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
+            uContext.Add(anAdmin);
+            User result = adminBL.LogInWithoutToken(username, password + "differentPassword");
+            TearDown();
+        }
+        [ExpectedException(typeof(NotAdminOrDoesntExistsException))]
+        [TestMethod]
+        public void LogInWinAppNotAuthorized()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            UserContext uContext = new UserContext();
+            EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
+            uContext.Add(anEditor);
+            adminBL.LogInWinApp(anEditor.Username, anEditor.Password);
+            TearDown();
+        }
+        [TestMethod]
+        public void LogInWinAppOk()
+        {
+            SetUp();
+            AdminBusinessLogic adminBL = new AdminBusinessLogic();
+            adminBL.LogInWinApp(username, password);
+            TearDown();
         }
         [TestMethod]
         public void GetAdminsBLTest()
@@ -39,7 +84,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
             uContext.Add(anAdmin);
             bool expectedResult = true;
-            bool result = adminBL.GetAllAdmins().Contains(anAdmin);
+            bool result = adminBL.GetAllAdmins(Guid.NewGuid()).Contains(anAdmin);
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -54,7 +99,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             uContext.Add(anAdmin);
             uContext.Add(anotherAdmin);
             bool expectedResult = true;
-            IEnumerable<AdminUser> allAdmins = adminBL.GetAllAdmins();
+            IEnumerable<AdminUser> allAdmins = adminBL.GetAllAdmins(Guid.NewGuid());
             bool resultOne = allAdmins.Contains(anAdmin);
             bool resultTwo = allAdmins.Contains(anotherAdmin);
             Assert.AreEqual(expectedResult, resultOne && resultTwo);
@@ -66,7 +111,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             bool expectedResult = true;
-            bool result = adminBL.GetAllAdmins().Count() == 1;
+            bool result = adminBL.GetAllAdmins(Guid.NewGuid()).Count() == 1;
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -121,7 +166,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             DateTime date1 = new DateTime(2018, 8, 1, 0, 0, 0);
             DateTime date2 = new DateTime(2018, 8, 12, 0, 0, 0);
             AdminBusinessLogic logic = new AdminBusinessLogic();
-            ChartIntDate result = logic.GetChartCreationByUser(new AdminUser(), date1, date2);
+            ChartIntDate result = logic.GetChartCreationByUser(new AdminUser(), date1, date2, Guid.NewGuid());
             ChartIntDate expected = new ChartIntDate();
             while (DateTime.Compare(date1, date2) < 0)
             {
@@ -146,7 +191,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Document documentInBD = documentContext.setUp(context);
             userLogic.ModifyDocument(newUser, documentInBD, ModifyState.Added);
             AdminBusinessLogic logic = new AdminBusinessLogic();
-            ChartIntDate result = logic.GetChartCreationByUser(newUser, date1, date2);
+            ChartIntDate result = logic.GetChartCreationByUser(newUser, date1, date2, Guid.NewGuid());
             ChartIntDate expected = new ChartIntDate();
             expected.AddTuple(1, date1);
             date1 = date1.AddDays(1);
@@ -174,7 +219,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             Document documentInBD = documentContext.setUp(context);
             userLogic.ModifyDocument(newUser, documentInBD, ModifyState.Added);
             AdminBusinessLogic logic = new AdminBusinessLogic();
-            ChartIntDate result = logic.GetChartModificationsByUser(newUser, date1, date2);
+            ChartIntDate result = logic.GetChartModificationsByUser(newUser, date1, date2, Guid.NewGuid());
             ChartIntDate expected = new ChartIntDate();
             expected.AddTuple(1, date1);
             date1 = date1.AddDays(1);
@@ -205,7 +250,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             userLogic.ModifyDocument(newUser, documentInBD, ModifyState.Modified);
             userLogic.ModifyDocument(newUser, anotherDocumentInBD, ModifyState.Added);
             AdminBusinessLogic logic = new AdminBusinessLogic();
-            ChartIntDate result = logic.GetChartCreationByUser(newUser, date1, date2);
+            ChartIntDate result = logic.GetChartCreationByUser(newUser, date1, date2, Guid.NewGuid());
             ChartIntDate expected = new ChartIntDate();
             expected.AddTuple(2, date1);
             date1 = date1.AddDays(1);
@@ -223,7 +268,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             DateTime date1 = DateTime.Today;
             DateTime date2 = DateTime.Today.AddDays(10);
             AdminBusinessLogic logic = new AdminBusinessLogic();
-            ChartIntDate result = logic.GetChartModificationsByUser(SetUpChart(ModifyState.Modified), date1, date2);
+            ChartIntDate result = logic.GetChartModificationsByUser(SetUpChart(ModifyState.Modified), date1, date2, Guid.NewGuid());
             ChartIntDate expected = new ChartIntDate();
             expected.AddTuple(3, date1);
             date1 = date1.AddDays(1);
@@ -241,7 +286,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             DateTime date1 = DateTime.Today;
             DateTime date2 = DateTime.Today.AddDays(10);
             AdminBusinessLogic logic = new AdminBusinessLogic();
-            ChartIntDate result = logic.GetChartModificationsByUser(SetUpChart(ModifyState.Removed), date1, date2);
+            ChartIntDate result = logic.GetChartModificationsByUser(SetUpChart(ModifyState.Removed), date1, date2, Guid.NewGuid());
             ChartIntDate expected = new ChartIntDate();
             expected.AddTuple(3, date1);
             date1 = date1.AddDays(1);
@@ -277,7 +322,7 @@ namespace DocumentsManager.BusinessLogic.Tests
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             UserContext uContext = new UserContext();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            Guid expectedResult = adminBL.Add(anAdmin);
+            Guid expectedResult = adminBL.AddAdmin(anAdmin, Guid.NewGuid());
             Guid result = uContext.GetById(expectedResult).Id;
             Assert.AreEqual(expectedResult, result);
             TearDown();
@@ -288,9 +333,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            adminBL.Add(anAdmin);
+            adminBL.AddAdmin(anAdmin, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = adminBL.GetAllAdmins().Count() == 2;
+            bool result = adminBL.GetAllAdmins(Guid.NewGuid()).Count() == 2;
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -304,8 +349,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
             AdminUser anotherAdmin = EntitiesExampleInstances.TestAdminUser();
             anotherAdmin.Email = "differentEmail";
-            adminBL.Add(anAdmin);
-            adminBL.Add(anotherAdmin);
+            adminBL.AddAdmin(anAdmin, Guid.NewGuid());
+            adminBL.AddAdmin(anotherAdmin, Guid.NewGuid());
             TearDown();
         }
         [ExpectedException(typeof(ObjectAlreadyExistsException))]
@@ -317,8 +362,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
             AdminUser anotherAdmin = EntitiesExampleInstances.TestAdminUser();
             anotherAdmin.Username = "differentUserName";
-            adminBL.Add(anAdmin);
-            adminBL.Add(anotherAdmin);
+            adminBL.AddAdmin(anAdmin, Guid.NewGuid());
+            adminBL.AddAdmin(anotherAdmin, Guid.NewGuid());
             TearDown();
         }
         [TestMethod]
@@ -330,10 +375,10 @@ namespace DocumentsManager.BusinessLogic.Tests
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
             anAdmin.Email = "newemail";
             anAdmin.Username = "newusername";
-            Guid idUserToDelete = adminBL.Add(anAdmin);
-            adminBL.Delete(idUserToDelete);
+            Guid idUserToDelete = adminBL.AddAdmin(anAdmin, Guid.NewGuid());
+            adminBL.DeleteAdmin(idUserToDelete, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = adminBL.GetAllAdmins().Count() == 1;
+            bool result = adminBL.GetAllAdmins(Guid.NewGuid()).Count() == 1;
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -343,10 +388,10 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            Guid idUserToDelete = adminBL.Add(anAdmin);
-            adminBL.Delete(idUserToDelete);
+            Guid idUserToDelete = adminBL.AddAdmin(anAdmin, Guid.NewGuid());
+            adminBL.DeleteAdmin(idUserToDelete, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = !adminBL.GetAllAdmins().Contains(anAdmin);
+            bool result = !adminBL.GetAllAdmins(Guid.NewGuid()).Contains(anAdmin);
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -356,9 +401,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            Guid idUserToDelete = adminBL.Add(anAdmin);
+            Guid idUserToDelete = adminBL.AddAdmin(anAdmin, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = adminBL.Delete(idUserToDelete);
+            bool result = adminBL.DeleteAdmin(idUserToDelete, Guid.NewGuid());
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -368,7 +413,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
-            adminBL.Delete(Guid.NewGuid());
+            adminBL.DeleteAdmin(Guid.NewGuid(), Guid.NewGuid());
             TearDown();
         }
         [TestMethod]
@@ -377,9 +422,9 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            Guid IdUserAdded = adminBL.Add(anAdmin);
+            Guid IdUserAdded = adminBL.AddAdmin(anAdmin, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = adminBL.GetByID(IdUserAdded).Equals(anAdmin);
+            bool result = adminBL.GetAdminByID(IdUserAdded, Guid.NewGuid()).Equals(anAdmin);
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -389,7 +434,7 @@ namespace DocumentsManager.BusinessLogic.Tests
         {
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
-            adminBL.GetByID(Guid.NewGuid());
+            adminBL.GetAdminByID(Guid.NewGuid(), Guid.NewGuid());
             TearDown();
         }
         [TestMethod]
@@ -398,13 +443,13 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            Guid IdUserAdded = adminBL.Add(anAdmin);
+            Guid IdUserAdded = adminBL.AddAdmin(anAdmin, Guid.NewGuid());
             AdminUser anotherAdmin = EntitiesExampleInstances.TestAdminUser();
             anotherAdmin.Username = "UserName2";
             anotherAdmin.Email = "Email2";
-            adminBL.Add(anotherAdmin);
+            adminBL.AddAdmin(anotherAdmin, Guid.NewGuid());
             bool expectedResult = true;
-            bool result = adminBL.GetByID(IdUserAdded).Equals(anAdmin);
+            bool result = adminBL.GetAdminByID(IdUserAdded, Guid.NewGuid()).Equals(anAdmin);
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -416,8 +461,8 @@ namespace DocumentsManager.BusinessLogic.Tests
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             EditorBusinessLogic editorBL = new EditorBusinessLogic();
             EditorUser anEditor = EntitiesExampleInstances.TestEditorUser();
-            Guid IdUserAdded = editorBL.Add(anEditor);
-            adminBL.GetByID(anEditor.Id);
+            Guid IdUserAdded = editorBL.AddEditor(anEditor, Guid.NewGuid());
+            adminBL.GetAdminByID(anEditor.Id, Guid.NewGuid());
             TearDown();
         }
         [TestMethod]
@@ -426,10 +471,10 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            Guid IdUserAdded = adminBL.Add(anAdmin);
+            Guid IdUserAdded = adminBL.AddAdmin(anAdmin, Guid.NewGuid());
             anAdmin.Email = "modified@gmail.com";
             bool expectedResult = true;
-            bool result = adminBL.Update(IdUserAdded, anAdmin);
+            bool result = adminBL.UpdateAdmin(IdUserAdded, anAdmin, Guid.NewGuid());
             Assert.AreEqual(expectedResult, result);
             TearDown();
         }
@@ -439,10 +484,10 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            Guid IdUserAdded = adminBL.Add(anAdmin);
+            Guid IdUserAdded = adminBL.AddAdmin(anAdmin, Guid.NewGuid());
             anAdmin.Email = "modified@gmail.com";
-            adminBL.Update(IdUserAdded, anAdmin);
-            Assert.AreEqual(adminBL.GetByID(IdUserAdded).Email, "modified@gmail.com");
+            adminBL.UpdateAdmin(IdUserAdded, anAdmin, Guid.NewGuid());
+            Assert.AreEqual(adminBL.GetAdminByID(IdUserAdded, Guid.NewGuid()).Email, "modified@gmail.com");
             TearDown();
         }
         [TestMethod]
@@ -451,13 +496,13 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            Guid IdUserAdded = adminBL.Add(anAdmin);
+            Guid IdUserAdded = adminBL.AddAdmin(anAdmin, Guid.NewGuid());
             anAdmin.Name = "George";
             anAdmin.Password = "newPassword";
             anAdmin.Surname = "Gomez";
             anAdmin.Username = "modifiedUsername";
-            adminBL.Update(IdUserAdded, anAdmin);
-            AdminUser modifiedUser = adminBL.GetByID(IdUserAdded);
+            adminBL.UpdateAdmin(IdUserAdded, anAdmin, Guid.NewGuid());
+            AdminUser modifiedUser = adminBL.GetAdminByID(IdUserAdded, Guid.NewGuid());
             Assert.AreEqual(modifiedUser.Name, "George");
             Assert.AreEqual(modifiedUser.Password, "newPassword");
             Assert.AreEqual(modifiedUser.Surname, "Gomez");
@@ -471,13 +516,13 @@ namespace DocumentsManager.BusinessLogic.Tests
             SetUp();
             AdminBusinessLogic adminBL = new AdminBusinessLogic();
             AdminUser anAdmin = EntitiesExampleInstances.TestAdminUser();
-            Guid IdUserAdded = adminBL.Add(anAdmin);
+            Guid IdUserAdded = adminBL.AddAdmin(anAdmin, Guid.NewGuid());
             anAdmin.Name = "George";
             anAdmin.Password = "newPassword";
             anAdmin.Surname = "Gomez";
             anAdmin.Username = "modifiedUsername";
-            adminBL.Update(IdUserAdded, anAdmin);
-            AdminUser modifiedUser = adminBL.GetByID(IdUserAdded);
+            adminBL.UpdateAdmin(IdUserAdded, anAdmin, Guid.NewGuid());
+            AdminUser modifiedUser = adminBL.GetAdminByID(IdUserAdded, Guid.NewGuid());
             Assert.AreEqual(modifiedUser.Name, "George");
             Assert.AreEqual(modifiedUser.Password, "newPassword");
             Assert.AreEqual(modifiedUser.Surname, "Gomez");
@@ -491,15 +536,40 @@ namespace DocumentsManager.BusinessLogic.Tests
             DateTime date1 = DateTime.Today;
             DateTime date2 = DateTime.Today.AddDays(10);
             AdminBusinessLogic logic = new AdminBusinessLogic();
-            ChartIntDate chartResult = logic.GetChartModificationsByUser(SetUpChart(ModifyState.Modified), date1, date2);
+            ChartIntDate chartResult = logic.GetChartModificationsByUser(SetUpChart(ModifyState.Modified), date1, date2, Guid.NewGuid());
             string result = chartResult.ToString();
             string expected = "[Documentos:3- Fecha:10/05/2018][Documentos:0- Fecha:11/05/2018][Documentos:0- Fecha:12/05/2018]"
-                +"[Documentos:0- Fecha:13/05/2018][Documentos:0- Fecha:14/05/2018][Documentos:0- Fecha:15/05/2018]"+
-                "[Documentos:0- Fecha:16/05/2018][Documentos:0- Fecha:17/05/2018][Documentos:0- Fecha:18/05/2018]"+
+                + "[Documentos:0- Fecha:13/05/2018][Documentos:0- Fecha:14/05/2018][Documentos:0- Fecha:15/05/2018]" +
+                "[Documentos:0- Fecha:16/05/2018][Documentos:0- Fecha:17/05/2018][Documentos:0- Fecha:18/05/2018]" +
                 "[Documentos:0- Fecha:19/05/2018]";
-            
+
             expected = chartResult.ToString();
             Assert.IsTrue(expected.Equals(result));
+            TearDown();
+        }
+        [TestMethod]
+        public void CanDeleteTestFalse()
+        {
+            TearDown();
+            Document docAdded = AddADocumentToDB();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            Assert.IsFalse(aBL.CanDeleteFormat(docAdded.Format.Id));
+            TearDown();
+        }
+        [TestMethod]
+        public void CanDeleteTestTrue()
+        {
+            TearDown();
+            FormatBusinessLogic fBL = new FormatBusinessLogic();
+            Format newFormat = new Format {
+                Id = Guid.NewGuid(),
+                Name="TestFormatCanDeleteTrue",
+                StyleClasses=new List<StyleClass>()
+            };
+            Guid formatId = fBL.AddFormat(newFormat, Guid.NewGuid());
+            Document docAdded = AddADocumentToDB();
+            AdminBusinessLogic aBL = new AdminBusinessLogic();
+            Assert.IsTrue(aBL.CanDeleteFormat(newFormat.Id));
             TearDown();
         }
     }

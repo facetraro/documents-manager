@@ -1,4 +1,6 @@
-﻿using DocumentsManager.BusinessLogic;
+﻿using DocumentsManager.FormatImportation;
+using DocumentsManager.ImportedItemsParser;
+using DocumentsManager.ProxyAcces;
 using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
 using System;
@@ -12,27 +14,27 @@ namespace DocumentsManager.Web.Api.Controllers
 {
     public class StyleClassController : ApiController
     {
-        private IStyleClassBusinessLogic styleClassBusinessLogic { get; set; }
+        private Proxy proxyAccess { get; set; }
 
-        public StyleClassController(IStyleClassBusinessLogic logic)
+        public StyleClassController(Proxy proxy)
         {
-            styleClassBusinessLogic = logic;
+            proxyAccess = proxy;
         }
         public StyleClassController()
         {
-            styleClassBusinessLogic = new StyleClassBusinessLogic();
+            proxyAccess = new Proxy();
         }
 
         // GET: api/StyleClass
         [HttpGet]
         [Route("viewStyles")]
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(Guid token)
         {
-            IEnumerable<StyleClass> realStyles = styleClassBusinessLogic.GetAllStyleClasses();
-            List<StyleClassDto> styles = new List<StyleClassDto>();
+            IEnumerable<StyleClass> realStyles = proxyAccess.GetAllStyleClasses(token);
+            List<ImportedStyleClass> styles = new List<ImportedStyleClass>();
             foreach (var item in realStyles)
             {
-                styles.Add(new StyleClassDto(item));
+                styles.Add(StyleClassParser.Parse(item));
             }
             if (styles == null)
             {
@@ -42,12 +44,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/StyleClass/5
-        public IHttpActionResult Get(Guid id)
+        public IHttpActionResult Get(Guid id, Guid token)
         {
             try
             {
-                StyleClass styleComplete = styleClassBusinessLogic.GetById(id);
-                StyleClassDto style = new StyleClassDto(styleComplete);
+                StyleClass styleComplete = proxyAccess.GetStyleById(id, token);
+                ImportedStyleClass style = StyleClassParser.Parse(styleComplete);
                 if (style == null)
                 {
                     return NotFound();
@@ -61,41 +63,50 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/StyleClass
-        public IHttpActionResult Post([FromBody] StyleClassModel style)
+        public IHttpActionResult Post([FromBody] ImportedStyleClass style, Guid token)
         {
             try
             {
-                StyleClass styleToAdd = GetEntityStyleClass(style);
-                Guid id = styleClassBusinessLogic.Add(styleToAdd);
-                return CreatedAtRoute("DefaultApi", new { id = styleToAdd.Id }, styleToAdd);
+                StyleClass styleToAdd = StyleClassParser.Parse(style);
+                Guid id = proxyAccess.AddStyle(styleToAdd, token);
+                return Ok(id);
             }
             catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
         // PUT: api/StyleClass/5
-        public IHttpActionResult Put(Guid id, [FromBody]StyleClassModel style)
+        public IHttpActionResult Put(Guid id, [FromBody]ImportedStyleClass style, Guid token)
         {
             try
             {
-                StyleClass styleToAdd = GetEntityStyleClass(style);
-                bool updateResult = styleClassBusinessLogic.Update(id, styleToAdd);
-                return CreatedAtRoute("DefaultApi", new { updated = updateResult }, styleToAdd);
+                StyleClass styleToAdd = StyleClassParser.Parse(style);
+                styleToAdd.Id = id;
+                bool updateResult = proxyAccess.UpdateStyle(id, styleToAdd, token);
+                return Ok(200);
             }
             catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
         //  DELETE: api/StyleClass/5
-        public HttpResponseMessage Delete(Guid id)
+        public HttpResponseMessage Delete(Guid id, Guid token)
         {
             try
             {
-                bool updateResult = styleClassBusinessLogic.Delete(id);
+                bool updateResult = proxyAccess.DeleteStyle(id, token);
                 return Request.CreateResponse(HttpStatusCode.NoContent, updateResult);
             }
             catch (ArgumentNullException ex)

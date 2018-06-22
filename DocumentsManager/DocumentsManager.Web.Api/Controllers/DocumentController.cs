@@ -1,7 +1,9 @@
-﻿using DocumentsManager.BusinessLogic;
-using DocumentsManager.Exceptions;
+﻿using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyAcces;
+using DocumentsManager.ProxyInterfaces;
 using DocumentsManager.Web.Api.Models;
 using DocumentsMangerEntities;
+using DocumentsManager.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,28 +15,25 @@ namespace DocumentsManager.Web.Api.Controllers
 {
     public class DocumentController : ApiController
     {
-        private IUsersBusinessLogic usersBuisnessLogic { get; set; }
-        private IDocumentBusinessLogic documentBusinessLogic { get; set; }
-        public DocumentController(IUsersBusinessLogic logic, IDocumentBusinessLogic dLogic)
+        private Proxy proxyAccess;
+        public DocumentController(Proxy proxy)
         {
-            this.usersBuisnessLogic = logic;
-            this.documentBusinessLogic = dLogic;
+            proxyAccess = proxy;
         }
         public DocumentController()
         {
-            this.usersBuisnessLogic = new AdminBusinessLogic();
-            this.documentBusinessLogic = new DocumentBusinessLogic();
+            proxyAccess = new Proxy();
         }
         // GET: api/Document
         [HttpGet]
         [Route("Documents")]
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(Guid token)
         {
-            IEnumerable<Document> documentsComplete = documentBusinessLogic.GetAllDocuments();
+            IEnumerable<Document> documentsComplete = proxyAccess.GetDocumentsFromUser(proxyAccess.GetUserByToken(token),token);
             List<DocumentDto> documents = new List<DocumentDto>();
             foreach (var item in documentsComplete)
             {
-                documents.Add(new DocumentDto(item));
+                 documents.Add(new DocumentDto(item));
             }
             if (documents == null)
             {
@@ -44,12 +43,12 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // GET: api/Document/5
-        public IHttpActionResult Get(Guid id)
+        public IHttpActionResult Get(Guid id, Guid token)
         {
             try
             {
-                Document documentComplete = documentBusinessLogic.GetById(id);
-                DocumentDto document = new DocumentDto(documentComplete);
+
+                DocumentDto document = new DocumentDto(proxyAccess.GetFullDocument(id, token));
                 if (document == null)
                 {
                     return NotFound();
@@ -68,23 +67,56 @@ namespace DocumentsManager.Web.Api.Controllers
         }
 
         // POST: api/Document
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]DocumentModel model, Guid token)
         {
+            try
+            {
+                model.Id = Guid.Empty;
+                Document documentToAdd = GetEntityDocument(model);
+                Guid id = proxyAccess.CreateADocument(documentToAdd, token);
+                return Ok(id);
+            }
+            catch (NoUserLoggedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ObjectAlreadyExistsException alreadyExistsException)
+            {
+                return BadRequest(alreadyExistsException.Message);
+            }
 
         }
 
         // PUT: api/Document/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Document/5
-        public HttpResponseMessage Delete(Guid id)
+        public IHttpActionResult Put(Guid id, [FromBody]DocumentModel model, Guid token)
         {
             try
             {
-                Document documentToDelete = documentBusinessLogic.GetById(id);
-                bool updateResult = usersBuisnessLogic.DeleteDocument(documentToDelete);
+                Document documentToModify = GetEntityDocument(model);
+                bool updateResult = proxyAccess.UpdateADocument(id, documentToModify, token);
+                return Ok(id);
+            }
+            catch (NoUserLoggedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ObjectDoesNotExists doesNotExistsException)
+            {
+                return BadRequest(doesNotExistsException.Message);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // DELETE: api/Document/5
+        public HttpResponseMessage Delete(Guid id, Guid token)
+        {
+            try
+            {
+                Document documentToDelete = proxyAccess.GetDocumentById(id,token);
+                bool updateResult = proxyAccess.DeleteADocument(documentToDelete, token);
                 return Request.CreateResponse(HttpStatusCode.Accepted, updateResult);
             }
             catch (ObjectDoesNotExists doesNotExists)
@@ -100,5 +132,10 @@ namespace DocumentsManager.Web.Api.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+        private Document GetEntityDocument(DocumentModel model)
+        {
+            return model.GetEntityModel();
+        }
+
     }
 }

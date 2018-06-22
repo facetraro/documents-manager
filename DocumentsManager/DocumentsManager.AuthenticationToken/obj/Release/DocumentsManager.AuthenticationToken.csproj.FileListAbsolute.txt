@@ -1,0 +1,12 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\bin\Release\DocumentsManager.AuthenticationToken.dll.config
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\bin\Release\DocumentsManager.AuthenticationToken.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\bin\Release\DocumentsManager.AuthenticationToken.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\bin\Release\DocumentsManager.Exceptions.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\bin\Release\EntityFramework.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\bin\Release\DocumentsManager.Exceptions.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\bin\Release\EntityFramework.xml
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\obj\Release\DocumentsManager.AuthenticationToken.csprojResolveAssemblyReference.cache
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\obj\Release\DocumentsManager.AuthenticationToken.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsManager.AuthenticationToken\obj\Release\DocumentsManager.AuthenticationToken.pdb

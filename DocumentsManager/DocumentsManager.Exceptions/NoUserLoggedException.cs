@@ -8,7 +8,7 @@ namespace DocumentsManager.Exceptions
 {
     public class NoUserLoggedException:Exception
     {
-        private static string message = "No hay ningun usuario logeado para hacer esa acción";
+        static string message = "No hay ningun usuario logeado para hacer esa acción";
         public NoUserLoggedException() : base(message)
         {
 

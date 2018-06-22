@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminUser.cs" />
+    <Compile Include="Attributes\Border.cs" />
+    <Compile Include="Friendship.cs" />
+    <Compile Include="FriendshipState.cs" />
     <Compile Include="ModifyState.cs" />
     <Compile Include="Attributes\Alignment.cs" />
     <Compile Include="Attributes\Bold.cs" />
@@ -49,6 +52,7 @@
     <Compile Include="Attributes\Italics.cs" />
     <Compile Include="Attributes\StyleColor.cs" />
     <Compile Include="ModifyDocumentHistory.cs" />
+    <Compile Include="Review.cs" />
     <Compile Include="StyleAttribute.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="DocumentObject.cs" />

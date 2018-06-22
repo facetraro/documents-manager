@@ -1,0 +1,127 @@
+<div align="center">
+    <h2>Modificar Documento</h2>
+
+
+      <label>Nombre:
+        <input [(ngModel)]="document.title" placeholder="title">
+      </label>
+      <br>
+      <br>
+      <label>Estilo:
+        <select [(ngModel)]="style" placeholder="id"> 
+          <option *ngFor="let c of allStyles" [ngValue]="c.id"  [selected]="c.id == style">{{c.name}}</option>
+        </select>
+      </label>
+      <br>
+      <br>
+      <label>Formato:
+        <select [(ngModel)]="format" placeholder="id"> 
+          <option *ngFor="let c of allFormats" [ngValue]="c.id" [selected]="c.id == format.id">{{c.name}}</option>
+        </select>
+      </label>
+     <h3>Header</h3>
+    <label>Nombre:
+      <input [(ngModel)]="header" placeholder="texto">
+    </label>
+    <br>
+    <br>
+    <label>Estilo:
+        <select [(ngModel)]="headerStyle.id"> 
+          <option *ngFor="let c of allStyles" [ngValue]="c.id" [selected]="c.id == headerStyle.id">{{c.name}}</option>
+        </select>
+      </label>
+      <h3>Footer</h3>
+      <label>Nombre:
+        <input [(ngModel)]="footer" placeholder="texto">
+      </label>
+      <br>
+      <br>
+      <label>Estilo:
+          <select [(ngModel)]="footerStyle.id" placeholder="id"> 
+            <option *ngFor="let c of allStyles" [ngValue]="c.id" [selected]="c.id == footerStyle.id">{{c.name}}</option>
+          </select>
+        </label>
+
+      <div>
+      <h3>Parrafos</h3>
+      
+          <table class='table' *ngIf='parragraphs && parragraphs.length'>
+              <!--Cabezal de la tabla -->
+              <thead>
+                  <tr>
+                      <th># Textos</th>
+                      <th>Estilo</th>
+                      <th>Acciones</th>
+                  </tr>
+              </thead>
+          <tbody>
+              <tr *ngFor='let p of parragraphs'  >
+                  <td> <div align="center">{{p.texts.length}}</div></td>
+                  <td> <div align="center">{{p.style.name | uppercase}}</div></td>
+                  <td> 
+                    <div align="center">
+                      <button (click)="deleteParragraph(p.id)">
+                        X
+                      </button>
+                     </div>
+                  </td>
+              </tr>
+          </tbody>
+          </table>
+          <h4>Parrafo a añadir</h4>
+          <label>Estilo:
+          <select [(ngModel)]="parragraphStyle.id" placeholder="id"> 
+              <option *ngFor="let c of allStyles" [ngValue]="c.id+'###'+c.name">{{c.name}}</option>
+            </select>
+          </label>     
+          <br>    
+          <br>    
+          <div *ngIf='actualParragraphs && actualParragraphs.length'><label>Textos:</label></div>
+          <table class='table' *ngIf='actualParragraphs && actualParragraphs.length'>
+              <!--Cabezal de la tabla -->
+              <thead>
+                  <tr>
+                      <th>Texto</th>
+                      <th>Estilo</th>
+                      <th>Acciones</th>
+                  </tr>
+              </thead>
+          <tbody>
+              <tr *ngFor='let p of actualParragraphs'  >
+                  <td> <div align="center">{{p.text}}</div></td>
+                  <td> <div align="center">{{p.style.name | uppercase}}</div></td>
+                  <td> 
+                    <div align="center">
+                      <button (click)="deleteText(p.id)">
+                        X
+                      </button>
+                     </div>
+                  </td>
+              </tr>
+          </tbody>
+          </table>
+        </div>
+        <h4> Añadir texto al Parrafo:</h4>
+        <br>
+      <label>Texto:
+        <input [(ngModel)]="simpleText" placeholder="texto">
+      </label>
+      <br>
+      <br>
+      <label>Estilo:
+          <select [(ngModel)]="simpleStyle.id" placeholder="id"> 
+            <option *ngFor="let c of allStyles" [ngValue]="c.id+'###'+c.name">{{c.name}}</option>
+          </select>
+        </label><br><br>
+        <button (click)="addTextToParragraph()">
+            Añadir Texto
+        </button>   <br>
+        <button (click)="addParragraph()">
+            Añadir Parrafo
+        </button>    
+        <br>
+<button (click)="modifyDocument()">
+    Modificar Documento
+</button>    
+<app-go-home></app-go-home>  
+</div>

@@ -69,7 +69,10 @@ namespace DocumentsManager.Data.DA.Handler
                 old.StyleClasses = new List<StyleClass>();
                 foreach (var item in modifiedFormat.StyleClasses)
                 {
-                    old.StyleClasses.Add(db.Styles.Find(item.Id));
+                    if (item != null)
+                    {
+                        old.StyleClasses.Add(db.Styles.Find(item.Id));
+                    }
                 }
                 old.Name = modifiedFormat.Name;
                 var unitOfWork = new UnitOfWork(db);
@@ -78,11 +81,12 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void DeleteOldStyles(Format modifiedFormat)
         {
-            Format oldFormat = GetById(modifiedFormat.Id);
             using (var db = new ContextDataAccess())
             {
-                modifiedFormat = db.Set<Format>().Attach(modifiedFormat);
+                db.Set<Format>().Attach(modifiedFormat);
+                modifiedFormat.StyleClasses = null;
                 db.Entry(modifiedFormat).Collection(p => p.StyleClasses).Load();
+                modifiedFormat.StyleClasses = null;
                 var unitOfWork = new UnitOfWork(db);
                 unitOfWork.FormatRepository.Update(modifiedFormat);
             }
@@ -98,8 +102,11 @@ namespace DocumentsManager.Data.DA.Handler
 
         public void Modify(Format modifiedFormat)
         {
+            Format oldFOrmat = GetById(modifiedFormat.Id);
+            oldFOrmat.StyleClasses = null;
+            DeleteOldStyles(oldFOrmat);
             UpdateFormat(modifiedFormat);
-            DeleteOldStyles(modifiedFormat);
+           
         }
         public List<Format> GetFormats()
         {
@@ -119,7 +126,7 @@ namespace DocumentsManager.Data.DA.Handler
                 formats.Add(GetById(item.Id));
             }
             return formats;
-           
+
         }
     }
 }

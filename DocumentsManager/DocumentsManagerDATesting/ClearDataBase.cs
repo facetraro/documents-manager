@@ -12,15 +12,25 @@ namespace DocumentsManagerDATesting
     {
         public static void ClearAll()
         {
+            ClearAllReview();
+            ClearAllFriendship();
             ClearAllHistories();
+            ClearParragraphTexts();
             ClearAllParragraph();
             ClearAllDocuments();
             ClearAllFormats();
             ClearAllFooters();
             ClearAllHeaders();
             ClearAllTexts();
+            ClearAllALogs();
             ClearAllUsers();
-            ClearAllStyleClasses(); 
+            ClearAllStyleClasses();
+        }
+
+        private static void ClearParragraphTexts()
+        {
+            ParragraphContext context = new ParragraphContext();
+            context.ClearParragraphTexts();
         }
 
         private static void ClearAllStyleClasses()
@@ -70,6 +80,20 @@ namespace DocumentsManagerDATesting
             ModifyDocumentHistoryContext context = new ModifyDocumentHistoryContext();
             context.ClearAll();
         }
-
+        private static void ClearAllFriendship()
+        {
+            FriendshipContext context = new FriendshipContext();
+            context.ClearAll();
+        }
+        private static void ClearAllReview()
+        {
+            ReviewContext context = new ReviewContext();
+            context.ClearAll();
+        }
+        private static void ClearAllALogs()
+        {
+            LoggerContext context = new LoggerContext();
+            context.ClearAll();
+        }
     }
 }

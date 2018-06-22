@@ -1,0 +1,40 @@
+<div>
+    <div align="center">
+        <button (click)="addFormat()">
+                Añadir Nuevo Formato
+        </button>
+    </div>
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <div style="overflow-x:auto;">
+                <table class='table' *ngIf='formats && formats.length'>
+                    <!--Cabezal de la tabla -->
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <!--Cuerpo de la tabla-->
+                    <tbody>
+                        <tr *ngFor='let aFullFormatData of formats'  >
+                            <td>{{aFullFormatData.id }}</td>
+                            <td>{{aFullFormatData.name | uppercase}}</td>
+                            <td>
+                            <button (click)="modifyFormat(aFullFormatData.id)">
+                                    Modificar
+                            </button>
+                            &nbsp;
+                            <button (click)="deleteFormat(aFullFormatData.id)">
+                                    Eliminar
+                            </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <app-go-home></app-go-home>
+    </div>
+</div>

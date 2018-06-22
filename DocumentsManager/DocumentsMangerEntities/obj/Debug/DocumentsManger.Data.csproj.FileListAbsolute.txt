@@ -1,0 +1,4 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsMangerEntities\bin\Debug\DocumentsMangerEntities.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsMangerEntities\bin\Debug\DocumentsMangerEntities.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsMangerEntities\obj\Debug\DocumentsMangerEntities.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsMangerEntities\obj\Debug\DocumentsMangerEntities.pdb

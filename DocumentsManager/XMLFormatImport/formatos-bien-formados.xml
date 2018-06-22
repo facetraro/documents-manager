@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Formatos>
+<Formato nombre="X">
+	<Normal>
+		<Estilos>
+			<TipoLetra>Arial</TipoLetra>
+			<TamanioLetra>12</TamanioLetra>
+     </Estilos>
+	</Normal>
+  <Titulo2>
+		<Estilos>
+		</Estilos>
+	</Titulo2>
+</Formato>
+<Formato nombre="Y">
+	<Titulo>
+		<Estilos>
+      <Cursiva/>
+		</Estilos>
+	</Titulo>
+</Formato>
+</Formatos>

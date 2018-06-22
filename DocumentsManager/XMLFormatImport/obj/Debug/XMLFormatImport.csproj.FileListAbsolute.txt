@@ -1,0 +1,10 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\XMLFormatImport\bin\Debug\XMLFormatImport.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\XMLFormatImport\bin\Debug\XMLFormatImport.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\XMLFormatImport\bin\Debug\DocumentsManager.FormatImportation.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\XMLFormatImport\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\XMLFormatImport\bin\Debug\DocumentsManager.FormatImportation.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\XMLFormatImport\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\XMLFormatImport\bin\Debug\es\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\XMLFormatImport\obj\Debug\XMLFormatImport.csprojResolveAssemblyReference.cache
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\XMLFormatImport\obj\Debug\XMLFormatImport.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\XMLFormatImport\obj\Debug\XMLFormatImport.pdb

@@ -1,6 +1,7 @@
-﻿using DocumentsManager.BusinessLogic;
-using DocumentsManager.Exceptions;
+﻿using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyAcces;
 using DocumentsMangerEntities;
+using DocumentsManager.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,10 @@ namespace DocumentsManager.Web.Api.Controllers
 {
     public class ModifiedChartController : ApiController
     {
-        private AdminBusinessLogic adminsBuisnessLogic { get; set; }
-        private EditorBusinessLogic editorBuisnessLogic { get; set; }
-        private UserBusinessLogic usersBuisnessLogic { get; set; }
+        private Proxy proxyAccess  { get; set; }
         public ModifiedChartController()
         {
-            this.adminsBuisnessLogic = new AdminBusinessLogic();
-            this.usersBuisnessLogic = new UserBusinessLogic();
-            this.editorBuisnessLogic = new EditorBusinessLogic();
+            this.proxyAccess = new Proxy();
         }
         // GET: api/ModifiedChart
         public IHttpActionResult Get()
@@ -29,25 +26,33 @@ namespace DocumentsManager.Web.Api.Controllers
         [HttpGet]
         [Route("ModifiersChart")]
         // GET: api/ModifiedChart/5
-        public string Get(Guid Id, string dateOne, string dateTwo)
+        public IHttpActionResult Get(Guid Id, string dateOne, string dateTwo, Guid token)
         {
-            DateTime dateFrom =DateTime.Parse(dateOne);
-            DateTime dateTo = DateTime.Parse(dateTwo);
+            DateTime dateFrom = new DateTime();
+            DateTime dateTo = new DateTime();
+            try
+            {
+                dateFrom = DateTime.Parse(dateOne);
+                dateTo = DateTime.Parse(dateTwo);
+            }
+            catch (Exception)
+            {
+                BadRequest("Los formatos para las fechas no son validos");
+            }
             User user = new AdminUser();
             try
             {
-                user = adminsBuisnessLogic.GetByID(Id);
+                user = proxyAccess.GetAdminByID(Id, token);
             }
-            catch (WrongUserType)
+            catch (WrongUserType ex)
             {
-
-                user = editorBuisnessLogic.GetByID(Id);
+                return BadRequest(ex.Message);
             }
             catch (ObjectDoesNotExists ex) {
-                return ex.Message;
+                return BadRequest(ex.Message);
             }
-
-            return adminsBuisnessLogic.GetChartModificationsByUser(user, dateFrom, dateTo).ToString();
+            var chart = proxyAccess.GetChartModificationsByUser(user, dateFrom, dateTo, token);
+            return Ok(new ChartDto(chart));
         }
 
         // POST: api/ModifiedChart

@@ -28,29 +28,57 @@ namespace DocumentsManager.Data.DA.Handler
         }
         public void Add(Parragraph aParragraph)
         {
+            TextContext tContext = new TextContext();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
                 db.Styles.Attach(aParragraph.StyleClass);
-                if (aParragraph.Document!=null)
+                if (aParragraph.Document != null)
                 {
                     aParragraph.Document = db.Documents.Find(aParragraph.Document.Id);
+                }
+                foreach (Text texti in aParragraph.Texts)
+                {
+                    Text aText = texti;
+                    if (tContext.Exists(texti))
+                    {
+                        aText = tContext.GetById(texti.Id);
+                    }
+                    if (texti.StyleClass != null)
+                    {
+                        texti.StyleClass = db.Styles.Find(aText.StyleClass.Id);
+                    }
+
                 }
                 unitOfWork.ParragraphRepository.Insert(aParragraph);
             }
         }
+
+        public void ClearParragraphTexts()
+        {
+            TextContext tContext = new TextContext();
+            foreach (Parragraph pi in GetLazy())
+            {
+                Parragraph actualParragraph = GetById(pi.Id);
+                foreach (Text ti in actualParragraph.Texts)
+                {
+                    tContext.Remove(ti.Id);
+                }
+            }
+        }
+
         public void Remove(Parragraph parragraphToDelete)
         {
-           
+            TextContext tContext = new TextContext();
+            Parragraph parragraph = GetById(parragraphToDelete.Id);
+            int lenghtText = parragraph.Texts.Count;
+            for (int i = 0; i < lenghtText; i++)
+            {
+                tContext.Remove(parragraph.Texts[i]);
+            }
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
-                Parragraph parragraph = GetById(parragraphToDelete.Id);
-                int lenghtText = parragraph.Texts.Count;
-                for (int i = 0; i < lenghtText; i++)
-                {
-                    unitOfWork.TextRepository.Delete(parragraph.Texts[i]);
-                }
                 parragraph = GetById(parragraphToDelete.Id);
                 parragraph.StyleClass = null;
                 unitOfWork.ParragraphRepository.Delete(parragraph);
@@ -62,21 +90,22 @@ namespace DocumentsManager.Data.DA.Handler
             {
                 var unitOfWork = new UnitOfWork(db);
                 Parragraph parragraph = GetById(id);
-                if (parragraph!=null)
+                if (parragraph != null)
                 {
-                  int lenghtText = parragraph.Texts.Count;
-                  for (int i = 0; i < lenghtText; i++)
-                  {
-                      unitOfWork.TextRepository.Delete(parragraph.Texts[i]);
-                  }
-                  db.Styles.Attach(parragraph.StyleClass);
-                  unitOfWork.ParragraphRepository.Delete(id);
+                    int lenghtText = parragraph.Texts.Count;
+                    for (int i = 0; i < lenghtText; i++)
+                    {
+                        unitOfWork.TextRepository.Delete(parragraph.Texts[i]);
+                    }
+                    parragraph.StyleClass = db.Styles.Find(parragraph.StyleClass.Id);
+                    unitOfWork.ParragraphRepository.Delete(id);
                 }
-                
+
             }
         }
         public Parragraph GetById(Guid id)
         {
+            TextContext tContext = new TextContext();
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);
@@ -84,10 +113,19 @@ namespace DocumentsManager.Data.DA.Handler
                 Parragraph theParragraph = unitOfWork.ParragraphRepository.GetByID(id);
                 db.Parragraphs.Include("StyleClass").ToList().FirstOrDefault();
                 db.Parragraphs.Include("Texts").ToList();
+                List<Text> eagerTexts = new List<Text>();
+                if (theParragraph != null)
+                {
+                    foreach (Text ti in theParragraph.Texts)
+                    {
+                        eagerTexts.Add(tContext.GetById(ti.Id));
+                    }
+                    theParragraph.Texts = eagerTexts;
+                }
                 return theParragraph;
             }
         }
-        public void Modify(Parragraph modifiedParragraph,Parragraph oldParragraph)
+        public void Modify(Parragraph modifiedParragraph, Parragraph oldParragraph)
         {
             TextContext contextT = new TextContext();
             for (int i = 0; i < oldParragraph.Texts.Count; i++)
@@ -104,7 +142,8 @@ namespace DocumentsManager.Data.DA.Handler
                 unitOfWork.Save();
             }
         }
-        public bool Exists(Parragraph aParragraph) {
+        public bool Exists(Parragraph aParragraph)
+        {
             using (var db = new ContextDataAccess())
             {
                 var unitOfWork = new UnitOfWork(db);

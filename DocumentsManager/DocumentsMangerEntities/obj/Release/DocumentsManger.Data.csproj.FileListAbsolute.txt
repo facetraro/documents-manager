@@ -1,0 +1,5 @@
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsMangerEntities\bin\Release\DocumentsMangerEntities.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsMangerEntities\bin\Release\DocumentsMangerEntities.pdb
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsMangerEntities\obj\Release\DocumentsManger.Data.csprojResolveAssemblyReference.cache
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsMangerEntities\obj\Release\DocumentsMangerEntities.dll
+C:\Users\Fede\Documents\193221.194738\DocumentsManager\DocumentsMangerEntities\obj\Release\DocumentsMangerEntities.pdb

@@ -1,5 +1,6 @@
 ﻿using DocumentsManager.Data.DA.Handler;
 using DocumentsManager.Exceptions;
+using DocumentsManager.ProxyInterfaces;
 using DocumentsMangerEntities;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace DocumentsManager.BusinessLogic
         private void LoadFormat(Document document)
         {
             FormatBusinessLogic formatLogic = new FormatBusinessLogic();
-            document.Format = formatLogic.GetByID(document.Format.Id);
+            document.Format = formatLogic.GetFormatByID(document.Format.Id, Guid.NewGuid());
         }
         private void LoadHeader(Document document)
         {
@@ -29,7 +30,7 @@ namespace DocumentsManager.BusinessLogic
         private void LoadStyleClass(Document document)
         {
             StyleClassBusinessLogic styleClassLogic = new StyleClassBusinessLogic();
-            document.StyleClass = styleClassLogic.GetById(document.StyleClass.Id);
+            document.StyleClass = styleClassLogic.GetStyleById(document.StyleClass.Id, Guid.NewGuid());
         }
         private void LoadParragraphs(Document document)
         {
@@ -49,7 +50,7 @@ namespace DocumentsManager.BusinessLogic
             LoadStyleClass(document);
             LoadParragraphs(document);
         }
-        public Document GetDocumentById(Guid id)
+        public Document GetDocumentById(Guid id, Guid tokenId)
         {
             DocumentContext context = new DocumentContext();
             Document documentFromBD = context.GetById(id);
@@ -87,7 +88,7 @@ namespace DocumentsManager.BusinessLogic
             context.Add(document);
             return newId;
         }
-        public string PrintDocument(Document aDocument)
+        public string PrintDocument(Document aDocument, Guid tokenId)
         {
             List<IPrintableObject> objectsToPrint = new List<IPrintableObject>();
             PrintableHeader headerToPrint = new PrintableHeader(aDocument.Header);
@@ -110,18 +111,25 @@ namespace DocumentsManager.BusinessLogic
             }
             return htmlDocument;
         }
-        public IEnumerable<Document> GetAllDocuments()
+        public IEnumerable<Document> GetAllDocuments(Guid tokenId)
         {
             DocumentContext context = new DocumentContext();
-            return context.GetDocuments();
+            List<Document> allNotDeletedDocuments = new List<Document>();
+            foreach (var item in context.GetDocuments())
+            {
+                if (!AlreadyDeleted(item))
+                {
+                    allNotDeletedDocuments.Add(item);
+                }
+            }
+            return allNotDeletedDocuments;
         }
 
         public Document GetById(Guid id)
         {
             DocumentContext context = new DocumentContext();
             Document document = new Document();
-            document.Id = id;
-            if (document.Equals(document))
+            if (Exists(id))
             {
                 document=context.GetById(id);
             }
@@ -142,6 +150,46 @@ namespace DocumentsManager.BusinessLogic
                 }
             }
             return false;
+        }
+
+        private Header GetDocumentHeader(Guid id)
+        {
+            HeaderBusinessLogic bl = new HeaderBusinessLogic();
+            return bl.GetById(GetById(id).Header.Id);
+        }
+
+        private Footer GetDocumentFooter(Guid id)
+        {
+            FooterBusinessLogic bl = new FooterBusinessLogic();
+            return bl.GetById(GetById(id).Footer.Id);
+        }
+
+        private List<Parragraph> GetDocumentParragraphs(Guid id)
+        {
+            ParragraphBusinessLogic bl = new ParragraphBusinessLogic();
+            List<Parragraph> completeParratgraphs = new List<Parragraph>();
+            foreach (Parragraph pi in GetById(id).Parragraphs)
+            {
+                completeParratgraphs.Add(bl.GetById(pi.Id));
+            }
+            return completeParratgraphs;
+        }
+
+        public Document GetFullDocument(Guid id, Guid tokenId)
+        {
+            Document document = GetById(id);
+            document.Footer = GetDocumentFooter(id);
+            document.Header = GetDocumentHeader(id);
+            document.Parragraphs = GetDocumentParragraphs(id);
+            return document;
+        }
+
+        public bool Exists(Guid id)
+        {
+            DocumentContext context = new DocumentContext();
+            Document aDoc = new Document();
+            aDoc.Id = id;
+            return context.Exists(aDoc);
         }
     }
 }
